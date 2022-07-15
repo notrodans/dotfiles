@@ -1,0 +1,44 @@
+! ----------------|
+1 - notrodan theme|
+1 ----------------|
+
+*borderNormal: #000000
+*borderActive: #ffffff
+
+*background:  #010101
+*foreground:  #e1e6ea
+
+*whiteColor:  #ffffff
+*blackColor:  #000000
+
+*rofiBackground:  #000000
+*rofiForeground:  #ffffff
+*rofiSelected:    #ffffff
+*rofiHighlight:   #000000
+
+*red:       #f7768e
+*pink:      #ff0677
+*purple:    #583794
+*blue:      #7aa2f7
+*blueArch:  #0a9cf5
+*cyan:      #4dd0e1
+*teal:      #00b19f
+*green:     #9ece6a
+*lime:      #b9c244
+*yellow:    #e0af68
+*amber:     #fbC02d
+*orange:    #e57C46
+*brown:     #ac8476
+*grey:      #8c8c8c
+*indigo:    #6c77bb
+*blueGray:  #6d8895
+*magenta:   #ba2360
+
+*altBlack:  #001719
+*altRed:    #e06d83
+*altBlue:   #84a9f7
+*altCyan:   #77d4e1
+*altGreen:  #b5e382
+*altYellow: #f4c278
+*altMagenta:#d73c7a
+*altWhite:  #f3e8e8

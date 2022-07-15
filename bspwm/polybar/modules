@@ -1,0 +1,333 @@
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/volume]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = false
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+format-volume = <ramp-volume><label-volume>
+label-volume-foreground = ${color.BLACK}
+label-volume-background = ${color.WHITE}
+
+label-muted-foreground = ${color.BLACK} 
+label-muted-background = ${color.WHITE} 
+
+format-muted = <label-muted>
+format-muted-prefix = 婢
+format-muted-prefix-font = 3
+format-muted-prefix-foreground = ${color.BLACK}
+format-muted-prefix-background = ${color.WHITE}
+format-muted-prefix-padding = 1
+
+label-volume = %percentage%%
+label-muted = "Mute"
+
+label-font = 4
+
+ramp-volume-0 = 奄
+ramp-volume-1 = 奄
+ramp-volume-2 = 奄
+ramp-volume-3 = 奔
+ramp-volume-4 = 奔
+ramp-volume-5 = 奔
+ramp-volume-6 = 墳
+ramp-volume-7 = 墳
+ramp-volume-8 = 墳
+ramp-volume-9 = 墳
+ramp-volume-font = 2
+ramp-volume-foreground = ${color.BLACK}
+ramp-volume-background = ${color.WHITE}
+ramp-volume-padding = 1
+
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = true
+inline-mode = false
+
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+
+fuzzy-match = true
+
+; ws-icon-[0-9]+ = label;icon
+; Note that the label needs to correspond with the bspwm workspace name
+ws-icon-0 = I;
+ws-icon-1 = II;
+ws-icon-2 = III;
+ws-icon-3 = IV;
+ws-icon-4 = V;
+ws-icon-5 = VI;
+ws-icon-6 = VII;
+ws-icon-7 = VIII;
+ws-icon-default = 
+
+format = <label-state>
+format-font = 2
+label-monitor = %name%
+
+label-focused = %name%
+label-focused-foreground = ${color.WHITE}
+label-focused-background = ${color.WHITE}
+label-focused-padding = 2
+
+label-occupied = %name%
+label-occupied-foreground = ${color.BLACK}
+label-occupied-background = ${color.WHITE}
+label-occupied-padding = 2
+
+label-urgent = %name%
+label-urgent-foreground = ${color.BLACK}
+label-urgent-background = ${color.WHITE}
+label-urgent-padding = 2
+
+label-empty = %name%
+label-empty-foreground = ${color.BLACK}
+label-empty-background = ${color.WHITE}
+label-empty-padding = 2
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/mod]
+type = internal/bspwm
+
+format-font = 4
+format = <label-mode>
+format-background = ${color.BLACK}
+format-foreground = ${color.WHITE}
+format-padding = 1
+
+label-monocle = "Monocle"
+label-tiled = "Tiled"
+
+label-floating = ", Float"
+label-pseudotiled = ", Pseudo"
+label-fullscreen = ", Full"
+
+label-locked = " | Locked"
+label-sticky = " | Sticky"
+label-private = " | Private"
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/date]
+type = internal/date
+
+interval = 1.0
+
+;;time = %I:%M %p
+time = %H:%M
+
+time-alt = %A, %d %B %Y
+
+format-foreground = ${color.BLACK}
+format-background = ${color.WHITE}
+
+format = <label>
+format-prefix = ""
+format-prefix-font = 3
+format-prefix-foreground = ${color.BLACK}
+format-prefix-background = ${color.WHITE}
+format-prefix-padding-right = 1
+format-padding-left = 1
+
+
+label = %time%
+label-font = 4  
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/mpd]
+type = internal/mpd
+
+;;host = 127.0.0.1
+;;port = 6600
+;;password = mysecretpassword
+
+interval = 2
+
+format-online = <label-song> <icon-prev> <toggle> <icon-next>
+format-online-prefix = " "
+format-online-prefix-foreground = ${color.GREEN}
+
+format-playing = ${self.format-online}
+format-paused = <label-song> <toggle>
+
+format-offline = <label-offline>
+format-offline-prefix = " "
+format-offline-prefix-foreground = ${color.WHITE}
+label-offline = "Offline"
+
+label-song =  "%title% | %artist%"
+label-song-maxlen = 40
+label-song-ellipsis = true
+
+icon-play = 
+icon-play-font = 2
+icon-play-foreground = ${color.GREEN}
+icon-pause = 
+icon-pause-font = 2
+icon-pause-foreground = ${color.YELLOW}
+icon-stop = 
+icon-stop-foreground = ${color.WHITE}
+icon-prev = 玲
+icon-prev-font = 2
+icon-prev-foreground = ${color.CYAN}
+icon-next = 怜
+icon-next-font = 2
+icon-next-foreground = ${color.CYAN}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+format = <label-layout> <label-indicator>
+format-spacing = 0
+
+label-layout-padding-left = 1
+label-layout-foreground = ${color.WHITE}
+label-layout-background = ${color.BLACK}
+
+label-indicator = %name%
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+; If you use both a wired and a wireless network, add both modules in config.
+[module/ethernet]
+type = internal/network
+interface = ${system.network_interface}
+
+interval = 1.0
+accumulate-stats = true
+unknown-as-up = true
+
+label-connected-foreground = ${color.WHITE}
+label-connected-background = ${color.BLACK}
+
+label-disconnected-foreground = ${color.WHITE}
+label-disconnected-background = ${color.BLACK}
+
+label-connected-padding = 1
+label-disconnected-padding = 1
+
+format-disconnected-prefix-padding-left = 1
+format-connected-prefix-padding-left = 1
+
+format-disconnected-prefix-foreground = ${color.WHITE}
+format-disconnected-prefix-background = ${color.BLACK}
+
+format-connected-prefix-foreground = ${color.WHITE}
+format-connected-prefix-background = ${color.BLACK}
+
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-font = 3
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = " "
+format-disconnected-prefix-font = 3
+
+label-connected = "%{A1:networkmanager_dmenu &:}%netspeed%%{A}"
+label-disconnected = "%{A1:networkmanager_dmenu &:}Offline%{A}"
+
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/network]
+type = internal/network
+interface = ${system.network_interface}
+
+interval = 1.0
+
+;;ping-interval = 3
+;;udspeed-minwidth = 5
+
+accumulate-stats = true
+unknown-as-up = true
+
+format-connected = <ramp-signal> <label-connected>
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = " "
+format-disconnected-prefix-font = 3
+format-disconnected-prefix-foreground = ${color.BLACK}
+
+label-connected = "%{A1:nmd &:}%essid%%{A}"
+label-disconnected = "%{A1:nmd &:}Disconnected%{A}"
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-font = 3
+ramp-signal-foreground = ${color.CYAN}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+[module/arrow1]
+type = custom/text
+content = ""
+content-foreground = ${color.WHITE}
+;content-background = 
+
+[module/arrow2]
+type = custom/text
+content = " "
+content-foreground = ${color.BLACK}
+content-background = ${color.WHITE}
+
+[module/arrow3]
+type = custom/text
+content = " "
+content-foreground = ${color.WHITE}
+content-background = ${color.BLACK}
+
+[module/RightArrow1]
+type = custom/text
+content = ""
+content-foreground = ${color.WHITE}
+
+[module/RightArrow2]
+type = custom/text
+content = ""
+content-foreground = ${color.WHITE}
+content-background = ${color.BLACK}
+
+[module/RightArrow3]
+type = custom/text
+content = ""
+content-foreground = ${color.BLACK}
+content-background = ${color.WHITE}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+;;	    __________  ______
+;;	   / ____/ __ \/ ____/
+;;	  / __/ / / / / /_    
+;;	 / /___/ /_/ / __/    
+;;	/_____/\____/_/       
+;;
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
