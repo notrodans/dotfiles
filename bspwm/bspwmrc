@@ -25,7 +25,7 @@ workspaces() {
 	name=1
 	for monitor in `bspc query -M`; do
 		# bspc monitor ${monitor} -n "$name" -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII'
-		bspc monitor ${monitor} -n "$name" -d ' ' ' ' ' ' ' ' 'ﴬ ' ' ' 'ﭮ ' ' ' ' ' '戮 '
+		bspc monitor ${monitor} -n "$name" -d ' ' ' ' ' ' ' ' 'ﴬ ' ' ' 'ﭮ ' ' ' ' ' '戮 '
 		let name++
 	done
 }
@@ -58,18 +58,18 @@ bspc rule -r *:*
 bspc rule -a Alacritty desktop='^1' follow=on focus=on
 bspc rule -a Xfce4-terminal desktop='^1' follow=on focus=on
 
-# 2 > web
-bspc rule -a firefox desktop='^2' follow=on focus=on
-bspc rule -a Google-chrome desktop='^2' follow=on focus=on
+# 2 > code
+declare -a code=(geany Vscode neovide)
+for i in ${code[@]}; do
+   bspc rule -a $i desktop='^2' follow=on focus=on; done
 
-# 3 > files
+# 3 > web
+bspc rule -a firefox desktop='^3' follow=on focus=on
+bspc rule -a Google-chrome desktop='^3' follow=on focus=on
+
+# 4 > files
 declare -a files=(Pcmanfm Thunar qBittorrent)
 for i in ${files[@]}; do
-   bspc rule -a $i desktop='^3' follow=on focus=on; done
-
-# 4 > code
-declare -a code=(geany Vscode Webstorm)
-for i in ${code[@]}; do
    bspc rule -a $i desktop='^4' follow=on focus=on; done
 
 # 5 > office and docs

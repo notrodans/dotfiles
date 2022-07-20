@@ -6,7 +6,7 @@ font:
   # Normal (roman) font face
   normal:
     family: "JetBrainsMono Nerd Font"
-    #style: Regular
+    # style: Regular
 
   # Bold font face
   bold:
@@ -33,5 +33,5 @@ font:
 
   # Glyph offset
   # glyph_offset:
-  #  x: 0 
+  #  x: 0
   #  y: 0

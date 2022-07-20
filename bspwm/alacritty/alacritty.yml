@@ -7,7 +7,8 @@
 
 ## Import files (Colors, Fonts, Etc)
 import:
-  - ~/.config/bspwm/alacritty/colors.yml
+  # - ~/.config/bspwm/alacritty/colors.yml
+  - ~/.config/bspwm/alacritty/rose-pine.yml
   - ~/.config/bspwm/alacritty/fonts.yml
 
 ## Set environment variables
@@ -34,14 +35,14 @@ window:
   multiplier: 3
 
 ## Background opacity
-  opacity: 0.70
+  opacity: 0.85
 
 ## Cursor
 cursor:
   style:
     shape: Block
     blinking: On
-  unfocused_hollow: true 
+  unfocused_hollow: true
 
 ## Live config reload
 live_config_reload: true
