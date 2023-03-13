@@ -1,0 +1,7 @@
+[user]
+	name = notrodans
+	mail = notrodans@gmail.com
+	email = notrodans@gmail.comm
+	notrodans = notrodans
+[core]
+	editor = nvim

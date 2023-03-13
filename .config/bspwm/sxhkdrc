@@ -1,0 +1,102 @@
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+##
+## Keybindings config for Archcraft's BSPWM
+
+##---------- Keybindings for bspwm ----------##
+
+# Terminal (alacritty)
+super + Return
+	bspterm
+
+##---------- Rofi Launcher & Menus ----------##
+
+# Rofi App Launcher
+super + space
+	rofi_launcher
+
+# Rofi Menus/Applets
+super + alt + {m,n,r,s,t,w,p}
+	{rofi_music,nmd,rofi_asroot,rofi_screenshot,rofi_themes,rofi_windows,rofi_powermenu}
+
+##---------- Appliclibva-vdpau-driver-chromiumations ----------##
+
+# Launch Apps
+super + shift + {c,f,g}
+	{thunar,firefox,google-chrome-stable}
+
+# Terminal Apps
+super + alt + {h}
+	alacritty --config-file ~/.config/bspwm/alacritty/alacritty.yml -e {btop}
+
+# Color Picker
+super + p
+	bspcolorpicker
+
+##---------- System Keys ----------##
+
+# Take a screenshot
+super + Print
+	bspscreenshot --now
+	
+# Take screenshot of area
+	bspscreenshot --area
+super + Print
+
+# Brighness control
+XF86MonBrightness{Up,Down}
+	bspbrightness{ --inc, --dec}
+	
+# Speaker Volume control
+XF86Audio{RaiseVolume,LowerVolume}
+	bspvolume{ --inc, --dec}
+
+# Mic Volume control
+XF86Audio{Mute,MicMute}
+	bspvolume{ --toggle, --toggle-mic}
+	
+# Music control
+XF86Audio{Next,Prev,Play,Stop}
+	mpc {next,prev,toggle,stop}
+
+##---------- Bspwm ----------##
+
+# Hide/Unhide Window
+super + shift + i
+	bspwinmask
+
+# Close App
+super + q
+	bspc node -c
+
+# Quit/Restart bspwm
+super + shift + {q,r}
+	bspc {quit,wm -r}
+	
+# Reload Keybindings
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Switch workspace or Send focused Node to another workspace
+super + {_,shift + }{1-8}
+	bspc {desktop -f,node -d} '^{1-8}' '--follow'
+
+# Change focus of the Node or Swap Nodes
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# Move floating windows
+super + alt + shift + {h,j,k,l}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# Expanding windows
+super + control + {h,l,k,j}
+	bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
+	
+# Shrinking windows
+super + alt + {h,l,k,j}
+	bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20}
+
+super + ctrl + {t,p,m,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+	
+##---------- EOF ----------##
