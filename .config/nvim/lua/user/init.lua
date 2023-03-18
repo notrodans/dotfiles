@@ -10,7 +10,7 @@ local config = {
     remote = "origin", -- remote to use
     channel = "stable", -- "stable" or "nightly"
     version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    branch = "nightly", -- branch name (NIGHTLY ONLY)
+    branch = "main", -- branch name (NIGHTLY ONLY)
     commit = nil, -- commit hash (NIGHTLY ONLY)
     pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
     skip_prompts = false, -- skip prompts about breaking changes
@@ -23,7 +23,7 @@ local config = {
     -- },
   },
   -- Set colorscheme to use
-  colorscheme = "kanagawabones",
+  colorscheme = "rose-pine",
   -- Add highlight groups in any theme
   highlights = {
     -- init = { -- this table overrides highlights in all themes
@@ -38,16 +38,20 @@ local config = {
   options = {
     opt = {
       swapfile = false,
-      spell = false,
       number = false,
       relativenumber = false,
       signcolumn = "yes",
       cmdheight = 1,
       completeopt = { "menu", "menuone", "noselect" },
-      tabstop = 4,
-      shiftwidth = 4,
       clipboard = "unnamedplus",
       background = "dark",
+      smartindent = false,
+      expandtab = false,
+      tabstop = 4,
+      shiftwidth = 0,
+      softtabstop = 0,
+      smarttab = true,
+      guicursor = "n-v-c:block",
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -178,6 +182,7 @@ local config = {
     },
     { "mcchrish/zenbones.nvim", dependencies = { "rktjmp/lush.nvim" } },
     { "EdenEast/nightfox.nvim" },
+    { "rebelot/kanagawa.nvim" },
     { "nyoom-engineering/oxocarbon.nvim" },
     { "sainnhe/everforest" },
     { "ellisonleao/gruvbox.nvim" },
@@ -185,17 +190,17 @@ local config = {
     { "jay-babu/mason-nvim-dap.nvim", enabled = false },
     { "mfussenegger/nvim-dap", enabled = false },
     { "rcarriga/nvim-dap-ui", enabled = false },
+    { "rcarriga/nvim-notify", enabled = false },
+    {
+      "rebelot/heirline.nvim",
+      opts = function(_, opts)
+        opts.winbar = nil
+        return opts
+      end,
+    },
     {
       "rose-pine/neovim",
       name = "rose-pine",
-      lazy = false,
-      priority = 1000,
-      config = function()
-        require("rose-pine").setup {
-          bold_vert_split = true,
-          dark_variant = "moon",
-        }
-      end,
     },
     { "catppuccin/nvim" },
     { "wakatime/vim-wakatime", event = { "BufRead" } },
@@ -333,6 +338,7 @@ local config = {
           "emmet_ls",
           "lemminx",
           "tailwindcss",
+          "cssmodules_ls",
         },
       },
     },
