@@ -1,7 +1,7 @@
 # Fonts
-font_family                       Liga SFMono Nerd Font
+font_family                       BlexMono Nerd Font Mono
 
-font_size                         16
+font_size                         18
 
 # Mouse
 cursor_shape                      block
@@ -19,7 +19,7 @@ enable_audio_bell 					      no
 
 # Window
 remember_window_size   			      no
-background_opacity 					      1
+background_opacity 					      0.95
 
 # Keys
 map ctrl+shift+v        			    paste_from_clipboard
