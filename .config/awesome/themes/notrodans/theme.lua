@@ -9,7 +9,7 @@ local themes_path = "/home/notrodans/.config/awesome/themes/notrodans/"
 
 local theme = {}
 
-theme.font = "monospace 8"
+theme.font = "sans 10"
 
 theme.bg_normal = "#222222"
 theme.bg_focus = "#535d6c"
@@ -22,13 +22,13 @@ theme.fg_focus = "#ffffff"
 theme.fg_urgent = "#ffffff"
 theme.fg_minimize = "#ffffff"
 
-theme.useless_gap = dpi(5)
+theme.useless_gap = dpi(3)
 theme.border_width = dpi(3)
-theme.border_normal = "#000000"
-theme.border_focus = "#535d6c"
+theme.border_normal = "#74c7ec"
+theme.border_focus = "#94e2d5"
 theme.border_marked = "#91231c"
 
-local taglist_square_size = dpi(4)
+local taglist_square_size = dpi(2)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
 

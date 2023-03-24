@@ -3,7 +3,7 @@
 --    By Adrian C. (anrxc)   --
 -------------------------------
 
-local themes_path = "/home/notrodans/.config/awesome/themes/zenburn"
+local themes_path = "/home/notrodans/.config/awesome/themes/"
 local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main

@@ -100,14 +100,14 @@ myawesomemenu = {
 	},
 }
 
-mymainmenu = awful.menu({
-	items = {
-		{ "awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "open terminal", terminal },
-	},
-})
+-- mymainmenu = awful.menu({
+-- 	items = {
+-- 		{ "awesome", myawesomemenu, beautiful.awesome_icon },
+-- 		{ "open terminal", terminal },
+-- 	},
+-- })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+-- mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -183,7 +183,7 @@ awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+	awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[6])
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -244,9 +244,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-	awful.button({}, 3, function()
-		mymainmenu:toggle()
-	end),
+	-- awful.button({}, 3, function()
+	-- 	mymainmenu:toggle()
+	-- end),
 	awful.button({}, 4, awful.tag.viewnext),
 	awful.button({}, 5, awful.tag.viewprev)
 ))
@@ -259,7 +259,7 @@ globalkeys = gears.table.join(
 	end),
 
 	awful.key({ modkey, "Control" }, "o", function()
-		awful.spawn.with_shell("picom --config $HOME/.config/awesome/picom.conf")
+		awful.spawn.with_shell("sh $HOME/.config/awesome/scripts/picom-toggle.sh")
 	end, { description = "Picom toggle", group = "alt+ctrl" }),
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
