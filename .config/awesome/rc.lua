@@ -5,6 +5,7 @@ pcall(require, "luarocks.loader")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+local screenshot = require("./scripts/screenshot")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -254,6 +255,20 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+	awful.key(nil, "Print", scrot_full, { description = "Take a screenshot of entire screen", group = "screenshot" }),
+	awful.key(
+		{ modkey },
+		"Print",
+		scrot_selection,
+		{ description = "Take a screenshot of selection", group = "screenshot" }
+	),
+	awful.key(
+		{ "Shift" },
+		"Print",
+		scrot_window,
+		{ description = "Take a screenshot of focused window", group = "screenshot" }
+	),
+	awful.key({ "Ctrl" }, "Print", scrot_delay, { description = "Take a screenshot of delay", group = "screenshot" }),
 	awful.key({ "Shift" }, "Alt_L", function()
 		mykeyboardlayout.next_layout()
 	end),
@@ -272,9 +287,6 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "k", function()
 		awful.client.focus.byidx(-1)
 	end, { description = "focus previous by index", group = "client" }),
-	awful.key({ modkey }, "w", function()
-		mymainmenu:show()
-	end, { description = "show main menu", group = "awesome" }),
 
 	-- Layout manipulation
 	awful.key({ modkey, "Shift" }, "j", function()
