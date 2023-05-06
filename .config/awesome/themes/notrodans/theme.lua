@@ -9,7 +9,7 @@ local themes_path = "/home/notrodans/.config/awesome/themes/notrodans/"
 
 local theme = {}
 
-theme.font = "sans 10"
+theme.font = "CaskaydiaCove Nerd Font 12"
 
 theme.bg_normal = "#222222"
 theme.bg_focus = "#535d6c"
@@ -71,7 +71,7 @@ theme.titlebar_maximized_button_focus_inactive = themes_path .. "titlebar/maximi
 theme.titlebar_maximized_button_normal_active = themes_path .. "titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path .. "natural.jpg"
+theme.wallpaper = themes_path .. "remilia-scarlet-moon.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "layouts/fairhw.png"

@@ -172,7 +172,7 @@ local function set_wallpaper(s)
 		if type(wallpaper) == "function" then
 			wallpaper = wallpaper(s)
 		end
-		gears.wallpaper.maximized(wallpaper, s)
+		gears.wallpaper.maximized(wallpaper, s, false)
 	end
 end
 
@@ -276,7 +276,6 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "o", function()
 		awful.spawn.with_shell("sh $HOME/.config/awesome/scripts/picom-toggle.sh")
 	end, { description = "Picom toggle", group = "alt+ctrl" }),
-	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
