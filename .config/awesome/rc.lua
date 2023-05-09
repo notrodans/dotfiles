@@ -1,25 +1,19 @@
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
-local screenshot = require("./scripts/screenshot")
+local xresources = require("beautiful.xresources")
+require("./scripts/screenshot")
 require("awful.autofocus")
--- Widget and layout library
 local wibox = require("wibox")
--- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
-awful.spawn.with_shell("/home/notrodans/.config/awesome/autorun.sh")
+local xrdb = xresources.get_current_theme()
+local dpi = xresources.apply_dpi
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -54,11 +48,29 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-local theme_path = string.format("/home/notrodans/.config/awesome/themes/%s/theme.lua", "notrodans")
-beautiful.init(theme_path)
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.font = "CaskaydiaCove Nerd Font 12"
+beautiful.useless_gap = dpi(3)
+beautiful.notification_icon_size = dpi(80)
+
+beautiful.bg_normal = xrdb.background
+beautiful.bg_focus = xrdb.color4
+beautiful.bg_urgent = xrdb.color1
+beautiful.bg_minimize = xrdb.color4
+beautiful.bg_systray = xrdb.bg_normal
+
+beautiful.fg_normal = xrdb.foreground
+beautiful.fg_focus = xrdb.foreground
+beautiful.fg_urgent = xrdb.foreground
+beautiful.fg_minimize = xrdb.foreground
+
+beautiful.border_width = dpi(0)
+beautiful.border_normal = xrdb.color5
+beautiful.border_focus = xrdb.color4
+beautiful.border_marked = xrdb.color10
 
 -- This is used later as the default terminal and editor to run.
-terminal = "kitty"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -122,47 +134,48 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
-local taglist_buttons = gears.table.join(
-	awful.button({}, 1, function(t)
-		t:view_only()
-	end),
-	awful.button({ modkey }, 1, function(t)
-		if client.focus then
-			client.focus:move_to_tag(t)
-		end
-	end),
-	awful.button({}, 3, awful.tag.viewtoggle),
-	awful.button({ modkey }, 3, function(t)
-		if client.focus then
-			client.focus:toggle_tag(t)
-		end
-	end),
-	awful.button({}, 4, function(t)
-		awful.tag.viewnext(t.screen)
-	end),
-	awful.button({}, 5, function(t)
-		awful.tag.viewprev(t.screen)
-	end)
-)
+-- local taglist_buttons = gears.table.join(
+-- 	awful.button({}, 1, function(t)
+-- 		t:view_only()
+-- 	end),
+-- 	awful.button({ modkey }, 1, function(t)
+-- 		if client.focus then
+-- 			client.focus:move_to_tag(t)
+-- 		end
+-- 	end),
+-- 	awful.button({}, 3, awful.tag.viewtoggle),
+-- 	awful.button({ modkey }, 3, function(t)
+-- 		if client.focus then
+-- 			client.focus:toggle_tag(t)
+-- 		end
+-- 	end),
+-- 	awful.button({}, 4, function(t)
+-- 		awful.tag.viewnext(t.screen)
+-- 	end),
+-- 	awful.button({}, 5, function(t)
+-- 		awful.tag.viewprev(t.screen)
+-- 	end)
+-- )
 
-local tasklist_buttons = gears.table.join(
-	awful.button({}, 1, function(c)
-		if c == client.focus then
-			c.minimized = true
-		else
-			c:emit_signal("request::activate", "tasklist", { raise = true })
-		end
-	end),
-	awful.button({}, 3, function()
-		awful.menu.client_list({ theme = { width = 250 } })
-	end),
-	awful.button({}, 4, function()
-		awful.client.focus.byidx(1)
-	end),
-	awful.button({}, 5, function()
-		awful.client.focus.byidx(-1)
-	end)
-)
+-- local tasklist_buttons = gears.table.join(
+-- 	awful.button({}, 1, function(c)
+-- 		if c == client.focus then
+-- 			c.minimized = true
+-- 		else
+-- 			c:emit_signal("request::activate", "tasklist", { raise = true })
+-- 		end
+-- 	end),
+-- 	awful.button({}, 3, function()
+-- 		awful.menu.client_list({ theme = { width = 250 } })
+-- 	end),
+-- 	awful.button({}, 4, function()
+-- 		awful.client.focus.byidx(1)
+-- 	end),
+-- 	awful.button({}, 5, function()
+-- 		awful.client.focus.byidx(-1)
+--
+-- 	end)
+-- )
 
 local function set_wallpaper(s)
 	-- Wallpaper
@@ -209,14 +222,6 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
-		buttons = taglist_buttons,
-	})
-
-	-- Create a tasklist widget
-	s.mytasklist = awful.widget.tasklist({
-		screen = s,
-		filter = awful.widget.tasklist.filter.currenttags,
-		buttons = tasklist_buttons,
 	})
 
 	-- Create the wibox
@@ -255,27 +260,14 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-	awful.key(nil, "Print", scrot_full, { description = "Take a screenshot of entire screen", group = "screenshot" }),
-	awful.key(
-		{ modkey },
-		"Print",
-		scrot_selection,
-		{ description = "Take a screenshot of selection", group = "screenshot" }
-	),
-	awful.key(
-		{ "Shift" },
-		"Print",
-		scrot_window,
-		{ description = "Take a screenshot of focused window", group = "screenshot" }
-	),
-	awful.key({ "Ctrl" }, "Print", scrot_delay, { description = "Take a screenshot of delay", group = "screenshot" }),
+	awful.key(nil, "Print", scrot_full),
+	awful.key({ modkey }, "Print", scrot_selection),
+	awful.key({ "Shift" }, "Print", scrot_window),
+	awful.key({ "Ctrl" }, "Print", scrot_delay),
 	awful.key({ "Shift" }, "Alt_L", function()
 		mykeyboardlayout.next_layout()
 	end),
 
-	awful.key({ modkey, "Control" }, "o", function()
-		awful.spawn.with_shell("sh $HOME/.config/awesome/scripts/picom-toggle.sh")
-	end, { description = "Picom toggle", group = "alt+ctrl" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
@@ -310,7 +302,7 @@ globalkeys = gears.table.join(
 
 	-- Standard program
 	awful.key({ modkey }, "Return", function()
-		awful.spawn(terminal)
+		awful.spawn("kitty")
 	end, { description = "open a terminal", group = "launcher" }),
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
@@ -360,11 +352,7 @@ globalkeys = gears.table.join(
 			exe_callback = awful.util.eval,
 			history_path = awful.util.get_cache_dir() .. "/history_eval",
 		})
-	end, { description = "lua execute prompt", group = "awesome" }),
-	-- Menubar
-	awful.key({ modkey }, "p", function()
-		menubar.show()
-	end, { description = "show the menubar", group = "launcher" })
+	end, { description = "lua execute prompt", group = "awesome" })
 )
 
 clientkeys = gears.table.join(
@@ -596,4 +584,6 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
--- }}}
+
+awful.spawn.with_shell("./scripts/picom.sh")
+awful.spawn.with_shell("wal -R")
