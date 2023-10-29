@@ -15,8 +15,7 @@ color4='#92b6f4'
 color5='#bd99ff'
 color6='#87dfeb'
 color7='#f8f8f2'
-color8='#56687e'
-color9='#ee4f84'
+color8='#56687e' color9='#ee4f84'
 color10='#53e2ae'
 color11='#f1ff52'
 color12='#6498ef'
@@ -33,9 +32,7 @@ dark_value='0.30'
 
 # Wallpaper
 wdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-wallpaper="$wdir/wallpaper"
-
-# Polybar
+wallpaper="$wdir/wallpaper" # Polybar
 polybar_font='JetBrains Mono:size=10;3'
 
 # Rofi
@@ -51,9 +48,8 @@ geany_colors='wave.conf'
 geany_font='JetBrains Mono 10'
 
 # Appearance
-gtk_font='Fira Mono Medium'
-gtk_theme='Wave'
-icon_theme='Luv-Folders-Dark'
+gtk_theme='Juno-palenight'
+icon_theme='Zafiro-icons'
 cursor_theme='Vimix'
 
 # Dunst

@@ -6,6 +6,7 @@
 
 # Colors
 background='#1E2128'
+altbackground='#1E2128'
 foreground='#ABB2BF'
 color0='#32363D'
 color1='#E06B74'

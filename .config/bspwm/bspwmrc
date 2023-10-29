@@ -19,13 +19,13 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 ## Current theme ---------------------------------------------#
 
 ## Bspwm colors
-BSPWM_FBC='#5294E2'
-BSPWM_NBC='#1E2128'
-BSPWM_ABC='#C778DD'
-BSPWM_PFC='#98C379'
+BSPWM_FBC='#BD99FF'
+BSPWM_NBC='#323f4e'
+BSPWM_ABC='#bd99ff'
+BSPWM_PFC='#a1efd3'
 
 ## Bspwm appearance
-BSPWM_BORDER='2'
+BSPWM_BORDER='0'
 BSPWM_GAP='0'
 BSPWM_SRATIO='0.50'
 
@@ -151,11 +151,11 @@ ksuperkey -e 'Super_R=Alt_L|F1' &
 xfce4-power-manager &
 
 # Set keyboard settings
-xset r rate 350 60
-setxkbmap -model pc104 -layout us,ru -option grp:alt_shift_toggle
+xset r rate 250 50
+setxkbmap -model pc104 -layout us,ru,ua -option grp:alt_shift_toggle
 
 # Set mouse speed
-xinput set-prop 'Kingston HyperX Pulsefire FPS Pro' 'libinput Accel Speed' -0.9
+xinput set-prop 'Kingston HyperX Pulsefire FPS Pro' 'libinput Accel Speed' -1
 
 # Fix cursor
 xsetroot -cursor_name left_ptr
@@ -167,8 +167,10 @@ bash ~/.fehbg
 exec mpd &
 
 # Start bspwm scripts
+bsp
 bspbar
 bspcomp
 bspdunst
-bspfloat &
+bspfloat
+bspterm &
 

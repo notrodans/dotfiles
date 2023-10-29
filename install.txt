@@ -1,0 +1,49 @@
+sudo pacman-key --init &
+sudo pacman-key --populate archlinux &
+sudo pacman-key --refresh-keys &
+sudo pacman -Sy
+
+sudo pacman -S reflector rsync curl
+sudo reflector --verbose --country 'Ukraine' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
+sudo pacman -S linux-firmware-qlogic linux-zen linux-zen-headers ccache
+sudo pacman -S lrzip unrar unzip unace p7zip squashfs-tools
+sudo pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia libxnvctrl
+sudo mkinitcpio -P # Обновляем образы initramfs
+MODULES=(crc32c libcrc32c zlib_deflate btrfs)
+sudo pacman -S amd-ucode                    # Установить микрокод AMD
+sudo mkinitcpio -P                          # Пересобираем образы initramfs.
+sudo grub-mkconfig -o /boot/grub/grub.cfg   # Обновляем загрузчик, можно так же через grub-customizer.
+
+#.makepkg-conf
+CFLAGS="-march=native -mtune=native -O2 -pipe -fno-plt -fexceptions \
+      -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security \
+      -fstack-clash-protection -fcf-protection"
+CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
+RUSTFLAGS="-C opt-level=3"
+MAKEFLAGS="-j$(nproc) -l$(nproc)"
+OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)
+BUILDENV=(!distcc color ccache check !sign)
+
+git clone https://aur.archlinux.org/nohang-git.git # Скачивание исходников.
+cd nohang-git                                      # Переход в nohang-git
+makepkg -sric                                      # Сборка и установка.
+sudo systemctl enable --now nohang-desktop         # Включаем службу.
+cd
+sudo systemctl enable fstrim.timer
+sudo pacman -S rng-tools         # Установка
+sudo systemctl enable --now rngd # Включает и запускает службу.
+sudo pacman -S dbus-broker                         # Уставновка
+sudo pacman -S dbus-broker                         # Уставновка
+sudo systemctl enable --now dbus-broker.service    # Включает и запускает службу.
+sudo systemctl --global enable dbus-broker.service # Включает и запускает службу для всех пользователей.
+sudo pacman -S irqbalance
+sudo systemctl enable --now irqbalance
+git clone https://aur.archlinux.org/uksmd.git
+cd uksmd
+makepkg -sric
+sudo systemctl enable uksmd
+cd
+sudo pacman -S jemalloc
+
+#/etc/environment
+LD_PRELOAD=/usr/lib/libjemalloc.so
