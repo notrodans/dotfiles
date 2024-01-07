@@ -16,6 +16,7 @@ local sources = {
       "json",
     },
   },
+  b.formatting.phpcsfixer,
   b.diagnostics.stylelint,
   b.diagnostics.eslint_d,
   require "typescript.extensions.null-ls.code-actions",
