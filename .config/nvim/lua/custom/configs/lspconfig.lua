@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "emmet_ls", "cssls", "lua_ls", "jsonls", "tsserver", "clangd", "tailwindcss", "marksman" }
+local servers = { "html", "emmet_ls", "cssls", "lua_ls", "jsonls", "tsserver", "clangd", "tailwindcss" }
 
 local json_settings = {
   json = {
