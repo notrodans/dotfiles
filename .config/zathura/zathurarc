@@ -15,6 +15,9 @@ set render-loading "false"
 set pages-per-row 1
 
 set scroll-step 40
+set recolor
+set default-bg "rgba(0, 0, 0, 0.85)"
+set recolor-lightcolor "rgba(0, 0, 0, 0)"
 
 # font size
 set font "JetBrainsMono Nerd Font 14"
@@ -24,37 +27,5 @@ set selection-clipboard clipboard
 
 # mappings
 
-unmap f
-map f toggle_fullscreen
-map [fullscreen] f toggle_fullscreen
 map j feedkeys "<C-Down>"
 map k feedkeys "<C-Up>"
-
-# ----- colour config ----- 
-set notification-error-bg "#3e4452"
-set notification-error-fg "#c678dd"
-set notification-warning-bg "#3e4452"
-set notification-warning-fg "#c678dd"
-set notification-bg "#3e4452"
-set notification-fg "#c678dd"
-set completion-group-bg "#3e4452"
-set completion-group-fg "#e5c07b"
-set completion-bg "#282c34"
-set completion-fg "#abb2bf"
-set completion-highlight-bg "#e5c07b"
-set completion-highlight-fg "#3e4452"
-set inputbar-bg "#282c34"
-set inputbar-fg "#abb2bf"
-set statusbar-bg "#3e4452"
-set statusbar-fg "#abb2bf"
-set highlight-color "#e5c07b"
-set highlight-active-color "#e06c75"
-set default-bg "#3e4452"
-set default-fg "#abb2bf"
-set recolor-lightcolor "#282c34"
-set recolor-darkcolor "#abb2bf"
-set index-bg "#282c34"
-set index-fg "#abb2bf"
-set index-active-bg "#e5c07b"
-set index-active-fg "#3e4452"
-set recolor true

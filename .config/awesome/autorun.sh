@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 
 CONFIG_DIR="/home/notrodans/.config/awesome"
 
@@ -9,7 +9,7 @@ run() {
 	fi
 }
 
-nvidia-settings --load-config-only
-xset r rate 350 60
-xinput set-prop 'Kingston HyperX Pulsefire FPS Pro' 'libinput Accel Speed' -0.9
+nvidia-settings --load-config-only 
+xset r rate 300 50
+xinput set-prop 'Kingston HyperX Pulsefire FPS Pro' 'libinput Accel Speed' -1
 xsetroot -cursor_name left_ptr

@@ -3,6 +3,7 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 local xresources = require("beautiful.xresources")
+-- require("./autorun")
 require("./scripts/screenshot")
 require("awful.autofocus")
 local wibox = require("wibox")
@@ -70,7 +71,7 @@ beautiful.border_focus = xrdb.color4
 beautiful.border_marked = xrdb.color10
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -585,5 +586,6 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
-awful.spawn.with_shell("./scripts/picom.sh")
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+awful.spawn.with_shell("~/.config/awesome/scripts/picom.sh")
 awful.spawn.with_shell("wal -R")
