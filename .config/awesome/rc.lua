@@ -265,9 +265,6 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "Print", scrot_selection),
 	awful.key({ "Shift" }, "Print", scrot_window),
 	awful.key({ "Ctrl" }, "Print", scrot_delay),
-	awful.key({ "Shift" }, "Alt_L", function()
-		mykeyboardlayout.next_layout()
-	end),
 
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
@@ -383,19 +380,19 @@ clientkeys = gears.table.join(
 		-- The client currently has the input focus, so it cannot be
 		-- minimized, since minimized clients can't have the focus.
 		c.minimized = true
-	end, { description = "minimize", group = "client" }),
-	awful.key({ modkey }, "m", function(c)
-		c.maximized = not c.maximized
-		c:raise()
-	end, { description = "(un)maximize", group = "client" }),
-	awful.key({ modkey, "Control" }, "m", function(c)
-		c.maximized_vertical = not c.maximized_vertical
-		c:raise()
-	end, { description = "(un)maximize vertically", group = "client" }),
-	awful.key({ modkey, "Shift" }, "m", function(c)
-		c.maximized_horizontal = not c.maximized_horizontal
-		c:raise()
-	end, { description = "(un)maximize horizontally", group = "client" })
+	end, { description = "minimize", group = "client" })
+	-- awful.key({ modkey }, "m", function(c)
+	-- 	c.maximized = not c.maximized
+	-- 	c:raise()
+	-- end, { description = "(un)maximize", group = "client" }),
+	-- awful.key({ modkey, "Control" }, "m", function(c)
+	-- 	c.maximized_vertical = not c.maximized_vertical
+	-- 	c:raise()
+	-- end, { description = "(un)maximize vertically", group = "client" }),
+	-- awful.key({ modkey, "Shift" }, "m", function(c)
+	-- 	c.maximized_horizontal = not c.maximized_horizontal
+	-- 	c:raise()
+	-- end, { description = "(un)maximize horizontally", group = "client" })
 )
 
 -- Bind all key numbers to tags.

@@ -1,0 +1,8 @@
+#/etc/X11/xorg.conf.d/00-keyboard.conf
+Section "InputClass"
+		Identifier "system-keyboard"
+		MatchIsKeyboard "on"
+		Option "XkbLayout" "us+typo,ru:2+typo,ua:3+typo"
+		Option "XkbModel" "pc105+inet"
+		Option "XkbOptions" "grp:caps_toggle,lv3:lalt_switch"
+EndSection
