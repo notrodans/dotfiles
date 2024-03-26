@@ -10,5 +10,6 @@
   },
   "showLineNumber": false,
   "propertiesInDocument": "visible",
-  "useTab": true
+  "useTab": true,
+  "alwaysUpdateLinks": true
 }

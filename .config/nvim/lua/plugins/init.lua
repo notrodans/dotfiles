@@ -9,6 +9,14 @@ return {
   },
 
   {
+    "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+
+  {
     "mfussenegger/nvim-lint",
     event = { "BufWritePre", "BufNewFile" },
     config = function()
@@ -135,6 +143,9 @@ return {
         --   "python"
         -- },
       },
+    },
+    autotag = {
+      enable = true,
     },
   },
 }
