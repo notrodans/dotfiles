@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/notrodans/Pictures/wallpapers/Fantasy-Autumn.png"
+let background = "#131219"
+let foreground = "#ddccde"
+let cursor     = "#ddccde"
+
+" Colors
+let color0  = "#131219"
+let color1  = "#633E81"
+let color2  = "#68688D"
+let color3  = "#906DA1"
+let color4  = "#7987A7"
+let color5  = "#9196B2"
+let color6  = "#ADAFC8"
+let color7  = "#ddccde"
+let color8  = "#9a8e9b"
+let color9  = "#633E81"
+let color10 = "#68688D"
+let color11 = "#906DA1"
+let color12 = "#7987A7"
+let color13 = "#9196B2"
+let color14 = "#ADAFC8"
+let color15 = "#ddccde"

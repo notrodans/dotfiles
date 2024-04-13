@@ -2,12 +2,16 @@
 local M = {}
 
 M.ui = {
-  theme = "nightlamp",
-  theme_toggle = { "nightlamp", "one_light" },
+  theme = "ashes",
+  theme_toggle = { "ashes", "one_light" },
+  transparency = true,
 
   hl_override = {
     CursorLine = {
-      bg = "line",
+      bg = "one_bg",
+    },
+    CmpDoc = {
+      bg = "none",
     },
   },
 
@@ -15,7 +19,10 @@ M.ui = {
     NvimTreeOpenedFolderName = { fg = "green", bold = true },
   },
 
-  transparency = true,
+  statusline = {
+    theme = "default",
+    separator_style = "round",
+  },
 
   nvdash = {
     load_on_startup = true,

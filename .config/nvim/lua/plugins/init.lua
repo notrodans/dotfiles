@@ -116,7 +116,7 @@ return {
         "prettierd",
         "stylua",
         "phpcs",
-        "phpcsfixer",
+        "php-cs-fixer",
       },
     },
   },

@@ -4,22 +4,45 @@
     "type": "split",
     "children": [
       {
-        "id": "6f53ccc5f0e9a8d3",
+        "id": "83cfd270e3e582dd",
         "type": "tabs",
         "children": [
           {
-            "id": "eff98f249dcfb1fb",
+            "id": "0eb23cf59c7b8804",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 264. Соединение источников тока в батареи.md",
-                "mode": "preview",
+                "file": "vault/Физика/Павел Виктор/Магнитное поле/Урок 273. Рамка с током в магнитном поле.md",
+                "mode": "source",
                 "source": false
               }
             }
+          },
+          {
+            "id": "4eeb5679cf74e766",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 261. Потери энергии в ЛЭП. Условие согласования источника тока с нагрузкой.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "45ad5b7665804c6a",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "vault/Images/ЛЭП.excalidraw.md"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -86,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 264. Соединение источников тока в батареи.md",
+                "file": "vault/Images/ЛЭП.excalidraw.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +126,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 264. Соединение источников тока в батареи.md",
+                "file": "vault/Images/ЛЭП.excalidraw.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +149,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 264. Соединение источников тока в батареи.md"
+                "file": "vault/Images/ЛЭП.excalidraw.md"
               }
             }
           },
@@ -179,46 +202,48 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "eff98f249dcfb1fb",
+  "active": "45ad5b7665804c6a",
   "lastOpenFiles": [
+    "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 261. Потери энергии в ЛЭП. Условие согласования источника тока с нагрузкой.md",
+    "vault/Images/Drawing 2024-04-10 14.05.36.excalidraw.md",
+    "vault/Физика/Павел Виктор/Магнитное поле/Урок 273. Рамка с током в магнитном поле.md",
+    "vault/Физика/Павел Виктор/Магнитное поле/Урок 270. Магнитное поле и его характеристики.md",
+    "vault/Images/Drawing 2024-04-10 14.54.55.excalidraw.md",
+    "vault/Физика/Павел Виктор/Магнитное поле/Урок 271. Модуль вектора магнитной индукции. Закон Ампера.md",
+    "vault/Images/Drawing 2024-04-08 21.16.30.excalidraw.md",
+    "vault/Images/Сравнение полей.excalidraw.md",
+    "vault/Images/Сила Ампера.excalidraw.md",
+    "vault/Images/Частные случаи при использовании правила левой руки.excalidraw.md",
+    "vault/Images/Правило левой руки.excalidraw.md",
+    "vault/Images/Drawing 2024-04-08 18.07.33.excalidraw.md",
+    "vault/Физика/Павел Виктор/Магнитное поле/Урок 271. Модуль вектора магнитной индукции. Закон Ампера",
+    "vault/Images/Вектор магнитной индукции.excalidraw.md",
+    "vault/Images/Drawing 2024-04-08 12.12.25.excalidraw.md",
+    "vault/Images/Направление нормали.excalidraw.md",
+    "vault/Images/Линии магнитной индукции.excalidraw.md",
+    "vault/Images/Drawing 2024-04-07 23.44.18.excalidraw.md",
+    "vault/Постоянные заметки/Список технологий, что нужно выучить для фриланса.md",
+    "vault/Постоянные заметки/Медицинские операции на будущее.md",
+    "vault/Images/Ориентирующее действие.excalidraw.md",
+    "vault/Images/Drawing 2024-04-03 20.19.34.excalidraw.md",
+    "vault/Images/Взаимодействие проводников в магнитном поле.excalidraw.md",
     "vault/Images/Drawing 2024-03-26 20.05.47.excalidraw.md",
-    "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 264. Соединение источников тока в батареи.md",
     "vault/Images/Drawing 2024-03-26 19.42.40.excalidraw.md",
     "vault/Images/Drawing 2024-03-26 18.20.01.excalidraw.md",
     "vault/Images/Drawing 2024-03-26 15.52.13.excalidraw.md",
-    "vault/Images/Drawing 2024-03-17 20.25.59.excalidraw.md",
-    "vault/Images/Drawing 2024-03-25 16.21.36.excalidraw.md",
-    "vault/Images/Drawing 2024-03-25 16.16.14.excalidraw.md",
-    "vault/Images/Drawing 2024-03-20 16.13.34.excalidraw.md",
-    "vault/Images/Drawing 2024-03-20 16.13.33.excalidraw.md",
-    "vault/Images/Drawing 2024-03-17 20.21.33.excalidraw.md",
-    "vault/Dataview.md",
-    "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 263. Правила Кирхгофа.md",
-    "vault/Images/Правило узлов.excalidraw.md",
-    "vault/Images/Правила Кирхгофа.excalidraw.md",
-    "vault/Images/Правило контуров.excalidraw.md",
-    "vault/Физика/Павел Виктор/Законы постоянного тока/Урок 261. Потери энергии в ЛЭП. Условие согласования источника тока с нагрузкой.md",
-    "vault/Математика/Статистика/Статистика. Термины.md",
+    "vault/Физика/Павел Виктор/Магнитное поле",
+    "vault/Постоянные заметки",
+    "vault/Images/Pasted image 20240329143556.png",
+    "vault/Images/Pasted image 20240329143341.png",
+    "vault/Физика/Павел Виктор/Законы постоянного тока/Важные моменты",
     "vault/Images/P(r).png",
     "vault/Images/n(R).png",
-    "vault/Images/P(R).excalidraw.md",
-    "vault/Images/n(R).excalidraw.md",
-    "vault/Images/ЛЭП.excalidraw.md",
-    "vault/Физика/Электродинамика/Закон Джоуля—Ленца. Работа и мощность электрического тока./Мощность электрического тока.md",
-    "vault/Важное/К обязательному просмотру.md",
-    "vault/Физика/Электродинамика/Закон Джоуля—Ленца. Работа и мощность электрического тока./Работа совершаемая электрическим током.md",
-    "vault/Дедлайны/Долги по школе.md",
-    "vault/Физика/Электродинамика/ЭДС/Зависимость напряжения от силы тока в полной замкнутой цепи при непостоянном сопротивлении внешней цепи..md",
     "vault/Физика/Электродинамика/Закон Джоуля—Ленца. Работа и мощность электрического тока.",
     "vault/Физика/Павел Виктор/Законы постоянного тока",
     "vault/Физика/Павел Виктор",
     "vault/Важное",
     "vault/Дедлайны",
     "vault/Физика/Электродинамика/ЭДС",
-    "vault/Физика/Электродинамика",
-    "vault/Математика/Статистика",
-    "vault/Математика",
-    "vault/Аниме",
     "Untitled.canvas"
   ]
 }

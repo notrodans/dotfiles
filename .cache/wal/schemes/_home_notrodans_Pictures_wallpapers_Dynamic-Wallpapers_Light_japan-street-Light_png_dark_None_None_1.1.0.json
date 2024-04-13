@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/notrodans/Pictures/wallpapers/Dynamic-Wallpapers/Light/japan-street-Light.png",
+    "alpha": "100",
+    "special": {
+        "background": "#191e21",
+        "foreground": "#c9d4e2",
+        "cursor": "#c9d4e2"
+    },
+    "colors": {
+        "color0": "#191e21",
+        "color1": "#5B738B",
+        "color2": "#6C8AA5",
+        "color3": "#4A9ED8",
+        "color4": "#A59F9C",
+        "color5": "#CDB4A7",
+        "color6": "#DFC8B4",
+        "color7": "#c9d4e2",
+        "color8": "#8c949e",
+        "color9": "#5B738B",
+        "color10": "#6C8AA5",
+        "color11": "#4A9ED8",
+        "color12": "#A59F9C",
+        "color13": "#CDB4A7",
+        "color14": "#DFC8B4",
+        "color15": "#c9d4e2"
+    }
+}

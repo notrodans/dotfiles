@@ -11,5 +11,6 @@
   "showLineNumber": false,
   "propertiesInDocument": "visible",
   "useTab": true,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "vault/Images"
 }

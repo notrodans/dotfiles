@@ -1,52 +1,74 @@
--- EXAMPLE
-local on_attach = require("nvchad.configs.lspconfig").on_attach
-local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
+local configs = require "nvchad.configs.lspconfig"
 
-local servers =
-  { "html", "emmet_ls", "cssls", "lua_ls", "jsonls", "tsserver", "clangd", "tailwindcss", "marksman", "bashls" }
+local servers = {
+  html = {},
+  emmet_ls = {},
+  lua_ls = {},
+  jsonls = {
+    settings = {
+      json = {
+        schemas = require("schemastore").json.schemas(),
+        validate = true,
+      },
+    },
+  },
+  clangd = {},
+  tailwindcss = {},
+  marksman = {},
+  bashls = {},
 
-local json_settings = {
-  json = {
-    schemas = require("schemastore").json.schemas(),
-    validate = true,
+  tsserver = {
+    settings = {
+
+      diagnostics = { ignoredCodes = { 6133 } },
+    },
+
+    cssls = {
+      settings = {
+        css = {
+          validate = false,
+        },
+      },
+    },
+
+    stylelint_lsp = {
+      filetypes = { "css", "scss", "less" },
+      settings = {
+        stylelintplus = {
+          autoFixOnFormat = true,
+        },
+      },
+    },
+
+    intelephense = {
+      root_dir = lspconfig.util.root_pattern("composer.json", "*.php"),
+      filetypes = { "php" },
+      settings = {
+        intelephense = {
+          telemetry = {
+            enabled = false,
+          },
+          files = {
+            maxSize = 5000000,
+          },
+        },
+      },
+    },
   },
 }
-local tsserver_settings = {
-  diagnostics = { ignoredCodes = { 6133 } },
-}
 
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-    formatting = {
-      enabled = false,
-    },
-    settings = (lsp == "jsonls" and json_settings or lsp == "tsserver" and tsserver_settings or {}),
-  }
+for name, opts in pairs(servers) do
+  opts.on_init = configs.on_init
+  opts.on_attach = configs.on_attach
+  opts.capabilities = configs.capabilities
+  opts.filetypes = servers[name].filetypes
+  opts.root_dir = servers[name].root_dir
+
+  require("lspconfig")[name].setup(opts)
 end
 
-lspconfig.intelephense.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern("composer.json", "*.php"),
-  settings = {
-    intelephense = {
-      telemetry = {
-        enabled = false,
-      },
-      files = {
-        maxSize = 5000000,
-      },
-    },
-  },
-}
-
 lspconfig.prismals.setup {
-  capabilities = capabilities,
-  on_init = on_init,
+  capabilities = configs.capabilities,
+  on_init = configs.on_init,
 }

@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/notrodans/Pictures/wallpapers/wallhaven-werdv6.png",
+    "alpha": "100",
+    "special": {
+        "background": "#3c191f",
+        "foreground": "#efdfe0",
+        "cursor": "#efdfe0"
+    },
+    "colors": {
+        "color0": "#3c191f",
+        "color1": "#BC7787",
+        "color2": "#B28D90",
+        "color3": "#B09CAA",
+        "color4": "#CD9092",
+        "color5": "#DEA6A8",
+        "color6": "#CEBCCA",
+        "color7": "#efdfe0",
+        "color8": "#a79c9c",
+        "color9": "#BC7787",
+        "color10": "#B28D90",
+        "color11": "#B09CAA",
+        "color12": "#CD9092",
+        "color13": "#DEA6A8",
+        "color14": "#CEBCCA",
+        "color15": "#efdfe0"
+    }
+}

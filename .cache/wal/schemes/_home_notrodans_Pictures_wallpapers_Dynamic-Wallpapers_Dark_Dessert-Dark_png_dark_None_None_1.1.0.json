@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/notrodans/Pictures/wallpapers/Dynamic-Wallpapers/Dark/Dessert-Dark.png",
+    "alpha": "100",
+    "special": {
+        "background": "#060B12",
+        "foreground": "#9bb7a6",
+        "cursor": "#9bb7a6"
+    },
+    "colors": {
+        "color0": "#060B12",
+        "color1": "#2A3D61",
+        "color2": "#17474D",
+        "color3": "#2A4D4A",
+        "color4": "#1C4B6C",
+        "color5": "#226165",
+        "color6": "#456859",
+        "color7": "#9bb7a6",
+        "color8": "#6c8074",
+        "color9": "#2A3D61",
+        "color10": "#17474D",
+        "color11": "#2A4D4A",
+        "color12": "#1C4B6C",
+        "color13": "#226165",
+        "color14": "#456859",
+        "color15": "#9bb7a6"
+    }
+}
