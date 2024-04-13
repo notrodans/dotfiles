@@ -2,6 +2,7 @@ local lspconfig = require "lspconfig"
 local configs = require "nvchad.configs.lspconfig"
 
 local servers = {
+  prismals = {},
   html = {},
   emmet_ls = {},
   lua_ls = {},
@@ -20,38 +21,37 @@ local servers = {
 
   tsserver = {
     settings = {
-
       diagnostics = { ignoredCodes = { 6133 } },
     },
+  },
 
-    cssls = {
-      settings = {
-        css = {
-          validate = false,
-        },
+  cssls = {
+    settings = {
+      css = {
+        validate = false,
       },
     },
+  },
 
-    stylelint_lsp = {
-      filetypes = { "css", "scss", "less" },
-      settings = {
-        stylelintplus = {
-          autoFixOnFormat = true,
-        },
+  stylelint_lsp = {
+    filetypes = { "css", "scss", "less" },
+    settings = {
+      stylelintplus = {
+        autoFixOnFormat = true,
       },
     },
+  },
 
-    intelephense = {
-      root_dir = lspconfig.util.root_pattern("composer.json", "*.php"),
-      filetypes = { "php" },
-      settings = {
-        intelephense = {
-          telemetry = {
-            enabled = false,
-          },
-          files = {
-            maxSize = 5000000,
-          },
+  intelephense = {
+    root_dir = lspconfig.util.root_pattern("composer.json", "*.php"),
+    filetypes = { "php" },
+    settings = {
+      intelephense = {
+        telemetry = {
+          enabled = false,
+        },
+        files = {
+          maxSize = 5000000,
         },
       },
     },
@@ -67,8 +67,3 @@ for name, opts in pairs(servers) do
 
   require("lspconfig")[name].setup(opts)
 end
-
-lspconfig.prismals.setup {
-  capabilities = configs.capabilities,
-  on_init = configs.on_init,
-}
