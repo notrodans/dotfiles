@@ -2,8 +2,8 @@
 local M = {}
 
 M.ui = {
-  theme = "ashes",
-  theme_toggle = { "ashes", "one_light" },
+  theme = "chadtain",
+  theme_toggle = { "chadtain", "one_light" },
   transparency = true,
 
   hl_override = {

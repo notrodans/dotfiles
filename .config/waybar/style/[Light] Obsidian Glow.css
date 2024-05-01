@@ -2,13 +2,13 @@
 /* Light - Obsidian Glow */
 
 * {
-font-family: "JetBrainsMono Nerd Font";
-font-weight: bold;
-min-height: 0;
-/* set font-size to 100% if font scaling is set to 1.00 using nwg-look */
-font-size: 97%;
-font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
-padding: 1px;
+	font-family: "JetBrainsMono Nerd Font";
+	font-weight: bold;
+	min-height: 0;
+	/* set font-size to 100% if font scaling is set to 1.00 using nwg-look */
+	font-size: 97%;
+	font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+	padding: 1px;
 }
 
 window#waybar {
@@ -27,7 +27,8 @@ window#waybar.empty {
 window#waybar.empty #window {
 	padding: 0px;
 	border: 0px;
-	/*  background-color: rgba(66,66,66,0.5); */ /* transparent */
+	/*  background-color: rgba(66,66,66,0.5); */
+	/* transparent */
 	background-color: transparent;
 }
 
@@ -44,23 +45,20 @@ tooltip label {
 
 #workspaces button {
 	color: #585b70;
-    box-shadow: none;
+	box-shadow: none;
 	text-shadow: none;
-    padding: 0px;
-    border-radius: 9px;
-    padding-left: 4px;
-    padding-right: 4px;
-    /* animation: gradient_f 20s ease-in infinite; */
-    /* transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682); */
+	padding: 0px;
+	border-radius: 10px;
+	padding-left: 4px;
+	padding-right: 4px;
+	/* animation: gradient_f 20s ease-in infinite; */
+	/* transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682); */
 }
 
 #workspaces button.active {
-	color: #000000;
-    border-radius: 15px 15px 15px 15px;
-    padding-left: 8px;
-    padding-right: 8px;
-    /* animation: gradient_f 20s ease-in infinite; */
-    /* transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682); */
+	color: #cdd6f4;
+	/* animation: gradient_f 20s ease-in infinite; */
+	/* transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682); */
 }
 
 #workspaces button.focused {
@@ -69,16 +67,12 @@ tooltip label {
 
 #workspaces button.urgent {
 	color: #000000;
-	border-radius: 10px;
 }
 
 #workspaces button:hover {
 	color: #000000;
-    border-radius: 15px;
- 	padding-left: 2px;
-    padding-right: 2px;
-    /* animation: gradient_f 20s ease-in infinite; */
-    /* transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682); */
+	/* animation: gradient_f 20s ease-in infinite; */
+	/* transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682); */
 }
 
 #backlight,
@@ -118,7 +112,7 @@ tooltip label {
 #custom-weather.clearNight,
 #custom-weather.cloudyFoggyDay,
 #custom-weather.cloudyFoggyNight,
-#custom-weather.default, 
+#custom-weather.default,
 #custom-weather.rainyDay,
 #custom-weather.rainyNight,
 #custom-weather.severe,
@@ -146,17 +140,17 @@ tooltip label {
 #taskbar button.active {
 	background-color: #585b70;
 	color: #cdd6f4;
-    padding-left: 12px;
-    padding-right: 12px;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+	padding-left: 12px;
+	padding-right: 12px;
+	animation: gradient_f 20s ease-in infinite;
+	transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
 }
 
 #taskbar button:hover {
-    padding-left: 3px;
-    padding-right: 3px;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+	padding-left: 3px;
+	padding-right: 3px;
+	animation: gradient_f 20s ease-in infinite;
+	transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
 }
 
 #battery.critical:not(.charging) {
@@ -176,16 +170,16 @@ tooltip label {
 	border: none;
 	box-shadow: none;
 }
-	
+
 #pulseaudio-slider trough {
-	min-width: 80px;  
-	min-height: 5px; 
+	min-width: 80px;
+	min-height: 5px;
 	border-radius: 5px;
 	background-color: grey;
 }
-	
+
 #pulseaudio-slider highlight {
-	min-height: 10px; 
+	min-height: 10px;
 	border-radius: 5px;
 	background-color: #ba5663;
 }
@@ -198,16 +192,16 @@ tooltip label {
 	border: none;
 	box-shadow: none;
 }
-	
+
 #backlight-slider trough {
-	min-width: 80px;  
-	min-height: 10px; 
+	min-width: 80px;
+	min-height: 10px;
 	border-radius: 5px;
 	background-color: grey;
 }
-	
+
 #backlight-slider highlight {
-	min-width: 10px; 
+	min-width: 10px;
 	border-radius: 5px;
 	background-color: #ba5663;
 }

@@ -18,7 +18,7 @@
 	"modules-left": [
 		"hyprland/workspaces#roman",
 		"custom/separator#dot-line",
-		"custom/cava_mviz",
+		"group/motherboard"
 	],
 
 	"modules-center": [
@@ -36,9 +36,7 @@
 		"custom/separator#dot-line",
 		"tray",
 		"custom/separator#dot-line", 
-		"pulseaudio",
-		"custom/separator#dot-line",
-		"pulseaudio#microphone",
+		"group/audio",
 		"custom/separator#dot-line",
 		"hyprland/language",
 		"custom/separator#dot-line",

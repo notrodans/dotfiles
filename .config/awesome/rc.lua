@@ -3,7 +3,6 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 local xresources = require("beautiful.xresources")
--- require("./autorun")
 require("./scripts/screenshot")
 require("awful.autofocus")
 local wibox = require("wibox")
@@ -13,7 +12,8 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
-local xrdb = xresources.get_current_theme()
+local awesome_dir = os.getenv("HOME") .. "/.config/awesome/"
+
 local dpi = xresources.apply_dpi
 
 -- {{{ Error handling
@@ -49,26 +49,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.font = "CaskaydiaCove Nerd Font 12"
-beautiful.useless_gap = dpi(3)
-beautiful.notification_icon_size = dpi(80)
-
-beautiful.bg_normal = xrdb.background
-beautiful.bg_focus = xrdb.color4
-beautiful.bg_urgent = xrdb.color1
-beautiful.bg_minimize = xrdb.color4
-beautiful.bg_systray = xrdb.bg_normal
-
-beautiful.fg_normal = xrdb.foreground
-beautiful.fg_focus = xrdb.foreground
-beautiful.fg_urgent = xrdb.foreground
-beautiful.fg_minimize = xrdb.foreground
-
-beautiful.border_width = dpi(0)
-beautiful.border_normal = xrdb.color5
-beautiful.border_focus = xrdb.color4
-beautiful.border_marked = xrdb.color10
+beautiful.init(awesome_dir .. "themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
@@ -186,12 +167,15 @@ local function set_wallpaper(s)
 		if type(wallpaper) == "function" then
 			wallpaper = wallpaper(s)
 		end
-		gears.wallpaper.maximized(wallpaper, s, false)
+		gears.wallpaper.maximized(wallpaper, s)
 	end
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
+
+local systray = wibox.widget.systray()
+beautiful.systray_icon_spacing = 5
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
@@ -226,7 +210,7 @@ awful.screen.connect_for_each_screen(function(s)
 	})
 
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "top", screen = s })
+	s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(30) })
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
@@ -241,7 +225,7 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			mykeyboardlayout,
-			wibox.widget.systray(),
+			wibox.container.margin(systray, 0, 0, dpi(2), dpi(2)),
 			mytextclock,
 			s.mylayoutbox,
 		},
@@ -250,13 +234,13 @@ end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(
-	-- awful.button({}, 3, function()
-	-- 	mymainmenu:toggle()
-	-- end),
-	awful.button({}, 4, awful.tag.viewnext),
-	awful.button({}, 5, awful.tag.viewprev)
-))
+-- root.buttons(gears.table.join(
+-- 	-- awful.button({}, 3, function()
+-- 	-- 	mymainmenu:toggle()
+-- 	-- end),
+-- 	awful.button({}, 4, awful.tag.viewnext),
+-- 	awful.button({}, 5, awful.tag.viewprev)
+-- ))
 -- }}}
 
 -- {{{ Key bindings
@@ -265,7 +249,7 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "Print", scrot_selection),
 	awful.key({ "Shift" }, "Print", scrot_window),
 	awful.key({ "Ctrl" }, "Print", scrot_delay),
-
+	awful.key({ "Ctrl" }, "Print", scrot_delay),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
@@ -380,19 +364,19 @@ clientkeys = gears.table.join(
 		-- The client currently has the input focus, so it cannot be
 		-- minimized, since minimized clients can't have the focus.
 		c.minimized = true
-	end, { description = "minimize", group = "client" })
-	-- awful.key({ modkey }, "m", function(c)
-	-- 	c.maximized = not c.maximized
-	-- 	c:raise()
-	-- end, { description = "(un)maximize", group = "client" }),
-	-- awful.key({ modkey, "Control" }, "m", function(c)
-	-- 	c.maximized_vertical = not c.maximized_vertical
-	-- 	c:raise()
-	-- end, { description = "(un)maximize vertically", group = "client" }),
-	-- awful.key({ modkey, "Shift" }, "m", function(c)
-	-- 	c.maximized_horizontal = not c.maximized_horizontal
-	-- 	c:raise()
-	-- end, { description = "(un)maximize horizontally", group = "client" })
+	end, { description = "minimize", group = "client" }),
+	awful.key({ modkey }, "m", function(c)
+		c.maximized = not c.maximized
+		c:raise()
+	end, { description = "(un)maximize", group = "client" }),
+	awful.key({ modkey, "Control" }, "m", function(c)
+		c.maximized_vertical = not c.maximized_vertical
+		c:raise()
+	end, { description = "(un)maximize vertically", group = "client" }),
+	awful.key({ modkey, "Shift" }, "m", function(c)
+		c.maximized_horizontal = not c.maximized_horizontal
+		c:raise()
+	end, { description = "(un)maximize horizontally", group = "client" })
 )
 
 -- Bind all key numbers to tags.
@@ -583,6 +567,4 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
-awful.spawn.with_shell("~/.config/awesome/autorun.sh")
-awful.spawn.with_shell("~/.config/awesome/scripts/picom.sh")
-awful.spawn.with_shell("wal -R")
+awful.spawn.with_shell(awesome_dir .. "autorun.sh")
