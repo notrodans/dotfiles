@@ -1,0 +1,15 @@
+{
+  "vimMode": false,
+  "showInlineTitle": true,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Letter",
+    "landscape": true,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "showLineNumber": false,
+  "propertiesInDocument": "visible",
+  "useTab": true,
+  "alwaysUpdateLinks": true
+}

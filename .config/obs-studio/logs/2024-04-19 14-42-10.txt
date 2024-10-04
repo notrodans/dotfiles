@@ -1,0 +1,202 @@
+14:42:10.490: Platform: Wayland
+14:42:10.490: CPU Name: AMD Ryzen 5 5600 6-Core Processor
+14:42:10.490: CPU Speed: 3986.046MHz
+14:42:10.490: Physical Cores: 6, Logical Cores: 12
+14:42:10.490: Physical Memory: 15896MB Total, 4071MB Free
+14:42:10.490: Kernel Version: Linux 6.8.7-1-cachyos-bore
+14:42:10.490: Distribution: "Arch Linux" Unknown
+14:42:10.490: Desktop Environment: Hyprland (Hyprland)
+14:42:10.490: Session Type: wayland
+14:42:10.492: Qt Version: 6.7.0 (runtime), 6.6.3 (compiled)
+14:42:10.492: Portable mode: false
+14:42:10.521: OBS 30.1.1-1 (linux)
+14:42:10.522: ---------------------------------
+14:42:10.522: ---------------------------------
+14:42:10.522: audio settings reset:
+14:42:10.522: 	samples per sec: 48000
+14:42:10.522: 	speakers:        2
+14:42:10.522: 	max buffering:   960 milliseconds
+14:42:10.522: 	buffering type:  dynamically increasing
+14:42:10.523: ---------------------------------
+14:42:10.523: Initializing OpenGL...
+14:42:10.523: Using EGL/Wayland
+14:42:10.552: Initialized EGL 1.5
+14:42:10.562: Loading up OpenGL on adapter AMD AMD Radeon RX 550 / 550 Series (radeonsi, polaris12, LLVM 17.0.6, DRM 3.57, 6.8.7-1-cachyos-bore)
+14:42:10.562: OpenGL loaded successfully, version 4.6 (Core Profile) Mesa 24.0.5-arch1.1, shading language 4.60
+14:42:10.661: ---------------------------------
+14:42:10.661: video settings reset:
+14:42:10.661: 	base resolution:   1680x1050
+14:42:10.661: 	output resolution: 1680x1050
+14:42:10.661: 	downscale filter:  Lanczos
+14:42:10.661: 	fps:               60/1
+14:42:10.661: 	format:            NV12
+14:42:10.661: 	YUV mode:          Rec. 709/Partial
+14:42:10.662: NV12 texture support enabled
+14:42:10.662: P010 texture support not available
+14:42:10.664: Audio monitoring device:
+14:42:10.664: 	name: По умолчанию
+14:42:10.664: 	id: default
+14:42:10.664: ---------------------------------
+14:42:10.672: Failed to load 'en-US' text for module: 'decklink-captions.so'
+14:42:10.679: Failed to load 'en-US' text for module: 'decklink-output-ui.so'
+14:42:10.685: A DeckLink iterator could not be created.  The DeckLink drivers may not be installed
+14:42:10.685: Failed to initialize module 'decklink.so'
+14:42:10.817: [pipewire] Available captures:
+14:42:10.817: [pipewire]     - Desktop capture
+14:42:10.817: [pipewire]     - Window capture
+14:42:10.846: [linux-vkcapture] plugin loaded successfully (version 1.5.0)
+14:42:10.896: LIBVA_DRIVER_NAME variable is set, this could prevent FFmpeg VAAPI from working correctly
+14:42:10.903: VAAPI: API version 1.21
+14:42:10.905: FFmpeg VAAPI H264 encoding supported
+14:42:10.910: FFmpeg VAAPI AV1 encoding not supported
+14:42:10.916: FFmpeg VAAPI HEVC encoding supported
+14:42:11.022: ---------------------------------
+14:42:11.022:   Loaded Modules:
+14:42:11.022:     wlrobs.so
+14:42:11.022:     text-freetype2.so
+14:42:11.022:     rtmp-services.so
+14:42:11.022:     obs-x264.so
+14:42:11.023:     obs-webrtc.so
+14:42:11.023:     obs-vst.so
+14:42:11.023:     obs-transitions.so
+14:42:11.023:     obs-qsv11.so
+14:42:11.023:     obs-outputs.so
+14:42:11.023:     obs-libfdk.so
+14:42:11.023:     obs-filters.so
+14:42:11.023:     obs-ffmpeg.so
+14:42:11.023:     linux-vkcapture.so
+14:42:11.023:     linux-v4l2.so
+14:42:11.023:     linux-pulseaudio.so
+14:42:11.023:     linux-pipewire.so
+14:42:11.023:     linux-pipewire-audio.so
+14:42:11.023:     linux-jack.so
+14:42:11.023:     linux-capture.so
+14:42:11.023:     linux-alsa.so
+14:42:11.023:     image-source.so
+14:42:11.023:     frontend-tools.so
+14:42:11.023:     decklink-output-ui.so
+14:42:11.023:     decklink-captions.so
+14:42:11.023: ---------------------------------
+14:42:11.023: QWidget::setTabOrder: 'first' and 'second' must be in the same window
+14:42:11.023: ==== Startup complete ===============================================
+14:42:11.058: All scene data cleared
+14:42:11.058: ------------------------------------------------
+14:42:11.062: pulse-input: Server name: 'PulseAudio (on PipeWire 1.0.5) 15.0.0'
+14:42:11.062: pulse-input: Audio format: s24le, 48000 Hz, 2 channels
+14:42:11.062: pulse-input: Sample format s24le not supported by OBS,using float32le instead for recording
+14:42:11.063: pulse-input: Started recording from 'alsa_output.usb-Kingston_HyperX_Cloud_Stinger_S_0000000000000000-00.pro-output-0.monitor' (default)
+14:42:11.063: [Loaded global audio device]: 'Рабочий стол'
+14:42:11.063: pulse-input: Server name: 'PulseAudio (on PipeWire 1.0.5) 15.0.0'
+14:42:11.063: pulse-input: Audio format: s16le, 48000 Hz, 1 channels
+14:42:11.063: pulse-input: Started recording from 'alsa_input.usb-Kingston_HyperX_Cloud_Stinger_S_0000000000000000-00.pro-input-0'
+14:42:11.063: [Loaded global audio device]: 'Микр/доп'
+14:42:11.063: PipeWire initialized
+14:42:11.064: Switched to scene 'Сцена'
+14:42:11.064: ------------------------------------------------
+14:42:11.064: Loaded scenes:
+14:42:11.064: - scene 'Сцена':
+14:42:11.064:     - source: 'Screen Capture (PipeWire)' (pipewire-desktop-capture-source)
+14:42:11.064: ------------------------------------------------
+14:42:11.121: [pipewire] Screencast session created
+14:42:11.631: adding 21 milliseconds of audio buffering, total audio buffering is now 21 milliseconds (source: Микр/доп)
+14:42:11.631: 
+14:42:12.108: [pipewire] Asking for desktop
+14:42:12.110: [pipewire] desktop selected, setting up screencast
+14:42:12.120: [pipewire] Server version: 1.0.5
+14:42:12.120: [pipewire] Library version: 1.0.5
+14:42:12.120: [pipewire] Header version: 1.0.4
+14:42:12.120: bmalloc: Allocating 0 bytes is broken behavior, please fix your code! This will crash in future versions of OBS.
+14:42:12.120: bmalloc: Allocating 0 bytes is broken behavior, please fix your code! This will crash in future versions of OBS.
+14:42:12.120: bmalloc: Allocating 0 bytes is broken behavior, please fix your code! This will crash in future versions of OBS.
+14:42:12.120: bmalloc: Allocating 0 bytes is broken behavior, please fix your code! This will crash in future versions of OBS.
+14:42:12.120: bmalloc: Allocating 0 bytes is broken behavior, please fix your code! This will crash in future versions of OBS.
+14:42:12.120: bmalloc: Allocating 0 bytes is broken behavior, please fix your code! This will crash in future versions of OBS.
+14:42:12.120: [pipewire] Created stream 0x5b72d54f6510
+14:42:12.120: [pipewire] Stream 0x5b72d54f6510 state: "connecting" (error: none)
+14:42:12.121: [pipewire] Playing stream 0x5b72d54f6510
+14:42:12.121: [pipewire] Stream 0x5b72d54f6510 state: "paused" (error: none)
+14:42:12.128: [pipewire] Negotiated format:
+14:42:12.128: [pipewire]     Format: 8 (Spa:Enum:VideoFormat:BGRx)
+14:42:12.128: [pipewire]     Modifier: 0x0
+14:42:12.128: [pipewire]     Size: 1680x1050
+14:42:12.128: [pipewire]     Framerate: 0/1
+14:42:12.131: [pipewire] Negotiated format:
+14:42:12.131: [pipewire]     Format: 8 (Spa:Enum:VideoFormat:BGRx)
+14:42:12.131: [pipewire]     Modifier: 0xffffffffffffff
+14:42:12.131: [pipewire]     Size: 1680x1050
+14:42:12.131: [pipewire]     Framerate: 0/1
+14:42:12.132: [pipewire] Stream 0x5b72d54f6510 state: "streaming" (error: none)
+14:42:16.274: ---------------------------------
+14:42:16.274: [AV1 encoder: 'advanced_video_recording'] settings:
+14:42:16.274: 	encoder:      SVT-AV1
+14:42:16.274: 	rate_control: CBR
+14:42:16.274: 	bitrate:      10000
+14:42:16.274: 	cqp:          0
+14:42:16.274: 	keyint:       -1
+14:42:16.274: 	preset:       8
+14:42:16.274: 	width:        1680
+14:42:16.274: 	height:       1050
+14:42:16.274: 	ffmpeg opts:  
+14:42:16.274: 
+14:42:16.973: libfdk_aac encoder created
+14:42:16.973: libfdk_aac bitrate: 160, channels: 2
+14:42:16.974: [ffmpeg muxer: 'adv_file_output'] Using muxer settings:
+14:42:16.974: 	movflags=frag_keyframe+empty_moov+delay_moov
+14:42:16.976: ==== Recording Start ===============================================
+14:42:16.976: [ffmpeg muxer: 'adv_file_output'] Writing file '/home/notrodans/2024-04-19_14-42-16.mp4'...
+14:42:23.814: adding 64 milliseconds of audio buffering, total audio buffering is now 85 milliseconds (source: Рабочий стол)
+14:42:23.814: 
+14:42:28.673: [ffmpeg muxer: 'adv_file_output'] Output of file '/home/notrodans/2024-04-19_14-42-16.mp4' stopped
+14:42:28.673: Output 'adv_file_output': stopping
+14:42:28.673: Output 'adv_file_output': Total frames output: 575
+14:42:28.673: Output 'adv_file_output': Total drawn frames: 699 (702 attempted)
+14:42:28.673: Output 'adv_file_output': Number of lagged frames due to rendering lag/stalls: 3 (0.4%)
+14:42:28.673: Video stopped, number of skipped frames due to encoding lag: 74/701 (10.6%)
+14:42:28.673: ==== Recording Stop ================================================
+14:42:29.522: libfdk_aac encoder destroyed
+14:42:41.310:   OpenType support missing for "Open Sans", script 11
+14:42:41.312:   OpenType support missing for "Arial", script 11
+14:42:41.328:   OpenType support missing for "Droid Sans", script 11
+14:42:41.334:   OpenType support missing for "Open Sans", script 12
+14:42:41.336:   OpenType support missing for "Arial", script 12
+14:42:41.338:   OpenType support missing for "Open Sans", script 16
+14:42:41.340:   OpenType support missing for "Arial", script 16
+14:42:41.340:   OpenType support missing for "Droid Sans", script 16
+14:42:41.340:   OpenType support missing for "Noto Sans", script 16
+14:42:41.341:   OpenType support missing for "Verdana", script 16
+14:42:41.343:   OpenType support missing for "Nimbus Sans", script 16
+14:42:41.376:   OpenType support missing for "WenQuanYi Zen Hei", script 16
+14:42:41.389:   OpenType support missing for "Open Sans", script 20
+14:42:41.390:   OpenType support missing for "Arial", script 20
+14:42:50.820: Settings changed (outputs)
+14:42:50.821: ------------------------------------------------
+14:42:56.737: Settings changed (outputs)
+14:42:56.737: ------------------------------------------------
+14:43:03.701: ---------------------------------
+14:43:03.701: [x264 encoder: 'advanced_video_recording'] preset: placebo
+14:43:03.701: [x264 encoder: 'advanced_video_recording'] settings:
+14:43:03.701: 	rate_control: CBR
+14:43:03.701: 	bitrate:      10000
+14:43:03.701: 	buffer size:  10000
+14:43:03.701: 	crf:          23
+14:43:03.701: 	fps_num:      60
+14:43:03.701: 	fps_den:      1
+14:43:03.701: 	width:        1680
+14:43:03.701: 	height:       1050
+14:43:03.701: 	keyint:       250
+14:43:03.701: 
+14:43:03.704: libfdk_aac encoder created
+14:43:03.704: libfdk_aac bitrate: 160, channels: 2
+14:43:03.704: [ffmpeg muxer: 'adv_file_output'] Using muxer settings:
+14:43:03.704: 	movflags=frag_keyframe+empty_moov+delay_moov
+14:43:03.705: ==== Recording Start ===============================================
+14:43:03.705: [ffmpeg muxer: 'adv_file_output'] Writing file '/home/notrodans/2024-04-19_14-43-03.mp4'...
+14:43:34.683: output adv_file_output paused
+14:43:35.466: output adv_file_output unpaused
+14:43:41.254: ==== Shutting down ==================================================
+14:43:41.256: pulse-input: Stopped recording from 'alsa_output.usb-Kingston_HyperX_Cloud_Stinger_S_0000000000000000-00.pro-output-0.monitor'
+14:43:41.256: pulse-input: Got 3607 packets with 4328400 frames
+14:43:41.256: pulse-input: Stopped recording from 'alsa_input.usb-Kingston_HyperX_Cloud_Stinger_S_0000000000000000-00.pro-input-0'
+14:43:41.256: pulse-input: Got 3607 packets with 4328400 frames
+14:43:41.258: [pipewire] Stream 0x5b72d54f6510 state: "paused" (error: none)
+14:43:41.258: [pipewire] Stream 0x5b72d54f6510 state: "unconnected" (error: none)
