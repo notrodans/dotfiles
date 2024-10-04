@@ -1,0 +1,24 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sda2
+UUID=9b10791d-9f92-45d7-97a0-2f4efbbf8af4	/         	btrfs     	rw,relatime,nodatasum,nodatacow,ssd,discard=async,space_cache=v2,subvolid=256,subvol=/@	0 0
+
+# /dev/sda2
+UUID=9b10791d-9f92-45d7-97a0-2f4efbbf8af4	/home     	btrfs     	rw,relatime,nodatasum,nodatacow,ssd,discard=async,space_cache=v2,subvolid=257,subvol=/@home	0 0
+
+# /dev/sda2
+UUID=9b10791d-9f92-45d7-97a0-2f4efbbf8af4	/var/log  	btrfs     	rw,relatime,nodatasum,nodatacow,ssd,discard=async,space_cache=v2,subvolid=258,subvol=/@log	0 0
+
+# /dev/sda2
+UUID=9b10791d-9f92-45d7-97a0-2f4efbbf8af4	/var/cache/pacman/pkg	btrfs     	rw,relatime,nodatasum,nodatacow,ssd,discard=async,space_cache=v2,subvolid=259,subvol=/@pkg	0 0
+
+# /dev/sda2
+UUID=9b10791d-9f92-45d7-97a0-2f4efbbf8af4	/.snapshots	btrfs     	rw,relatime,nodatasum,nodatacow,ssd,discard=async,space_cache=v2,subvolid=260,subvol=/@.snapshots	0 0
+
+# /dev/sda1
+UUID=8FA5-0E48      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/sdb1
+UUID=79E4C7D83724085A	/home/notrodans/D	ntfs-3g	defaults,nofail 	0 0
