@@ -1,22 +1,61 @@
-require("nvchad.options")
-local opt = vim.o
+local opt = vim.opt
+local o = vim.o
+local g = vim.g
 
-opt.swapfile = false
-opt.signcolumn = "yes"
-opt.smartindent = false
-opt.expandtab = false
-opt.tabstop = 2
-opt.shiftwidth = 0
-opt.softtabstop = 0
-opt.smarttab = true
-opt.mouse = "a"
-opt.guicursor = "i:block"
+-------------------------------------- options ------------------------------------------
+o.laststatus = 3
+o.showmode = false
+
+o.clipboard = "unnamedplus"
+o.cursorline = true
+o.cursorlineopt = "both"
 opt.scrolloff = 999
-opt.linebreak = true
--- opt.textwidth = 120
-opt.wrap = false
-opt.relativenumber = true
-opt.cursorlineopt = "both" -- to enable cursorline!
 
+-- Indenting
+o.expandtab = true
+o.shiftwidth = 2
+o.smartindent = true
+o.tabstop = 2
+o.softtabstop = 2
 
-return nil
+opt.fillchars = { eob = " " }
+o.ignorecase = true
+o.smartcase = true
+o.mouse = "a"
+
+-- Numbers
+o.number = true
+o.numberwidth = 2
+o.ruler = false
+
+-- disable nvim intro
+opt.shortmess:append "sI"
+
+o.signcolumn = "yes"
+o.splitbelow = true
+o.splitright = true
+o.timeoutlen = 400
+o.undofile = true
+opt.guicursor = "i:block"
+
+-- interval for writing swap file to disk, also used by gitsigns
+o.updatetime = 250
+
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+opt.whichwrap:append "<>[]hl"
+
+-- disable some default providers
+g.loaded_node_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
+
+-- g.vscode_snippets_path = vim.fn.stdpath "config" .. "/snippets/vscode"
+-- g.vscode_snippets_path = "~/.vscode-oss/extensions/fls-snippets.json"
+
+-- add binaries installed by mason.nvim to path
+local is_windows = vim.fn.has "win32" ~= 0
+local sep = is_windows and "\\" or "/"
+local delim = is_windows and ";" or ":"
+vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
