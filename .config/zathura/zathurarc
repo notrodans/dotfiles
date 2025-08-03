@@ -1,0 +1,31 @@
+# window frame configurations
+set window-height 3000
+set window-width 1000
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set page-padding 10
+set window-title-page true
+set guioptions s
+
+set adjust-open "best-fit"
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set zoom-min 10
+set render-loading "false"
+set pages-per-row 1
+
+set scroll-step 40
+set recolor
+set default-bg "rgba(0, 0, 0, 0.85)"
+set recolor-lightcolor "rgba(0, 0, 0, 0)"
+
+# font size
+set font "JetBrainsMono Nerd Font 14"
+
+# clipboard configurations
+set selection-clipboard clipboard
+
+# mappings
+
+map j feedkeys "<C-Down>"
+map k feedkeys "<C-Up>"

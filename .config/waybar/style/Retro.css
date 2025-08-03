@@ -1,0 +1,336 @@
+/*
+ * Waybar Theme - Classic Gray Style
+ * Fixed padding and tray icon issues
+ */
+
+* {
+	font-family: "JetBrains Mono Nerd Font", monospace;
+	font-weight: bold;
+	font-size: 14px;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+window#waybar {
+	background: #c0c0c0; /* bg_color */
+	color: #000000; /* fg_color */
+	border-bottom: 1px solid #000000; /* borders */
+}
+
+window#waybar.hidden {
+	opacity: 0.6;
+}
+
+tooltip {
+	background: #c0c0c0; /* bg_color */
+	border: 1px solid #000000; /* borders */
+	border-radius: 0;
+	color: #000000; /* fg_color */
+	padding: 4px;
+}
+
+/*----- Module Groups -----*/
+.modules-right {
+	background-color: #c0c0c0; /* bg_color */
+	border: 1px solid #000000; /* borders */
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	margin: 2px 4px 2px 2px;
+	padding: 0 2px;
+}
+
+.modules-center {
+	background-color: #c0c0c0; /* bg_color */
+	border: 1px solid #000000; /* borders */
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	margin: 2px 0;
+	padding: 0 2px;
+}
+
+.modules-left {
+	background-color: #c0c0c0; /* bg_color */
+	border: 1px solid #000000; /* borders */
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	margin: 2px 2px 2px 4px;
+	padding: 0 2px;
+}
+
+/*----- Workspaces -----*/
+#workspaces {
+	padding: 0;
+}
+
+#workspaces button {
+	color: #000000; /* fg_color */
+	padding-right: 4px;
+	background-color: #c0c0c0; /* button_bg_color */
+	border: 1px solid #000000; /* borders */
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	margin: 2px 1px;
+	min-width: 16px;
+}
+
+#workspaces button.active {
+	color: #ffffff; /* selected_fg_color */
+	background-color: #0000aa; /* selected_bg_color */
+	border: 1px solid #000000;
+	box-shadow:
+		inset 1px 1px 0px #000000,
+		inset -1px -1px 0px #505050;
+}
+
+#workspaces button.urgent {
+	color: #ffffff;
+	background-color: #ff0000; /* error_bg_color */
+	border: 1px solid #000000;
+}
+
+#workspaces button:hover {
+	background-color: #d4d4d4;
+	border: 1px solid #000000;
+	box-shadow:
+		inset 1px 1px 0px #ffffff,
+		inset -1px -1px 0px #808080;
+}
+
+/*----- Common Modules -----*/
+#clock,
+#cpu,
+#memory,
+#disk,
+#pulseaudio,
+#network,
+#battery,
+#tray,
+#temperature,
+#backlight,
+#custom-power,
+#custom-menu {
+	color: #000000; /* fg_color */
+	padding: 0 4px;
+	margin: 2px 1px;
+	background-color: #c0c0c0; /* button_bg_color */
+	border: 1px solid #000000; /* borders */
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	min-height: 18px;
+}
+
+/*----- Specific Module Styles -----*/
+#clock {
+	font-weight: bold;
+	background-color: #c0c0c0;
+	min-width: 50px;
+}
+
+#cpu,
+#memory,
+#disk {
+	background-color: #c0c0c0;
+	min-width: 24px;
+}
+
+#cpu:hover,
+#memory:hover,
+#disk:hover {
+	background-color: #d4d4d4;
+	box-shadow:
+		inset 1px 1px 0px #ffffff,
+		inset -1px -1px 0px #808080;
+}
+
+#pulseaudio {
+	background-color: #c0c0c0;
+	min-width: 32px;
+}
+
+#pulseaudio.muted {
+	color: #606060;
+	background-color: #a0a0a0;
+}
+
+#network {
+	background-color: #c0c0c0;
+	min-width: 32px;
+}
+
+#network.disconnected {
+	color: #606060;
+	background-color: #a0a0a0;
+}
+
+#battery {
+	background-color: #c0c0c0;
+	min-width: 40px;
+}
+
+#battery.charging {
+	color: #006600;
+}
+
+#battery.warning:not(.charging) {
+	color: #aa0000;
+}
+
+#battery.critical:not(.charging) {
+	color: #ffffff;
+	background-color: #aa0000;
+	animation-name: blink;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+/*----- Tray Fix -----*/
+#tray {
+	background-color: #a0a0a0;
+	min-width: 16px;
+	padding: 0 2px;
+	margin: 2px 1px;
+}
+
+#tray > .passive {
+	-gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+	-gtk-icon-effect: highlight;
+	background-color: #ff0000;
+}
+
+#tray > .active {
+	background-color: #0000aa;
+}
+
+/* Separator for tray to prevent icon mixing */
+#tray separator {
+	background-color: #000000;
+	margin: 0 2px;
+	padding: 0;
+}
+
+#temperature {
+	background-color: #c0c0c0;
+	min-width: 32px;
+}
+
+#temperature.critical {
+	color: #ffffff;
+	background-color: #aa0000;
+}
+
+#backlight {
+	background-color: #c0c0c0;
+	min-width: 32px;
+}
+
+#custom-power {
+	background-color: #aa0000;
+	color: #ffffff;
+	padding: 0 6px;
+	margin: 2px 2px 2px 1px;
+	min-width: 16px;
+}
+
+#custom-menu {
+	background-color: #0000aa; /* selected_bg_color */
+	color: #ffffff; /* selected_fg_color */
+	padding: 0 6px;
+	margin: 2px 1px 2px 2px;
+	min-width: 16px;
+}
+
+/*----- Sliders -----*/
+#pulseaudio-slider slider,
+#backlight-slider slider {
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
+}
+
+#pulseaudio-slider trough,
+#backlight-slider trough {
+	min-width: 80px;
+	min-height: 8px;
+	background-color: #a0a0a0;
+	border: 1px solid #000000;
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+}
+
+#pulseaudio-slider highlight,
+#backlight-slider highlight {
+	min-height: 8px;
+	background-color: #0000aa; /* selected_bg_color */
+}
+
+/*----- Animations -----*/
+@keyframes blink {
+	to {
+		background-color: #ff0000;
+	}
+}
+
+/*----- Taskbar -----*/
+#taskbar {
+	padding: 0;
+}
+
+#taskbar button {
+	padding: 0 3px;
+	color: #000000;
+	background-color: #c0c0c0;
+	border: 1px solid #000000;
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	margin: 2px 1px;
+	min-width: 16px;
+}
+
+#taskbar button.active {
+	background-color: #0000aa; /* selected_bg_color */
+	color: #ffffff; /* selected_fg_color */
+	border: 1px solid #000000;
+	box-shadow:
+		inset 1px 1px 0px #000000,
+		inset -1px -1px 0px #505050;
+}
+
+#taskbar button:hover {
+	background-color: #d4d4d4;
+	border: 1px solid #000000;
+	box-shadow:
+		inset 1px 1px 0px #ffffff,
+		inset -1px -1px 0px #808080;
+}
+
+/*----- Additional fixes for left-side padding -----*/
+.modules-left > widget > *:first-child {
+	margin-left: 0;
+}
+
+.modules-left > widget > *:last-child {
+	margin-right: 0;
+}
+
+/* Ensure proper spacing between modules */
+#custom-menu,
+#custom-power,
+#tray,
+#battery,
+#network,
+#pulseaudio,
+#backlight,
+#temperature,
+#disk,
+#memory,
+#cpu,
+#clock {
+	margin: 2px 1px;
+}
