@@ -35,7 +35,7 @@ ensure_link() {
   if [[ -L "$dst" ]]; then
     local cur
     cur="$(readlink "$dst" || true)"
-    if [[ -n "$cur" ]] && samepath "$(canonpath "$src")" "$(canonpath "$dst")"; then
+    if [[ -n "$cur" ]] && samepath "$src" "$dst"; then
       info "OK link: $dst"
       return 0
     fi
@@ -80,9 +80,46 @@ list_config_entries() {
   find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -exec basename {} \;
 }
 
+check_one() {
+  # check_one NAME
+  local name="$1" src dst
+  src="$CONFIG_DIR/$name"
+  if is_special_home "$name"; then
+    dst="$HOME/$name"
+  else
+    dst="$HOME/.config/$name"
+  fi
+
+  if [[ -L "$dst" ]]; then
+    if samepath "$src" "$dst"; then
+      info "OK link: $dst"
+      return 0
+    else
+      local target
+      target="$(readlink "$dst")"
+      warn "Wrong link: $dst -> $target (should be -> $src)"
+      return 1
+    fi
+  elif [[ -e "$dst" ]]; then
+    warn "Exists but not a symlink: $dst"
+    return 1
+  else
+    warn "Missing: $dst"
+    return 1
+  fi
+}
+
+check_all() {
+  local name ret=0
+  while IFS= read -r name; do
+    check_one "$name" || ret=1
+  done < <(list_config_entries)
+  return "$ret"
+}
+
 link_all() {
   local name src dst
-  for name in $(list_config_entries); do
+  while IFS= read -r name; do
     src="$CONFIG_DIR/$name"
     if is_special_home "$name"; then
       dst="$HOME/$name"
@@ -90,7 +127,7 @@ link_all() {
       dst="$HOME/.config/$name"
     fi
     ensure_link "$src" "$dst"
-  done
+  done < <(list_config_entries)
 }
 
 adopt_one() {
@@ -126,19 +163,19 @@ adopt_one() {
 
 adopt_all() {
   local name
-  for name in $(list_config_entries); do
+  while IFS= read -r name; do
     adopt_one "$name"
-  done
+  done < <(list_config_entries)
 }
 
 unlink_all() {
   local name dst
-  for name in $(list_config_entries); do
+  while IFS= read -r name; do
     if is_special_home "$name"; then
       dst="$HOME/$name"
     else
       dst="$HOME/.config/$name"
     fi
     unlink_path "$dst"
-  done
+  done < <(list_config_entries)
 }
