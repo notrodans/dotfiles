@@ -46,10 +46,8 @@ ensure_link() {
 
   # Replace anything at dst safely
   # Use -n to not dereference if dst is a symlink to a dir; -f to force replace; -s for symlink
-  # Some ln implementations need removing first; do a best-effort unlink
-  if [[ -e "$dst" || -L "$dst" ]]; then
-    rm -rf -- "$dst"
-  fi
+  # Back up any existing file/symlink at destination before linking
+  backup_existing "$dst"
   ln -sfn -- "$src" "$dst"
   info "Linked: $dst -> $src"
 }
@@ -77,7 +75,7 @@ is_special_home() {
 list_config_entries() {
   # One level under repo .config
   find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -printf "%f\n" 2>/dev/null || \
-  find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -exec basename {} \;                 
+  (find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 | sed 's#.*/##')
 }                                                                                 
                                                                                   
 check_one() {                                                                     

@@ -15,10 +15,7 @@ canonpath() {
   if command -v realpath >/dev/null 2>&1; then
     realpath "$p"
   elif command -v python3 >/dev/null 2>&1; then
-    python3 - "$p" <<'PY'
-import os,sys
-print(os.path.realpath(sys.argv[1]))
-PY
+    python3 -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' -- "$p"
   else
     # Best-effort fallback; readlink -f not on all BSDs
     readlink -f "$p" 2>/dev/null || printf "%s\n" "$p"
