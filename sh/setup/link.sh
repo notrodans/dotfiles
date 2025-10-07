@@ -34,8 +34,8 @@ ensure_link() {
   # If already correct symlink or same canonical, skip
   if [[ -L "$dst" ]]; then
     local cur
-    cur="$(readlink "$dst" || true)"
-    if [[ -n "$cur" ]] && samepath "$src" "$dst"; then
+    cur="$(readlink "$dst" || true)"                                              
+    if [[ -n "$cur" ]] && samepath "$src" "$dst"; then                            
       info "OK link: $dst"
       return 0
     fi
@@ -77,46 +77,46 @@ is_special_home() {
 list_config_entries() {
   # One level under repo .config
   find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -printf "%f\n" 2>/dev/null || \
-  find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -exec basename {} \;
-}
-
-check_one() {
-  # check_one NAME
-  local name="$1" src dst
-  src="$CONFIG_DIR/$name"
-  if is_special_home "$name"; then
-    dst="$HOME/$name"
-  else
-    dst="$HOME/.config/$name"
-  fi
-
-  if [[ -L "$dst" ]]; then
-    if samepath "$src" "$dst"; then
-      info "OK link: $dst"
-      return 0
-    else
-      local target
-      target="$(readlink "$dst")"
-      warn "Wrong link: $dst -> $target (should be -> $src)"
-      return 1
-    fi
-  elif [[ -e "$dst" ]]; then
-    warn "Exists but not a symlink: $dst"
-    return 1
-  else
-    warn "Missing: $dst"
-    return 1
-  fi
-}
-
-check_all() {
-  local name ret=0
-  while IFS= read -r name; do
-    check_one "$name" || ret=1
-  done < <(list_config_entries)
-  return "$ret"
-}
-
+  find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -exec basename {} \;                 
+}                                                                                 
+                                                                                  
+check_one() {                                                                     
+  # check_one NAME                                                                
+  local name="$1" src dst                                                         
+  src="$CONFIG_DIR/$name"                                                         
+  if is_special_home "$name"; then                                                
+    dst="$HOME/$name"                                                             
+  else                                                                            
+    dst="$HOME/.config/$name"                                                     
+  fi                                                                              
+                                                                                  
+  if [[ -L "$dst" ]]; then                                                        
+    if samepath "$src" "$dst"; then                                               
+      info "OK link: $dst"                                                        
+      return 0                                                                    
+    else                                                                          
+      local target                                                                
+      target="$(readlink "$dst")"                                                 
+      warn "Wrong link: $dst -> $target (should be -> $src)"                      
+      return 1                                                                    
+    fi                                                                            
+  elif [[ -e "$dst" ]]; then                                                      
+    warn "Exists but not a symlink: $dst"                                         
+    return 1                                                                      
+  else                                                                            
+    warn "Missing: $dst"                                                          
+    return 1                                                                      
+  fi                                                                              
+}                                                                                 
+                                                                                  
+check_all() {                                                                     
+  local name ret=0                                                                
+  while IFS= read -r name; do                                                     
+    check_one "$name" || ret=1                                                    
+  done < <(list_config_entries)                                                   
+  return "$ret"                                                                   
+}                                                                                 
+                                                                                  
 link_all() {
   local name src dst
   while IFS= read -r name; do
@@ -126,7 +126,7 @@ link_all() {
     else
       dst="$HOME/.config/$name"
     fi
-    ensure_link "$src" "$dst"
+    ensure_link "$src" "$dst"                                                     
   done < <(list_config_entries)
 }
 
