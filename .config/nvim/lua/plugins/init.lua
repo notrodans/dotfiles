@@ -7,12 +7,7 @@ return {
 	{ "ccaglak/namespace.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "mfussenegger/nvim-jdtls", lazy = true, ft = {
 		"java",
-	}
-    },
-	{
-		"plax-00/endscroll.nvim",
-        opts = {}
-	},
+	} },
 
 	{
 		"nvchad/base46",

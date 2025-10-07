@@ -7,11 +7,11 @@ set -euo pipefail
 
 usage() { echo "Usage: $0 {link|adopt|unlink|check}"; }
 
-cmd="${1:-}"
-case "$cmd" in
-  link)   link_all ;;
-  adopt)  adopt_all ;;
-  unlink) unlink_all ;;
-  check)  check_all ;;
-  *) usage; exit 2 ;;
+cmd="${1:-}"                                                                      
+case "$cmd" in                                                                    
+  link)   link_all ;;                                                             
+  adopt)  adopt_all ;;                                                            
+  unlink) unlink_all ;;                                                           
+  check)  check_all ;;                                                            
+  *) usage; exit 2 ;;                                                             
 esac
