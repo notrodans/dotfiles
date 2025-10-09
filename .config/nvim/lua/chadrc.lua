@@ -4,8 +4,8 @@ return {
 		theme = "kanagawa-dragon",
 		theme_toggle = { "kanagawa-dragon", "one_light" },
 		transparency = true,
-		hl_add = {
-			["colorcolumn"] = { bg = "#1c1c1c" },
+		hl_override = {
+			["CursorLine"] = { bg = "base00" },
 		},
 	},
 	lsp = {
