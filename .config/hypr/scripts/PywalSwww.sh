@@ -1,5 +1,4 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Pywal Colors for current wallpaper
 
 # Define the path to the swww cache directory
@@ -22,17 +21,5 @@ if [ -f "$cache_file" ]; then
     # Get the wallpaper path from the cache file
     wallpaper_path=$(sed -n '2p' echo "$cache_file")
     echo $wallpaper_path
-    # Copy the wallpaper to the location Rofi can access
-    if ln -sf "$wallpaper_path" "$HOME/.config/rofi/.current_wallpaper"; then
-        ln_success=true  # Set the flag to true upon successful execution
-    fi
-fi
-
-# Check the flag before executing further commands
-if [ "$ln_success" = true ]; then
-  # execute pywal
-  wal -i "$wallpaper_path"
-	echo 'about to execute wal'
-    # execute pywal skipping tty and terminal changes
-    # wal -i "$wallpaper_path" -s -t &
+    ln_success=true  # Set the flag to true upon successful execution
 fi
