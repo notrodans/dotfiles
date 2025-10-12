@@ -9,6 +9,11 @@ active_window_class=$(hyprctl -j activewindow | jq -r '(.class)')
 active_window_file="Screenshot_${time}_${active_window_class}.png"
 active_window_path="${dir}/${active_window_file}"
 
+shotnow() {
+	cd ${dir} && grim - | tee "$file" | wl-copy
+	sleep 2
+}
+
 shotarea() {
 	tmpfile=$(mktemp)
 	grim -g "$(slurp)" - >"$tmpfile"

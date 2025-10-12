@@ -22,7 +22,7 @@ local servers = {
 	"stylelint_lsp",
 	"biome",
 	"tailwindcss",
-	"ts_ls",
+	"vtsls",
 	"jsonls",
 	"lemminx",
 	"eslint",
@@ -49,11 +49,6 @@ vim.lsp.config("stylelint_lsp", {
 		stylelintplus = {
 			autoFixOnFormat = true,
 		},
-	},
-})
-vim.lsp.config("ts_ls", {
-	settings = {
-		diagnostics = { ignoredCodes = { 6133 } },
 	},
 })
 vim.lsp.config("jsonls", {
