@@ -1,42 +1,25 @@
 {
-"include": "~/.config/waybar/modules",
-"layer": "top",
-"position": "top",
-"height": 14,
-"margin-left": 10,
-"margin-right": 10,
-"margin-top": 2,
+    "include": "~/.config/waybar/modules",
+    "layer": "top",
+    "position": "top",
+    "height": 20,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-top": 0,
 	
-"modules-left": [
-	"clock",
-	"hyprland/window"
-],
+    "modules-left": [
+        "clock",
+        "custom/separator",
+        "cpu",
+    ],
 
-"modules-center": [		
-	"hyprland/workspaces"	
-],
-		
-"modules-right": [
-	"custom/swaync",
-	"custom/separator#blank",
-	"tray",
-	"custom/separator#blank",
-	"pulseaudio",
-	"custom/separator#blank",
-	],
-
-
-// Additional format / customize modules
-
-"custom/power": {
-	"format": " ",
-	"icon-size": 20,
-	"tooltip": false,
-},
-	
-"clock": {
-	//"format": "{:%I:%M %p - %d/%b}", //for AM/PM
-    "format": "{:%H:%M - %d/%b}", // 24H
-	"tooltip": false
-},
+    "modules-center": [		
+        "hyprland/workspaces#apps"	
+    ],
+            
+    "modules-right": [
+        "tray",
+        "custom/separator",
+        "pulseaudio",
+    ],
 }

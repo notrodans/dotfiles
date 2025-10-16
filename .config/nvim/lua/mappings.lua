@@ -45,6 +45,9 @@ map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
+-- undotree
+map("n", "<C-m>", "<cmd>UndotreeToggle<CR>", { desc = "undotree toggle window" })
+
 -- telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })

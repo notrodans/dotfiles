@@ -19,9 +19,6 @@ configuration {
     
 }
 
-/* ---- Load pywal colors (custom wal template) ---- */
-@import "~/.config/rofi/pywal-color/pywal-theme.rasi"
-
 /* ---- Window ---- */
 window {
     width:					700px;
@@ -40,7 +37,6 @@ window {
     enabled:                true;
     border-radius:          12px;
     border-radius:          12px;
-	background-image:   	url("~/.config/rofi/.current_wallpaper", height);
 }
 
 /* ---- Mainbox ---- */

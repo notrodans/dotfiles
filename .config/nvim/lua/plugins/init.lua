@@ -9,6 +9,8 @@ return {
 		"java",
 	} },
 
+	{ "mbbill/undotree", lazy = false },
+
 	{
 		"OXY2DEV/markview.nvim",
 		lazy = false,
