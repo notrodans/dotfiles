@@ -17,8 +17,7 @@ wo.wrap = false
 wo.linebreak = false
 
 -- Indenting
-o.expandtab = true
-o.smartindent = true
+o.expandtab = false
 o.tabstop = 4
 o.shiftwidth = 4
 o.softtabstop = 4

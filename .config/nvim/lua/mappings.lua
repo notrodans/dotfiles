@@ -42,6 +42,9 @@ end, { desc = "buffer close" })
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
+-- tabulation
+map("i", "<S-tab>", "<C-d>", { desc = "delete level of indentation", remap = true })
+
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
