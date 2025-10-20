@@ -49,7 +49,7 @@ map("i", "<S-tab>", "<C-d>", { desc = "delete level of indentation", remap = tru
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
 -- undotree
-map("n", "<C-m>", "<cmd>UndotreeToggle<CR>", { desc = "undotree toggle window" })
+map("n", "<C-m>", "<cmd>lua require('undotree').toggle()<CR>", { desc = "undotree toggle window" })
 
 -- telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })

@@ -9,7 +9,7 @@ return {
 		"java",
 	} },
 
-	{ "mbbill/undotree", lazy = false },
+	{ "jiaoshijie/undotree", lazy = false },
 
 	{
 		"OXY2DEV/markview.nvim",
@@ -142,9 +142,9 @@ return {
 				config = function(_, opts)
 					require("luasnip").config.set_config(opts)
 					require("nvchad.configs.luasnip")
-					-- require("luasnip.loaders.from_vscode").load_standalone({
-					-- 	path = "~/.config/nvim/snippets/a.code-snippets",
-					-- })
+					require("luasnip.loaders.from_vscode").load_standalone({
+						path = "~/.config/nvim/snippets/a.code-snippets",
+					})
 				end,
 			},
 

@@ -48,6 +48,8 @@ return {
 		update_root = false,
 	},
 	view = {
+		centralize_selection = true,
+		side = "right",
 		width = {
 			min = 40,
 			padding = 0,
