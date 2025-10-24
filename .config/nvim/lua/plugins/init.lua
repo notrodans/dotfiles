@@ -103,6 +103,16 @@ return {
 	},
 
 	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				move_cursor = false,
+			})
+		end,
+	},
+
+	{
 		"nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },

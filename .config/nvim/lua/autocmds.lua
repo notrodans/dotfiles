@@ -3,6 +3,7 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
+		vim.opt_local.scroll = 4 -- scroll value from options.lua
 		local line = vim.fn.line("'\"")
 		if
 			line > 1

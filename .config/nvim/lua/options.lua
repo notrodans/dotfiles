@@ -9,7 +9,7 @@ local wo = vim.wo
 o.mouse = "v"
 
 -- windows
-o.winborder = "rounded"
+o.winborder = "solid"
 
 -- netrw
 g.netrw_banner = 0 -- Now we won't have bloated top of the window
@@ -54,7 +54,7 @@ o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
--- opt.guicursor = "i:block"
+opt.guicursor = "i:block"
 o.swapfile = false
 
 -- interval for writing swap file to disk, also used by gitsigns
