@@ -101,5 +101,5 @@ end, { desc = "terminal toggle floating term" })
 
 -- code actions
 map({ "n", "x" }, "gra", function()
-	require("tiny-code-action").code_action()
+	require("fzf-lua").lsp_code_actions({ silent = true })
 end, { desc = "LSP code actions", noremap = true, silent = true })

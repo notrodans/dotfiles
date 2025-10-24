@@ -10,11 +10,14 @@ active_window_file="Screenshot_${time}_${active_window_class}.png"
 active_window_path="${dir}/${active_window_file}"
 
 shotnow() {
+	hyprshade off
 	cd ${dir} && grim - | tee "$file" | wl-copy
+	hyprshade on "$HOME/.config/hypr/shaders/vibrance.glsl.mustache"
 	sleep 2
 }
 
 shotarea() {
+	hyprshade off
 	tmpfile=$(mktemp)
 	grim -g "$(slurp)" - >"$tmpfile"
 	if [[ -s "$tmpfile" ]]; then
@@ -22,6 +25,7 @@ shotarea() {
 		mv "$tmpfile" "$dir/$file"
 	fi
 	rm "$tmpfile"
+	hyprshade on "$HOME/.config/hypr/shaders/vibrance.glsl.mustache"
 }
 
 shotactive() {

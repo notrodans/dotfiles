@@ -4,9 +4,9 @@ return {
 		theme = "kanagawa-dragon",
 		transparency = true,
 		hl_override = {
-			["CursorLine"] = { bg = "base00" },
+			WinSeparator = { bg = nil },
+			CursorLine = { bg = "base00" },
 		},
-		theme_toggle = nil,
 	},
 	lsp = {
 		signature = true,
@@ -14,7 +14,6 @@ return {
 	ui = {
 		tabufline = {
 			modules = {
-
 				btns = function()
 					return ""
 				end,

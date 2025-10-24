@@ -5,11 +5,14 @@ local wo = vim.wo
 
 -------------------------------------- options ------------------------------------------
 
+-- spelling
+vim.o.spelllang = "ru_ru,en_us"
+
 -- mouse
 o.mouse = "v"
 
 -- windows
-o.winborder = "solid"
+o.winborder = "single"
 
 -- netrw
 g.netrw_banner = 0 -- Now we won't have bloated top of the window
@@ -45,9 +48,6 @@ o.number = true
 o.numberwidth = 1
 o.relativenumber = true
 o.ruler = false
-
--- disable nvim intro
-opt.shortmess:append("sI")
 
 o.signcolumn = "yes"
 o.splitbelow = true
