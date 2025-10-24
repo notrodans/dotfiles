@@ -4,133 +4,133 @@
  */
 
 * {
-    font-family: "JetBrains Mono Nerd Font", monospace;
-    font-weight: bold;
-    font-size: 14px;
-    min-height: 0;
-    padding: 0;
-    margin: 0;
-    border: none;
+	font-family: "Go Mono", monospace;
+	font-weight: bold;
+	font-size: 14px;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
 }
 
 window#waybar {
-    color: #a6a6a6;
-    background: #111111;
-    border-bottom: 1px solid #a6a6a6; /* borders */
+	color: #a6a6a6;
+	background: #111111;
+	border-bottom: 1px solid #a6a6a6; /* borders */
 }
 
 window#waybar.hidden {
-    opacity: 0;
+	opacity: 0;
 }
 
 tooltip {
-    border-radius: 0;
+	border-radius: 0;
 }
 
 /*----- Module Groups -----*/
 .modules-right {
-    margin: 2px 4px 2px 2px;
-    padding: 0 2px;
+	margin: 2px 4px 2px 2px;
+	padding: 0 2px;
 }
 
 .modules-center {
-    margin: 2px 0;
-    padding: 0 2px;
+	margin: 2px 0;
+	padding: 0 2px;
 }
 
 .modules-left {
-    margin: 2px 2px 2px 4px;
-    padding: 0 2px;
+	margin: 2px 2px 2px 4px;
+	padding: 0 2px;
 }
 
 /*----- Workspaces -----*/
 #workspaces {
-    padding: 0;
+	padding: 0;
 }
 
 #workspaces button {
-    padding: 0 8px;
+	padding: 0 8px;
 }
 
 #workspaces button.active {
-    color: gold;
+	color: gold;
 }
 
 #workspaces button.urgent {
-    color: aquamarine;
+	color: aquamarine;
 }
 
 #workspaces button:hover {
-    color: #ffffff;
+	color: #ffffff;
 }
 
 /*----- Specific Module Styles -----*/
 #clock {
-    font-weight: bold;
-    min-width: 50px;
+	font-weight: bold;
+	min-width: 50px;
 }
 
 #cpu,
 #memory,
 #disk {
-    min-width: 24px;
+	min-width: 24px;
 }
 
 #pulseaudio {
-    min-width: 32px;
+	min-width: 32px;
 }
 
 #pulseaudio.muted {
-    color: #606060;
+	color: #606060;
 }
 
 #network {
-    min-width: 32px;
+	min-width: 32px;
 }
 
 #network.disconnected {
-    color: #606060;
+	color: #606060;
 }
 
 /*----- Sliders -----*/
 #pulseaudio-slider slider,
 #backlight-slider slider {
-    min-width: 0;
-    min-height: 0;
-    opacity: 0;
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
 }
 
 #pulseaudio-slider trough,
 #backlight-slider trough {
-    min-width: 80px;
-    min-height: 8px;
+	min-width: 80px;
+	min-height: 8px;
 }
 
 #pulseaudio-slider highlight,
 #backlight-slider highlight {
-    min-height: 8px;
-    background-color: #0000aa; /* selected_bg_color */
+	min-height: 8px;
+	background-color: #0000aa; /* selected_bg_color */
 }
 
 /*----- Animations -----*/
 @keyframes blink {
-    to {
-        background-color: #ff0000;
-    }
+	to {
+		background-color: #ff0000;
+	}
 }
 
 /*----- Taskbar -----*/
 #taskbar {
-    padding: 0;
+	padding: 0;
 }
 
 /*----- Additional fixes for left-side padding -----*/
 .modules-left > widget > *:first-child {
-    margin-left: 0;
+	margin-left: 0;
 }
 
 .modules-left > widget > *:last-child {
-    margin-right: 0;
+	margin-right: 0;
 }
 
 /* Ensure proper spacing between modules */
@@ -146,5 +146,5 @@ tooltip {
 #memory,
 #cpu,
 #clock {
-    padding: 4px 0;
+	padding: 4px 0;
 }
