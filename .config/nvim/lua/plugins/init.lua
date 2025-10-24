@@ -1,13 +1,18 @@
 return {
-	{ "nvim-lua/plenary.nvim" },
-	{ "nvzone/volt" },
-	{ "nvzone/menu" },
 	{ "b0o/schemastore.nvim" },
-	{ "nvzone/minty", cmd = { "Huefy", "Shades" } },
-	{ "ccaglak/namespace.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-	{ "mfussenegger/nvim-jdtls", lazy = true, ft = {
-		"java",
-	} },
+	{
+		"ccaglak/namespace.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
+	{
+		"mfussenegger/nvim-jdtls",
+		lazy = true,
+		ft = {
+			"java",
+		},
+	},
 
 	{ "jiaoshijie/undotree", lazy = false },
 
@@ -16,48 +21,7 @@ return {
 		lazy = false,
 	},
 
-	{
-		"nvchad/base46",
-		build = function()
-			require("base46").load_all_highlights()
-		end,
-	},
-
-	{
-		"nvchad/ui",
-		lazy = false,
-		config = function()
-			require("nvchad")
-		end,
-	},
-
-	{
-		"nvim-tree/nvim-web-devicons",
-		opts = function()
-			dofile(vim.g.base46_cache .. "devicons")
-			return { override = require("nvchad.icons.devicons") }
-		end,
-	},
-
-	{
-
-		"lukas-reineke/indent-blankline.nvim",
-		enabled = false,
-		event = "User FilePost",
-		opts = {
-			indent = { char = "│", highlight = "IblChar" },
-			scope = { char = "│", highlight = "IblScopeChar" },
-		},
-		config = function(_, opts)
-			dofile(vim.g.base46_cache .. "blankline")
-
-			local hooks = require("ibl.hooks")
-			hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-			require("ibl").setup(opts)
-
-			dofile(vim.g.base46_cache .. "blankline")
-		end,
-	},
+	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -124,63 +88,9 @@ return {
 
 	{ import = "nvchad.blink.lazyspec" },
 
-	-- If you want to override blink config :
 	{
 		"Saghen/blink.cmp",
 		opts = {},
-	},
-
-	{
-		"hrsh7th/nvim-cmp",
-		enabled = false,
-		event = "InsertEnter",
-		dependencies = {
-			{
-				"L3MON4D3/LuaSnip",
-				dependencies = "rafamadriz/friendly-snippets",
-				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-				config = function(_, opts)
-					require("luasnip").config.set_config(opts)
-					require("nvchad.configs.luasnip")
-					require("luasnip.loaders.from_vscode").load_standalone({
-						path = "~/.config/nvim/snippets/a.code-snippets",
-					})
-				end,
-			},
-
-			{
-				"windwp/nvim-autopairs",
-				opts = {
-					fast_wrap = {},
-					disable_filetype = { "TelescopePrompt", "vim" },
-				},
-				config = function(_, opts)
-					require("nvim-autopairs").setup(opts)
-					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-					require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-				end,
-			},
-
-			{
-				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-nvim-lua",
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"roginfarrer/cmp-css-variables",
-			},
-		},
-		opts = function()
-			return require("nvchad.configs.cmp")
-		end,
-	},
-
-	{
-		"lewis6991/gitsigns.nvim",
-		event = "User FilePost",
-		opts = function()
-			return require("nvchad.configs.gitsigns")
-		end,
 	},
 
 	{
@@ -190,11 +100,6 @@ return {
 		config = function()
 			require("todo-comments").setup()
 		end,
-	},
-
-	{
-		"williamboman/mason.nvim",
-		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
 	},
 
 	{
@@ -211,5 +116,10 @@ return {
 		autotag = {
 			enable = true,
 		},
+	},
+
+	{
+		"hrsh7th/nvim-cmp",
+		enabled = false,
 	},
 }

@@ -2,16 +2,24 @@
 return {
 	base46 = {
 		theme = "kanagawa-dragon",
-		theme_toggle = { "kanagawa-dragon", "one_light" },
 		transparency = true,
 		hl_override = {
 			["CursorLine"] = { bg = "base00" },
 		},
+		theme_toggle = nil,
 	},
 	lsp = {
 		signature = true,
 	},
 	ui = {
+		tabufline = {
+			modules = {
+
+				btns = function()
+					return ""
+				end,
+			},
+		},
 		statusline = {
 			theme = "vscode",
 			separator_style = "default",
@@ -24,6 +32,7 @@ return {
 			},
 		},
 	},
+
 	nvdash = {
 		load_on_startup = false,
 	},

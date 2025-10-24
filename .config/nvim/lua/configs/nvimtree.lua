@@ -40,7 +40,7 @@ end
 
 return {
 	filters = { dotfiles = false },
-	disable_netrw = true,
+	disable_netrw = false,
 	hijack_cursor = true,
 	sync_root_with_cwd = true,
 	update_focused_file = {
