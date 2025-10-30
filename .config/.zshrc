@@ -11,6 +11,8 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
 export SUDO_EDITOR=nvim
 
+alias current-size="du -ch --max-depth 1 . | sort -rh"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

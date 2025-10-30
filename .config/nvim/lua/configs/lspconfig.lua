@@ -77,3 +77,26 @@ vim.lsp.config("biome", {
 		},
 	},
 })
+vim.lsp.config("jdtls", {
+	settings = {
+		java = {
+			home = "~/.sdkman/candidates/java/21.0.2-open",
+			configuration = {
+				runtimes = {
+					{
+						name = "JavaSE-25",
+						path = "~/.sdkman/candidates/java/25-open",
+					},
+					{
+						name = "JavaSE-21",
+						path = "~/.sdkman/candidates/java/21.0.2-open",
+					},
+					{
+						name = "JavaSE-17",
+						path = "~/.sdkman/candidates/java/17.0.8-tem",
+					},
+				},
+			},
+		},
+	},
+})

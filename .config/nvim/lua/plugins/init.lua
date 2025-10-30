@@ -2,6 +2,7 @@ return {
 	{ "b0o/schemastore.nvim" },
 	{
 		"ccaglak/namespace.nvim",
+		enabled = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
@@ -20,8 +21,6 @@ return {
 		"OXY2DEV/markview.nvim",
 		lazy = false,
 	},
-
-	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -114,5 +113,16 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		enabled = false,
+	},
+
+	{
+		"ibhagwan/fzf-lua",
+		lazy = true,
+		opts = {
+			fzf_opts = {
+				["--layout"] = "default",
+			},
+			winopts = {},
+		},
 	},
 }

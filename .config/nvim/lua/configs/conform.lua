@@ -13,7 +13,6 @@ conf.setup({
 		css = { "biome", "biome-organize-imports" },
 		scss = { "biome", "biome-organize-imports" },
 		less = { "biome", "biome-organize-imports" },
-		latex = { "tex-fmt" },
 	},
 })
 
