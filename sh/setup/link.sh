@@ -62,7 +62,7 @@ unlink_path() {
 
 # Domain-specific logic
 CONFIG_DIR="$REPO_ROOT/.config"
-SPECIAL_HOME_FILES=(".zshrc" ".tmux.conf" ".icons" ".themes")
+SPECIAL_HOME_FILES=(".zshrc" ".tmux.conf" ".icons" ".themes" "eclipse-java-google-style.xml")
 
 is_special_home() {
   local name="$1"

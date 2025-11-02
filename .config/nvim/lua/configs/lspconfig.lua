@@ -1,6 +1,10 @@
 local nvlsp = require("nvchad.configs.lspconfig")
 local lspconfig = require("lspconfig")
 
+local function get_install_path_for(package)
+	return vim.fn.expand("$MASON/packages/" .. package)
+end
+
 nvlsp.defaults()
 
 local servers = {
@@ -28,7 +32,6 @@ local servers = {
 	"eslint",
 }
 
-vim.lsp.enable(servers)
 vim.lsp.config("intelephense", {
 	root_dir = lspconfig.util.root_pattern("composer.json", "*.php"),
 	filetypes = { "php" },
@@ -78,25 +81,80 @@ vim.lsp.config("biome", {
 	},
 })
 vim.lsp.config("jdtls", {
+	cmd = {
+		"jdtls",
+		"--data",
+		"--jvm-arg=-javaagent:" .. get_install_path_for("jdtls") .. "/lombok.jar",
+	},
+
+	root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
+
 	settings = {
 		java = {
-			home = "~/.sdkman/candidates/java/21.0.2-open",
+			home = "/usr/lib/jvm/java-21-openjdk",
+			redhat = {
+				telemetry = { enabled = false },
+			},
+			sources = {
+				organizeImports = {
+					starThreshold = 9999,
+					staticStarThreshold = 9999,
+				},
+			},
+			codeGeneration = {
+				toString = {
+					template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+				},
+				hashCodeEquals = {
+					useJava7Objects = true,
+				},
+				useBlocks = true,
+			},
+			maven = { downloadSources = true },
+			format = {
+				settings = {
+					url = vim.fn.expand("$HOME") .. "/eclipse-java-google-style.xml",
+					profile = "GoogleStyle",
+				},
+			},
+			compile = {
+				nullAnalysis = {
+					nonnull = {
+						"lombok.NonNull",
+						"javax.annotation.Nonnull",
+						"org.eclipse.jdt.annotation.NonNull",
+						"org.springframework.lang.NonNull",
+					},
+				},
+			},
+			eclipse = { downloadSources = true },
+			completion = {
+				chain = { enabled = false },
+				guessMethodArguments = "off",
+				favouriteStaticMembers = {
+					"org.junit.jupiter.api.Assertions.*",
+					"org.junit.jupiter.api.Assumptions.*",
+					"org.mockito.Mockito.*",
+					"java.util.Objects.*",
+				},
+			},
 			configuration = {
 				runtimes = {
 					{
 						name = "JavaSE-25",
-						path = "~/.sdkman/candidates/java/25-open",
+						path = "/usr/lib/jvm/java-25-openjdk",
 					},
 					{
 						name = "JavaSE-21",
-						path = "~/.sdkman/candidates/java/21.0.2-open",
+						path = "/usr/lib/jvm/java-21-openjdk",
 					},
 					{
 						name = "JavaSE-17",
-						path = "~/.sdkman/candidates/java/17.0.8-tem",
+						path = "/usr/lib/jvm/java-17-openjdk",
 					},
 				},
 			},
 		},
 	},
 })
+vim.lsp.enable(servers)
