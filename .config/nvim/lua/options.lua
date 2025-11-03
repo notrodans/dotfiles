@@ -9,7 +9,7 @@ local wo = vim.wo
 vim.o.spelllang = "ru_ru,en_us"
 
 -- mouse
-o.mouse = "v"
+o.mouse = "a"
 
 -- windows
 o.winborder = "single"

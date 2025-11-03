@@ -1,7 +1,7 @@
 ---@type ChadrcConfig
 return {
 	base46 = {
-		theme = "kanagawa-dragon",
+		theme = "mountain",
 		transparency = true,
 		hl_override = {
 			WinSeparator = { bg = nil },

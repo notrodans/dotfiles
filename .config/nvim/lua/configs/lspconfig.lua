@@ -113,7 +113,7 @@ vim.lsp.config("jdtls", {
 			maven = { downloadSources = true },
 			format = {
 				settings = {
-					url = vim.fn.expand("$HOME") .. "/eclipse-java-google-style.xml",
+					url = vim.fn.expand("$HOME") .. "/eclipse-my-style.xml",
 					profile = "GoogleStyle",
 				},
 			},
