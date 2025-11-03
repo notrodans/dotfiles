@@ -53,28 +53,21 @@ map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" }
 -- undotree
 map("n", "<C-m>", "<cmd>lua require('undotree').toggle()<CR>", { desc = "undotree toggle window" })
 
--- telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
-map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
-map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
-map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
-map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
+-- Fzf
+map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Fzf live grep" })
+map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>", { desc = "Fzf find buffers" })
+map("n", "<leader>fh", "<cmd>FzfLua helptags<CR>", { desc = "Fzf help page" })
+map("n", "<leader>ma", "<cmd>FzfLua marks<CR>", { desc = "Fzf find marks" })
+map("n", "<leader>fo", "<cmd>FzfLua oldfiles<CR>", { desc = "Fzf find oldfiles" })
+map("n", "<leader>fz", "<cmd>FzfLua lgrep_curbuf<CR>", { desc = "Fzf find in current buffer" })
+map("n", "<leader>cm", "<cmd>FzfLua git_commits<CR>", { desc = "Fzf git commits" })
+map("n", "<leader>gt", "<cmd>FzfLua git_status<CR>", { desc = "Fzf git status" })
 
 map("n", "<leader>th", function()
 	require("nvchad.themes").open()
-end, { desc = "telescope nvchad themes" })
+end, { desc = "nvchad themes" })
 
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
-map(
-	"n",
-	"<leader>fa",
-	"<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
-	{ desc = "telescope find all files" }
-)
+map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Fzf find files" })
 
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
@@ -105,3 +98,7 @@ end, { desc = "terminal toggle floating term" })
 map({ "n", "x" }, "gra", function()
 	require("fzf-lua").lsp_code_actions({ silent = true })
 end, { desc = "LSP code actions", noremap = true, silent = true })
+
+-- quickfix
+map("n", "<A-k>", "<Up><CR><C-w>p", { remap = false, desc = "Navigate up quickfix" })
+map("n", "<A-j>", "<Down><CR><C-w>p", { remap = false, desc = "Navigate down quickfix" })

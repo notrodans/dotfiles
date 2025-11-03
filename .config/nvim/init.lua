@@ -22,6 +22,11 @@ require("lazy").setup({
 		import = "nvchad.plugins",
 	},
 
+	change_detection = {
+		enabled = false,
+		notify = false, -- get a notification when changes are found
+	},
+
 	{ import = "plugins" },
 }, lazy_config)
 
