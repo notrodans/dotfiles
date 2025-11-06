@@ -30,6 +30,7 @@ local servers = {
 	"jsonls",
 	"lemminx",
 	"eslint",
+	"texlab",
 }
 
 vim.lsp.config("intelephense", {

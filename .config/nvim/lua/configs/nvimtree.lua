@@ -39,7 +39,7 @@ local fsd_folder_length_sorter = function(nodes)
 end
 
 return {
-	filters = { dotfiles = false },
+	filters = { dotfiles = true },
 	disable_netrw = false,
 	hijack_cursor = true,
 	sync_root_with_cwd = true,
@@ -57,10 +57,12 @@ return {
 		preserve_window_proportions = true,
 	},
 	renderer = {
+		-- LITERALLY FOR JAVA
+		group_empty = false,
+		--
 		root_folder_label = false,
 		add_trailing = false,
 		highlight_git = true,
-		group_empty = true,
 		indent_width = 1,
 		indent_markers = { enable = false },
 		icons = {

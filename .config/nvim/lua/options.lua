@@ -5,6 +5,9 @@ local wo = vim.wo
 
 -------------------------------------- options ------------------------------------------
 
+--latex
+opt.conceallevel = 2
+
 -- spelling
 vim.o.spelllang = "ru_ru,en_us"
 

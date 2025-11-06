@@ -41,10 +41,10 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		---@type snacks.Config
 		opts = {
-			scroll = { enabled = true },
-			image = { enabled = true },
+			image = {
+				enabled = true,
+			},
 		},
 	},
 

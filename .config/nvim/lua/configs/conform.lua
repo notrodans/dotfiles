@@ -1,6 +1,11 @@
 local conf = require("conform")
 
 conf.setup({
+	formatters = {
+		["tex-fmt"] = {
+			args = { "--config", vim.fn.expand("$HOME/") .. ".config/tex-fmt/tex-fmt.toml", "--stdin" },
+		},
+	},
 	formatters_by_ft = {
 		lua = { "stylua" },
 		html = { "biome", "biome-organize-imports" },
@@ -13,6 +18,7 @@ conf.setup({
 		css = { "biome", "biome-organize-imports" },
 		scss = { "biome", "biome-organize-imports" },
 		less = { "biome", "biome-organize-imports" },
+		tex = { "tex-fmt" },
 	},
 })
 
