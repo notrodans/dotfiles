@@ -23,9 +23,6 @@ map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 
--- global lsp mappings
-map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
-
 -- tabs
 map("n", "<leader>tc", "<cmd>tabnew<CR>", { desc = "New tab" })
 map("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" })
@@ -66,8 +63,16 @@ map("n", "<leader>fh", "<cmd>FzfLua helptags<CR>", { desc = "Fzf help page" })
 map("n", "<leader>ma", "<cmd>FzfLua marks<CR>", { desc = "Fzf find marks" })
 map("n", "<leader>fo", "<cmd>FzfLua oldfiles<CR>", { desc = "Fzf find oldfiles" })
 map("n", "<leader>fz", "<cmd>FzfLua lgrep_curbuf<CR>", { desc = "Fzf find in current buffer" })
-map("n", "<leader>cm", "<cmd>FzfLua git_commits<CR>", { desc = "Fzf git commits" })
-map("n", "<leader>gt", "<cmd>FzfLua git_status<CR>", { desc = "Fzf git status" })
+
+-- git
+map("n", "<leader>gbb", "<cmd>FzfLua git_branches<CR>", { desc = "Fzf git branches" })
+map("n", "<leader>gbc", "<cmd>FzfLua git_bcommits<CR>", { desc = "Fzf git branch commits" })
+map("n", "<leader>gc", "<cmd>FzfLua git_commits<CR>", { desc = "Fzf git commits" })
+map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "Fzf git status" })
+
+-- global lsp mappings
+map("n", "<leader>dd", "<cmd>FzfLua diagnostics_document<CR>", { desc = "LSP diagnostics document" })
+map("n", "<leader>dw", "<cmd>FzfLua diagnostics_workspace<CR>", { desc = "LSP diagnostics workspace" })
 
 map("n", "<leader>th", function()
 	require("nvchad.themes").open()

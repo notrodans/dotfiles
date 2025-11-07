@@ -58,7 +58,7 @@ return {
 	},
 	renderer = {
 		-- LITERALLY FOR JAVA
-		group_empty = false,
+		group_empty = true,
 		--
 		root_folder_label = false,
 		add_trailing = false,

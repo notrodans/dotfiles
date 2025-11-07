@@ -48,6 +48,11 @@ return {
 		},
 	},
 
+	{
+		"folke/which-key.nvim",
+		lazy = false,
+	},
+
 	{ "b0o/schemastore.nvim" },
 
 	{
