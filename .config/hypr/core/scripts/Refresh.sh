@@ -1,6 +1,6 @@
 #!/bin/bash
-SCRIPTSDIR=$HOME/.config/hypr/scripts
-UserScripts=$HOME/.config/hypr/UserScripts
+SCRIPTSDIR=$HOME/core/.config/hypr/core/scripts
+UserScripts=$HOME/.config/hypr/scripts
 
 # Define file_exists function
 file_exists() {

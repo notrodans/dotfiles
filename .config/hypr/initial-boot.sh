@@ -2,7 +2,7 @@
 # A bash script designed to run only once dotfiles installed
 
 # Variables
-scriptsDir=$HOME/.config/hypr/scripts
+coreScripts=$HOME/.config/hypr/core/scripts
 wallpaper=$HOME/Pictures/wallpapers/Fantasy-Landscape.png
 waybar_style="$HOME/.config/waybar/style/Retro.css"
 
@@ -14,7 +14,7 @@ if [ ! -f ~/.config/hypr/.initial_startup_done ]; then
     # Initialize pywal and wallpaper
 	if [ -f "$wallpaper" ]; then
 		swww init && $swww $wallpaper
-	    "$scriptsDir/PywalSwww.sh" > /dev/null 2>&1 & 
+	    "$coreScripts/PywalSwww.sh" > /dev/null 2>&1 & 
 	fi
      
     # Initial waybar style

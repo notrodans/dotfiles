@@ -15,12 +15,9 @@ set render-loading "false"
 set pages-per-row 1
 
 set scroll-step 40
-set recolor
-set default-bg "rgba(0, 0, 0, 0.85)"
-set recolor-lightcolor "rgba(0, 0, 0, 0)"
 
 # font size
-set font "JetBrainsMono Nerd Font 14"
+set font "Go Mono 14"
 
 # clipboard configurations
 set selection-clipboard clipboard

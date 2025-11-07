@@ -1,7 +1,7 @@
 #!/bin/bash
 # This script for selecting wallpapers (SUPER W)
 
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
+SCRIPTSDIR="$HOME/core/.config/hypr/core/scripts"
 
 # WALLPAPERS PATH
 wallDIR="$HOME/Pictures/wallpapers"
