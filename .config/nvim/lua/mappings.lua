@@ -58,7 +58,7 @@ map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" }
 map("n", "<C-m>", "<cmd>lua require('undotree').toggle()<CR>", { desc = "undotree toggle window" })
 
 -- Fzf
-map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Fzf live grep" })
+map("n", "<leader>fg", "<cmd>FzfLua live_grep<CR>", { desc = "Fzf live grep" })
 map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>", { desc = "Fzf find buffers" })
 map("n", "<leader>fh", "<cmd>FzfLua helptags<CR>", { desc = "Fzf find help pages" })
 map("n", "<leader>ma", "<cmd>FzfLua marks<CR>", { desc = "Fzf find marks" })
