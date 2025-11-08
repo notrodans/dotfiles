@@ -31,13 +31,14 @@ map("n", "tb", "<cmd>tabprevious<CR>", { desc = "Go to previous tab" })
 
 -- tabufline
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
-map("n", "<tab>", function()
-	require("nvchad.tabufline").next()
-end, { desc = "buffer goto next" })
 
-map("n", "<S-tab>", function()
+map("n", "<C-i>", function()
+	require("nvchad.tabufline").next()
+end, { desc = "buffer goto next", remap = true })
+
+map("n", "<C-o>", function()
 	require("nvchad.tabufline").prev()
-end, { desc = "buffer goto prev" })
+end, { desc = "buffer goto prev", remap = true })
 
 map("n", "db", function()
 	require("nvchad.tabufline").close_buffer()
@@ -59,10 +60,14 @@ map("n", "<C-m>", "<cmd>lua require('undotree').toggle()<CR>", { desc = "undotre
 -- Fzf
 map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Fzf live grep" })
 map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>", { desc = "Fzf find buffers" })
-map("n", "<leader>fh", "<cmd>FzfLua helptags<CR>", { desc = "Fzf help page" })
+map("n", "<leader>fh", "<cmd>FzfLua helptags<CR>", { desc = "Fzf find help pages" })
 map("n", "<leader>ma", "<cmd>FzfLua marks<CR>", { desc = "Fzf find marks" })
 map("n", "<leader>fo", "<cmd>FzfLua oldfiles<CR>", { desc = "Fzf find oldfiles" })
 map("n", "<leader>fz", "<cmd>FzfLua lgrep_curbuf<CR>", { desc = "Fzf find in current buffer" })
+map("n", "<leader>fz", "<cmd>FzfLua lgrep_curbuf<CR>", { desc = "Fzf find in current buffer" })
+map("n", "<leader>fk", "<cmd>FzfLua keymaps<CR>", { desc = "Fzf find keymaps" })
+map({ "n", "v" }, "<leader>fw", "<cmd>FzfLua grep_cword<CR>", { desc = "Fzf find current word" })
+map({ "n", "v" }, "<leader>fW", "<cmd>FzfLua grep_cWORD<CR>", { desc = "Fzf find current WORD" })
 
 -- git
 map("n", "<leader>gbb", "<cmd>FzfLua git_branches<CR>", { desc = "Fzf git branches" })
@@ -110,6 +115,6 @@ map({ "n", "x" }, "gra", function()
 	require("fzf-lua").lsp_code_actions({ silent = true })
 end, { desc = "LSP code actions", noremap = true, silent = true })
 
--- quickfix
+-- quickfix list
 map("n", "<A-k>", "<Up><CR><C-w>p", { remap = false, desc = "Navigate up quickfix" })
 map("n", "<A-j>", "<Down><CR><C-w>p", { remap = false, desc = "Navigate down quickfix" })
