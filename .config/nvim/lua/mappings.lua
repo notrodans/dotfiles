@@ -68,6 +68,7 @@ map("n", "<leader>fz", "<cmd>FzfLua lgrep_curbuf<CR>", { desc = "Fzf find in cur
 map("n", "<leader>fk", "<cmd>FzfLua keymaps<CR>", { desc = "Fzf find keymaps" })
 map({ "n", "v" }, "<leader>fw", "<cmd>FzfLua grep_cword<CR>", { desc = "Fzf find current word" })
 map({ "n", "v" }, "<leader>fW", "<cmd>FzfLua grep_cWORD<CR>", { desc = "Fzf find current WORD" })
+map("n", "<leader>ft", "<cmd>TodoFzfLua<CR>", { desc = "Fzf find todo comments" })
 
 -- git
 map("n", "<leader>gbb", "<cmd>FzfLua git_branches<CR>", { desc = "Fzf git branches" })
