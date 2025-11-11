@@ -1,12 +1,9 @@
 ---@type ChadrcConfig
 return {
 	base46 = {
-		theme = "mountain",
+		---@diagnostic disable-next-line: assign-type-mismatch <my theme>
+		theme = "blackmetal",
 		transparency = true,
-		hl_override = {
-			WinSeparator = { bg = nil },
-			CursorLine = { bg = "base00" },
-		},
 	},
 	lsp = {
 		signature = true,

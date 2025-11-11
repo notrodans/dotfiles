@@ -27,7 +27,7 @@ o.showmode = false
 o.virtualedit = "all"
 
 o.clipboard = "unnamedplus"
-o.cursorline = true
+o.cursorline = false
 o.cursorlineopt = "number,line"
 o.scroll = 4
 opt.scrolloff = 100
