@@ -59,25 +59,13 @@ M.base_30 = {
 M.polish_hl = {
 
 	defaults = {
-
 		NonText = { fg = M.base_30.black2 },
 		Whitespace = { fg = M.base_30.black2 },
 	},
 
 	syntax = {
-		Keyword = { fg = M.base_30.grey_fg },
 		Delimiter = { fg = M.base_30.grey_fg },
-		Operator = { fg = M.base_30.grey_fg },
-		String = { fg = M.base_30.green },
-		Number = { fg = M.base_30.cyan },
-		Boolean = { link = "Number" },
-		Character = { link = "Number" },
-		Function = { fg = M.base_30.purple },
-		Special = { fg = M.base_30.purple },
-		Type = { fg = M.base_30.yellow },
-		TypeDef = { link = "Type" },
 		MatchParen = { fg = M.base_30.white, underline = true },
-		Label = { fg = M.base_30.white, bold = true },
 		Pmenu = { fg = M.base_30.grey_fg, bg = M.base_30.one_bg },
 		PmenuSel = { fg = M.base_16.base06, bg = M.base_30.black, underline = true },
 		Visual = { fg = M.base_30.blue, bg = M.base_30.one_bg },
@@ -85,26 +73,9 @@ M.polish_hl = {
 	},
 
 	treesitter = {
-		["@keyword"] = { fg = M.base_30.grey_fg },
-		["@keyword.function"] = { fg = M.base_30.grey_fg },
-		["@keyword.operator"] = { fg = M.base_30.grey_fg },
-		["@keyword.storage"] = { fg = M.base_30.blue },
 		["@operator"] = { fg = M.base_30.grey_fg },
 		["@delimiter"] = { fg = M.base_30.grey_fg },
 		["@string"] = { fg = M.base_30.green },
-		["@number"] = { fg = M.base_30.cyan },
-		["@boolean"] = { link = "@number" },
-		["@character"] = { link = "@number" },
-		["@function"] = { fg = M.base_30.purple },
-		["@function.builtin"] = { fg = M.base_30.purple },
-		["@function.call"] = { fg = M.base_30.purple },
-		["@function.macro"] = { fg = M.base_30.white },
-		["@type"] = { fg = M.base_30.yellow },
-		["@type.builtin"] = { fg = M.base_30.yellow },
-		["@constant.builtin"] = { fg = M.base_30.yellow },
-		["@constructor"] = { fg = M.base_30.purple },
-		["@variable"] = { fg = M.base_30.white },
-		["@variable.builtin"] = { link = "@string" },
 	},
 
 	lsp = {
@@ -112,12 +83,6 @@ M.polish_hl = {
 		DiagnosticUnderlineWarn = { sp = M.base_30.orange, underline = true },
 		DiagnosticUnderlineHint = { sp = M.base_30.grey, underline = true },
 		DiagnosticUnderlineInfo = { sp = M.base_30.grey, underline = true },
-	},
-
-	git = {
-		GitSignsAdd = { fg = M.base_30.green },
-		GitSignsChange = { fg = M.base_30.orange },
-		GitSignsDelete = { fg = M.base_30.red },
 	},
 }
 
