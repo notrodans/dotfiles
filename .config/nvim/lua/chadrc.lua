@@ -4,6 +4,9 @@ return {
 		---@diagnostic disable-next-line: assign-type-mismatch <my theme>
 		theme = "blackmetal",
 		transparency = true,
+		hl_override = {
+			CursorLine = { bg = "line" },
+		},
 	},
 	lsp = {
 		signature = true,

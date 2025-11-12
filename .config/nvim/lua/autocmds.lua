@@ -3,7 +3,6 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
-		vim.opt_local.scroll = 4 -- scroll value from options.lua
 		local line = vim.fn.line("'\"")
 		if
 			line > 1
@@ -16,11 +15,12 @@ autocmd("BufReadPost", {
 	end,
 })
 
-autocmd("BufDelete", {
-	callback = function()
-		local bufs = vim.t.bufs
-		if #bufs == 1 and vim.api.nvim_buf_get_name(bufs[1]) == "" then
-			vim.cmd("Nvdash")
+autocmd("BufEnter", {
+	pattern = "*",
+	callback = function(args)
+		-- NvChad themes fix
+		if string.len(args.match) ~= 0 then
+			vim.opt_local.scroll = 4
 		end
 	end,
 })
