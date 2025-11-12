@@ -15,7 +15,7 @@ autocmd("BufReadPost", {
 	end,
 })
 
-autocmd("BufEnter", {
+autocmd({ "BufEnter", "VimResized" }, {
 	pattern = "*",
 	callback = function(args)
 		-- NvChad themes fix
