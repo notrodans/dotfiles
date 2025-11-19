@@ -91,11 +91,21 @@ vim.lsp.config("jdtls", {
 	root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
 
 	settings = {
+		redhat = {
+			telemetry = { enabled = false },
+		},
 		java = {
-			home = "/usr/lib/jvm/java-21-openjdk",
-			redhat = {
-				telemetry = { enabled = false },
+			jdt = {
+				ls = {
+					lombokSupport = {
+						enabled = true,
+					},
+					protobufSupport = {
+						enabled = true,
+					},
+				},
 			},
+			home = "/usr/lib/jvm/java-21-openjdk",
 			sources = {
 				organizeImports = {
 					starThreshold = 9999,
@@ -137,6 +147,12 @@ vim.lsp.config("jdtls", {
 					"org.junit.jupiter.api.Assumptions.*",
 					"org.mockito.Mockito.*",
 					"java.util.Objects.*",
+				},
+			},
+			signatureHelp = {
+				enabled = true,
+				description = {
+					enabled = true,
 				},
 			},
 			configuration = {

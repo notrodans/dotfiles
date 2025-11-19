@@ -63,7 +63,12 @@ return {
 		},
 	},
 
-	{ "jiaoshijie/undotree" },
+	{
+		"jiaoshijie/undotree",
+		keys = {
+			{ "<C-,>", "<cmd>lua require('undotree').toggle()<CR>", desc = "undotree toggle window", mode = { "n" } },
+		},
+	},
 
 	{
 		"OXY2DEV/markview.nvim",
@@ -144,9 +149,6 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPost", "BufNewFile" },
-		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-		build = ":TSUpdate",
 		opts = {
 			auto_install = true,
 			indent = {

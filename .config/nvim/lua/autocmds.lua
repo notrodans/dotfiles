@@ -15,7 +15,13 @@ autocmd("BufReadPost", {
 	end,
 })
 
-autocmd({ "BufEnter", "VimResized" }, {
+autocmd({
+	"BufEnter",
+	"VimResized",
+	"UIEnter",
+	"MenuPopup",
+	"TermEnter",
+}, {
 	pattern = "*",
 	callback = function(args)
 		-- NvChad themes fix

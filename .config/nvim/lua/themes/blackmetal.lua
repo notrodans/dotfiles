@@ -57,25 +57,23 @@ M.base_30 = {
 }
 
 M.polish_hl = {
-
 	defaults = {
 		NonText = { fg = M.base_30.black2 },
 		Whitespace = { fg = M.base_30.black2 },
 	},
 
 	syntax = {
-		Delimiter = { fg = M.base_30.grey_fg },
+		Delimiter = { fg = M.base_30.grey_fg, bold = true },
 		MatchParen = { fg = M.base_30.white, underline = true },
 		Pmenu = { fg = M.base_30.grey_fg, bg = M.base_30.one_bg },
-		PmenuSel = { fg = M.base_16.base06, bg = M.base_30.black, underline = true },
+		PmenuSel = { fg = M.base_16.base06, bg = M.base_30.black, underline = true, bold = true },
 		Visual = { fg = M.base_30.blue, bg = M.base_30.one_bg },
 		VisualNOS = { fg = M.base_30.blue, bg = M.base_30.one_bg },
 	},
 
 	treesitter = {
-		["@operator"] = { fg = M.base_30.grey_fg },
-		["@delimiter"] = { fg = M.base_30.grey_fg },
-		["@string"] = { fg = M.base_30.green },
+		["@operator"] = { fg = M.base_30.grey_fg, bold = true },
+		["@function"] = { fg = M.base_30.yellow },
 	},
 
 	lsp = {
