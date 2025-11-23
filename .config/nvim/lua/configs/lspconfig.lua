@@ -112,6 +112,20 @@ vim.lsp.config("jdtls", {
 					staticStarThreshold = 9999,
 				},
 			},
+			implementationsCodeLens = {
+				enabled = true,
+			},
+			referencesCodeLens = {
+				enabled = true,
+			},
+			references = {
+				includeDecompiledSources = true,
+			},
+			inlayHints = {
+				parameterNames = {
+					enabled = "all",
+				},
+			},
 			codeGeneration = {
 				toString = {
 					template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",

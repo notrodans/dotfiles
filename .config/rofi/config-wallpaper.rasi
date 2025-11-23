@@ -19,6 +19,9 @@ configuration {
     
 }
 
+/* ---- Load pywal colors (custom wal template) ---- */
+@import "~/.config/rofi/pywal-color/pywal-theme.rasi"
+
 /* ---- Window ---- */
 window {
     width:					700px;

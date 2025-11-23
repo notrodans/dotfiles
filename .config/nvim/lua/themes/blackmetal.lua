@@ -75,13 +75,6 @@ M.polish_hl = {
 		["@operator"] = { fg = M.base_30.grey_fg, bold = true },
 		["@function"] = { fg = M.base_30.yellow },
 	},
-
-	lsp = {
-		DiagnosticUnderlineError = { sp = M.base_30.red, underline = true },
-		DiagnosticUnderlineWarn = { sp = M.base_30.orange, underline = true },
-		DiagnosticUnderlineHint = { sp = M.base_30.grey, underline = true },
-		DiagnosticUnderlineInfo = { sp = M.base_30.grey, underline = true },
-	},
 }
 
 M.add_hl = {}
