@@ -5,6 +5,10 @@ local function get_install_path_for(package)
 	return vim.fn.expand("$MASON/packages/" .. package)
 end
 
+local function string_split(target, separator)
+	return vim.split(target, separator, { plain = true, trimempty = true })
+end
+
 nvlsp.defaults()
 
 local servers = {
@@ -186,6 +190,23 @@ vim.lsp.config("jdtls", {
 				},
 			},
 		},
+	},
+
+	init_options = {
+		bundles = vim.iter({
+			string_split(
+				vim.fn.glob(
+					get_install_path_for("java-debug-adapter")
+						.. "/extension/server/"
+						.. "com.microsoft.java.debug.plugin-*.jar",
+					1
+				),
+				"\n"
+			),
+			string_split(vim.fn.glob(get_install_path_for("java-test") .. "/extension/server/" .. "*.jar", 1), "\n"),
+		})
+			:flatten()
+			:totable(),
 	},
 })
 vim.lsp.enable(servers)
