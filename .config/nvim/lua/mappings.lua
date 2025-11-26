@@ -43,32 +43,6 @@ map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
--- Fzf
-map("n", "<leader>fg", "<cmd>FzfLua live_grep<CR>", { desc = "Fzf live grep" })
-map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>", { desc = "Fzf find buffers" })
-map("n", "<leader>fh", "<cmd>FzfLua helptags<CR>", { desc = "Fzf find help pages" })
-map("n", "<leader>ma", "<cmd>FzfLua marks<CR>", { desc = "Fzf find marks" })
-map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Fzf find files" })
-map("n", "<leader>fo", "<cmd>FzfLua oldfiles<CR>", { desc = "Fzf find oldfiles" })
-map("n", "<leader>fz", "<cmd>FzfLua lgrep_curbuf<CR>", { desc = "Fzf find in current buffer" })
-map("n", "<leader>fz", "<cmd>FzfLua lgrep_curbuf<CR>", { desc = "Fzf find in current buffer" })
-map("n", "<leader>fk", "<cmd>FzfLua keymaps<CR>", { desc = "Fzf find keymaps" })
-map({ "n", "v" }, "<leader>fw", "<cmd>FzfLua grep_cword<CR>", { desc = "Fzf find current word" })
-map({ "n", "v" }, "<leader>fW", "<cmd>FzfLua grep_cWORD<CR>", { desc = "Fzf find current WORD" })
-map({ "n", "v" }, "<leader>fi", "<cmd>FzfLua lsp_implementations<CR>", { desc = "Fzf find lsp implementations" })
-map({ "n", "v" }, "<leader>fd", "<cmd>FzfLua lsp_definitions<CR>", { desc = "Fzf find lsp definitions" })
-map("n", "<leader>ft", "<cmd>TodoFzfLua<CR>", { desc = "Fzf find todo comments" })
-
--- diagnostics
-map("n", "<leader>dd", "<cmd>FzfLua diagnostics_document<CR>", { desc = "LSP diagnostics document" })
-map("n", "<leader>dw", "<cmd>FzfLua diagnostics_workspace<CR>", { desc = "LSP diagnostics workspace" })
-
--- git
-map("n", "<leader>gbb", "<cmd>FzfLua git_branches<CR>", { desc = "Fzf git branches" })
-map("n", "<leader>gbc", "<cmd>FzfLua git_bcommits<CR>", { desc = "Fzf git branch commits" })
-map("n", "<leader>gc", "<cmd>FzfLua git_commits<CR>", { desc = "Fzf git commits" })
-map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "Fzf git status" })
-
 map("n", "<leader>th", function()
 	require("nvchad.themes").open()
 end, { desc = "nvchad themes" })
@@ -97,11 +71,6 @@ end, { desc = "terminal toggleable horizontal term" })
 map({ "n", "t" }, "<A-i>", function()
 	require("nvchad.term").toggle({ pos = "float", id = "floatTerm" })
 end, { desc = "terminal toggle floating term" })
-
--- code actions
-map({ "n", "x" }, "gra", function()
-	require("fzf-lua").lsp_code_actions({ silent = true })
-end, { desc = "LSP code actions", noremap = true, silent = true })
 
 -- quickfix list
 map("n", "<A-k>", "<Up><CR><C-w>p", { remap = false, desc = "Navigate up quickfix" })
