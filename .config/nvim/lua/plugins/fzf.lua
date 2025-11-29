@@ -137,16 +137,6 @@ return {
 					},
 				},
 			},
-			default = {
-				git_icons = false,
-			},
-			lsp = {
-				code_actions = {
-					prompt = "Code Actions> ",
-					async_or_timeout = 5000,
-					previewer = "codeaction",
-				},
-			},
 		}
 	end,
 }

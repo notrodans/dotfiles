@@ -24,14 +24,6 @@ map("n", "tn", "<cmd>tabnext<CR>", { desc = "Go to next tab" })
 map("n", "tb", "<cmd>tabprevious<CR>", { desc = "Go to previous tab" })
 
 -- tabufline
-map("n", "<C-i>", function()
-	require("nvchad.tabufline").next()
-end, { desc = "buffer goto next", remap = true })
-
-map("n", "<C-o>", function()
-	require("nvchad.tabufline").prev()
-end, { desc = "buffer goto prev", remap = true })
-
 map("n", "db", function()
 	require("nvchad.tabufline").close_buffer()
 end, { desc = "buffer close" })
@@ -49,15 +41,6 @@ end, { desc = "nvchad themes" })
 
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
-
--- new terminals
-map("n", "<leader>h", function()
-	require("nvchad.term").new({ pos = "sp" })
-end, { desc = "terminal new horizontal term" })
-
-map("n", "<leader>v", function()
-	require("nvchad.term").new({ pos = "vsp" })
-end, { desc = "terminal new vertical term" })
 
 -- toggleable
 map({ "n", "t" }, "<A-v>", function()

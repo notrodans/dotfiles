@@ -40,7 +40,7 @@ o.tabstop = 4
 o.shiftwidth = 4
 o.softtabstop = 4
 o.list = true
-o.listchars = "tab:> ,eol:¬"
+o.listchars = "tab:  ,eol:¬"
 
 opt.fillchars = { eob = " " }
 o.ignorecase = true
@@ -57,7 +57,7 @@ o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
-opt.guicursor = "i:block"
+-- opt.guicursor = "i:block"
 o.swapfile = false
 
 -- interval for writing swap file to disk, also used by gitsigns

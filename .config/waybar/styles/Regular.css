@@ -16,7 +16,7 @@
 window#waybar {
 	color: #a6a6a6;
 	background: #111111;
-	border-bottom: 1px solid #a6a6a6; /* borders */
+	border-bottom: 1px solid #444444; /* borders */
 }
 
 window#waybar.hidden {
