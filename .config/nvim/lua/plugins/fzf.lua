@@ -8,6 +8,10 @@ return {
 
 		fzf.register_ui_select()
 
+		vim.keymap.set("n", "<leader>fq", function()
+			fzf.quickfix_stack()
+		end, { desc = "Fzf find quickfix stacks" })
+
 		vim.keymap.set("n", "<leader>fr", function()
 			fzf.resume()
 		end, { desc = "Fzf resume previous picker" })
