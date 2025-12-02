@@ -88,7 +88,7 @@ M.polish_hl = {
 		["@operator"] = { fg = M.base_16.base05, bold = true },
 		["@variable"] = { fg = M.base_16.base05 },
 		["@variable.builtin"] = { fg = M.base_16.base08 },
-		["@tag.attribute"] = { fg = M.base_16.base0E, italic = true },
+		["@tag.attribute"] = { fg = M.base_16.base08, italic = false },
 	},
 }
 

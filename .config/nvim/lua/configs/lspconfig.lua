@@ -143,7 +143,7 @@ vim.lsp.config("jdtls", {
 			format = {
 				settings = {
 					url = vim.fn.expand("$HOME") .. "/eclipse-my-style.xml",
-					profile = "GoogleStyle",
+					profile = "Eclipse",
 				},
 			},
 			compile = {
