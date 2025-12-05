@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <profiles version="13">
-	<profile kind="CodeFormatterProfile" name="NotrodansStyle" version="1">
+	<profile kind="CodeFormatterProfile" name="NotrodansStyle" version="13">
 		<setting id="org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags"
 			value="insert" />
 		<setting id="org.eclipse.jdt.core.formatter.disabling_tag" value="@formatter:off" />
@@ -452,6 +452,9 @@
 			id="org.eclipse.jdt.core.formatter.insert_space_before_comma_in_parameterized_type_reference"
 			value="do not insert" />
 		<setting
+			id="org.eclipse.jdt.core.formatter.alignment_for_parameters_in_constructor_declaration.count_dependent"
+			value="16|5|80" />
+		<setting
 			id="org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_type_declaration"
 			value="16" />
 		<setting id="org.eclipse.jdt.core.formatter.brace_position_for_enum_declaration"
@@ -638,6 +641,9 @@
 			value="do not insert" />
 		<setting id="org.eclipse.jdt.core.formatter.insert_space_before_semicolon_in_for"
 			value="do not insert" />
+		<setting
+			id="org.eclipse.jdt.core.formatter.alignment_for_arguments_in_explicit_constructor_call.count_dependent"
+			value="16|5|80" />
 		<setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_catch"
 			value="insert" />
 		<setting
@@ -655,8 +661,14 @@
 			id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_parameterized_type_reference"
 			value="insert" />
 		<setting
+			id="org.eclipse.jdt.core.formatter.alignment_for_arguments_in_allocation_expression.count_dependent"
+			value="16|5|80" />
+		<setting
 			id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_invocation_arguments"
 			value="insert" />
+		<setting
+			id="org.eclipse.jdt.core.formatter.alignment_for_parameters_in_method_declaration.count_dependent"
+			value="16|5|80" />
 		<setting id="org.eclipse.jdt.core.formatter.comment.new_lines_at_javadoc_boundaries"
 			value="true" />
 		<setting id="org.eclipse.jdt.core.formatter.blank_lines_after_imports" value="1" />
@@ -681,6 +693,7 @@
 		<setting id="org.eclipse.jdt.core.formatter.keep_then_statement_on_same_line" value="false" />
 
 
+		<!-- Settings for allignment -->
 		<setting id="org.eclipse.jdt.core.formatter.alignment_for_arguments_in_method_invocation"
 			value="48" />
 		<setting
