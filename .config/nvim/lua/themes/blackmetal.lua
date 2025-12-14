@@ -57,23 +57,28 @@ M.base_30 = {
 }
 
 M.polish_hl = {
-	defaults = {
-		NonText = { fg = M.base_30.black2 },
-		Whitespace = { fg = M.base_30.black2 },
-	},
+	-- defaults = {
+	-- 	Normal = { bg = M.base_16.base00 },
+	-- 	Cursor = { bg = "#cedaeb", fg = "#000000" },
+	-- },
 
 	syntax = {
-		Delimiter = { fg = M.base_30.grey_fg, bold = true },
-		MatchParen = { fg = M.base_30.white, underline = true },
-		Pmenu = { fg = M.base_30.grey_fg, bg = M.base_30.one_bg },
-		PmenuSel = { fg = M.base_16.base06, bg = M.base_30.black, underline = true, bold = true },
-		Visual = { fg = M.base_30.blue, bg = M.base_30.one_bg },
-		VisualNOS = { fg = M.base_30.blue, bg = M.base_30.one_bg },
+		Comment = { fg = M.base_16.base03, italic = true },
+		String = { fg = M.base_16.base0B },
+		Function = { fg = M.base_16.base0D, bold = true },
+		Keyword = { fg = M.base_16.base0E, italic = true },
+		Statement = { fg = M.base_16.base0E },
+		Type = { fg = M.base_16.base0A },
+		MatchParen = { fg = M.base_30.blue, underline = true },
+		Pmenu = { bg = M.base_30.one_bg },
+		PmenuSel = { bg = M.base_30.blue, fg = M.base_30.black, bold = true },
 	},
 
 	treesitter = {
-		["@operator"] = { fg = M.base_30.grey_fg, bold = true },
-		["@function"] = { fg = M.base_30.yellow },
+		["@operator"] = { fg = M.base_16.base05, bold = true },
+		["@variable"] = { fg = M.base_16.base05 },
+		["@variable.builtin"] = { fg = M.base_16.base08 },
+		["@tag.attribute"] = { fg = M.base_16.base08, italic = false },
 	},
 }
 

@@ -66,14 +66,14 @@ M.base_30 = {
 }
 
 M.polish_hl = {
-	defaults = {
-		Normal = { bg = M.base_16.base00 },
-		Cursor = { bg = "#cedaeb", fg = "#000000" },
-		Visual = { bg = "#2a2030" },
-	},
+	-- defaults = {
+	-- 	Normal = { bg = M.base_16.base00 },
+	-- 	Cursor = { bg = "#cedaeb", fg = "#000000" },
+	-- 	Visual = { bg = M.base_16.base02 },
+	-- },
 
 	syntax = {
-		Comment = { fg = "#60486d", italic = true },
+		Comment = { fg = M.base_16.base03, italic = true },
 		String = { fg = M.base_16.base0B },
 		Function = { fg = M.base_16.base0D, bold = true },
 		Keyword = { fg = M.base_16.base0E, italic = true },
