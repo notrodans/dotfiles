@@ -22,7 +22,8 @@ g.netrw_banner = 0 -- Now we won't have bloated top of the window
 g.netrw_liststyle = 3 -- Now it will be a tree view
 g.netrw_bufsettings = "nu nobl"
 
-o.laststatus = 3
+o.cmdheight = 0
+o.laststatus = 0
 o.showmode = false
 o.virtualedit = "all"
 

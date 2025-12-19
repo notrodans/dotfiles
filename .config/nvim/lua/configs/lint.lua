@@ -6,7 +6,8 @@ lint.linters_by_ft = {
 	javascriptreact = { "biomejs" },
 	typescriptreact = { "biomejs" },
 	php = { "phpcs" },
-	go = { "staticcheck" },
+	-- go = { "staticcheck" },
+	sql = { "sqlfluff" },
 }
 
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

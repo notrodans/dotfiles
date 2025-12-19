@@ -23,6 +23,7 @@ return {
 				scss = { "biome", "biome-organize-imports" },
 				less = { "biome", "biome-organize-imports" },
 				tex = { "tex-fmt" },
+				sql = { "pg_format" },
 			},
 		})
 
