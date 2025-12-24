@@ -20,7 +20,7 @@ return {
 			},
 		},
 		statusline = {
-			enabled = false,
+			enabled = true,
 			theme = "vscode",
 			separator_style = "default",
 		},

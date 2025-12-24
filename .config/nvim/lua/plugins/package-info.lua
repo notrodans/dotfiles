@@ -15,6 +15,9 @@ return {
 		vim.keymap.set("n", "<leader>pu", function()
 			package_info.update()
 		end, { desc = "Update package to latest version" })
-		package_info.setup()
+
+		package_info.setup({
+			package_manager = vim.g.package_manager or "npm",
+		})
 	end,
 }

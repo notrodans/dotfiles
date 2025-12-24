@@ -23,7 +23,7 @@ g.netrw_liststyle = 3 -- Now it will be a tree view
 g.netrw_bufsettings = "nu nobl"
 
 o.cmdheight = 0
-o.laststatus = 0
+o.laststatus = 3
 o.showmode = false
 o.virtualedit = "all"
 
@@ -58,8 +58,12 @@ o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
-opt.guicursor = "i:block"
+-- opt.guicursor = "i:block"
 o.swapfile = false
+
+-- local nvim config
+o.secure = true
+o.exrc = true
 
 -- interval for writing swap file to disk, also used by gitsigns
 o.updatetime = 250

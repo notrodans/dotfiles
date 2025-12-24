@@ -27,7 +27,6 @@ local servers = {
 	"gopls",
 	"cssls",
 	"intelephense",
-	"stylelint_lsp",
 	"biome",
 	"tailwindcss",
 	"vtsls",
@@ -35,6 +34,8 @@ local servers = {
 	"lemminx",
 	"eslint",
 	"texlab",
+	"pgformatter",
+	"jdtls",
 }
 
 vim.lsp.config("intelephense", {
@@ -48,14 +49,6 @@ vim.lsp.config("intelephense", {
 			files = {
 				maxSize = 5000000,
 			},
-		},
-	},
-})
-vim.lsp.config("stylelint_lsp", {
-	filetypes = { "css", "scss", "less" },
-	settings = {
-		stylelintplus = {
-			autoFixOnFormat = true,
 		},
 	},
 })
