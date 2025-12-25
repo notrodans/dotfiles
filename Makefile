@@ -11,6 +11,7 @@ help:
 
 install:
 	$(SHELL) sh/setup/all.sh link
+	$(SHELL) sh/setup/all.sh install
 
 adopt:
 	$(SHELL) sh/setup/all.sh adopt

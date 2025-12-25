@@ -16,6 +16,7 @@ return {
 			package_info.update()
 		end, { desc = "Update package to latest version" })
 
+		print(vim.g.package_manager)
 		package_info.setup({
 			package_manager = vim.g.package_manager or "npm",
 		})

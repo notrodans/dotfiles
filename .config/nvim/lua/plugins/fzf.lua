@@ -97,6 +97,10 @@ return {
 			fzf.lsp_code_actions({ silent = true })
 		end, { desc = "LSP code actions", noremap = true, silent = true })
 
+		vim.keymap.set("n", "<leader>flr", function()
+			fzf.lsp_references()
+		end, { desc = "Fzf lsp references" })
+
 		return {
 			"ivy",
 			winopts = {
