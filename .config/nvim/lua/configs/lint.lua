@@ -1,10 +1,10 @@
 local lint = require("lint")
 
 lint.linters_by_ft = {
-	javascript = { "biomejs" },
-	typescript = { "biomejs" },
-	javascriptreact = { "biomejs" },
-	typescriptreact = { "biomejs" },
+	javascript = { "biomejs", "eslint_d" },
+	typescript = { "biomejs", "eslint_d" },
+	javascriptreact = { "biomejs", "eslint_d" },
+	typescriptreact = { "biomejs", "eslint_d" },
 	php = { "phpcs" },
 	-- go = { "staticcheck" },
 	sql = { "sqlfluff" },

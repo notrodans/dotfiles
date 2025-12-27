@@ -32,10 +32,10 @@ local servers = {
 	"vtsls",
 	"jsonls",
 	"lemminx",
-	"eslint",
 	"texlab",
 	"pgformatter",
 	"jdtls",
+	"graphql",
 }
 
 vim.lsp.config("intelephense", {
