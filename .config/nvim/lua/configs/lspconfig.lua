@@ -36,6 +36,7 @@ local servers = {
 	"pgformatter",
 	"jdtls",
 	"graphql",
+	"eslint_d",
 }
 
 vim.lsp.config("intelephense", {

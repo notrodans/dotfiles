@@ -12,12 +12,12 @@ return {
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
-				html = { "biome", "biome-organize-imports" },
-				json = { "biome", "biome-organize-imports" },
-				javascript = { "biome", "biome-organize-imports" },
-				typescript = { "biome", "biome-organize-imports" },
-				javascriptreact = { "biome", "biome-organize-imports" },
-				typescriptreact = { "biome", "biome-organize-imports" },
+				html = { "biome", "biome-organize-imports", "eslint_d" },
+				json = { "biome", "biome-organize-imports", "eslint_d" },
+				javascript = { "biome", "biome-organize-imports", "eslint_d" },
+				typescript = { "biome", "biome-organize-imports", "eslint_d" },
+				javascriptreact = { "biome", "biome-organize-imports", "eslint_d" },
+				typescriptreact = { "biome", "biome-organize-imports", "eslint_d" },
 				php = { "phpcsfixer" },
 				css = { "biome", "biome-organize-imports" },
 				scss = { "biome", "biome-organize-imports" },
@@ -30,7 +30,7 @@ return {
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			pattern = "*",
 			callback = function(args)
-				require("conform").format({ bufnr = args.buf, lsp_fallback = true })
+				conf.format({ bufnr = args.buf, lsp_fallback = true })
 			end,
 		})
 	end,

@@ -1,8 +1,13 @@
 return {
 	"lewis6991/gitsigns.nvim",
 	event = "User FilePost",
-	opts = function()
-		require("configs.gitsigns")
+	opts = function(opts)
+		dofile(vim.g.base46_cache .. "git")
+
+		opts.signs = {
+			delete = { text = "󰍵" },
+			changedelete = { text = "󱕖" },
+		}
 
 		local gitsigns = require("gitsigns")
 

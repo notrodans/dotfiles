@@ -24,6 +24,14 @@ map("n", "tn", "<cmd>tabnext<CR>", { desc = "Go to next tab" })
 map("n", "tb", "<cmd>tabprevious<CR>", { desc = "Go to previous tab" })
 
 -- tabufline
+map("n", "]b", function()
+	require("nvchad.tabufline").next()
+end, { desc = "buffer goto next", remap = true })
+
+map("n", "[b", function()
+	require("nvchad.tabufline").prev()
+end, { desc = "buffer goto prev", remap = true })
+
 map("n", "db", function()
 	require("nvchad.tabufline").close_buffer()
 end, { desc = "buffer close" })
