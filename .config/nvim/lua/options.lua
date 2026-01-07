@@ -15,7 +15,7 @@ vim.o.spelllang = "ru_ru,en_us"
 o.mouse = "a"
 
 -- windows
-o.winborder = "single"
+o.winborder = "rounded"
 
 -- netrw
 g.netrw_banner = 0 -- Now we won't have bloated top of the window
