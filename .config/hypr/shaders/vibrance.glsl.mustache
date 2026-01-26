@@ -3,8 +3,7 @@
  *
  * Enhance color saturation.
  * Also supports per-channel multipliers.
- *
- * Source: https://github.com/hyprwm/Hyprland/issues/1140#issuecomment-1614863627
+ * Updated to GLES 3.0.
  */
 
 #version 300 es
@@ -21,12 +20,9 @@ out vec4 fragColor;
  *
  * @min 0.0
  * @max 10.0
+ * Default: 1.0 (no change)
  */
-const vec3 Balance = vec3(
-    float({{#nc}}{{balance.red}} ? 1.0{{/nc}}),
-    float({{#nc}}{{balance.green}} ? 1.0{{/nc}}),
-    float({{#nc}}{{balance.blue}} ? 1.0{{/nc}})
-);
+const vec3 Balance = vec3(1.0, 1.0, 1.0);
 
 /**
  * Strength of filter.
@@ -35,27 +31,29 @@ const vec3 Balance = vec3(
  * @min -1.0
  * @max 1.0
  */
-const float Strength = float({{#nc}}{{strength}} ? 0.15{{/nc}});
+const float Strength = 0.7;
 
-const float VIB_VIBRANCE = 0.5;
-
-const vec3 VIB_coeffVibrance = Balance * -VIB_VIBRANCE;
+// Calculate coefficients based on Strength and Balance
+const vec3 VIB_coeffVibrance = Balance * -Strength;
 
 void main() {
     vec4 pixColor = texture(tex, v_texcoord);
     vec3 color = pixColor.rgb;
 
+    // Luma coefficients (BT.709 standard for sRGB)
     vec3 VIB_coefLuma = vec3(0.212656, 0.715158, 0.072186);
     float luma = dot(VIB_coefLuma, color);
 
+    // Calculate color saturation
     float max_color = max(color.r, max(color.g, color.b));
     float min_color = min(color.r, min(color.g, color.b));
     float color_saturation = max_color - min_color;
 
+    // Apply vibrance
     vec3 p_col = (sign(VIB_coeffVibrance) * color_saturation - 1.0) * VIB_coeffVibrance + 1.0;
 
+    // Mix the adjusted color with the luma
     vec3 adjustedColor = mix(vec3(luma), color, p_col);
+
     fragColor = vec4(adjustedColor, pixColor.a);
 }
-
-// vim: ft=glsl
