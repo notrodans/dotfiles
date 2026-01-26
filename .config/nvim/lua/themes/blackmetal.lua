@@ -1,7 +1,9 @@
+---@class Base46Table
 local M = {}
 
 M.type = "dark"
 
+---@class Base16Table
 M.base_16 = {
 	base00 = "#000000",
 	base01 = "#333333",
@@ -21,6 +23,7 @@ M.base_16 = {
 	base0F = "#aaaaaa",
 }
 
+---@class Base30Table
 M.base_30 = {
 	white = "#ffffff",
 	black = "#000000",
@@ -57,11 +60,6 @@ M.base_30 = {
 }
 
 M.polish_hl = {
-	-- defaults = {
-	-- 	Normal = { bg = M.base_16.base00 },
-	-- 	Cursor = { bg = "#cedaeb", fg = "#000000" },
-	-- },
-
 	syntax = {
 		Comment = { fg = M.base_16.base03, italic = true },
 		String = { fg = M.base_16.base0B },
@@ -72,6 +70,7 @@ M.polish_hl = {
 		MatchParen = { fg = M.base_30.blue, underline = true },
 		Pmenu = { bg = M.base_30.one_bg },
 		PmenuSel = { bg = M.base_30.blue, fg = M.base_30.black, bold = true },
+		St_Mode = { bg = M.base_30.one_bg, fg = M.base_16.base02, bold = true },
 	},
 
 	treesitter = {

@@ -37,6 +37,8 @@ local servers = {
 	"jdtls",
 	"graphql",
 	"eslint_d",
+	"hyprls",
+	"basedpyright",
 }
 
 vim.lsp.config("intelephense", {

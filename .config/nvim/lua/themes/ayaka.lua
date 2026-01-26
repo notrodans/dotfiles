@@ -1,3 +1,4 @@
+---@class Base46Table
 local M = {}
 
 M.type = "dark"
@@ -5,32 +6,34 @@ M.type = "dark"
 -- Ayaka theme
 -- background: #000000
 -- foreground: #cedaeb
--- color1 (Blue in kitty): #71ADE9 -> Using as Blue
--- color2 (Purple in kitty): #AB8CAE -> Using as Keyword/Purple
--- color3 (Pink in kitty): #E59DB1 -> Using as Red/Warning
--- color4 (Periwinkle in kitty): #9EA0D3 -> Using as Green/String
--- color5 (Light Blue in kitty): #8BB8E9 -> Using as Cyan
--- color6 (Light Pink in kitty): #E1B4CE -> Using as Orange
+-- color1 (Blue): #71ADE9 -> Using as Blue
+-- color2 (Purple): #AB8CAE -> Using as Keyword/Purple
+-- color3 (Pink): #E59DB1 -> Using as Red/Warning
+-- color4 (Periwinkle): #9EA0D3 -> Using as Green/String
+-- color5 (Light Blue): #8BB8E9 -> Using as Cyan
+-- color6 (Light Pink): #E1B4CE -> Using as Orange
 
+---@class Base16Table
 M.base_16 = {
-	base00 = "#000000", -- Default Background
-	base01 = "#151018", -- Lighter Background (Status bars)
-	base02 = "#2a2030", -- Selection Background (Visual Mode)
-	base03 = "#60486d", -- Comments, Line Highlighting
-	base04 = "#9098a4", -- Dark Foreground, Status bars
-	base05 = "#cedaeb", -- Default Foreground
-	base06 = "#e1eaff", -- Light Foreground
-	base07 = "#ffffff", -- Lightest Foreground
-	base08 = "#E59DB1", -- Variables, Errors (Pink)
-	base09 = "#E1B4CE", -- Integers, Constants (Light Pink)
-	base0A = "#AB8CAE", -- Classes, Search Text (Purple)
-	base0B = "#9EA0D3", -- Strings (Periwinkle/Blue-ish)
-	base0C = "#8BB8E9", -- Constructor, Regex (Light Blue)
-	base0D = "#71ADE9", -- Functions, Methods (Sky Blue)
-	base0E = "#AB8CAE", -- Keywords (Purple)
-	base0F = "#E59DB1", -- Delimiters (Pink)
+	base00 = "#000000",
+	base01 = "#151018",
+	base02 = "#2a2030",
+	base03 = "#60486d",
+	base04 = "#9098a4",
+	base05 = "#cedaeb",
+	base06 = "#e1eaff",
+	base07 = "#ffffff",
+	base08 = "#E59DB1",
+	base09 = "#E1B4CE",
+	base0A = "#AB8CAE",
+	base0B = "#9EA0D3",
+	base0C = "#8BB8E9",
+	base0D = "#71ADE9",
+	base0E = "#AB8CAE",
+	base0F = "#E59DB1",
 }
 
+---@class Base30Table
 M.base_30 = {
 	white = "#cedaeb",
 	black = "#000000",

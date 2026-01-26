@@ -18,6 +18,7 @@ return {
 				typescript = { "biome", "biome-organize-imports", "eslint_d" },
 				javascriptreact = { "biome", "biome-organize-imports", "eslint_d" },
 				typescriptreact = { "biome", "biome-organize-imports", "eslint_d" },
+				python = { "autopep8" },
 				php = { "phpcsfixer" },
 				css = { "biome", "biome-organize-imports" },
 				scss = { "biome", "biome-organize-imports" },

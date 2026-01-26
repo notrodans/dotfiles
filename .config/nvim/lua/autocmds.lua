@@ -15,6 +15,8 @@ autocmd("BufReadPost", {
 	end,
 })
 
+local scroll = vim.o.scroll
+
 autocmd({
 	"BufEnter",
 	"VimResized",
@@ -26,7 +28,7 @@ autocmd({
 	callback = function(args)
 		-- NvChad themes fix
 		if string.len(args.match) ~= 0 then
-			vim.opt_local.scroll = 4
+			vim.opt_local.scroll = scroll
 		end
 	end,
 })
