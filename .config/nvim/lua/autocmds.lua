@@ -1,5 +1,18 @@
 local autocmd = vim.api.nvim_create_autocmd
 
+autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		-- setting up folds
+		if require("nvim-treesitter.parsers").has_parser() then
+			vim.opt_local.foldmethod = "expr"
+			vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		else
+			vim.opt_local.foldmethod = "syntax"
+		end
+	end,
+})
+
 autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
@@ -28,7 +41,7 @@ autocmd({
 	callback = function(args)
 		-- NvChad themes fix
 		if string.len(args.match) ~= 0 then
-			vim.opt_local.scroll = scroll
+			vim.wo.scroll = scroll
 		end
 	end,
 })

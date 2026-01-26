@@ -5,6 +5,10 @@ local wo = vim.wo
 
 -------------------------------------- options ------------------------------------------
 
+-- folds
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
 --latex
 opt.conceallevel = 2
 
