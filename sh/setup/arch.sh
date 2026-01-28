@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# shellcheck source=../lib/common.sh
+. "$(dirname "$0")/../lib/common.sh"
+
+update_arch_keys() {
+  info "Updating Arch Linux keys..."
+  sudo pacman-key --init
+  sudo pacman-key --populate archlinux
+  sudo pacman-key --refresh-keys
+  sudo pacman -Sy
+  sudo systemctl enable --now archlinux-keyring-wkd-sync.timer
+}
+
+install_paru() {
+  if command -v paru >/dev/null 2>&1; then
+    info "paru already installed"
+  else
+    info "Installing paru..."
+    sudo pacman -S --needed base-devel git
+    local temp_dir
+    temp_dir=$(mktemp -d)
+    git clone https://aur.archlinux.org/paru.git "$temp_dir"
+    pushd "$temp_dir" > /dev/null
+    makepkg -si --noconfirm
+    popd > /dev/null
+    rm -rf "$temp_dir"
+  fi
+}
+
+install_arch_packages() {
+  info "Installing Arch Linux packages..."
+  
+  # Fonts
+  paru -Syyu --needed --noconfirm \
+    ttf-ms-fonts apple-fonts noto-fonts-emoji adobe-source-code-pro-fonts \
+    ttf-droid ttf-courier-code ttf-fantasque-nerd ttf-jetbrains-mono \
+    ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-fira-code ttf-cascadia-code-nerd \
+    ttf-hannom wqy-zenhei ttf-kopub ttf-mplus-git ttf-nerd-fonts-symbols \
+    ttf-nerd-fonts-symbols-mono ttf-lato \
+    ttf-0xproto-nerd ttf-hack-nerd otf-hermit-nerd ttf-iosevka-nerd \
+    ttf-recursive-nerd ttf-intel-one-mono ttf-spline-sans-mono \
+    otf-geist-mono-nerd ttf-ibm-plex ttf-comfortaa ttf-indic-otf \
+    ttf-tahoma
+
+  # Shell & Terminal Tools
+  paru -S --needed --noconfirm \
+    zsh tmux fzf xclip bat libnotify dbus procps-ng \
+    zathura zathura-pdf-mupdf newsraft tex-fmt xsettingsd
+
+  # Archives
+  paru -S --needed --noconfirm lrzip unrar unzip unace p7zip squashfs-tools
+
+  # GPU (AMD)
+  paru -S --needed --noconfirm \
+    mesa mesa-vdpau mesa-utils lib32-mesa vulkan-radeon lib32-vulkan-radeon \
+    libva-mesa-driver libva-vdpau-driver lib32-libva-mesa-driver vulkan-mesa-layers \
+    opencl-rusticl-mesa lib32-opencl-rusticl-mesa
+
+  # DE (Hyprland)
+  paru -S --needed --noconfirm \
+    hyprland hyprshade hyprlang hyprcursor xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+
+  # Extra Hyprland packages
+  paru -S --needed --noconfirm \
+    rofi-wayland waybar cliphist grim gvfs gvfs-mtp hypridle hyprlock \
+    imagemagick inxi jq network-manager-applet pamixer pavucontrol \
+    pipewire-alsa playerctl polkit-gnome python-requests python-pyquery \
+    pyprland qt5ct qt6ct qt6-svg slurp swappy swaync swwww wallust-git \
+    wl-clipboard wlogout xdg-user-dirs xdg-utils brightnessctl pacman-contrib \
+    python-pywal mkinitcpio-firmware bluez bluez-utils blueman
+
+  # Programs
+  paru -S --needed --noconfirm \
+    curl wget thunar yt-dlp nwg-look nvtop mpv mpv-mpris btop cava eog fastfetch gedit kitty kvantum neovim
+
+  # Development
+  paru -S --needed --noconfirm \
+    maven gradle nodejs npm \
+    stylua biome sqlfluff python-debugpy
+
+  # OBS Studio
+  paru -S --needed --noconfirm obs-studio ffmpeg-amd-full-git
+}
+
+setup_arch_services() {
+  info "Configuring Arch Linux services..."
+
+  # Zram
+  sudo pacman -S --needed --noconfirm zram-generator
+  sudo tee /etc/systemd/zram-generator.conf > /dev/null <<EOF
+[zram0]
+zram-size = ram
+compression-algorithm = zstd
+swap-priority = 100
+fs-type = swap
+EOF
+  sudo systemctl daemon-reload
+  sudo systemctl start systemd-zram-setup@zram0.service
+
+  # Systemd-oomd
+  sudo systemctl enable --now systemd-oomd
+
+  # Fstrim
+  sudo systemctl enable fstrim.timer
+
+  # Ananicy-cpp
+  paru -S --needed --noconfirm ananicy-cpp
+  sudo systemctl enable --now ananicy-cpp
+
+  # Irqbalance
+  paru -S --needed --noconfirm irqbalance
+  sudo systemctl enable --now irqbalance
+
+  # Pacman cleaner
+  setup_pacman_cleaner
+}
+
+setup_pacman_cleaner() {
+  info "Setting up pacman cleaner service..."
+  sudo tee /etc/systemd/system/pacman-cleaner.service > /dev/null <<EOF
+[Unit]
+Description=Cleans pacman cache
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pacman -Scc --noconfirm
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  sudo tee /etc/systemd/system/pacman-cleaner.timer > /dev/null <<EOF
+[Unit]
+Description=Run clean of pacman cache every week
+
+[Timer]
+OnCalendar=weekly
+AccuracySec=1h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+  sudo systemctl enable --now pacman-cleaner.timer
+}
+
+install_arch() {
+  update_arch_keys
+  install_paru
+  install_arch_packages
+  setup_arch_services
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  install_arch
+fi

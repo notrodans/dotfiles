@@ -62,6 +62,7 @@ unlink_path() {
 
 # Domain-specific logic
 CONFIG_DIR="$REPO_ROOT/.config"
+FONTS_DIR="$REPO_ROOT/fonts"
 SPECIAL_HOME_FILES=(".zshrc" ".tmux.conf" ".icons" ".themes" "eclipse-java-google-style.xml" "eclipse-my-style.xml")
 
 is_special_home() {
@@ -107,11 +108,58 @@ check_one() {
   fi                                                                              
 }                                                                                 
                                                                                   
+list_fonts_entries() {
+  find "$FONTS_DIR" -mindepth 1 -maxdepth 1 -printf "%f\n" 2>/dev/null || \
+  (find "$FONTS_DIR" -mindepth 1 -maxdepth 1 | sed 's#.*/##')
+}
+
+check_fonts() {
+  local name src dst ret=0
+  while IFS= read -r name; do
+    src="$FONTS_DIR/$name"
+    dst="$HOME/.local/share/fonts/$name"
+    if [[ -L "$dst" ]]; then
+      if samepath "$src" "$dst"; then
+        info "OK font link: $dst"
+      else
+        warn "Wrong font link: $dst -> $(readlink "$dst") (should be -> $src)"
+        ret=1
+      fi
+    elif [[ -e "$dst" ]]; then
+      warn "Font exists but not a symlink: $dst"
+      ret=1
+    else
+      warn "Missing font: $dst"
+      ret=1
+    fi
+  done < <(list_fonts_entries)
+  return "$ret"
+}
+
+link_fonts() {
+  local name src dst
+  while IFS= read -r name; do
+    src="$FONTS_DIR/$name"
+    dst="$HOME/.local/share/fonts/$name"
+    ensure_link "$src" "$dst"
+  done < <(list_fonts_entries)
+  fc-cache -f >/dev/null 2>&1 || true
+}
+
+unlink_fonts() {
+  local name dst
+  while IFS= read -r name; do
+    dst="$HOME/.local/share/fonts/$name"
+    unlink_path "$dst"
+  done < <(list_fonts_entries)
+}
+
 check_all() {                                                                     
   local name ret=0                                                                
   while IFS= read -r name; do                                                     
     check_one "$name" || ret=1                                                    
-  done < <(list_config_entries)                                                   
+  done < <(list_config_entries)
+  check_fonts || ret=1
   return "$ret"                                                                   
 }                                                                                 
                                                                                   
@@ -126,37 +174,7 @@ link_all() {
     fi
     ensure_link "$src" "$dst"                                                     
   done < <(list_config_entries)
-}
-
-adopt_one() {
-  # Move from $HOME target into repo and link back
-  local name="$1" src dst cur
-  src="$CONFIG_DIR/$name"
-  if is_special_home "$name"; then
-    dst="$HOME/$name"
-  else
-    dst="$HOME/.config/$name"
-  fi
-
-  if [[ -L "$dst" ]]; then
-    info "Already symlink: $dst (skipping adopt)"
-    return 0
-  fi
-
-  if [[ -e "$dst" ]]; then
-    ensure_parent "$src"
-    # Move existing into repo
-    if [[ -e "$src" || -L "$src" ]]; then
-      backup_existing "$src"
-      rm -rf -- "$src"
-    fi
-    mv -- "$dst" "$src"
-    info "Moved $dst -> $src"
-  else
-    info "No target at $dst, will just link to repo copy"
-  fi
-
-  ensure_link "$src" "$dst"
+  link_fonts
 }
 
 adopt_all() {
@@ -176,4 +194,5 @@ unlink_all() {
     fi
     unlink_path "$dst"
   done < <(list_config_entries)
+  unlink_fonts
 }
