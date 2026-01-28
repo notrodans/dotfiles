@@ -46,7 +46,7 @@ install_arch_packages() {
   # Shell & Terminal Tools
   paru -S --needed --noconfirm \
     zsh tmux fzf xclip bat libnotify dbus procps-ng \
-    zathura zathura-pdf-mupdf newsraft tex-fmt xsettingsd
+    sioyek-git newsraft tex-fmt xsettingsd
 
   # Archives
   paru -S --needed --noconfirm lrzip unrar unzip unace p7zip squashfs-tools
