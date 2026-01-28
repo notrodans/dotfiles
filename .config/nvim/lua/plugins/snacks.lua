@@ -19,29 +19,6 @@ return {
 						enabled = true,
 						latex = {
 							font_size = "small",
-							packages = { "amsmath", "amssymb", "amsfonts", "amscd", "mathtools" },
-						},
-					},
-					convert = {
-						notify = false,
-						magick = {
-							math = {
-								"-density",
-								"600",
-								"{src}[{page}]",
-								"-background",
-								"transparent",
-								"-alpha",
-								"remove",
-								"-trim",
-								"-bordercolor",
-								"transparent",
-								"-border",
-								"50x50",
-								"+repage",
-								"-scale",
-								"150%",
-							},
 						},
 					},
 					resolve = function(path, src)
