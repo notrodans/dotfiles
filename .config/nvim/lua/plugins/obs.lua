@@ -26,7 +26,7 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>Ot", ":Obsidian tags<CR>", { desc = "Obsidian find notes by tag" })
-		vim.keymap.set("n", "<leader>Og", ":Obsidian tags<CR>", { desc = "Obsidian grep" })
-		vim.keymap.set("n", "<leader>Oi", ":Obsidian paste_image<CR>", { desc = "Obsidian paste_image" })
+		vim.keymap.set("n", "<leader>Og", ":Obsidian search<CR>", { desc = "Obsidian grep" })
+		vim.keymap.set("n", "<leader>Oi", ":Obsidian paste_img<CR>", { desc = "Obsidian paste_image" })
 	end,
 }

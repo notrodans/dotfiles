@@ -4,6 +4,11 @@ return {
 	ft = "markdown",
 	config = function()
 		require("markview").setup({
+			markdown_inline = {
+				images = {
+					enable = true,
+				},
+			},
 			latex = {
 				enable = false,
 			},
