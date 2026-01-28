@@ -7,11 +7,14 @@ export REPO_ROOT
 .PHONY: help install adopt
 
 help:
-	@echo "Targets: install | adopt"
+	@echo "Targets: install | adopt | link"
 
 install:
 	$(SHELL) sh/setup/all.sh link
 	$(SHELL) sh/setup/all.sh install
+
+link:
+	$(SHELL) sh/setup/all.sh link
 
 adopt:
 	$(SHELL) sh/setup/all.sh adopt

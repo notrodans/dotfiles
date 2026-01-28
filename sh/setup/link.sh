@@ -106,8 +106,45 @@ check_one() {
     warn "Missing: $dst"                                                          
     return 1                                                                      
   fi                                                                              
-}                                                                                 
-                                                                                  
+}
+
+adopt_one() {
+  # adopt_one NAME
+  local name="$1" src dst
+  src="$CONFIG_DIR/$name"
+  if is_special_home "$name"; then
+    dst="$HOME/$name"
+  else
+    dst="$HOME/.config/$name"
+  fi
+
+  if [[ -L "$dst" ]]; then
+    if samepath "$src" "$dst"; then
+      info "Already linked: $dst"
+      return 0
+    fi
+    warn "Different link already exists: $dst -> $(readlink "$dst")"
+    return 1
+  fi
+
+  if [[ ! -e "$dst" ]]; then
+    warn "Nothing to adopt: $dst does not exist"
+    return 1
+  fi
+
+  # If repo already has this file/dir, back it up
+  if [[ -e "$src" || -L "$src" ]]; then
+    local bak="${src}.bak.$(timestamp)"
+    mv -f -- "$src" "$bak"
+    warn "Repo already had $name, backed up to $bak"
+  fi
+
+  ensure_parent "$src"
+  mv -v -- "$dst" "$src"
+  ln -sfn -- "$src" "$dst"
+  info "Adopted: $dst -> $src"
+}
+
 list_fonts_entries() {
   find "$FONTS_DIR" -mindepth 1 -maxdepth 1 -printf "%f\n" 2>/dev/null || \
   (find "$FONTS_DIR" -mindepth 1 -maxdepth 1 | sed 's#.*/##')
