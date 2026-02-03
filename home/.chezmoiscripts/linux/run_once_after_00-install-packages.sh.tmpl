@@ -12,11 +12,18 @@ if [[ ! -f /etc/arch-release ]]; then
 fi
 
 update_arch_keys() {
+  if [[ -f "/etc/pacman.d/gnupg/trustdb.gpg" ]]; then
+      if sudo pacman -Sy --noconfirm >/dev/null 2>&1; then
+          info "Arch keys are valid (pacman sync succeeded). Skipping key update."
+          return 0
+      fi
+      warn "Pacman sync failed. Refreshing keys..."
+  fi
+
   info "Updating Arch Linux keys..."
   sudo pacman-key --init
   sudo pacman-key --populate archlinux
-  sudo pacman-key --refresh-keys
-  sudo pacman -Sy
+  sudo pacman -Sy --noconfirm archlinux-keyring
   sudo systemctl enable --now archlinux-keyring-wkd-sync.timer
 }
 
@@ -81,11 +88,6 @@ install_arch_packages() {
   # Programs
   paru -S --needed --noconfirm \
     curl wget thunar yt-dlp nwg-look nvtop mpv mpv-mpris btop cava eog fastfetch gedit kitty kvantum neovim
-
-  # Development
-  paru -S --needed --noconfirm \
-    maven gradle nodejs npm \
-    stylua biome sqlfluff python-debugpy
 
   # OBS Studio
   paru -S --needed --noconfirm obs-studio ffmpeg-amd-full-git
