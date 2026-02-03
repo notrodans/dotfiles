@@ -1,7 +1,15 @@
+{{ if eq .chezmoi.os "linux" -}}
 #!/usr/bin/env bash
 set -euo pipefail
-# shellcheck source=../lib/common.sh
-. "$(dirname "$0")/../lib/common.sh"
+
+# Helpers
+info() { echo -e "\033[34m[INFO]\033[0m $*"; }
+warn() { echo -e "\033[33m[WARN]\033[0m $*"; }
+
+if [[ ! -f /etc/arch-release ]]; then
+    info "Not an Arch Linux system. Skipping Arch package installation."
+    exit 0
+fi
 
 update_arch_keys() {
   info "Updating Arch Linux keys..."
@@ -46,7 +54,7 @@ install_arch_packages() {
   # Shell & Terminal Tools
   paru -S --needed --noconfirm \
     zsh tmux fzf xclip bat libnotify dbus procps-ng \
-    sioyek-git newsraft tex-fmt xsettingsd
+    newsraft tex-fmt xsettingsd # sioyek-git
 
   # Archives
   paru -S --needed --noconfirm lrzip unrar unzip unace p7zip squashfs-tools
@@ -83,6 +91,36 @@ install_arch_packages() {
   paru -S --needed --noconfirm obs-studio ffmpeg-amd-full-git
 }
 
+setup_pacman_cleaner() {
+  info "Setting up pacman cleaner service..."
+  sudo tee /etc/systemd/system/pacman-cleaner.service > /dev/null <<EOF
+[Unit]
+Description=Cleans pacman cache
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pacman -Scc --noconfirm
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  sudo tee /etc/systemd/system/pacman-cleaner.timer > /dev/null <<EOF
+[Unit]
+Description=Run clean of pacman cache every week
+
+[Timer]
+OnCalendar=weekly
+AccuracySec=1h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+  sudo systemctl enable --now pacman-cleaner.timer
+}
+
 setup_arch_services() {
   info "Configuring Arch Linux services..."
 
@@ -116,43 +154,9 @@ EOF
   setup_pacman_cleaner
 }
 
-setup_pacman_cleaner() {
-  info "Setting up pacman cleaner service..."
-  sudo tee /etc/systemd/system/pacman-cleaner.service > /dev/null <<EOF
-[Unit]
-Description=Cleans pacman cache
+update_arch_keys
+install_paru
+install_arch_packages
+setup_arch_services
 
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/pacman -Scc --noconfirm
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-  sudo tee /etc/systemd/system/pacman-cleaner.timer > /dev/null <<EOF
-[Unit]
-Description=Run clean of pacman cache every week
-
-[Timer]
-OnCalendar=weekly
-AccuracySec=1h
-Persistent=true
-
-[Install]
-WantedBy=timers.target
-EOF
-
-  sudo systemctl enable --now pacman-cleaner.timer
-}
-
-install_arch() {
-  update_arch_keys
-  install_paru
-  install_arch_packages
-  setup_arch_services
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  install_arch
-fi
+{{ end -}}
