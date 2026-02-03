@@ -56,25 +56,25 @@ install_arch_packages() {
     ttf-0xproto-nerd ttf-hack-nerd otf-hermit-nerd ttf-iosevka-nerd \
     ttf-recursive-nerd ttf-intel-one-mono ttf-spline-sans-mono \
     otf-geist-mono-nerd ttf-ibm-plex ttf-comfortaa ttf-indic-otf \
-    ttf-tahoma
+    ttf-tahoma || true
 
   # Shell & Terminal Tools
   paru -S --needed --noconfirm \
     zsh tmux fzf xclip bat libnotify dbus procps-ng \
-    newsraft tex-fmt xsettingsd # sioyek-git
+    newsraft tex-fmt xsettingsd # sioyek-git || true
 
   # Archives
-  paru -S --needed --noconfirm lrzip unrar unzip unace p7zip squashfs-tools
+  paru -S --needed --noconfirm lrzip unrar unzip unace p7zip squashfs-tools || true
 
   # GPU (AMD)
   paru -S --needed --noconfirm \
     mesa mesa-vdpau mesa-utils lib32-mesa vulkan-radeon lib32-vulkan-radeon \
     libva-mesa-driver libva-vdpau-driver lib32-libva-mesa-driver vulkan-mesa-layers \
-    opencl-rusticl-mesa lib32-opencl-rusticl-mesa
+    opencl-rusticl-mesa lib32-opencl-rusticl-mesa || true
 
   # DE (Hyprland)
   paru -S --needed --noconfirm \
-    hyprland hyprshade hyprlang hyprcursor xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+    hyprland hyprshade hyprlang hyprcursor xdg-desktop-portal-hyprland xdg-desktop-portal-gtk || true
 
   # Extra Hyprland packages
   paru -S --needed --noconfirm \
@@ -83,14 +83,19 @@ install_arch_packages() {
     pipewire-alsa playerctl polkit-gnome python-requests python-pyquery \
     pyprland qt5ct qt6ct qt6-svg slurp swappy swaync swwww wallust-git \
     wl-clipboard wlogout xdg-user-dirs xdg-utils brightnessctl pacman-contrib \
-    python-pywal mkinitcpio-firmware bluez bluez-utils blueman
+    python-pywal mkinitcpio-firmware bluez bluez-utils blueman || true
 
   # Programs
   paru -S --needed --noconfirm \
-    curl wget thunar yt-dlp nwg-look nvtop mpv mpv-mpris btop cava eog fastfetch gedit kitty kvantum neovim
+    curl wget thunar yt-dlp nwg-look nvtop mpv mpv-mpris btop cava eog fastfetch gedit kitty kvantum neovim || true
+
+  # Development
+  paru -S --needed --noconfirm \
+    maven gradle nodejs npm \
+    stylua biome sqlfluff python-debugpy || true
 
   # OBS Studio
-  paru -S --needed --noconfirm obs-studio ffmpeg-amd-full-git
+  paru -S --needed --noconfirm obs-studio ffmpeg-amd-full-git || true
 }
 
 setup_pacman_cleaner() {

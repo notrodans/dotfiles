@@ -45,7 +45,7 @@ chezmoi init --apply
 
 *   `home/` - The source state of your home directory.
 *   `home/.chezmoiscripts/` - Installation hooks (run automatically during `chezmoi apply`).
-    *   `linux/run_onchange_after_00-install-packages.sh.tmpl` - Installs system packages (Arch/Pacman/Paru).
+    *   `linux/run_once_after_00-install-packages.sh.tmpl` - Installs system packages (Arch/Pacman/Paru).
     *   `run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
 
 ## 🔄 Management
