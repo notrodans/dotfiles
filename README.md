@@ -39,14 +39,38 @@ chezmoi init --apply
     *   **NVM**: Node.js version management.
     *   **TPM**: Tmux Plugin Manager.
 *   **Package Management**:
+    *   Declarative package management via `home/.packages.yaml`.
     *   Automatically installs Arch Linux packages via `paru` (AUR helper).
+*   **Secrets Management**:
+    *   Integrated with **Bitwarden** for secure token and password handling (e.g., MCP tokens).
 
 ## 📂 Structure
 
 *   `home/` - The source state of your home directory.
+*   `home/.packages.yaml` - Declarative list of packages to install.
 *   `home/.chezmoiscripts/` - Installation hooks (run automatically during `chezmoi apply`).
-    *   `linux/run_once_after_00-install-packages.sh.tmpl` - Installs system packages (Arch/Pacman/Paru).
+    *   `linux/run_onchange_after_00-install-packages.sh.tmpl` - Installs system packages from YAML.
     *   `run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
+*   `tests/` - Multi-arch Docker testing suite.
+
+## 🔐 Secrets (Bitwarden)
+
+To use templates that require secrets (like MCP tokens):
+1.  Ensure `bw` (Bitwarden CLI) is installed.
+2.  Unlock your vault: `export BW_SESSION=$(bw unlock --raw)`.
+3.  Run `chezmoi apply`.
+
+## 🧪 Testing
+
+Test your dotfiles in a clean container (supports `x86_64` and `ARM64`):
+
+```bash
+# Automated test
+./tests/run-test.sh linux/amd64 --test
+
+# Interactive shell
+./tests/run-test.sh linux/arm64
+```
 
 ## 🔄 Management
 

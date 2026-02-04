@@ -24,6 +24,15 @@
 {{- $name := env "NAME" | default $user -}}
 {{- $email := env "EMAIL" | default (printf "%s@localhost" $user) -}}
 
+{{- $secrets := false -}}
+{{- if not $ephemeral -}}
+{{-   if $interactive -}}
+{{-     $secrets = promptBoolOnce . "secrets" "enable bitwarden secrets" -}}
+{{-   else -}}
+{{-     $secrets = true -}}
+{{-   } -}}
+{{- end -}}
+
 {{- if hasKey . "name" -}}
 {{-   $name = .name -}}
 {{- else if env "GIT_CONFIG_USER_NAME" -}}
@@ -55,6 +64,7 @@ data:
   codespaces: {{ $codespaces }}
   ci: {{ $ci }}
   devContainer: {{ $devContainer }}
+  secrets: {{ $secrets }}
   
   # Upgrade packages
   upgrade: {{ $upgrade }}
@@ -66,6 +76,9 @@ diff:
 
 github:
   refreshPeriod: 12h
+
+bitwarden:
+  command: "bw"
 
 scriptEnv:
 {{- if eq .chezmoi.os "linux" }}
