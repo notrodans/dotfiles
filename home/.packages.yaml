@@ -59,6 +59,9 @@ packages:
     - mesa-utils
     - vulkan-radeon
     - vulkan-mesa-layers
+    - vulkan-amdgpu-pro
+    - opencl-mesa
+    - amdvlk
     - libva-utils 
 
   hyprland:
