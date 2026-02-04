@@ -13,11 +13,21 @@
 			"args": ["chrome-devtools-mcp@latest"]
 		},
 		"DeepWiki": {
-{{- if .secrets }}
+{{- if and .secrets (lookPath "bw") }}
 			"httpUrl": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key={{ (bitwarden "item" "opencode-fastmcp-key").login.password }}"
 {{- else }}
 			"httpUrl": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key=PLACEHOLDER"
 {{- end }}
+		}
+{{- if and .secrets (lookPath "bw") }},
+		"github": {
+			"httpUrl": "https://api.githubcopilot.com/mcp/",
+			"headers": {
+				"Authorization": "Bearer {{ (bitwarden "item" "github-token").login.password }}"
+			}
+		}
+{{- end }}
+
 		},
 {{- if .secrets }}
 		"github": {

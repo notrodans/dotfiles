@@ -18,11 +18,22 @@
 		},
 		"DeepWiki": {
 			"type": "remote",
-{{- if .secrets }}
+{{- if and .secrets (lookPath "bw") }}
 			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key={{ (bitwarden "item" "opencode-fastmcp-key").login.password }}"
 {{- else }}
 			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key=PLACEHOLDER"
 {{- end }}
+		}
+{{- if and .secrets (lookPath "bw") }},
+		"github": {
+			"type": "remote",
+			"url": "https://api.githubcopilot.com/mcp/",
+			"headers": {
+				"Authorization": "Bearer {{ (bitwarden "item" "github-token").login.password }}"
+			}
+		}
+{{- end }}
+
 		},
 {{- if .secrets }}
 		"github": {
