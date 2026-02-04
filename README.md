@@ -83,9 +83,25 @@ These dotfiles are tested and working stably on the following hardware:
 *   **Storage**: NVMe SSD (Btrfs)
 *   **Kernel**: Arch Linux (Zen)
 
-## 🔄 Management
+## ⌨️ Cheatsheet
 
-*   **Apply changes**: `chezmoi apply`
-*   **Edit a file**: `chezmoi edit ~/.config/kitty/kitty.conf`
-*   **Add a file**: `chezmoi add ~/.bashrc`
-*   **Update dotfiles**: `chezmoi update` (pulls from git and applies)
+### Daily Operations
+
+| Command | Description |
+| :--- | :--- |
+| `chezmoi apply` | **Apply** changes from source state to destination (home dir) |
+| `chezmoi edit $FILE` | **Edit** the source state of a file (opens in `$EDITOR`) |
+| `chezmoi add $FILE` | **Add** a file from home dir to chezmoi management |
+| `chezmoi diff` | See **diff** between target state and actual state |
+| `chezmoi update` | Pull changes from git remote and **apply** them |
+
+### Advanced / Maintenance
+
+| Command | Description |
+| :--- | :--- |
+| `chezmoi cd` | Launch a shell in the source directory |
+| `chezmoi status` | Show status of managed files (modified, missing, etc) |
+| `chezmoi doctor` | Check for potential problems in configuration |
+| `chezmoi re-add` | Re-import file from home dir (updates source state) |
+| `chezmoi forget $FILE` | Stop managing a file (does not delete it from disk) |
+| `chezmoi managed` | List all files currently managed by chezmoi |
