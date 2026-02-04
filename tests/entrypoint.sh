@@ -2,6 +2,7 @@
 
 # Ensure USER is set for scripts that rely on it
 export USER=${USER:-$(id -un)}
+export CI=true
 
 # If the first argument is "test", run the installation and exit
 if [ "$1" = "test" ]; then
