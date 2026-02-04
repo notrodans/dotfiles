@@ -13,29 +13,30 @@ vim.opt.foldlevelstart = 99
 opt.conceallevel = 2
 
 -- spelling
-vim.o.spelllang = "ru_ru,en_us"
+vim.o.spelllang = 'ru_ru,en_us'
 
 -- mouse
-o.mouse = "a"
+o.mouse = 'a'
 
 -- windows
-o.winborder = "rounded"
+o.winborder = 'rounded'
 
 -- netrw
 g.netrw_banner = 0 -- Now we won't have bloated top of the window
 g.netrw_liststyle = 3 -- Now it will be a tree view
-g.netrw_bufsettings = "nu nobl"
+g.netrw_bufsettings = 'nu nobl'
 
 o.cmdheight = 0
 o.laststatus = 3
 o.showmode = false
-o.virtualedit = "all"
+o.virtualedit = 'all'
 
-o.clipboard = "unnamedplus"
+o.clipboard = 'unnamedplus'
 o.cursorline = true
-o.cursorlineopt = "number,line"
+o.cursorlineopt = 'number,line'
 o.scroll = 4
 opt.scrolloff = 100
+opt.virtualedit = 'all'
 wo.wrap = false
 wo.linebreak = false
 
@@ -45,9 +46,9 @@ o.tabstop = 4
 o.shiftwidth = 4
 o.softtabstop = 4
 o.list = true
-o.listchars = "tab:  ,eol:¬"
+o.listchars = 'tab:  ,eol:¬'
 
-opt.fillchars = { eob = " " }
+opt.fillchars = { eob = ' ' }
 o.ignorecase = true
 o.smartcase = true
 
@@ -57,12 +58,12 @@ o.numberwidth = 1
 o.relativenumber = true
 o.ruler = false
 
-o.signcolumn = "yes"
+o.signcolumn = 'yes'
 o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
-opt.guicursor = "i:block"
+opt.guicursor = 'i:block'
 o.swapfile = false
 
 -- local nvim config
@@ -79,7 +80,7 @@ g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.fn.has("win32") ~= 0
-local sep = is_windows and "\\" or "/"
-local delim = is_windows and ";" or ":"
-vim.env.PATH = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, sep) .. delim .. vim.env.PATH
+local is_windows = vim.fn.has('win32') ~= 0
+local sep = is_windows and '\\' or '/'
+local delim = is_windows and ';' or ':'
+vim.env.PATH = table.concat({ vim.fn.stdpath('data'), 'mason', 'bin' }, sep) .. delim .. vim.env.PATH

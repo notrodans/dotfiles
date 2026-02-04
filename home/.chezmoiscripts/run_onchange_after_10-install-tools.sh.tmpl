@@ -2,6 +2,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Ensure USER is set
+USER=${USER:-$(id -un)}
+
 info() { echo -e "\033[34m[INFO]\033[0m $*"; }
 warn() { echo -e "\033[33m[WARN]\033[0m $*"; }
 

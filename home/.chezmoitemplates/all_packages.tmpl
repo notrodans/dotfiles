@@ -1,0 +1,6 @@
+{{- $pkgs := include ".packages.yaml" | fromYaml -}}
+{{- $all := (list) -}}
+{{- range $category, $list := $pkgs.packages -}}
+  {{- $all = concat $all $list -}}
+{{- end -}}
+{{- $all | join " " -}}
