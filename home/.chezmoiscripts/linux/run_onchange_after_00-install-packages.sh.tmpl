@@ -72,8 +72,25 @@ install_paru() {
 install_arch_packages() {
   info "Installing Arch Linux packages..."
   
-  # Packages from .packages.yaml
-  paru -Syyu --needed --noconfirm {{ template "all_packages.tmpl" . }} || true
+  local pkgs=({{ template "all_packages.tmpl" . }})
+  
+  # Filter out packages that are known to cause provider ambiguity or don't exist in repos
+  # (mesa-vdpau, opencl-rusticl-mesa, etc. are now provided by main mesa packages or are gone)
+  local filtered_pkgs=()
+  for pkg in "${pkgs[@]}"; do
+    case "$pkg" in
+      mesa-vdpau|opencl-rusticl-mesa|lib32-opencl-rusticl-mesa|lib32-libva-mesa-driver)
+        # Skip these to avoid pulling in conflicting AUR providers (like ARM/WSL2 versions)
+        continue
+        ;;
+      *)
+        filtered_pkgs+=("$pkg")
+        ;;
+    esac
+  done
+
+  info "Attempting bulk installation..."
+  paru -Syyu --needed --noconfirm --provides=no "${filtered_pkgs[@]}" || warn "Bulk installation hit some conflicts. Some packages might need manual intervention."
 }
 
 setup_pacman_cleaner() {

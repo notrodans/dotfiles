@@ -58,15 +58,11 @@ packages:
     - mesa
     - mesa-vdpau
     - mesa-utils
-    - lib32-mesa
     - vulkan-radeon
-    - lib32-vulkan-radeon
+    - vulkan-mesa-layers
     - libva-mesa-driver
     - libva-vdpau-driver
-    - lib32-libva-mesa-driver
-    - vulkan-mesa-layers
-    - opencl-rusticl-mesa
-    - lib32-opencl-rusticl-mesa
+    - opencl-mesa
 
   hyprland:
     - hyprland
