@@ -72,6 +72,17 @@ Test your dotfiles in a clean container (supports `x86_64` and `ARM64`):
 ./tests/run-test.sh linux/arm64
 ```
 
+## 💻 Known Working Hardware
+
+These dotfiles are tested and working stably on the following hardware:
+
+*   **CPU**: AMD Ryzen 5 5600
+*   **GPU**: AMD Radeon RX 550
+*   **Mobo**: ASUS TUF GAMING B550M-PLUS
+*   **RAM**: 16GB DDR4
+*   **Storage**: NVMe SSD (Btrfs)
+*   **Kernel**: Arch Linux (Zen)
+
 ## 🔄 Management
 
 *   **Apply changes**: `chezmoi apply`
