@@ -1,0 +1,53 @@
+{
+	"context": {
+		"fileName": ["AGENTS.md", "CONTEXT.md", "GEMINI.md", "PROMPT.md"]
+	},
+	"security": {
+		"auth": {
+			"selectedType": "oauth-personal"
+		}
+	},
+	"mcpServers": {
+		"chrome-devtools": {
+			"command": "npx",
+			"args": ["chrome-devtools-mcp@latest"]
+		},
+		"DeepWiki": {
+			"httpUrl": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key=pp7PiD0TS_r5M3MUSbEoacKO96c8d2t5jE7r9anXHXg"
+		},
+{{- if .secrets }}
+		"github": {
+			"httpUrl": "https://api.githubcopilot.com/mcp/",
+			"headers": {
+				"Authorization": "Bearer {{ (bitwarden "item" "github-token").login.password }}"
+			}
+		}
+{{- end }}
+	},
+	"general": {
+		"previewFeatures": true,
+		"enablePromptCompletion": false,
+		"preferredEditor": "nvim",
+		"vimMode": false,
+		"disableAutoUpdate": true,
+		"enableAutoUpdate": false
+	},
+	"ui": {
+		"hideContextSummary": false,
+		"footer": {
+			"hideContextPercentage": false
+		},
+		"showCitations": true,
+		"theme": "ANSI",
+		"useAlternateBuffer": false
+	},
+	"tools": {
+		"shell": {
+			"showColor": true
+		},
+		"autoAccept": true
+	},
+	"model": {
+		"name": "gemini-3-flash-preview"
+	}
+}

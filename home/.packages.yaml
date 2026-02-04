@@ -102,3 +102,32 @@ packages:
     - brightnessctl
     - pacman-contrib
 
+  programs:
+    - curl
+    - wget
+    - thunar
+    - yt-dlp
+    - nwg-look
+    - nvtop
+    - mpv
+    - mpv-mpris
+    - btop
+    - fastfetch
+    - gedit
+    - kitty
+    - kvantum
+    - neovim
+    - bitwarden
+    - bitwarden-cli
+    - sioyek
+
+  obs:
+    - obs-studio
+    - ffmpeg
+    - ffmpeg4.4
+
+  system_services:
+    - zram-generator
+    - ananicy-cpp
+    - irqbalance
+

@@ -1,0 +1,311 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+	"plugin": ["opencode-gemini-auth@latest"],
+	"theme": "system",
+	"agent": {
+		"plan": {
+			"permission": {
+				"skill": {
+					"internal-*": "allow"
+				}
+			}
+		}
+	},
+	"mcp": {
+		"chrome-devtools": {
+			"type": "local",
+			"command": ["npx", "chrome-devtools-mcp@latest"]
+		},
+		"DeepWiki": {
+			"type": "remote",
+			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key=pp7PiD0TS_r5M3MUSbEoacKO96c8d2t5jE7r9anXHXg"
+		},
+{{- if .secrets }}
+		"github": {
+			"type": "remote",
+			"url": "https://api.githubcopilot.com/mcp/",
+			"headers": {
+				"Authorization": "Bearer {{ (bitwarden "item" "github-token").login.password }}"
+			}
+		}
+{{- end }}
+	},
+	"lsp": {
+		"python": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/basedpyright-langserver",
+				"--stdio"
+			],
+			"extensions": [".py", ".pyi"]
+		},
+		"bash": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/bash-language-server",
+				"start"
+			],
+			"extensions": [".sh", ".bash"]
+		},
+		"go": {
+			"command": ["~/.local/share/nvim/mason/bin/gopls"],
+			"extensions": [".go"]
+		},
+		"java": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/jdtls",
+				"--data",
+				"--jvm-arg=-javaagent:{{ .chezmoi.homeDir }}/.local/share/nvim/mason/packages/jdtls/lombok.jar"
+			],
+			"extensions": [".java"],
+			"initialization": {
+				"redhat": { "telemetry": { "enabled": false } },
+				"java": {
+					"jdt": {
+						"ls": {
+							"lombokSupport": { "enabled": true },
+							"protobufSupport": { "enabled": true }
+						}
+					},
+					"home": "/usr/lib/jvm/java-21-openjdk",
+					"sources": {
+						"organizeImports": {
+							"starThreshold": 9999,
+							"staticStarThreshold": 9999
+						}
+					},
+					"implementationsCodeLens": { "enabled": true },
+					"referencesCodeLens": { "enabled": true },
+					"references": { "includeDecompiledSources": true },
+					"inlayHints": { "parameterNames": { "enabled": "all" } },
+					"codeGeneration": {
+						"toString": {
+							"template": "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
+						},
+						"hashCodeEquals": { "useJava7Objects": true },
+						"useBlocks": true
+					},
+					"maven": { "downloadSources": true },
+					"format": {
+						"settings": {
+							"url": "{{ .chezmoi.homeDir }}/eclipse-my-style.xml",
+							"profile": "Eclipse"
+						}
+					},
+					"compile": {
+						"nullAnalysis": {
+							"nonnull": [
+								"lombok.NonNull",
+								"javax.annotation.Nonnull",
+								"org.eclipse.jdt.annotation.NonNull",
+								"org.springframework.lang.NonNull"
+							]
+						}
+					},
+					"eclipse": { "downloadSources": true },
+					"completion": {
+						"chain": { "enabled": false },
+						"guessMethodArguments": "off",
+						"favouriteStaticMembers": [
+							"org.junit.jupiter.api.Assertions.*",
+							"org.junit.jupiter.api.Assumptions.*",
+							"org.mockito.Mockito.*",
+							"java.util.Objects.*"
+						]
+					},
+					"signatureHelp": {
+						"enabled": true,
+						"description": { "enabled": true }
+					},
+					"configuration": {
+						"runtimes": [
+							{
+								"name": "JavaSE-25",
+								"path": "/usr/lib/jvm/java-25-openjdk"
+							},
+							{
+								"name": "JavaSE-21",
+								"path": "/usr/lib/jvm/java-21-openjdk"
+							},
+							{
+								"name": "JavaSE-17",
+								"path": "/usr/lib/jvm/java-17-openjdk"
+							}
+						]
+					}
+				}
+			}
+		},
+		"lua": {
+			"command": ["~/.local/share/nvim/mason/bin/lua-language-server"],
+			"extensions": [".lua"]
+		},
+		"markdown": {
+			"command": ["~/.local/share/nvim/mason/bin/marksman", "server"],
+			"extensions": [".md", ".markdown"]
+		},
+		"php": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/intelephense",
+				"--stdio"
+			],
+			"extensions": [".php"],
+			"initialization": {
+				"intelephense": {
+					"telemetry": { "enabled": false },
+					"files": { "maxSize": 5000000 }
+				}
+			}
+		},
+		"typescript": {
+			"command": ["~/.local/share/nvim/mason/bin/vtsls", "--stdio"],
+			"extensions": [
+				".ts",
+				".tsx",
+				".vue",
+				".js",
+				".jsx",
+				".mjs",
+				".cjs",
+				".json"
+			],
+			"initialization": {
+				"complete_function_calls": true,
+				"vtsls": {
+					"enableMoveToFileCodeAction": true,
+					"autoUseWorkspaceTsdk": true,
+					"experimental": {
+						"maxInlayHintLength": 30,
+						"completion": { "enableServerSideFuzzyMatch": true }
+					},
+					"tsserver": {
+						"globalPlugins": [
+							{
+								"name": "@vue/typescript-plugin",
+								"location": "{{ .chezmoi.homeDir }}/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server",
+								"languages": ["vue"],
+								"configNamespace": "typescript",
+								"enableForWorkspaceTypeScriptVersions": true
+							}
+						]
+					}
+				},
+				"typescript": {
+					"updateImportsOnFileMove": { "enabled": "always" },
+					"suggest": { "completeFunctionCalls": true },
+					"inlayHints": {
+						"enumMemberValues": { "enabled": true },
+						"functionLikeReturnTypes": { "enabled": true },
+						"parameterNames": { "enabled": "literals" },
+						"parameterTypes": { "enabled": true },
+						"propertyDeclarationTypes": { "enabled": true },
+						"variableTypes": { "enabled": false }
+					}
+				},
+				"javascript": {
+					"updateImportsOnFileMove": { "enabled": "always" }
+				}
+			}
+		},
+		"css": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/vscode-css-language-server",
+				"--stdio"
+			],
+			"extensions": [".css", ".scss", ".less"]
+		},
+		"html": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/vscode-html-language-server",
+				"--stdio"
+			],
+			"extensions": [".html", ".htm"]
+		},
+		"json": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/vscode-json-language-server",
+				"--stdio"
+			],
+			"extensions": [".json", ".jsonc"],
+			"initialization": {
+				"json": {
+					"validate": { "enable": true }
+				}
+			}
+		},
+		"vue": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/vue-language-server",
+				"--stdio"
+			],
+			"extensions": [".vue"]
+		},
+		"tailwindcss": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/tailwindcss-language-server",
+				"--stdio"
+			],
+			"extensions": [
+				".css",
+				".html",
+				".js",
+				".ts",
+				".jsx",
+				".tsx",
+				".vue"
+			],
+			"initialization": {
+				"tailwindCSS": {
+					"experimental": {
+						"classRegex": [
+							[
+								"cva|cn|cx\\(([^)]*)\\)",
+								"[\"'`]([^\"'`]*).*?[\"'`]"
+							]
+						]
+					}
+				}
+			}
+		},
+		"javascript": {
+			"command": ["~/.local/share/nvim/mason/bin/biome", "lsp-proxy"],
+			"extensions": [".js", ".jsx", ".mjs", ".cjs"],
+			"initialization": {
+				"biome": { "requireConfiguration": true }
+			}
+		},
+		"gradle": {
+			"command": ["~/.local/share/nvim/mason/bin/gradle-language-server"],
+			"extensions": [".gradle", ".gradle.kts"]
+		},
+		"graphql": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/graphql-lsp",
+				"server",
+				"-m",
+				"stream"
+			],
+			"extensions": [".graphql", ".gql"]
+		},
+		"xml": {
+			"command": ["~/.local/share/nvim/mason/bin/lemminx"],
+			"extensions": [".xml"]
+		},
+		"prisma": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/prisma-language-server",
+				"--stdio"
+			],
+			"extensions": [".prisma"]
+		},
+		"stylelint": {
+			"command": [
+				"~/.local/share/nvim/mason/bin/stylelint-lsp",
+				"--stdio"
+			],
+			"extensions": [".css", ".scss"]
+		},
+		"tex": {
+			"command": ["~/.local/share/nvim/mason/bin/texlab"],
+			"extensions": [".tex"]
+		}
+	}
+}
