@@ -42,8 +42,8 @@ packages:
     - libnotify
     - dbus
     - procps-ng
-    - newsraft-git
-    - tex-fmt-bin
+    - newsraft
+    - tex-fmt
     - xsettingsd
 
   archives:
@@ -61,7 +61,6 @@ packages:
     - vulkan-mesa-layers
     - vulkan-amdgpu-pro
     - opencl-mesa
-    - amdvlk
     - libva-utils 
 
   hyprland:
@@ -98,7 +97,7 @@ packages:
     - swww
     - wallust-git
     - wl-clipboard
-    - wlogout-git
+    - wlogout
     - xdg-user-dirs
     - xdg-utils
     - brightnessctl

@@ -1,6 +1,6 @@
-{{- $pkgs := include ".packages.yaml" | fromYaml -}}
+{{- $pkgs := includeTemplate "packages-data.yaml.tmpl" . | fromYaml -}}
 {{- $all := (list) -}}
-{{- range $category, $list := $pkgs.packages -}}
+{{- range $category, $list := $pkgs -}}
   {{- $all = concat $all $list -}}
 {{- end -}}
-{{- $all | join " " -}}
+{{- $all | uniq | join " " -}}

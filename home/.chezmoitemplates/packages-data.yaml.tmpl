@@ -1,0 +1,16 @@
+{{- $sourceDir := .chezmoi.sourceDir -}}
+{{- $files := output "find" $sourceDir "-name" "*packages.yaml" | trim | splitList "\n" -}}
+{{- $allPkgs := dict -}}
+{{- range $file := $files -}}
+  {{- $rel := trimPrefix $sourceDir $file | trimPrefix "/" -}}
+  {{- if (and $rel (not (contains ".git" $rel))) -}}
+    {{- $content := include $rel | fromYaml -}}
+    {{- if $content.packages -}}
+      {{- range $category, $list := $content.packages -}}
+        {{- $existing := get $allPkgs $category | default (list) -}}
+        {{- $_ := set $allPkgs $category (concat $existing $list | uniq) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $allPkgs | toYaml -}}

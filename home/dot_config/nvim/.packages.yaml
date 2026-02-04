@@ -1,0 +1,4 @@
+packages:
+  neovim_deps:
+    - ripgrep
+    - fd

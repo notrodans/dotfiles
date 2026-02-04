@@ -15,6 +15,7 @@
 .Xresources
 .hushlogin
 .packages.yaml
+**/.packages.yaml
 
 {{ if not .codespaces -}}
 .vscode-remote/

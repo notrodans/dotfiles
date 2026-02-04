@@ -1,0 +1,17 @@
+packages:
+  hyprland_extra:
+    - hyprpicker
+    - python-pywal
+    - python-pyquery
+    - python-requests
+    - mkinitcpio-firmware
+    - bluez
+    - bluez-utils
+    - blueman
+    - network-manager-applet
+    - brightnessctl
+    - playerctl
+    - pamixer
+    - imagemagick
+    - jq
+    - inxi
