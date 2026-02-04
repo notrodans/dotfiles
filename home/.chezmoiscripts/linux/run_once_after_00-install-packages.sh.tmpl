@@ -73,7 +73,7 @@ install_arch_packages() {
   info "Installing Arch Linux packages..."
   
   # Packages from .packages.yaml
-  paru -Syyu --needed  {{ template "all_packages.tmpl" . }}
+  paru -Syyu --needed --noconfirm {{ template "all_packages.tmpl" . }}
 }
 
 setup_pacman_cleaner() {
