@@ -33,17 +33,6 @@
 			}
 		}
 {{- end }}
-
-		},
-{{- if .secrets }}
-		"github": {
-			"type": "remote",
-			"url": "https://api.githubcopilot.com/mcp/",
-			"headers": {
-				"Authorization": "Bearer {{ (bitwarden "item" "github-token").login.password }}"
-			}
-		}
-{{- end }}
 	},
 	"lsp": {
 		"python": {

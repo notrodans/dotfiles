@@ -27,16 +27,6 @@
 			}
 		}
 {{- end }}
-
-		},
-{{- if .secrets }}
-		"github": {
-			"httpUrl": "https://api.githubcopilot.com/mcp/",
-			"headers": {
-				"Authorization": "Bearer {{ (bitwarden "item" "github-token").login.password }}"
-			}
-		}
-{{- end }}
 	},
 	"general": {
 		"previewFeatures": true,
