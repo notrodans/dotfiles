@@ -1,0 +1,26 @@
+# https://www.chezmoi.io/reference/special-files/chezmoiignore/
+
+# NOTE: replaced by ~/.config/git/config
+.gitconfig
+
+{{- if ne .email "firstname.lastname@company.com" }}
+# Ignore .company-directory unless configured with a company email
+.company-directory # note that the pattern is not dot_company-directory
+{{- end }}
+
+{{- if ne .email "me@home.org" }}
+.personal-file
+{{- end }}
+
+.Xresources
+.hushlogin
+.packages.yaml
+**/.packages.yaml
+
+{{ if not .codespaces -}}
+.vscode-remote/
+{{ end -}}
+
+{{- if not (eq .chezmoi.os "linux") }}
+.chezmoiscripts/linux/**
+{{- end }}

@@ -1,0 +1,90 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Ensure USER is set
+USER=${USER:-$(id -un)}
+
+info() { echo -e "\033[34m[INFO]\033[0m $*"; }
+warn() { echo -e "\033[33m[WARN]\033[0m $*"; }
+
+install_oh_my_zsh() {
+  if [[ -d "$HOME/.oh-my-zsh" ]]; then
+    info "Oh My Zsh already installed"
+  else
+    info "Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  fi
+  
+  if [[ "$SHELL" != */zsh ]]; then
+    info "Changing shell to zsh..."
+    if command -v zsh >/dev/null; then
+        sudo chsh -s "$(which zsh)" "$USER"
+    else
+        warn "zsh not found, skipping chsh"
+    fi
+  fi
+}
+
+install_sdkman() {
+  set +u
+  if [[ -d "$HOME/.sdkman" ]]; then
+    info "SDKMAN already installed at $HOME/.sdkman"
+  else
+    info "Installing SDKMAN..."
+    curl -s "https://get.sdkman.io?rcupdate=false" | bash
+  fi
+
+  export SDKMAN_DIR="$HOME/.sdkman"
+  # shellcheck disable=SC1091
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+  if command -v sdk >/dev/null 2>&1; then
+    info "Installing Java versions via SDKMAN..."
+    if ! command -v zip >/dev/null 2>&1 || ! command -v unzip >/dev/null 2>&1; then
+       warn "zip/unzip not found. SDKMAN might fail to install packages."
+    fi
+
+    sdk install java 21.0.2-tem || true
+    sdk install java 17.0.10-tem || true
+    sdk install java 11.0.22-tem || true
+    sdk default java 21.0.2-tem
+    
+    sdk version
+  else
+    warn "SDKMAN was installed but 'sdk' command is not available in current shell."
+  fi
+  set -u
+}
+
+install_tpm() {
+  local tpm_dir="$HOME/.tmux/plugins/tpm"
+  if [[ -d "$tpm_dir" ]]; then
+    info "TPM already installed at $tpm_dir"
+  else
+    info "Installing TPM..."
+    git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+  fi
+}
+
+install_nvm() {
+  local nvm_dir="$HOME/.nvm"
+  if [[ -d "$nvm_dir" ]]; then
+    info "NVM already installed at $nvm_dir"
+  else
+    info "Installing NVM..."
+    git clone https://github.com/nvm-sh/nvm.git "$nvm_dir"
+    (
+      cd "$nvm_dir"
+      # checkout latest release
+      git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
+    )
+  fi
+}
+
+install_oh_my_zsh
+install_sdkman
+install_tpm
+install_nvm
+
+{{ end -}}

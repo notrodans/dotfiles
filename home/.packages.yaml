@@ -1,0 +1,133 @@
+# Arch Linux Packages
+packages:
+  fonts:
+    - ttf-ms-fonts
+    - apple-fonts
+    - noto-fonts-emoji
+    - adobe-source-code-pro-fonts
+    - ttf-droid
+    - ttf-courier-code
+    - ttf-fantasque-nerd
+    - ttf-jetbrains-mono
+    - ttf-jetbrains-mono-nerd
+    - ttf-firacode-nerd
+    - ttf-fira-code
+    - ttf-cascadia-code-nerd
+    - ttf-hannom
+    - wqy-zenhei
+    - ttf-mplus-git
+    - ttf-nerd-fonts-symbols
+    - ttf-nerd-fonts-symbols-mono
+    - ttf-lato
+    - ttf-0xproto-nerd
+    - ttf-hack-nerd
+    - otf-hermit-nerd
+    - ttf-iosevka-nerd
+    - ttf-recursive-nerd
+    - ttf-intel-one-mono
+    - ttf-spline-sans-mono
+    - otf-geist-mono-nerd
+    - ttf-ibm-plex
+    - ttf-comfortaa
+    - ttf-indic-otf
+    - ttf-tahoma
+
+  shell_tools:
+    - zsh
+    - tmux
+    - fzf
+    - xclip
+    - bat
+    - libnotify
+    - dbus
+    - procps-ng
+    - newsraft
+    - tex-fmt
+    - xsettingsd
+
+  archives:
+    - lrzip
+    - unrar
+    - unzip
+    - unace
+    - p7zip
+    - squashfs-tools
+
+  gpu_amd:
+    - mesa
+    - mesa-utils
+    - vulkan-radeon
+    - vulkan-mesa-layers
+    - vulkan-amdgpu-pro
+    - opencl-mesa
+    - libva-utils 
+
+  hyprland:
+    - hyprland
+    - hyprshade
+    - hyprlang
+    - hyprcursor
+    - hypridle
+    - hyprlock
+    - xdg-desktop-portal-hyprland
+    - xdg-desktop-portal-gtk
+    - rofi-wayland
+    - waybar
+    - cliphist
+    - grim
+    - gvfs
+    - gvfs-mtp
+    - imagemagick
+    - inxi
+    - jq
+    - network-manager-applet
+    - pamixer
+    - pavucontrol
+    - pipewire-alsa
+    - playerctl
+    - polkit-gnome
+    - pyprland
+    - qt5ct
+    - qt6ct
+    - qt6-svg
+    - slurp
+    - swappy
+    - swaync
+    - swww
+    - wallust-git
+    - wl-clipboard
+    - wlogout
+    - xdg-user-dirs
+    - xdg-utils
+    - brightnessctl
+    - pacman-contrib
+
+  programs:
+    - curl
+    - wget
+    - thunar
+    - yt-dlp
+    - nwg-look
+    - nvtop
+    - mpv
+    - mpv-mpris
+    - btop
+    - fastfetch
+    - gedit
+    - kitty
+    - kvantum
+    - neovim
+    - bitwarden
+    - bitwarden-cli
+    - sioyek
+
+  obs:
+    - obs-studio
+    - ffmpeg
+    - ffmpeg4.4
+
+  system_services:
+    - zram-generator
+    - ananicy-cpp
+    - irqbalance
+

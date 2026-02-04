@@ -1,0 +1,156 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Helpers
+info() { echo -e "\033[34m[INFO]\033[0m $*"; }
+warn() { echo -e "\033[33m[WARN]\033[0m $*"; }
+
+# Check if running in a container or if systemd is unavailable
+has_systemd() {
+  if [[ -d /run/systemd/system ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# Check if sudo is available and doesn't require a password for the current user
+can_sudo() {
+  if command -v sudo >/dev/null 2>&1 && sudo -n true >/dev/null 2>&1; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+if [[ ! -f /etc/arch-release ]]; then
+    info "Not an Arch Linux system. Skipping Arch package installation."
+    exit 0
+fi
+
+update_arch_keys() {
+  if [[ -f "/etc/pacman.d/gnupg/trustdb.gpg" ]]; then
+      if sudo pacman -Sy --noconfirm >/dev/null 2>&1; then
+          info "Arch keys are valid (pacman sync succeeded). Skipping key update."
+          return 0
+      fi
+      warn "Pacman sync failed. Refreshing keys..."
+  fi
+
+  if ! can_sudo; then
+    warn "Sudo not available or requires password. Skipping key update."
+    return 0
+  fi
+
+  info "Updating Arch Linux keys..."
+  sudo pacman-key --init
+  sudo pacman-key --populate archlinux
+  sudo pacman -Sy --noconfirm archlinux-keyring
+  
+  if has_systemd; then
+    sudo systemctl enable --now archlinux-keyring-wkd-sync.timer || true
+  fi
+}
+
+install_paru() {
+  if command -v paru >/dev/null 2>&1; then
+    info "paru already installed"
+  else
+    info "Installing paru..."
+    sudo pacman -S --needed base-devel git
+    local temp_dir
+    temp_dir=$(mktemp -d)
+    git clone https://aur.archlinux.org/paru.git "$temp_dir"
+    pushd "$temp_dir" > /dev/null
+    makepkg -si --noconfirm
+    popd > /dev/null
+    rm -rf "$temp_dir"
+  fi
+}
+
+install_arch_packages() {
+  info "Installing Arch Linux packages..."
+  
+  # Packages from .packages.yaml
+  paru -Syyu --needed --noconfirm {{ template "all_packages.tmpl" . }}
+}
+
+setup_pacman_cleaner() {
+  if ! has_systemd; then
+    return 0
+  fi
+
+  info "Setting up pacman cleaner service..."
+  sudo tee /etc/systemd/system/pacman-cleaner.service > /dev/null <<EOF
+[Unit]
+Description=Cleans pacman cache
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pacman -Scc --noconfirm
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  sudo tee /etc/systemd/system/pacman-cleaner.timer > /dev/null <<EOF
+[Unit]
+Description=Run clean of pacman cache every week
+
+[Timer]
+OnCalendar=weekly
+AccuracySec=1h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+  sudo systemctl enable --now pacman-cleaner.timer
+}
+
+setup_arch_services() {
+  if ! has_systemd || ! can_sudo; then
+    warn "Skipping system services configuration (no systemd or sudo access)."
+    return 0
+  fi
+
+  info "Configuring Arch Linux services..."
+
+  # Zram
+  sudo pacman -S --needed --noconfirm zram-generator
+  sudo tee /etc/systemd/zram-generator.conf > /dev/null <<EOF
+[zram0]
+zram-size = ram
+compression-algorithm = zstd
+swap-priority = 100
+fs-type = swap
+EOF
+  sudo systemctl daemon-reload
+  sudo systemctl start systemd-zram-setup@zram0.service
+
+  # Systemd-oomd
+  sudo systemctl enable --now systemd-oomd
+
+  # Fstrim
+  sudo systemctl enable fstrim.timer
+
+  # Ananicy-cpp
+  paru -S --needed --noconfirm ananicy-cpp
+  sudo systemctl enable --now ananicy-cpp
+
+  # Irqbalance
+  paru -S --needed --noconfirm irqbalance
+  sudo systemctl enable --now irqbalance
+
+  # Pacman cleaner
+  setup_pacman_cleaner
+}
+
+update_arch_keys
+install_paru
+install_arch_packages
+setup_arch_services
+
+{{ end -}}
