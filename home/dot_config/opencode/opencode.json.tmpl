@@ -18,7 +18,11 @@
 		},
 		"DeepWiki": {
 			"type": "remote",
-			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key=pp7PiD0TS_r5M3MUSbEoacKO96c8d2t5jE7r9anXHXg"
+{{- if .secrets }}
+			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key={{ (bitwarden "item" "opencode-fastmcp-key").login.password }}"
+{{- else }}
+			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key=PLACEHOLDER"
+{{- end }}
 		},
 {{- if .secrets }}
 		"github": {
