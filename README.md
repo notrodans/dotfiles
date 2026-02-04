@@ -60,6 +60,23 @@ To use templates that require secrets (like MCP tokens):
 2.  Unlock your vault: `export BW_SESSION=$(bw unlock --raw)`.
 3.  Run `chezmoi apply`.
 
+### Configuration
+
+To enable secret retrieval, your `~/.config/chezmoi/chezmoi.toml` (or `.yaml`) must have:
+
+```toml
+[data]
+    secrets = true
+```
+
+When initializing, `chezmoi init` will prompt you to enable this. To re-enable it manually or fix it:
+
+```bash
+chezmoi data | grep secrets
+# If false, edit your config:
+chezmoi edit-config
+```
+
 ## 🧪 Testing
 
 Test your dotfiles in a clean container (supports `x86_64` and `ARM64`):
