@@ -18,13 +18,13 @@
 		},
 		"DeepWiki": {
 			"type": "remote",
-{{- if and .secrets (lookPath "bw") }}
-			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key={{ (bitwarden "item" "opencode-fastmcp-key").login.password }}"
+{{- if .secrets }}
+			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key={{ (bitwarden "item" "fastmcp-key").login.password }}"
 {{- else }}
 			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key=PLACEHOLDER"
 {{- end }}
 		}
-{{- if and .secrets (lookPath "bw") }},
+{{- if .secrets }},
 		"github": {
 			"type": "remote",
 			"url": "https://api.githubcopilot.com/mcp/",
@@ -37,25 +37,25 @@
 	"lsp": {
 		"python": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/basedpyright-langserver",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/basedpyright-langserver",
 				"--stdio"
 			],
 			"extensions": [".py", ".pyi"]
 		},
 		"bash": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/bash-language-server",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/bash-language-server",
 				"start"
 			],
 			"extensions": [".sh", ".bash"]
 		},
 		"go": {
-			"command": ["~/.local/share/nvim/mason/bin/gopls"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/gopls"],
 			"extensions": [".go"]
 		},
 		"java": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/jdtls",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/jdtls",
 				"--data",
 				"--jvm-arg=-javaagent:{{ .chezmoi.homeDir }}/.local/share/nvim/mason/packages/jdtls/lombok.jar"
 			],
@@ -139,16 +139,16 @@
 			}
 		},
 		"lua": {
-			"command": ["~/.local/share/nvim/mason/bin/lua-language-server"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/lua-language-server"],
 			"extensions": [".lua"]
 		},
 		"markdown": {
-			"command": ["~/.local/share/nvim/mason/bin/marksman", "server"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/marksman", "server"],
 			"extensions": [".md", ".markdown"]
 		},
 		"php": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/intelephense",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/intelephense",
 				"--stdio"
 			],
 			"extensions": [".php"],
@@ -160,7 +160,7 @@
 			}
 		},
 		"typescript": {
-			"command": ["~/.local/share/nvim/mason/bin/vtsls", "--stdio"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/vtsls", "--stdio"],
 			"extensions": [
 				".ts",
 				".tsx",
@@ -211,21 +211,21 @@
 		},
 		"css": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/vscode-css-language-server",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/vscode-css-language-server",
 				"--stdio"
 			],
 			"extensions": [".css", ".scss", ".less"]
 		},
 		"html": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/vscode-html-language-server",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/vscode-html-language-server",
 				"--stdio"
 			],
 			"extensions": [".html", ".htm"]
 		},
 		"json": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/vscode-json-language-server",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/vscode-json-language-server",
 				"--stdio"
 			],
 			"extensions": [".json", ".jsonc"],
@@ -237,14 +237,14 @@
 		},
 		"vue": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/vue-language-server",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/vue-language-server",
 				"--stdio"
 			],
 			"extensions": [".vue"]
 		},
 		"tailwindcss": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/tailwindcss-language-server",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/tailwindcss-language-server",
 				"--stdio"
 			],
 			"extensions": [
@@ -270,19 +270,19 @@
 			}
 		},
 		"javascript": {
-			"command": ["~/.local/share/nvim/mason/bin/biome", "lsp-proxy"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/biome", "lsp-proxy"],
 			"extensions": [".js", ".jsx", ".mjs", ".cjs"],
 			"initialization": {
 				"biome": { "requireConfiguration": true }
 			}
 		},
 		"gradle": {
-			"command": ["~/.local/share/nvim/mason/bin/gradle-language-server"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/gradle-language-server"],
 			"extensions": [".gradle", ".gradle.kts"]
 		},
 		"graphql": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/graphql-lsp",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/graphql-lsp",
 				"server",
 				"-m",
 				"stream"
@@ -290,25 +290,25 @@
 			"extensions": [".graphql", ".gql"]
 		},
 		"xml": {
-			"command": ["~/.local/share/nvim/mason/bin/lemminx"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/lemminx"],
 			"extensions": [".xml"]
 		},
 		"prisma": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/prisma-language-server",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/prisma-language-server",
 				"--stdio"
 			],
 			"extensions": [".prisma"]
 		},
 		"stylelint": {
 			"command": [
-				"~/.local/share/nvim/mason/bin/stylelint-lsp",
+				"{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/stylelint-lsp",
 				"--stdio"
 			],
 			"extensions": [".css", ".scss"]
 		},
 		"tex": {
-			"command": ["~/.local/share/nvim/mason/bin/texlab"],
+			"command": ["{{ .chezmoi.homeDir }}/.local/share/nvim/mason/bin/texlab"],
 			"extensions": [".tex"]
 		}
 	}
