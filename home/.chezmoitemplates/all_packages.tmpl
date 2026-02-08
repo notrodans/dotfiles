@@ -1,6 +1,24 @@
 {{- $pkgs := includeTemplate "packages-data.yaml.tmpl" . | fromYaml -}}
 {{- $all := (list) -}}
 {{- range $category, $list := $pkgs -}}
-  {{- $all = concat $all $list -}}
+  {{- $shouldInstall := true -}}
+  
+  {{- if hasPrefix "gpu_" $category -}}
+    {{- $vendor := trimPrefix "gpu_" $category -}}
+    {{- if and (ne $.gpu_vendor "unknown") (ne $.gpu_vendor $vendor) -}}
+      {{- $shouldInstall = false -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if hasPrefix "cpu_" $category -}}
+    {{- $vendor := trimPrefix "cpu_" $category -}}
+    {{- if and (ne $.cpu_vendor "unknown") (ne $.cpu_vendor $vendor) -}}
+      {{- $shouldInstall = false -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $shouldInstall -}}
+    {{- $all = concat $all $list -}}
+  {{- end -}}
 {{- end -}}
 {{- $all | uniq | join " " -}}

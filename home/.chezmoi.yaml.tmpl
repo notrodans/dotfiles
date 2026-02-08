@@ -2,6 +2,34 @@
 {{- $ephemeral := env "CHEZMOI_EPHEMERAL" | not | not -}}
 {{- $headless := env "CHEZMOI_HEADLESS" | not | not -}}
 {{- $upgrade := eq (env "CHEZMOI_UPGRADE") "true" -}}
+{{- $osID := .chezmoi.osRelease.id | default "" -}}
+
+{{- $cpuVendor := "unknown" -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $cpuInfo := output "cat" "/proc/cpuinfo" -}}
+{{-   if contains "GenuineIntel" $cpuInfo -}}
+{{-     $cpuVendor = "intel" -}}
+{{-   else if contains "AuthenticAMD" $cpuInfo -}}
+{{-     $cpuVendor = "amd" -}}
+{{-   end -}}
+{{- end -}}
+
+{{- $gpuVendor := "unknown" -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $lspci := output "bash" "-c" "lspci | grep -i vga || true" -}}
+{{-   if contains "Intel" $lspci -}}
+{{-     $gpuVendor = "intel" -}}
+{{-   else if contains "NVIDIA" $lspci -}}
+{{-     $gpuVendor = "nvidia" -}}
+{{-   else if or (contains "AMD" $lspci) (contains "ATI" $lspci) -}}
+{{-     $gpuVendor = "amd" -}}
+{{-   end -}}
+{{- end -}}
+
+{{- $isLaptop := false -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $isLaptop = (stat "/sys/class/power_supply/BAT0" | not | not) -}}
+{{- end -}}
 
 {{- $homeDir := .chezmoi.homeDir | default (env "HOME") -}}
 {{- $binDir := joinPath $homeDir ".local" "bin" -}}
@@ -68,6 +96,10 @@ data:
   
   # Upgrade packages
   upgrade: {{ $upgrade }}
+
+  cpu_vendor: {{ $cpuVendor | quote }}
+  gpu_vendor: {{ $gpuVendor | quote }}
+  is_laptop: {{ $isLaptop }}
 
 diff:
   # exclude:

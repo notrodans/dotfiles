@@ -144,6 +144,12 @@ EOF
   paru -S --needed --noconfirm irqbalance
   sudo systemctl enable --now irqbalance
 
+  # Thermald (Intel only)
+  {{ if eq .cpu_vendor "intel" -}}
+  info "Enabling thermald for Intel CPU..."
+  sudo systemctl enable --now thermald
+  {{- end }}
+
   # Pacman cleaner
   setup_pacman_cleaner
 }

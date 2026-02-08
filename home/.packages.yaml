@@ -62,6 +62,23 @@ packages:
     - opencl-mesa
     - libva-utils 
 
+  gpu_intel:
+    - mesa
+    - mesa-utils
+    - vulkan-intel
+    - intel-media-driver
+    - libva-intel-driver
+    - vulkan-mesa-layers
+    - opencl-mesa
+    - libva-utils
+
+  cpu_amd:
+    - amd-ucode
+
+  cpu_intel:
+    - intel-ucode
+    - thermald
+
   hyprland:
     - hyprland
     - hyprshade
