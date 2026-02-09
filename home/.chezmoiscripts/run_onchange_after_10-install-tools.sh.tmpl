@@ -111,11 +111,11 @@ install_gemini() {
   # shellcheck disable=SC1091
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-  if command -v gemini-cli &>/dev/null; then
+  if command -v gemini &>/dev/null; then
     info "Gemini CLI already installed"
   else
     info "Installing Gemini CLI via NPM..."
-    npm install -g @google/generative-ai-cli
+    npm install -g @google/gemini-cli
   fi
 }
 
