@@ -16,15 +16,13 @@
 
 {{- $gpuVendor := "unknown" -}}
 {{- if eq .chezmoi.os "linux" -}}
-{{-   if lookPath "lspci" -}}
-{{-     $lspci := output "bash" "-c" "lspci | grep -i vga || true" -}}
-{{-     if contains "Intel" $lspci -}}
-{{-       $gpuVendor = "intel" -}}
-{{-     else if contains "NVIDIA" $lspci -}}
-{{-       $gpuVendor = "nvidia" -}}
-{{-     else if or (contains "AMD" $lspci) (contains "ATI" $lspci) -}}
-{{-       $gpuVendor = "amd" -}}
-{{-     end -}}
+{{-   $lspci := output "bash" "-c" "lspci | grep -i vga || true" -}}
+{{-   if contains "Intel" $lspci -}}
+{{-     $gpuVendor = "intel" -}}
+{{-   else if contains "NVIDIA" $lspci -}}
+{{-     $gpuVendor = "nvidia" -}}
+{{-   else if or (contains "AMD" $lspci) (contains "ATI" $lspci) -}}
+{{-     $gpuVendor = "amd" -}}
 {{-   end -}}
 {{- end -}}
 

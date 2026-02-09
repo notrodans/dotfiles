@@ -4,16 +4,10 @@ ARG TARGETPLATFORM
 
 # Disable pacman sandboxing (Landlock) and refresh mirrors for better reliability
 RUN sed -i 's/^#DisableSandbox/DisableSandbox/' /etc/pacman.conf && \
-    if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-        curl -s "https://archlinux.org/mirrorlist/?country=all&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' | head -n 20 > /etc/pacman.d/mirrorlist; \
-    fi && \
+    curl -s "https://archlinux.org/mirrorlist/?country=all&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' | head -n 20 > /etc/pacman.d/mirrorlist && \
     pacman-key --init && \
-    if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-        pacman-key --populate archlinux; \
-    else \
-        pacman-key --populate archlinuxarm; \
-    fi && \
-    (pacman -Sy --noconfirm archlinux-keyring || true)
+    pacman-key --populate archlinux && \
+    pacman -Sy --noconfirm archlinux-keyring
 
 # Pre-install rust and core tools to satisfy paru's build requirements and SDKMAN
 RUN pacman -Syu --noconfirm --needed \
