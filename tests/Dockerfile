@@ -12,6 +12,7 @@ RUN sed -i 's/^#DisableSandbox/DisableSandbox/' /etc/pacman.conf && \
 # Pre-install rust and core tools to satisfy paru's build requirements and SDKMAN
 RUN pacman -Syu --noconfirm --needed \
     base-devel \
+    pciutils \
     git \
     curl \
     sudo \

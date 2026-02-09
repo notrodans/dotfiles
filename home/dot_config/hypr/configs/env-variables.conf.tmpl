@@ -26,7 +26,7 @@ env = QT_QUICK_CONTROLS_STYLE,org.hyprland.style
 # env = GDK_SCALE,1
 # env = QT_SCALE_FACTOR,1
 
-{{ if eq .gpu_vendor "intel" -}}
+{{- if eq .gpu_vendor "intel" -}}
 env = LIBVA_DRIVER_NAME,iHD
 {{- else if eq .gpu_vendor "amd" -}}
 env = LIBVA_DRIVER_NAME,radeonsi
