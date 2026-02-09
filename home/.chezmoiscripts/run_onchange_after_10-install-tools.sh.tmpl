@@ -106,11 +106,16 @@ install_opencode() {
 }
 
 install_gemini() {
-  if [[ -f "$HOME/.opencode/bin/gemini" ]]; then
-    info "Gemini already installed"
+  # Load NVM environment to ensure npm is available
+  export NVM_DIR="$HOME/.nvm"
+  # shellcheck disable=SC1091
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+  if command -v gemini-cli &>/dev/null; then
+    info "Gemini CLI already installed"
   else
-    info "Installing Gemini..."
-    curl -fsSL https://gemini.sh/install | bash
+    info "Installing Gemini CLI via NPM..."
+    npm install -g @google/generative-ai-cli
   fi
 }
 
