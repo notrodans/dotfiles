@@ -54,24 +54,21 @@ packages:
     - p7zip
     - squashfs-tools
 
-  gpu_amd:
+  graphics_common:
     - mesa
     - mesa-utils
-    - vulkan-radeon
-    - vulkan-mesa-layers
-    - vulkan-amdgpu-pro
-    - opencl-mesa
-    - libva-utils 
-
-  gpu_intel:
-    - mesa
-    - mesa-utils
-    - vulkan-intel
-    - intel-media-driver
-    - libva-intel-driver
     - vulkan-mesa-layers
     - opencl-mesa
     - libva-utils
+
+  gpu_amd:
+    - vulkan-radeon
+    - vulkan-amdgpu-pro
+
+  gpu_intel:
+    - vulkan-intel
+    - intel-media-driver
+    - libva-intel-driver
 
   cpu_amd:
     - amd-ucode
