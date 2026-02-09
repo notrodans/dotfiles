@@ -138,6 +138,7 @@ packages:
     - bitwarden
     - bitwarden-cli
     - sioyek
+    - docker
 
   obs:
     - obs-studio
