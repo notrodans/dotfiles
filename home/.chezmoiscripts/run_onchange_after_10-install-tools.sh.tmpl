@@ -80,11 +80,45 @@ install_nvm() {
       git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
     )
   fi
+
+  # Load NVM and install Node.js
+  export NVM_DIR="$HOME/.nvm"
+  # shellcheck disable=SC1091
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+  if command -v nvm >/dev/null; then
+    info "Installing Node.js LTS via NVM..."
+    nvm install --lts
+    nvm use --lts
+    nvm alias default 'lts/*'
+  else
+    warn "NVM installed but 'nvm' command not found in current shell"
+  fi
+}
+
+install_opencode() {
+  if [[ -f "$HOME/.opencode/bin/opencode" ]]; then
+    info "OpenCode already installed"
+  else
+    info "Installing OpenCode..."
+    curl -fsSL https://opencode.ai/install | bash
+  fi
+}
+
+install_gemini() {
+  if [[ -f "$HOME/.opencode/bin/gemini" ]]; then
+    info "Gemini already installed"
+  else
+    info "Installing Gemini..."
+    curl -fsSL https://gemini.sh/install | bash
+  fi
 }
 
 install_oh_my_zsh
 install_sdkman
 install_tpm
 install_nvm
+install_opencode
+install_gemini
 
 {{ end -}}
