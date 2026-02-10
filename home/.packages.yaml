@@ -116,6 +116,8 @@ packages:
     - xdg-utils
     - brightnessctl
     - pacman-contrib
+    - hyprpolkitagent
+    - hyprlauncher
 
   programs:
     - curl
@@ -136,6 +138,8 @@ packages:
     - bitwarden-cli
     - sioyek
     - docker
+    - ocs-url
+    - google-chrome
 
   obs:
     - obs-studio

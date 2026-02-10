@@ -12,6 +12,17 @@ install_oh_my_zsh() {
   if [[ -d "$HOME/.oh-my-zsh" ]]; then
     info "Oh My Zsh already installed"
   else
+    if ! command -v zsh >/dev/null 2>&1; then
+      warn "zsh not found. Installing zsh before Oh My Zsh..."
+      if command -v paru >/dev/null 2>&1; then
+        paru -S --needed --noconfirm zsh
+      elif command -v pacman >/dev/null 2>&1; then
+        sudo pacman -S --needed --noconfirm zsh
+      else
+        warn "Could not install zsh. Skipping Oh My Zsh installation."
+        return 1
+      fi
+    fi
     info "Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   fi
