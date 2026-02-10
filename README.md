@@ -30,6 +30,7 @@ chezmoi init --apply
 ## 🛠 Features
 
 *   **OS**: Arch Linux (primary), basic support for others.
+*   **Hardware Detection**: Automatically detects CPU (Intel/AMD), GPU (Intel/AMD/NVIDIA), and Form Factor (Laptop/Desktop) to apply specific drivers and configurations.
 *   **Window Manager**: Hyprland (with Waybar, Rofi, Wlogout).
 *   **Shell**: Zsh + Oh My Zsh + Powerlevel10k (if configured).
 *   **Terminal**: Kitty.
@@ -40,6 +41,7 @@ chezmoi init --apply
     *   **TPM**: Tmux Plugin Manager.
 *   **Package Management**:
     *   Declarative package management via `home/.packages.yaml`.
+    *   Hardware-aware: Installs only relevant drivers/microcode for your CPU/GPU.
     *   Automatically installs Arch Linux packages via `paru` (AUR helper).
 *   **Secrets Management**:
     *   Integrated with **Bitwarden** for secure token and password handling (e.g., MCP tokens).
@@ -51,7 +53,7 @@ chezmoi init --apply
 *   `home/.chezmoiscripts/` - Installation hooks (run automatically during `chezmoi apply`).
     *   `linux/run_once_after_00-install-packages.sh.tmpl` - Installs system packages from YAML.
     *   `run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
-*   `tests/` - Multi-arch Docker testing suite.
+*   `tests/` - Docker testing suite.
 
 ## 🔐 Secrets (Bitwarden)
 
@@ -79,20 +81,27 @@ chezmoi edit-config
 
 ## 🧪 Testing
 
-Test your dotfiles in a clean container (supports `x86_64` and `ARM64`):
+Test your dotfiles in a clean container:
 
 ```bash
 # Automated test
 ./tests/run-test.sh linux/amd64 --test
 
 # Interactive shell
-./tests/run-test.sh linux/arm64
+./tests/run-test.sh linux/amd64
 ```
 
 ## 💻 Known Working Hardware
 
 These dotfiles are tested and working stably on the following hardware:
 
+### Thinkpad T14s Gen 3 (Intel)
+*   **CPU**: Intel Core i7-1280P
+*   **GPU**: Intel Iris Xe Graphics
+*   **RAM**: 32GB LPDDR5
+*   **Kernel**: Arch Linux (Zen)
+
+### Desktop System (AMD)
 *   **CPU**: AMD Ryzen 5 5600
 *   **GPU**: AMD Radeon RX 550
 *   **Mobo**: ASUS TUF GAMING B550M-PLUS

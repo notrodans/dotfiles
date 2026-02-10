@@ -24,6 +24,16 @@ can_sudo() {
   fi
 }
 
+# Check for pacman lock file
+check_pacman_lock() {
+  if [[ -f /var/lib/pacman/db.lck ]]; then
+    warn "Pacman database is locked (/var/lib/pacman/db.lck)."
+    warn "If no other pacman/paru process is running, remove the lock file manually:"
+    warn "  sudo rm /var/lib/pacman/db.lck"
+    exit 1
+  fi
+}
+
 if [[ ! -f /etc/arch-release ]]; then
     info "Not an Arch Linux system. Skipping Arch package installation."
     exit 0
@@ -144,10 +154,20 @@ EOF
   paru -S --needed --noconfirm irqbalance
   sudo systemctl enable --now irqbalance
 
+  # Docker
+  sudo systemctl enable --now docker
+
+  # Thermald (Intel only)
+  {{ if eq .cpu_vendor "intel" -}}
+  info "Enabling thermald for Intel CPU..."
+  sudo systemctl enable --now thermald
+  {{- end }}
+
   # Pacman cleaner
   setup_pacman_cleaner
 }
 
+check_pacman_lock
 update_arch_keys
 install_paru
 install_arch_packages
