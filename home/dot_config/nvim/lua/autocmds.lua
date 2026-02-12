@@ -7,19 +7,6 @@ autocmd({ "CursorMoved", "CursorMovedI" }, {
 	end,
 })
 
-autocmd("FileType", {
-	pattern = "*",
-	callback = function()
-		-- setting up folds
-		if require("nvim-treesitter.parsers").has_parser() then
-			vim.opt_local.foldmethod = "expr"
-			vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-		else
-			vim.opt_local.foldmethod = "syntax"
-		end
-	end,
-})
-
 autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
