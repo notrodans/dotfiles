@@ -1,27 +1,137 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPost", "BufNewFile" },
-	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-	build = ":TSUpdate | TSInstallAll",
-	opts = function()
-		local opts = require("nvchad.configs.treesitter")
-		opts.textobjects = {
-			select = {
-				enable = true,
-				lookahead = true,
-				keymaps = {
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
-					["ac"] = "@class.outer",
-					["ic"] = "@class.inner",
-					["ap"] = "@parameter.outer",
-					["ip"] = "@parameter.inner",
-				},
-			},
-		}
-		return opts
-	end,
-	config = function(_, opts)
-		require("nvim-treesitter").setup(opts)
-	end,
+  {
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    dependencies = {
+      {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        branch = 'main',
+        config = function()
+          vim.g.no_plugin_maps = true
+          require('nvim-treesitter-textobjects').setup({
+            select = {
+              lookahead = true,
+              include_surrounding_whitespace = false,
+            },
+            move = {
+              set_jumps = true,
+            },
+          })
+
+          local function setup_selects()
+            local ts_select = require('nvim-treesitter-textobjects.select')
+
+            vim.keymap.set({ 'o', 'x' }, '=r', function()
+              ts_select.select_textobject('@assignment.rhs', 'textobjects')
+            end)
+
+            vim.keymap.set({ 'o', 'x' }, 'aa', function()
+              ts_select.select_textobject('@parameter.outer', 'textobjects')
+            end)
+            vim.keymap.set({ 'o', 'x' }, 'ia', function()
+              ts_select.select_textobject('@parameter.inner', 'textobjects')
+            end)
+
+            vim.keymap.set({ 'o', 'x' }, 'ai', function()
+              ts_select.select_textobject('@conditional.outer', 'textobjects')
+            end)
+            vim.keymap.set({ 'o', 'x' }, 'ii', function()
+              ts_select.select_textobject('@conditional.inner', 'textobjects')
+            end)
+
+            vim.keymap.set({ 'o', 'x' }, 'af', function()
+              ts_select.select_textobject('@function.outer', 'textobjects')
+            end)
+            vim.keymap.set({ 'o', 'x' }, 'if', function()
+              ts_select.select_textobject('@function.inner', 'textobjects')
+            end)
+
+            vim.keymap.set({ 'o', 'x' }, 'at', function()
+              ts_select.select_textobject('@class.outer', 'textobjects')
+            end)
+            vim.keymap.set({ 'o', 'x' }, 'it', function()
+              ts_select.select_textobject('@class.inner', 'textobjects')
+            end)
+          end
+
+          local function setup_moves()
+            local ts_moves = require('nvim-treesitter-textobjects.move')
+            vim.keymap.set({ 'n', 'o' }, ']f', function()
+              ts_moves.goto_next_start('@function.outer', 'textobjects')
+            end)
+            vim.keymap.set({ 'n', 'o' }, ']F', function()
+              ts_moves.goto_next_end('@function.outer', 'textobjects')
+            end)
+
+            vim.keymap.set({ 'n', 'o' }, '[f', function()
+              ts_moves.goto_previous_start('@function.outer', 'textobjects')
+            end)
+            vim.keymap.set({ 'n', 'o' }, '[F', function()
+              ts_moves.goto_previous_end('@function.outer', 'textobjects')
+            end)
+          end
+
+          local function setup_swaps()
+            local ts_swaps = require('nvim-treesitter-textobjects.swap')
+
+            vim.keymap.set('n', '<leader>man', function()
+              ts_swaps.swap_next('@parameter.inner')
+            end)
+            vim.keymap.set('n', '<leader>map', function()
+              ts_swaps.swap_previous('@parameter.inner')
+            end)
+
+            vim.keymap.set('n', '<leader>mfn', function()
+              ts_swaps.swap_next('@function.inner')
+            end)
+            vim.keymap.set('n', '<leader>mfp', function()
+              ts_swaps.swap_previous('@function.inner')
+            end)
+          end
+
+          local ts_group = vim.api.nvim_create_augroup('ilyasyoy-treesitter', {})
+
+          vim.api.nvim_create_autocmd('FileType', {
+            pattern = {
+              'go',
+              'gomod',
+              'gosum',
+              'java',
+              'lua',
+              'make',
+              'markdown',
+              'proto',
+              'python',
+              'query',
+              'sql',
+              'typescript',
+              'vim',
+              'yaml',
+            },
+            callback = function()
+              setup_selects()
+              setup_moves()
+              setup_swaps()
+            end,
+            group = ts_group,
+          })
+        end,
+      },
+      {
+        'nvim-treesitter/nvim-treesitter-context',
+        config = function()
+          local ts_context = require('treesitter-context')
+          ts_context.setup({
+            enable = true,
+            max_lines = 1,
+            line_numbers = true,
+          })
+
+          vim.keymap.set('n', '[c', function()
+            ts_context.go_to_context(vim.v.count1)
+          end, { silent = true })
+        end,
+      },
+    },
+  },
 }
