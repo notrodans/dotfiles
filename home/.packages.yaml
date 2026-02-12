@@ -2,7 +2,6 @@
 packages:
   fonts:
     - ttf-ms-fonts
-    - apple-fonts
     - noto-fonts-emoji
     - adobe-source-code-pro-fonts
     - ttf-droid
