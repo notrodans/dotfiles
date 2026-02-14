@@ -131,3 +131,4 @@ These dotfiles are tested and working stably on the following hardware:
 | `chezmoi re-add` | Re-import file from home dir (updates source state) |
 | `chezmoi forget $FILE` | Stop managing a file (does not delete it from disk) |
 | `chezmoi managed` | List all files currently managed by chezmoi |
+

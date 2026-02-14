@@ -15,6 +15,7 @@ packages:
     - ttf-hannom
     - wqy-zenhei
     - ttf-mplus-git
+    - ttf-ibm-plex
     - ttf-nerd-fonts-symbols
     - ttf-nerd-fonts-symbols-mono
     - ttf-lato
@@ -52,6 +53,8 @@ packages:
     - unace
     - p7zip
     - squashfs-tools
+    - tar
+    - 7zip
 
   graphics_common:
     - mesa
@@ -135,6 +138,8 @@ packages:
     - bitwarden-cli
     - sioyek
     - docker
+    - docker-compose
+    - docker-buildx
 
   obs:
     - obs-studio

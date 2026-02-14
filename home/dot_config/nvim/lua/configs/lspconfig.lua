@@ -58,7 +58,9 @@ vim.lsp.config("jsonls", {
 	settings = {
 		json = {
 			schemas = require("schemastore").json.schemas(),
-			validate = true,
+			validate = {
+				enable = true,
+			},
 		},
 	},
 })
