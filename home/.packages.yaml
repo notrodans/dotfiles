@@ -134,7 +134,10 @@ packages:
     - kitty
     - kvantum
     - neovim
+    - tree-sitter-cli
+    - lazygit
     - bitwarden
+    - ripgrep
     - bitwarden-cli
     - sioyek
     - docker
