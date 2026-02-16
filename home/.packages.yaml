@@ -4,30 +4,18 @@ packages:
     - ttf-ms-fonts
     - noto-fonts-emoji
     - adobe-source-code-pro-fonts
-    - ttf-droid
-    - ttf-courier-code
     - ttf-fantasque-nerd
-    - ttf-jetbrains-mono
     - ttf-jetbrains-mono-nerd
     - ttf-firacode-nerd
-    - ttf-fira-code
     - ttf-cascadia-code-nerd
     - ttf-hannom
     - wqy-zenhei
-    - ttf-mplus-git
     - ttf-ibm-plex
     - ttf-nerd-fonts-symbols
     - ttf-nerd-fonts-symbols-mono
-    - ttf-lato
-    - ttf-0xproto-nerd
     - ttf-hack-nerd
     - otf-hermit-nerd
     - ttf-iosevka-nerd
-    - ttf-recursive-nerd
-    - ttf-intel-one-mono
-    - ttf-spline-sans-mono
-    - otf-geist-mono-nerd
-    - ttf-ibm-plex
     - ttf-comfortaa
     - ttf-indic-otf
     - ttf-tahoma
@@ -80,6 +68,8 @@ packages:
     - thermald
 
   hyprland:
+    - hyprpolkitagent
+    - hyprlauncher
     - hyprland
     - hyprshade
     - hyprlang
@@ -102,7 +92,6 @@ packages:
     - pavucontrol
     - pipewire-alsa
     - playerctl
-    - polkit-gnome
     - pyprland
     - qt5ct
     - qt6ct
@@ -111,7 +100,7 @@ packages:
     - swappy
     - swaync
     - swww
-    - wallust-git
+    - wallust
     - wl-clipboard
     - wlogout
     - xdg-user-dirs
@@ -128,6 +117,8 @@ packages:
     - nvtop
     - mpv
     - mpv-mpris
+    - imv
+    - dunst
     - btop
     - fastfetch
     - gedit
@@ -153,4 +144,3 @@ packages:
     - zram-generator
     - ananicy-cpp
     - irqbalance
-

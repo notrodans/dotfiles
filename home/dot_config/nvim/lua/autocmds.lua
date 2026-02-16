@@ -37,5 +37,6 @@ autocmd({
 		if string.len(args.match) ~= 0 then
 			vim.wo.scroll = scroll
 		end
+		vim.wo.cursorline = true
 	end,
 })

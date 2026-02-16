@@ -17,6 +17,11 @@
 .packages.yaml
 **/.packages.yaml
 
+**/node_modules
+**/package.json
+**/bun.lock
+**/antigravity-accounts.json
+
 {{ if not .codespaces -}}
 .vscode-remote/
 {{ end -}}

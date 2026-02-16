@@ -45,10 +45,10 @@ install_sdkman() {
        warn "zip/unzip not found. SDKMAN might fail to install packages."
     fi
 
-    sdk install java 21.0.2-tem || true
-    sdk install java 17.0.10-tem || true
-    sdk install java 11.0.22-tem || true
-    sdk default java 21.0.2-tem
+    sdk install java 25.0.2-tem || true
+    sdk install java 21.0.10-tem || true
+    sdk install java 17.0.18-tem || true
+    sdk default java 21.0.10-tem
     
     sdk version
   else

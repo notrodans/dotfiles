@@ -196,7 +196,7 @@
 							"protobufSupport": { "enabled": true }
 						}
 					},
-					"home": "/usr/lib/jvm/java-21-openjdk",
+					"path": "{{ .chezmoi.homeDir }}/.sdkman/candidates/java/java-21.0.10-tem",
 					"sources": {
 						"organizeImports": {
 							"starThreshold": 9999,
@@ -250,15 +250,15 @@
 						"runtimes": [
 							{
 								"name": "JavaSE-25",
-								"path": "/usr/lib/jvm/java-25-openjdk"
+								"path": "{{ .chezmoi.homeDir }}/.sdkman/candidates/java/java-25.0.2-tem"
 							},
 							{
 								"name": "JavaSE-21",
-								"path": "/usr/lib/jvm/java-21-openjdk"
+								"path": "{{ .chezmoi.homeDir }}/.sdkman/candidates/java/java-21.0.10-tem"
 							},
 							{
 								"name": "JavaSE-17",
-								"path": "/usr/lib/jvm/java-17-openjdk"
+								"path": "{{ .chezmoi.homeDir }}/.sdkman/candidates/java/java-17.0.18-tem"
 							}
 						]
 					}

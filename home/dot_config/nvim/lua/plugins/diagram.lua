@@ -1,27 +1,28 @@
 return {
-	"3rd/diagram.nvim",
+	"notrodans/diagram.nvim",
 	lazy = true,
 	ft = "markdown",
+	branch = "fix/security-cache-modernization",
 	dependencies = {
-		{ "3rd/image.nvim", opts = {} }, -- you'd probably want to configure image.nvim manually instead of doing this
+		{ "3rd/image.nvim", opts = {}, commit = "1746a74" },
 	},
-	opts = {
-		events = {
-			render_buffer = {}, -- Empty = no automatic rendering
-			clear_buffer = { "BufLeave" },
-		},
-		renderer_options = {
-			mermaid = {
-				-- scale = 1,
-				max_width = 12800,
-				max_height = 6000,
-				-- cli_args = { "--no-sandbox" },
+	config = function()
+		require("diagram").setup({
+			events = {
+				render_buffer = {},
+				clear_buffer = { "BufLeave" },
 			},
-		},
-	},
+			renderer_options = {
+				mermaid = {
+					theme = "neutral",
+					scale = 8,
+				},
+			},
+		})
+	end,
 	keys = {
 		{
-			"K", -- or any key you prefer
+			"K",
 			function()
 				require("diagram").show_diagram_hover()
 			end,
