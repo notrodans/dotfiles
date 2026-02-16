@@ -23,4 +23,4 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # opencode
 export PATH="$HOME/.local/bin:$PATH"
-export PATH={{ .chezmoi.homeDir }}/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
