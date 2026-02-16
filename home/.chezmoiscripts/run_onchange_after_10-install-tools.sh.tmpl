@@ -105,25 +105,10 @@ install_opencode() {
   fi
 }
 
-install_gemini() {
-  # Load NVM environment to ensure npm is available
-  export NVM_DIR="$HOME/.nvm"
-  # shellcheck disable=SC1091
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-  if command -v gemini &>/dev/null; then
-    info "Gemini CLI already installed"
-  else
-    info "Installing Gemini CLI via NPM..."
-    npm install -g @google/gemini-cli
-  fi
-}
-
 install_oh_my_zsh
 install_sdkman
 install_tpm
 install_nvm
 install_opencode
-install_gemini
 
 {{ end -}}
