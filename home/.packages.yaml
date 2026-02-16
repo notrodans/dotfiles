@@ -112,6 +112,9 @@ packages:
     - curl
     - wget
     - thunar
+    - thunar-media-tags-plugin
+    - thunar-archive-plugin
+    - xarchiver
     - yt-dlp
     - nwg-look
     - nvtop
