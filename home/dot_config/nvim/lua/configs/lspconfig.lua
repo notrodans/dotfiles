@@ -38,6 +38,7 @@ local servers = {
 	"eslint_d",
 	"hyprls",
 	"basedpyright",
+	"emmet_language_server",
 }
 
 vim.lsp.config("intelephense", {
