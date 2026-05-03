@@ -1,0 +1,64 @@
+{
+	"preset": "dynamic",
+	"presets": {
+		"dynamic": {
+			"oracle": {
+				"model": "google/gemini-3-flash-preview",
+				"variant": "high",
+				"skills": [],
+				"mcps": []
+			},
+			"orchestrator": {
+				"model": "google/gemini-3-flash-preview",
+				"skills": ["*"],
+				"mcps": ["websearch"]
+			},
+			"fixer": {
+				"model": "google/gemini-3-flash-preview",
+				"variant": "low",
+				"skills": [],
+				"mcps": []
+			},
+			"designer": {
+				"model": "google/gemini-3-flash-preview",
+				"variant": "medium",
+				"skills": ["agent-browser"],
+				"mcps": []
+			},
+			"librarian": {
+				"model": "google/gemini-3-flash-preview",
+				"variant": "low",
+				"skills": [],
+				"mcps": ["websearch", "context7", "grep_app"]
+			},
+			"explorer": {
+				"model": "google/gemini-3-flash-preview",
+				"variant": "low",
+				"skills": [],
+				"mcps": []
+			}
+		}
+	},
+	"balanceProviderUsage": false,
+	"fallback": {
+		"enabled": true,
+		"timeoutMs": 15000,
+		"chains": {
+			"oracle": ["google/gemini-3-flash-preview", "opencode/big-pickle"],
+			"orchestrator": [
+				"google/gemini-3-flash-preview",
+				"opencode/big-pickle"
+			],
+			"fixer": ["google/gemini-3-flash-preview", "opencode/big-pickle"],
+			"designer": [
+				"google/gemini-3-flash-preview",
+				"opencode/big-pickle"
+			],
+			"librarian": [
+				"google/gemini-3-flash-preview",
+				"opencode/big-pickle"
+			],
+			"explorer": ["google/gemini-3-flash-preview", "opencode/big-pickle"]
+		}
+	}
+}
