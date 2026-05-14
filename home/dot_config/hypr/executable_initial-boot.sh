@@ -6,7 +6,7 @@ coreScripts=$HOME/.config/hypr/core/scripts
 wallpaper=$HOME/Pictures/wallpapers/Fantasy-Landscape.png
 waybar_style="$HOME/.config/waybar/style/Retro.css"
 
-swww="swww img"
+swww="awww img"
 
 # Check if a marker file exists.
 if [ ! -f ~/.config/hypr/.initial_startup_done ]; then
