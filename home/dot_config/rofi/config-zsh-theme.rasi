@@ -5,7 +5,7 @@
 /* ---- Configuration ---- */
 configuration {
     modi:                       "drun,run";
-    font:                       "Fira Code SemiBold 12";
+    font:                       "Michroma Bold 12";
     show-icons:                 true;
     display-drun:               "";
 	display-run:                "";
