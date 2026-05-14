@@ -1,24 +1,45 @@
-# Arch Linux Packages
 packages:
   fonts:
+    - ttf-0xproto-nerd
+    - ttf-bitstream-vera-mono-nerd
+    - ttf-cascadia-code-nerd
+    - ttf-comfortaa
+    - ttf-courier-code
+    - ttf-dejavu-nerd
+    - ttf-droid
+    - ttf-fantasque-nerd
+    - ttf-fira-code
+    - ttf-fira-sans
+    - ttf-firacode-nerd
+    - ttf-go-mono-git
+    - ttf-google-sans-code-nf
+    - ttf-hack-nerd
+    - ttf-hannom
+    - ttf-ibm-plex
+    - ttf-indic-otf
+    - ttf-intel-one-mono
+    - ttf-iosevka-nerd
+    - ttf-jetbrains-mono
+    - ttf-jetbrains-mono-nerd
+    - ttf-kopub
+    - ttf-lato
+    - ttf-liberation
+    - ttf-liberation-mono-nerd
+    - ttf-linux-libertine
+    - ttf-michroma
+    - ttf-mplus-git
+    - ttf-ms-fonts
+    - ttf-nerd-fonts-symbols
+    - ttf-nerd-fonts-symbols-common
+    - ttf-nerd-fonts-symbols-mono
+    - ttf-recursive-nerd
+    - ttf-segoe-ui-variable
+    - ttf-spline-sans-mono
+    - ttf-tahoma
     - ttf-ms-fonts
     - noto-fonts-emoji
     - adobe-source-code-pro-fonts
-    - ttf-fantasque-nerd
-    - ttf-jetbrains-mono-nerd
-    - ttf-firacode-nerd
-    - ttf-cascadia-code-nerd
-    - ttf-hannom
     - wqy-zenhei
-    - ttf-ibm-plex
-    - ttf-nerd-fonts-symbols
-    - ttf-nerd-fonts-symbols-mono
-    - ttf-hack-nerd
-    - otf-hermit-nerd
-    - ttf-iosevka-nerd
-    - ttf-comfortaa
-    - ttf-indic-otf
-    - ttf-tahoma
 
   shell_tools:
     - zsh
@@ -69,13 +90,14 @@ packages:
 
   hyprland:
     - hyprpolkitagent
-    - hyprlauncher
     - hyprland
     - hyprshade
     - hyprlang
     - hyprcursor
     - hypridle
     - hyprlock
+    - hyprpm
+    - hyprpicker
     - xdg-desktop-portal-hyprland
     - xdg-desktop-portal-gtk
     - rofi-wayland
@@ -109,11 +131,10 @@ packages:
     - pacman-contrib
 
   programs:
+    - antigravity
     - curl
     - wget
-    - thunar
-    - thunar-media-tags-plugin
-    - thunar-archive-plugin
+    - pcmanfm
     - xarchiver
     - yt-dlp
     - nwg-look
@@ -137,6 +158,7 @@ packages:
     - docker
     - docker-compose
     - docker-buildx
+    - exiftool
 
   obs:
     - obs-studio
