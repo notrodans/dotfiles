@@ -40,3 +40,26 @@ autocmd({
 		vim.wo.cursorline = true
 	end,
 })
+
+autocmd({ "BufRead", "BufNewFile" }, {
+	group = vim.api.nvim_create_augroup("DockerComposeFiletype", { clear = true }),
+	pattern = {
+		"docker-compose*.yml",
+		"docker-compose*.yaml",
+		"compose.yml",
+		"compose.yaml",
+	},
+	callback = function()
+		vim.bo.filetype = "yaml.docker-compose"
+	end,
+})
+
+autocmd("BufReadPost", {
+	pattern = "*",
+	callback = function()
+		local last_pos = vim.fn.line("'\"")
+		if last_pos > 0 and last_pos <= vim.fn.line("$") then
+			vim.cmd('normal! g`"')
+		end
+	end,
+})

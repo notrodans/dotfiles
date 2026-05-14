@@ -39,6 +39,8 @@ local servers = {
 	"hyprls",
 	"basedpyright",
 	"emmet_language_server",
+	"docker_compose_language_service",
+	"jinja_lsp",
 }
 
 vim.lsp.config("intelephense", {
