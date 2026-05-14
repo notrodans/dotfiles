@@ -4,7 +4,7 @@
  */
 
 * {
-	font-family: "Hurmit Nerd Font", monospace;
+	font-family: "Michroma";
 	font-weight: bold;
 	font-size: 14px;
 	min-height: 0;
@@ -15,7 +15,7 @@
 
 window#waybar {
 	color: #a6a6a6;
-	background: #111111;
+	background-color: transparent;
 	border-bottom: 0px solid #444444; /* borders */
 }
 
@@ -109,7 +109,6 @@ tooltip {
 #pulseaudio-slider highlight,
 #backlight-slider highlight {
 	min-height: 8px;
-	background-color: #0000aa; /* selected_bg_color */
 }
 
 /*----- Animations -----*/

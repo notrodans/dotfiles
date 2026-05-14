@@ -19,7 +19,6 @@
             
     "modules-right": [
         "tray",
-        "custom/separator",
         "pulseaudio",
     ],
 }
