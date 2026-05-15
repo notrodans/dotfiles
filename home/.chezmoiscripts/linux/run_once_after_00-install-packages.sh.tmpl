@@ -128,8 +128,6 @@ setup_arch_services() {
 
   info "Configuring Arch Linux services..."
 
-  # Zram
-  sudo pacman -S --needed --noconfirm zram-generator
   sudo tee /etc/systemd/zram-generator.conf > /dev/null <<EOF
 [zram0]
 zram-size = ram
@@ -140,8 +138,8 @@ EOF
   sudo systemctl daemon-reload
   sudo systemctl start systemd-zram-setup@zram0.service
 
-  # Systemd-oomd
-  sudo systemctl enable --now systemd-oomd
+  # Earlyoom
+  sudo systemctl enable --now earlyoom
 
   # Fstrim
   sudo systemctl enable fstrim.timer

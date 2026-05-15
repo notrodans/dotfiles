@@ -165,6 +165,7 @@ packages:
     - ffmpeg4.4
 
   system_services:
+    - earlyoom
     - zram-generator
     - ananicy-cpp
     - irqbalance
