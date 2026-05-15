@@ -11,8 +11,6 @@ packages:
     - ttf-fira-code
     - ttf-fira-sans
     - ttf-firacode-nerd
-    - ttf-go-mono-git
-    - ttf-google-sans-code-nf
     - ttf-hack-nerd
     - ttf-hannom
     - ttf-ibm-plex
@@ -27,7 +25,6 @@ packages:
     - ttf-liberation-mono-nerd
     - ttf-linux-libertine
     - ttf-michroma
-    - ttf-mplus-git
     - ttf-ms-fonts
     - ttf-nerd-fonts-symbols
     - ttf-nerd-fonts-symbols-common
