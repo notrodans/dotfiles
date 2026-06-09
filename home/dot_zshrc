@@ -1,3 +1,4 @@
+export TERM="screen-256color"
 export MASON="$HOME/.local/share/nvim/mason"
 export ZSH="$HOME/.oh-my-zsh"
 
