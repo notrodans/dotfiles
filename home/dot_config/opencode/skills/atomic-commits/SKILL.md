@@ -1,188 +1,172 @@
 ---
 name: atomic-commits
-description: "Analyzes uncommitted changes (git status/diff) and groups them into logical, atomic commits with meaningful messages based on LeanIX engineering principles. Triggers on: split my commits, make atomic commits, review diff, group changes, git commit plan."
+description: "Relentlessly interviews the user to split messy diffs into atomic commits with documented intent"
 user-invocable: true
 ---
 
 # Atomic Commit Assistant
 
-Transform messy, bundled code changes into clean, independent, and atomic commits to maintain a readable and manageable Git history.
+Interviews the user until every uncommitted change has a purpose, a commit, and a documented reason.
+
+<what-to-do>
+
+Interview me relentlessly about every uncommitted change until we reach a shared understanding of how to split it. Walk down the decision tree one branch at a time: resolve intent, isolate concerns, enforce comments, then output the plan. One question at a time.
+
+For each question, provide your recommended answer.
+
+If a question can be answered by exploring the diff, explore the diff instead.
+
+When the plan is complete, output it in terse terminal format — no fluff sections, no leftover pile, no checklist. Every commit entry carries a Verdict line per rule.
+
+</what-to-do>
 
 ---
 
-## The Job
+## Q1: What language for commit messages?
 
-1. Receive `git status`, `git diff`, and an optional brief explanation of the work done from the user.
-2. Ask 1-3 essential clarifying questions (with lettered options) ONLY if the intent behind certain file changes is ambiguous.
-3. Group the changes into logical, independent units (Atomic Commits).
-4. Generate an actionable "Commit Plan" with ready-to-use Git commands.
-
-**Important:** Do NOT suggest a single `git commit -am "Update stuff"`. Strict adherence to the single-responsibility principle for commits is required.
+English by default. If the entire diff context and user responses are in Russian, Russian messages are acceptable. Never mix languages in a single commit message.
 
 ---
 
-## Step 1: Clarifying Questions (If Needed)
+## Q2: What kind of work is this?
 
-Ask questions only if the relationship between changed files is unclear. Focus on:
-
-* **Separation of Concerns:** Are these UI changes part of the new feature, or a separate cleanup?
-* **Scope:** Is this documentation update related to the bug fix, or a general chore?
-* **Test Coverage:** Do these test files belong to the refactoring or the new feature?
-
-### Format Questions Like This:
+Walk through the diff file by file. For each logical group, resolve one category. Do not move to the next file until the current one is assigned.
 
 ```
-1. I see changes in `src/components/Button.scss`. Are these related to the new calculator feature, or a separate styling update?
-   A. Part of the new calculator feature
-   B. Separate styling update (UI chore)
-   C. Other: [please specify]
+Feature     → Are these new files or modifications to existing ones?
+               ├── New files only       → single commit per logical addition
+               └── Mixed (new+modify)   → Can the modifications stand alone?
+                   ├── Yes              → split: "Modify existing" + "Add new"
+                   └── No               → one feature unit
 
-2. You updated `docs/changelog.md`. Should this be:
-   A. Bundled with the bug fix
-   B. A standalone documentation commit
+Bug Fix     → Is the test present in this diff?
+               ├── Yes                  → fix + test in one commit
+               └── No                   → stop: warn the user, do not proceed
+                                         until test is added or explicitly waived
+
+Refactor    → How invasive is this?
+               ├── Structural           → rename, extract, rewire (pure refactor)
+               ├── API change           → public signature changed → flag BREAKING
+               └── Format only          → biome, prettier, eslint --fix
+                                         → "chore: reformat" [skip ci]
+
+Config      → Config only? (tsconfig, eslint, biome, deps)
+               ├── Yes                  → standalone "chore: <scope> config"
+               └── Mixed with code      → SPLIT: config in chore, code in its own commit
+
+Docs/Chore  → One file per commit, no cross-contamination with code
+
+Mixed       → I see changes across unrelated areas. One at a time:
+               Q2a: What was the intent of this file group?
+               Q2b: Can I split this into N independent commits?
 ```
 
-This lets users respond with "1B, 2B" for quick iteration. If the diff is perfectly self-explanatory, skip this step.
+Before progressing, verify: **does each group serve exactly ONE purpose?** If no, split further.
 
 ---
 
-## Step 2: Rules of Atomicity
+## Q3: Are tests grouped with the code they cover?
 
-When grouping files and generating the commit plan, you MUST adhere to these strict rules:
+Every functional commit (feat, fix, refactor) must include its test files. A commit that changes logic without a test is incomplete — flag it.
 
-1. **One Purpose:** An atomic commit is the smallest code change that cannot be broken down any further. It serves a single, discrete purpose.
-2. **Feature Implementation:** Do not mix adding new logic/utilities with unrelated UI component updates.
-3. **Bug Fixes:** The fix and its corresponding test case MUST be in the same commit. Unrelated files (like changelogs or readmes) must be separated.
-4. **Refactoring:** Do not mix structural code changes (e.g., migrating to async/await) with unrelated styling or feature additions.
-5. **Meaningful Messages:** Commit messages must be clear, concise, and summarize the single change being made (e.g., imperative mood: "Fix divide by zero error", not "fixed bug").
+```
+Test present?  → Yes → group with the code it tests
+               → No  → warn: "This change has no test. Commit anyway?" 
+```
 
 ---
 
-## Step 3: Commit Plan Structure
+## Q4: Does every commit message describe WHAT and WHY?
 
-Generate the Commit Plan with these sections:
+Subject line (≤72 chars, imperative mood). Body (≥2 lines) answering:
 
-### 1. Overview
+- **What** changed (one line)
+- **Why** this way and not another (the trade-off, the context, the constraint)
 
-A brief summary of what was found in the diff and how it will be split up.
-
-### 2. The Commit Plan
-
-A numbered list of proposed commits. For each commit, provide:
-
-* **Type:** (Feature | Bug Fix | Refactor | Docs | Chore | Test)
-* **Included Files:** List of files to be staged.
-* **Reasoning:** One sentence explaining *why* these files are grouped together.
-* **Command:** The exact terminal command to execute.
-
-**Format:**
-
-```markdown
-### 1. [Commit Type]: [Meaningful Commit Message]
-**Files:**
-- `path/to/file1`
-- `path/to/file2`
-
-**Reasoning:** [Brief explanation of why this is an atomic unit]
-
-**Execute:**
 ```
-```bash
-git add path/to/file1 path/to/file2 && git commit -m "Type: Meaningful Commit Message"
+feat: Add sliding window leaderboard to worker
+
+The naive full-scan approach exceeded 500ms per request on
+production data. Sliding window with Redis sorted sets keeps
+it under 10ms. The trade-off is a 24-hour TTL on leaderboard
+keys — acceptable since we never serve historical data beyond
+the current window.
 ```
-
-### 3. Leftover Changes (If Applicable)
-
-List any files or hunks that were excluded from the plan because their purpose was entirely unclear or they seem like accidental modifications (e.g., `console.log` remnants, `.env` files).
 
 ---
 
-## Output
+## Q5: Does this commit cross module/package boundaries?
 
-* **Format:** Markdown (`.md`)
-* **Location:** Direct terminal/chat response
-* **Style:** Clear, copy-pasteable bash commands.
+If a commit touches files in two or more independent modules (e.g., `src/worker/` and `src/web/`), the body MUST explain the cross-module dependency.
+
+```
+A commit touching both src/worker/ and src/web/ without 
+explanation → agent rejects the grouping.
+
+"Why does the worker change require a web-side change?"
+```
 
 ---
 
-## Example Execution
+## Q6: Does every non-obvious logic change carry inline comments?
 
-**User Input:**
-"I built a new addition function, updated the button styles, and fixed a divide-by-zero bug. Here is my git status: `src/utils.js`, `src/components/button.scss`, `src/mathUtils.js`, `tests/mathUtils.test.js`, `docs/changelog.md`."
-
-**Agent Output:**
-
-```markdown
-# Atomic Commit Plan
-
-I've analyzed your changes and separated them into 4 atomic commits based on their specific purposes (Feature, Chore, Bug Fix, and Docs).
-
-### 1. Feature: Add addition function to utility module
-**Files:**
-- `src/utils.js`
-
-**Reasoning:** This is a distinct feature addition and should not be mixed with UI updates or bug fixes.
-
-**Execute:**
-```
-```bash
-git add src/utils.js && git commit -m "feat: Add addition function to utility module"
-```
-
-### 2. Chore: Update button component styling
-
-**Files:**
-
-* `src/components/button.scss`
-
-**Reasoning:** UI and styling adjustments are independent of the backend utility logic.
-
-**Execute:**
-
-```bash
-git add src/components/button.scss && git commit -m "chore: Update button component styling"
+The agent scans the diff for opaque logic — one-liners without context, magic numbers, complex conditionals, unclear state transitions.
 
 ```
-
-### 3. Bug Fix: Fix divide by zero error in 'divide' function
-
-**Files:**
-
-* `src/mathUtils.js`
-* `tests/mathUtils.test.js`
-
-**Reasoning:** The bug fix and its accompanying test case form a single, atomic unit of work.
-
-**Execute:**
-
-```bash
-git add src/mathUtils.js tests/mathUtils.test.js && git commit -m "fix: Fix divide by zero error in 'divide' function"
-
+Rule:
+- If a hunk introduces a non-obvious expression with zero comments,
+  the agent refuses to output the plan until the user adds them.
+- The agent does not write the comments. It points at the exact
+  lines and says: "Explain this."
 ```
 
-### 4. Docs: Update changelog for recent fixes and features
+---
 
-**Files:**
+## Q7: What is the interview cadence?
 
-* `docs/changelog.md`
+One question at a time. Wait for the user's answer before continuing. Do not batch.
 
-**Reasoning:** Documentation updates should be kept separate from functional code changes.
+Exception: if the diff is trivially separable (each file clearly belongs to one independent concern), the agent may skip straight to the plan and present it for confirmation.
 
-**Execute:**
+---
 
-```bash
-git add docs/changelog.md && git commit -m "docs: Update changelog for recent fixes and features"
+## The Commit Plan
+
+Terse terminal format. `---` delimited blocks. No overview, no leftover section, no checklist.
+
+Every entry includes:
 
 ```
 ---
+## <type>: <subject>
 
-## Checklist
+Body:
+<why this way and not another, ≥2 lines>
 
-Before outputting the commit plan:
+Files:
+- path/to/file1
+- path/to/file2
 
-- [ ] Reviewed `git diff` and `git status` thoroughly.
-- [ ] Asked clarifying questions if the relationship between files was ambiguous.
-- [ ] Ensured no single commit mixes Features, Fixes, or Refactoring.
-- [ ] Verified that tests are grouped with the code they cover.
-- [ ] Wrote clear, imperative commit messages.
-- [ ] Provided exact, copy-pasteable `git add ... && git commit -m ...` commands.
+Verdict:
+  Atomic:   PASS / FAIL
+  Test:     PASS / FAIL (N/A if docs/chore)
+  Comments: PASS / FAIL (N/A if trivial)
+  Message:  PASS / FAIL
+
+$ git add path/to/file1 path/to/file2 && git commit -m "<type>: <subject>"
+---
+```
+
+If any entry has a FAIL verdict, the agent does NOT output a plan. It goes back to the interview until all verdicts are PASS.
+
+---
+
+## Stuck?
+
+If the user cannot clarify the intent of a file or hunk, the agent does not proceed. It keeps drilling:
+
+- "What does this line do?"
+- "Why is this file changed?"
+- "What would happen if I left this file out of this group?"
+
+No output until every diff line has a home.
