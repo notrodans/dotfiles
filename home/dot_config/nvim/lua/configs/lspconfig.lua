@@ -37,7 +37,7 @@ local servers = {
 	"graphql",
 	"eslint_d",
 	"hyprls",
-	"basedpyright",
+	"pyrefly",
 	"emmet_language_server",
 	"docker_compose_language_service",
 	"jinja_lsp",
