@@ -63,3 +63,20 @@ autocmd("BufReadPost", {
 		end
 	end,
 })
+
+autocmd("FileType", {
+	pattern = { "markdown", "text", "gitcommit" },
+	callback = function()
+		vim.opt_local.wrap = true
+	end,
+})
+
+autocmd("BufWinLeave", {
+	pattern = "*.*",
+	command = "mkview",
+})
+
+autocmd("BufWinEnter", {
+	pattern = "*.*",
+	command = "silent! loadview",
+})
