@@ -1,26 +1,24 @@
 ---
 name: tg-analyzer
-description: Analyzes Telegram chat history via tdl (text only), installs Ralph autonomous agent, and generates a detailed report based on topic.md.
-user-invocable: true
+description: Analyze Telegram chat history via tdl text export and prepare Ralph-compatible analysis inputs with explicit approval for mutations.
 ---
 
 # Telegram Chat Analyzer Skill
 
-This skill automates the extraction of text-only Telegram messages using `tdl`, installs the Ralph autonomous agent, and generates an analysis report based on specified topics.
+This skill helps extract text-only Telegram messages using `tdl`, prepare Ralph-compatible analysis inputs, and generate a report plan based on specified topics. Preserve user data and require explicit approval before any export, download, filesystem mutation, git initialization, git commit, or other persistent change.
 
 ## The Job
 
-When invoked, you MUST execute the following steps sequentially using your available tools:
+When invoked, work sequentially and keep the user in control. Before any command that exports data, downloads files, writes files, creates directories, initializes git, or commits changes, show the exact intended action and wait for explicit approval.
 
 ### Step 1: Initialize Environment
-Use the `bash` tool to create the necessary directories:
+Ask for approval to create the working directories. Only after approval, create:
 ```bash
 mkdir -p .tg/data .tg/ralph
 ```
 
 ### Step 2: Export Chat via TDL
-Ask the user for the target chat identifier (e.g., `@username`, `chat_id`, or `https://t.me/...`).
-Once provided, use the `bash` tool to run the following commands to export messages and filter out media:
+Ask the user for the target chat identifier (e.g., `@username`, `chat_id`, or `https://t.me/...`). Then ask for explicit approval before running export commands because this writes chat data to disk.
 ```bash
 # Export all messages (including non-media) with content
 tdl chat export -c <CHAT_ID> --all --with-content -o .tg/data/chat_history_raw.json
@@ -29,20 +27,17 @@ tdl chat export -c <CHAT_ID> --all --with-content -o .tg/data/chat_history_raw.j
 jq '[.[] | select(.message != null and .message != "")]' .tg/data/chat_history_raw.json > .tg/data/chat_history.json
 ```
 
-### Step 3: Install Ralph
-Use the `bash` tool to download Ralph and its prompt template. Rename the template to `AGENTS.md` as required:
+### Step 3: Prepare Ralph
+Do not automatically download Ralph. If the user wants Ralph installed, request approval for the download and use a user-approved stable commit SHA, not a floating branch. If no commit is provided or verified in the local context, avoid the download and tell the user to provide a pinned commit. Do not run `git init`, `git add`, or `git commit` unless separately approved.
 ```bash
 cd .tg/ralph
-curl -O https://raw.githubusercontent.com/snarktank/ralph/main/ralph.sh
+curl -O https://raw.githubusercontent.com/snarktank/ralph/<APPROVED_COMMIT_SHA>/ralph.sh
 chmod +x ralph.sh
-curl -o AGENTS.md https://raw.githubusercontent.com/snarktank/ralph/main/CLAUDE.md
-git init
-git add .
-git commit -m "Initial ralph commit"
+curl -o AGENTS.md https://raw.githubusercontent.com/snarktank/ralph/<APPROVED_COMMIT_SHA>/CLAUDE.md
 ```
 
 ### Step 4: Create Topics File
-Use the `write` tool to create `.tg/topic.md` with the following default structure:
+Ask for approval before writing `.tg/topic.md`. Use this default structure if the user does not provide topics:
 ```markdown
 # Telegram Chat Analysis Topics
 
@@ -56,7 +51,7 @@ Be sure to support every fact with a link to the original message.
 ```
 
 ### Step 5: Integrate Ralph and Execute
-Use the `write` tool to create `.tg/prd.json` to instruct Ralph. You MUST read the `.tg/topic.md` file and generate a distinct story for each individual topic listed.
+Ask for approval before writing `.tg/prd.json` to instruct Ralph. Read `.tg/topic.md` and generate a distinct story for each individual topic listed.
 
 For example, if there are 3 topics, your generated `prd.json` should look similar to this:
 ```json
@@ -85,7 +80,7 @@ For example, if there are 3 topics, your generated `prd.json` should look simila
 ```
 *Note: The exact number of stories and their descriptions should match the actual content of `.tg/topic.md`.*
 
-Finally, inform the user that the setup is complete and they can start the analysis by running:
+Finally, inform the user what was prepared and, if Ralph was installed with approval, that they can start the analysis by running:
 ```bash
 cd .tg && ./ralph/ralph.sh
 ```

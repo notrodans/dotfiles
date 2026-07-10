@@ -1,7 +1,6 @@
 ---
 name: atomic-commits
 description: "Relentlessly interviews the user to split messy diffs into atomic commits with documented intent"
-user-invocable: true
 ---
 
 # Atomic Commit Assistant

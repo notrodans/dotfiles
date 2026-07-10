@@ -1,9 +1,6 @@
 ---
-
-name: requirements-analyzer
-description: "Analyze PRDs, User Stories, and specs to identify 'topological holes'—logical gaps, missing edge cases, and contradictions. Triggers on: analyze requirements, find gaps in PRD, review user stories, check for edge cases, audit this spec."
-user-invocable: true
-
+name: requirements-analyzator
+description: Analyze PRDs, user stories, and specs for logical gaps, missing edge cases, contradictions, and undefined states.
 ---
 # Requirements Topology Analyzer
 

@@ -1,7 +1,6 @@
 ---
 name: import-notes
 description: "Import notes from a SUMMARY.md file into the Obsidian vault. Autonomously routes notes based on tags, updates indexes, and manages navigation links. Triggers on: import notes, process summary, import summary.md."
-user-invocable: true
 ---
 
 # Obsidian Vault Importer
