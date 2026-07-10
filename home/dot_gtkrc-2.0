@@ -2,11 +2,11 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/notrodans/.gtkrc-2.0.mine"
-gtk-theme-name="Redmond97 SE Jet Blue"
-gtk-icon-theme-name="Silvery-Dark-Icons"
-gtk-font-name="Michroma Bold 10"
+gtk-theme-name="Kripton-v40"
+gtk-icon-theme-name="Zafiro-Icons-Dark"
+gtk-font-name="IBM Plex Sans 12"
 gtk-cursor-theme-name="SilverXMod"
-gtk-cursor-theme-size=18
+gtk-cursor-theme-size=24
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
 gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
 gtk-button-images=0
@@ -15,5 +15,5 @@ gtk-enable-event-sounds=0
 gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintfull"
+gtk-xft-hintstyle="hintslight"
 gtk-xft-rgba="rgb"
