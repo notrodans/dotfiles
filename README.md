@@ -55,12 +55,44 @@ chezmoi init --apply
     *   `run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
 *   `tests/` - Docker testing suite.
 
+## OpenCode Agent Harness
+
+OpenCode is managed from chezmoi source files under `home/`:
+
+*   `home/dot_config/opencode/opencode.json.tmpl` - Main generated OpenCode config, including plugin registration, permissions, LSPs, and MCP wiring.
+*   `home/dot_config/opencode/tui.json` - TUI configuration.
+*   `home/dot_config/opencode/oh-my-opencode-slim.json` - Agent presets and orchestration behavior.
+*   `home/dot_config/opencode/oh-my-opencode-slim/` - Narrow prompt extensions.
+*   `home/dot_config/opencode/commands/` - Slash commands.
+*   `home/dot_config/opencode/skills/` - Agent skills.
+
+Active presets are `openai` and `opencode-go`. There is no cross-provider fallback: if one provider is unavailable, switch presets explicitly instead of relying on another provider automatically.
+
+The harness includes tmux specialist panes for focused agent work and four slash commands: `/dotfiles-check`, `/repo-review`, `/research`, and `/commit-plan`. Commands stay small and deterministic; skills remain reusable and scoped.
+
+MCP servers backed by secrets are omitted from generated config when secrets are disabled. When secrets are enabled, a missing or locked Bitwarden item stops template rendering instead of generating broken credentials. Required items are:
+
+*   `fastmcp-key` - FastMCP gateway access.
+*   `github-token` - GitHub MCP/API access.
+*   `dockerhub-token` - Docker Hub access.
+
+FastMCP currently requires the token as a query parameter; keep that caveat in mind when reviewing generated MCP URLs and never replace it with placeholder credentials.
+
+Validate harness changes in this order:
+
+```bash
+OPENCODE_CONFIG="$HOME/.config/opencode/opencode.json" bunx oh-my-opencode-slim@latest doctor
+chezmoi apply --dry-run -v
+```
+
+Restart OpenCode after config, command, skill, or MCP changes so the runtime reloads generated files.
+
 ## 🔐 Secrets (Bitwarden)
 
 To use templates that require secrets (like MCP tokens):
 1.  Ensure `bw` (Bitwarden CLI) is installed.
 2.  Unlock your vault: `export BW_SESSION=$(bw unlock --raw)`.
-3.  Run `chezmoi apply`.
+3.  Run `chezmoi apply -v`.
 
 ### Configuration
 
@@ -115,7 +147,7 @@ These dotfiles are tested and working stably on the following hardware:
 
 | Command | Description |
 | :--- | :--- |
-| `chezmoi apply` | **Apply** changes from source state to destination (home dir) |
+| `chezmoi apply -v` | **Apply** changes from source state to destination (home dir), with verbose script output |
 | `chezmoi edit $FILE` | **Edit** the source state of a file (opens in `$EDITOR`) |
 | `chezmoi add $FILE` | **Add** a file from home dir to chezmoi management |
 | `chezmoi diff` | See **diff** between target state and actual state |

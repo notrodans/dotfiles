@@ -1,3 +1,4 @@
 .aider*
 .env*
 home/private_dot_env
+.slim/deepwork/
