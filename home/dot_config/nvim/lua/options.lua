@@ -65,7 +65,8 @@ o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
-opt.guicursor = "i:block"
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25"
+o.swapfile = false
 o.swapfile = false
 
 -- local nvim config
