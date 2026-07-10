@@ -1,14 +1,7 @@
 packages:
   fonts:
-    - ttf-0xproto-nerd
-    - ttf-bitstream-vera-mono-nerd
-    - ttf-cascadia-code-nerd
     - ttf-comfortaa
     - ttf-courier-code
-    - ttf-dejavu-nerd
-    - ttf-droid
-    - ttf-fantasque-nerd
-    - ttf-fira-code
     - ttf-fira-sans
     - ttf-firacode-nerd
     - ttf-hack-nerd
@@ -17,26 +10,15 @@ packages:
     - ttf-indic-otf
     - ttf-intel-one-mono
     - ttf-iosevka-nerd
-    - ttf-jetbrains-mono
     - ttf-jetbrains-mono-nerd
     - ttf-kopub
     - ttf-lato
-    - ttf-liberation
-    - ttf-liberation-mono-nerd
     - ttf-linux-libertine
-    - ttf-michroma
-    - ttf-ms-fonts
     - ttf-nerd-fonts-symbols
     - ttf-nerd-fonts-symbols-common
     - ttf-nerd-fonts-symbols-mono
-    - ttf-recursive-nerd
-    - ttf-segoe-ui-variable
-    - ttf-spline-sans-mono
-    - ttf-tahoma
-    - ttf-ms-fonts
     - noto-fonts-emoji
     - adobe-source-code-pro-fonts
-    - wqy-zenhei
 
   shell_tools:
     - zsh
