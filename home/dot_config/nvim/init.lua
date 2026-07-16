@@ -38,6 +38,7 @@ require("commands")
 require("options")
 require("autocmds")
 require("nvchad.autocmds")
+require("modules.buffer_close").setup()
 
 vim.schedule(function()
 	require("mappings")
