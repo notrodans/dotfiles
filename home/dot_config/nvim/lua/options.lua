@@ -5,6 +5,8 @@ local wo = vim.wo
 
 -------------------------------------- options ------------------------------------------
 
+opt.paste = false
+
 -- folds
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
@@ -18,7 +20,7 @@ opt.conceallevel = 2
 vim.o.spelllang = "ru_ru,en_us"
 
 -- mouse
-o.mouse = "a"
+o.mouse = ""
 
 -- windows
 o.winborder = "rounded"

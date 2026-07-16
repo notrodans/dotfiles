@@ -80,3 +80,21 @@ autocmd("BufWinEnter", {
 	pattern = "*.*",
 	command = "silent! loadview",
 })
+
+local no_legacy_paste_group = vim.api.nvim_create_augroup("NoLegacyPasteMode", { clear = true })
+
+autocmd("OptionSet", {
+	group = no_legacy_paste_group,
+	pattern = "paste",
+	callback = function()
+		if not vim.o.paste then
+			return
+		end
+
+		vim.schedule(function()
+			vim.o.paste = false
+
+			vim.notify("Legacy 'paste' mode was enabled and has been disabled", vim.log.levels.WARN)
+		end)
+	end,
+})
