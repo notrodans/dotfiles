@@ -1,6 +1,15 @@
 {
 	"$schema": "https://opencode.ai/config.json",
-	"plugin": ["oh-my-opencode-slim@latest"],
+	"plugin": [
+		"opencode-gemini-auth@latest",
+		"oh-my-opencode-slim",
+		"oc-codex-multi-auth"
+	],
+	"compaction": {
+		"auto": false,
+		"prune": false,
+		"reserved": 10000
+	},
 	"permission": {
 		"bash": {
 			"*": "allow",
@@ -50,7 +59,7 @@
 	"mcp": {
 		"chrome-devtools": {
 			"type": "local",
-			"command": ["npx", "chrome-devtools-mcp@1.5.0"],
+			"command": ["npx", "chrome-devtools-mcp@latest"],
 			"timeout": 30000
 		}{{- if .secrets }},
 		"DeepWiki": {
