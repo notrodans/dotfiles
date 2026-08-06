@@ -2,11 +2,50 @@ return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		"theHamsta/nvim-dap-virtual-text",
+		"leoluz/nvim-dap-go",
 	},
 	lazy = true,
 	config = function()
-		local dap = require("dap")
 		require("nvim-dap-virtual-text").setup()
+
+		require("dap-go").setup({
+			delve = {
+				path = "dlv",
+				initialize_timeout_sec = 20,
+				port = "${port}",
+				args = {},
+				build_flags = {},
+				detached = vim.fn.has("win32") == 0,
+			},
+		})
+
+		local dap = require("dap")
+
+		dap.adapters.go = function(callback)
+			callback({
+				type = "server",
+				host = "127.0.0.1",
+				port = "${port}",
+				executable = {
+					command = "go",
+					args = {
+						"tool",
+						"dlv",
+						"dap",
+						"-l",
+						"127.0.0.1:${port}",
+					},
+					cwd = vim.fn.getcwd(),
+				},
+				options = {
+					initialize_timeout_sec = 20,
+				},
+			})
+		end
+
+		require("dap.ext.vscode").load_launchjs(nil, {
+			go = { "go" },
+		})
 
 		vim.keymap.set("n", "<F2>", function()
 			dap.terminate()
