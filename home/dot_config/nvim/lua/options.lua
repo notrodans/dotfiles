@@ -20,7 +20,9 @@ opt.conceallevel = 2
 vim.o.spelllang = "ru_ru,en_us"
 
 -- mouse
-o.mouse = ""
+o.mouse = "a"
+o.mousefocus = false
+o.mousemoveevent = false
 
 -- windows
 o.winborder = "rounded"
@@ -40,7 +42,6 @@ o.cursorline = true
 o.cursorlineopt = "number,line"
 o.scroll = 4
 opt.scrolloff = 100
-opt.virtualedit = "all"
 wo.wrap = false
 wo.linebreak = false
 
@@ -67,8 +68,8 @@ o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
-opt.guicursor = "n-v-c:block,i-ci-ve:ver25"
-o.swapfile = false
+-- opt.guicursor = "n-v-c:block,i-ci-ve:ver25"
+opt.guicursor = "a:block-blinkon250"
 o.swapfile = false
 
 -- local nvim config

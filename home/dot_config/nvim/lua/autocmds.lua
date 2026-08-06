@@ -1,12 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd({ "CursorMoved", "CursorMovedI" }, {
-	group = vim.api.nvim_create_augroup("CenterCursor", { clear = true }),
-	callback = function()
-		vim.cmd("normal! zz")
-	end,
-})
-
 autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
