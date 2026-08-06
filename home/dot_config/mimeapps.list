@@ -1,7 +1,7 @@
 [Default Applications]
 x-scheme-handler/discord=vesktop.desktop
-x-scheme-handler/tg=org.telegram.desktop.desktop
-x-scheme-handler/tonsite=org.telegram.desktop.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-EPYRS3.desktop
+x-scheme-handler/tonsite=userapp-Telegram Desktop-0XGRS3.desktop
 x-scheme-handler/fdm=freedownloadmanager_fdm_up.desktop
 text/html=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop
@@ -33,8 +33,8 @@ x-scheme-handler/antigravity=antigravity.desktop
 inode/directory=pcmanfm.desktop
 
 [Added Associations]
-x-scheme-handler/tg=org.telegram.desktop.desktop;userapp-AyuGram Desktop-DW5AL3.desktop;org.telegram.desktop._49bbe76393d787c65a832f731202915d.desktop;org.telegram.desktop._57d377c1c9be0790cb0dfa90f9cdf629.desktop;org.telegram.desktop._4302700281c542ce76b8dbedc42d599b.desktop;org.telegram.desktop._a18621bea23998572d94356c4be9197b.desktop;
-x-scheme-handler/tonsite=org.telegram.desktop.desktop;userapp-AyuGram Desktop-G8RAL3.desktop;org.telegram.desktop._49bbe76393d787c65a832f731202915d.desktop;org.telegram.desktop._57d377c1c9be0790cb0dfa90f9cdf629.desktop;org.telegram.desktop._4302700281c542ce76b8dbedc42d599b.desktop;org.telegram.desktop._a18621bea23998572d94356c4be9197b.desktop;
+x-scheme-handler/tg=org.telegram.desktop.desktop;userapp-AyuGram Desktop-DW5AL3.desktop;org.telegram.desktop._49bbe76393d787c65a832f731202915d.desktop;org.telegram.desktop._57d377c1c9be0790cb0dfa90f9cdf629.desktop;org.telegram.desktop._4302700281c542ce76b8dbedc42d599b.desktop;org.telegram.desktop._a18621bea23998572d94356c4be9197b.desktop;userapp-Telegram Desktop-EPYRS3.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop;userapp-AyuGram Desktop-G8RAL3.desktop;org.telegram.desktop._49bbe76393d787c65a832f731202915d.desktop;org.telegram.desktop._57d377c1c9be0790cb0dfa90f9cdf629.desktop;org.telegram.desktop._4302700281c542ce76b8dbedc42d599b.desktop;org.telegram.desktop._a18621bea23998572d94356c4be9197b.desktop;userapp-Telegram Desktop-0XGRS3.desktop;
 image/png=userapp-feh -F-YQP7E3.desktop;feh.desktop;viewnior.desktop;com.github.aliencoweatcake.imageviewer.desktop;gimp.desktop;com.google.Chrome.desktop;
 inode/symlink=feh.desktop;
 x-scheme-handler/http=firefox.desktop;
