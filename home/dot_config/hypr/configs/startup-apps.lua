@@ -45,7 +45,7 @@ local wallDIR = home .. "/Pictures/wallpapers"
 
 -- Autostart
 hl.on("hyprland.start", function()
-	hl.exec_cmd("hyprctl setcursor SilverXMod 24")
+	hl.exec_cmd("hyprctl setcursor pixelfun 24")
 	hl.exec_cmd("hyprpm reload -n")
 	hl.exec_cmd("awww-daemon &")
 	hl.exec_cmd("awww query && awww restore")
