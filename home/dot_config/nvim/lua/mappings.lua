@@ -73,3 +73,7 @@ map("n", "<leader>dt", function()
 	local vt = config().virtual_text
 	config({ virtual_text = not vt })
 end, { desc = "Toggle Virtual Text" })
+
+-- scrolling
+vim.keymap.set("n", "<C-d>", vim.o.scroll .. "<C-d>")
+vim.keymap.set("n", "<C-u>", vim.o.scroll .. "<C-u>")
