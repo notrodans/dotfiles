@@ -69,3 +69,15 @@ autocmd("BufWinEnter", {
 	command = "silent! loadview",
 })
 
+vim.api.nvim_create_autocmd("RecordingEnter", {
+	callback = function()
+		vim.notify("MACRO RECORDING @" .. vim.fn.reg_recording(), vim.log.levels.WARN)
+	end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+	callback = function()
+		vim.notify("MACRO RECORDING STOPPED")
+	end,
+})
+
