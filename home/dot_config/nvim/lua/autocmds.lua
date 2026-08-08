@@ -15,22 +15,17 @@ autocmd("BufReadPost", {
 	end,
 })
 
-local scroll = vim.o.scroll
+autocmd({ "BufEnter", "WinEnter" }, {
+	callback = function()
+		local win = vim.api.nvim_get_current_win()
 
-autocmd({
-	"BufEnter",
-	"VimResized",
-	"UIEnter",
-	"MenuPopup",
-	"TermEnter",
-}, {
-	pattern = "*",
-	callback = function(args)
-		-- NvChad themes fix
-		if string.len(args.match) ~= 0 then
-			vim.wo.scroll = scroll
-		end
-		vim.wo.cursorline = true
+		vim.schedule(function()
+			if vim.api.nvim_win_is_valid(win) then
+				vim.api.nvim_set_option_value("cursorline", true, {
+					win = win,
+				})
+			end
+		end)
 	end,
 })
 
@@ -74,20 +69,3 @@ autocmd("BufWinEnter", {
 	command = "silent! loadview",
 })
 
-local no_legacy_paste_group = vim.api.nvim_create_augroup("NoLegacyPasteMode", { clear = true })
-
-autocmd("OptionSet", {
-	group = no_legacy_paste_group,
-	pattern = "paste",
-	callback = function()
-		if not vim.o.paste then
-			return
-		end
-
-		vim.schedule(function()
-			vim.o.paste = false
-
-			vim.notify("Legacy 'paste' mode was enabled and has been disabled", vim.log.levels.WARN)
-		end)
-	end,
-})

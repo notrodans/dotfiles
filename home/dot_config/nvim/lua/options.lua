@@ -5,8 +5,6 @@ local wo = vim.wo
 
 -------------------------------------- options ------------------------------------------
 
-opt.paste = false
-
 -- folds
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
