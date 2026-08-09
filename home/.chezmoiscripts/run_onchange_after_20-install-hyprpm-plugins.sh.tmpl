@@ -1,0 +1,113 @@
+{{- if and (eq .chezmoi.os "linux") (not .headless) }}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+info() {
+	echo -e "\033[34m[INFO]\033[0m $*"
+}
+
+error() {
+	echo -e "\033[31m[ERROR]\033[0m $*" >&2
+}
+
+if ! command -v hyprpm >/dev/null 2>&1; then
+	error "hyprpm is not available"
+	exit 1
+fi
+
+strip_ansi() {
+	sed -E 's/\x1B\[[0-9;]*[mK]//g'
+}
+
+refresh_state() {
+	HYPRPM_STATE="$(hyprpm list | strip_ansi)"
+}
+
+repository_exists() {
+	local repository="$1"
+
+	grep -Fq "Repository ${repository} " <<< "$HYPRPM_STATE"
+}
+
+plugin_state() {
+	local plugin="$1"
+
+	awk -v plugin="$plugin" '
+		{
+			line = $0
+			sub(/^.*Plugin[[:space:]]+/, "", line)
+
+			if (line == plugin) {
+				found = 1
+				next
+			}
+
+			if (found && /enabled:/) {
+				if (/enabled:[[:space:]]*true/) {
+					print "true"
+				} else {
+					print "false"
+				}
+
+				exit
+			}
+		}
+	' <<< "$HYPRPM_STATE"
+}
+
+ensure_repository() {
+	local name="$1"
+	local url="$2"
+
+	if repository_exists "$name"; then
+		info "Hyprpm repository '$name' already installed"
+		return
+	fi
+
+	info "Adding hyprpm repository '$name'"
+	hyprpm add "$url"
+
+	refresh_state
+}
+
+ensure_plugin() {
+	local plugin="$1"
+	local expected="$2"
+	local actual
+
+	actual="$(plugin_state "$plugin")"
+
+	if [[ -z "$actual" ]]; then
+		error "Plugin '$plugin' was not found in installed hyprpm repositories"
+		exit 1
+	fi
+
+	if [[ "$actual" == "$expected" ]]; then
+		info "Hyprpm plugin '$plugin' already enabled=$expected"
+		return
+	fi
+
+	if [[ "$expected" == "true" ]]; then
+		info "Enabling hyprpm plugin '$plugin'"
+		hyprpm enable "$plugin"
+	else
+		info "Disabling hyprpm plugin '$plugin'"
+		hyprpm disable "$plugin"
+	fi
+
+	refresh_state
+}
+
+refresh_state
+
+{{ range .hyprpm.repositories -}}
+ensure_repository {{ .name | quote }} {{ .url | quote }}
+
+{{ range .plugins -}}
+ensure_plugin {{ .name | quote }} {{ printf "%t" .enabled | quote }}
+{{ end }}
+{{ end -}}
+
+info "Hyprpm plugins are configured"
+{{- end }}

@@ -1,0 +1,7 @@
+ hyprpm:
+  repositories:
+    - name: hy3
+      url: https://github.com/AlejandroMinaya/hy3
+      plugins:
+        - name: hy3
+          enabled: true

@@ -1,7 +1,5 @@
 ---@module 'hl'
 
--- local hy3 = hl.plugin.hy3
-
 local mainMod = "SUPER"
 
 local files = "pcmanfm"
@@ -14,24 +12,6 @@ local coreScripts = home .. "/.config/hypr/core/scripts"
 local UserScripts = home .. "/.config/hypr/scripts"
 
 local UserConfigs = home .. "/.config/hypr/configs"
-
--- hy3
-
--- hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "g", hy3.change_group("untab"))
---
--- hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "h", hy3.make_group("h"))
---
--- hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "v", hy3.make_group("v"))
---
--- hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "o", hy3.make_group("opposite"))
---
--- hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "t", hy3.change_group("toggletab"))
---
--- hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "h", hy3.change_group("h"))
---
--- hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "o", hy3.change_group("opposite"))
---
--- hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "v", hl.dsp.window.float())
 
 -- rofi App launcher
 
@@ -150,16 +130,6 @@ hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "right", hl.dsp.window.move({ dir
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "up", hl.dsp.window.move({ direction = "u" }))
 
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "down", hl.dsp.window.move({ direction = "d" }))
-
--- Move focus with mainMod + h/j/k/l (hy3)
-
--- hl.bind(mainMod .. " + " .. "h", hy3.move_focus("l"))
---
--- hl.bind(mainMod .. " + " .. "l", hy3.move_focus("r"))
---
--- hl.bind(mainMod .. " + " .. "k", hy3.move_focus("u"))
---
--- hl.bind(mainMod .. " + " .. "j", hy3.move_focus("d"))
 
 -- Workspaces related
 

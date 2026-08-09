@@ -107,6 +107,10 @@ packages:
     - xdg-utils
     - brightnessctl
     - pacman-contrib
+    # Hyprland plugin build dependencies
+    - cmake
+    - meson
+    - cpio
 
   programs:
     - antigravity
