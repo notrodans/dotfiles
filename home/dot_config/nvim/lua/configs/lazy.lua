@@ -1,6 +1,5 @@
 return {
 	defaults = { lazy = true },
-	install = { colorscheme = { "blackmetal" } },
 
 	ui = {
 		border = "rounded",

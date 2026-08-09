@@ -2,7 +2,7 @@
 return {
 	base46 = {
 		---@diagnostic disable-next-line: assign-type-mismatch <my theme>
-		theme = "aquarium",
+		theme = "kanagawa-dragon",
 		transparency = false,
 		hl_override = {
 			CursorLine = { bg = "line" },
