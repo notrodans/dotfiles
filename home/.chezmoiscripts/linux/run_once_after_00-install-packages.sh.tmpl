@@ -81,9 +81,38 @@ install_paru() {
 
 install_arch_packages() {
   info "Installing Arch Linux packages..."
-  
-  # Packages from .packages.yaml
-  paru -Syyu --needed --noconfirm {{ template "all_packages.tmpl" . }}
+
+  local packages=(
+    {{ template "all_packages.tmpl" . }}
+  )
+
+{{ if .ci }}
+  # AUR builds depend on external PKGBUILDs and source archives and make CI flaky.
+  # Validate and install repository packages while leaving AUR builds to real installations.
+  local repo_packages=()
+  local aur_packages=()
+  local package
+
+  for package in "${packages[@]}"; do
+    if pacman -Si "$package" >/dev/null 2>&1; then
+      repo_packages+=("$package")
+    else
+      aur_packages+=("$package")
+    fi
+  done
+
+  if ((${#repo_packages[@]} > 0)); then
+    info "Installing repository packages in CI..."
+    sudo pacman -Syu --needed --noconfirm "${repo_packages[@]}"
+  fi
+
+  if ((${#aur_packages[@]} > 0)); then
+    info "Skipping AUR source builds in CI:"
+    printf '  - %s\n' "${aur_packages[@]}"
+  fi
+{{ else }}
+  paru -Syyu --needed --noconfirm "${packages[@]}"
+{{ end }}
 }
 
 setup_pacman_cleaner() {
