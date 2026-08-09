@@ -81,3 +81,15 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 	end,
 })
 
+autocmd("FileType", {
+	pattern = "lazy_backdrop",
+	callback = function(args)
+		for _, win in ipairs(vim.api.nvim_list_wins()) do
+			if vim.api.nvim_win_get_buf(win) == args.buf then
+				vim.api.nvim_win_set_config(win, {
+					border = "none",
+				})
+			end
+		end
+	end,
+})
