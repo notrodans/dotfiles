@@ -98,5 +98,5 @@ map("n", "<leader>dt", function()
 end, { desc = "Toggle Virtual Text" })
 
 -- scrolling
-vim.keymap.set("n", "<C-d>", vim.o.scroll .. "<C-d>")
-vim.keymap.set("n", "<C-u>", vim.o.scroll .. "<C-u>")
+map("n", "<C-d>", vim.o.scroll .. "j", { desc = "scroll down" })
+map("n", "<C-u>", vim.o.scroll .. "k", { desc = "scroll up" })
