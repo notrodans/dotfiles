@@ -59,16 +59,6 @@ autocmd("BufReadPost", {
 -- 	end,
 -- })
 
-autocmd("BufWinLeave", {
-	pattern = "*.*",
-	command = "mkview",
-})
-
-autocmd("BufWinEnter", {
-	pattern = "*.*",
-	command = "silent! loadview",
-})
-
 vim.api.nvim_create_autocmd("RecordingEnter", {
 	callback = function()
 		vim.notify("MACRO RECORDING @" .. vim.fn.reg_recording(), vim.log.levels.WARN)
