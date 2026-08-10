@@ -2,8 +2,25 @@ return {
 	{
 		"kristijanhusak/vim-dadbod-ui",
 		lazy = true,
-		cmd = { "DB", "DBUI" },
+		cmd = {
+			"DB",
+			"DBUI",
+			"DBUIToggle",
+			"DBUIFindBuffer",
+		},
 		ft = { "sql", "mysql", "plsql" },
+		keys = {
+			{
+				"<leader>db",
+				"<cmd>DBUIToggle<CR>",
+				desc = "Database UI toggle",
+			},
+			{
+				"<leader>df",
+				"<cmd>DBUIFindBuffer<CR>",
+				desc = "Database find buffer",
+			},
+		},
 		config = function()
 			vim.g.db_ui_disable_info_notifications = 1
 			vim.g.db_ui_save_location = vim.fn.getcwd() .. "/sql/"
