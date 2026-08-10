@@ -44,7 +44,7 @@ map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 map("n", "<C-n>", function()
 	require("nvim-tree.api").tree.toggle({
 		find_file = true,
-		focus = false,
+		focus = true,
 	})
 end, { desc = "nvimtree toggle window" })
 
