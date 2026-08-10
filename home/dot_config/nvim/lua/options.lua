@@ -40,6 +40,7 @@ o.cursorline = true
 o.cursorlineopt = "number,line"
 o.scroll = 4
 opt.scrolloff = 100
+opt.scrolloffpad = 1
 wo.wrap = false
 wo.linebreak = false
 
