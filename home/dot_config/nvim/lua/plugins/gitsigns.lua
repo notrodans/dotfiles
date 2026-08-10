@@ -10,8 +10,21 @@ return {
 		}
 
 		local gitsigns = require("gitsigns")
+		local map = vim.keymap.set
 
-		vim.keymap.set("n", "<leader>gd", function()
+		map("n", "]h", function()
+			gitsigns.nav_hunk("next")
+		end, { desc = "Git next hunk" })
+
+		map("n", "[h", function()
+			gitsigns.nav_hunk("prev")
+		end, { desc = "Git previous hunk" })
+
+		map("n", "<leader>gp", function()
+			gitsigns.preview_hunk()
+		end, { desc = "Git preview hunk" })
+
+		map("n", "<leader>gd", function()
 			gitsigns.diffthis()
 		end, { desc = "Git diffthis" })
 	end,
