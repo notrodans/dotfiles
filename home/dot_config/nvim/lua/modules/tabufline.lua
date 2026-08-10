@@ -44,21 +44,32 @@ local function available_width()
 	return math.max(1, vim.o.columns - tabs_width())
 end
 
-local function current_index(bufs)
+local function anchor_buffer(bufs)
 	local current = api.nvim_get_current_buf()
 
 	for i, buf in ipairs(bufs) do
 		if buf == current then
-			return i
+			vim.t.tabufline_anchor = buf
+			return buf, i
 		end
 	end
 
-	return 1
+	local anchor = vim.t.tabufline_anchor
+
+	if anchor then
+		for i, buf in ipairs(bufs) do
+			if buf == anchor then
+				return buf, i
+			end
+		end
+	end
+
+	vim.t.tabufline_anchor = bufs[1]
+
+	return bufs[1], 1
 end
 
-local function visible_window(bufs, capacity)
-	local current = current_index(bufs)
-
+local function visible_window(bufs, capacity, current)
 	local left = math.floor((capacity - 1) / 2)
 
 	local first = current - left
@@ -77,6 +88,23 @@ local function visible_window(bufs, capacity)
 	return first, last
 end
 
+local function pad_to_width(content, width, buf, active)
+	local rendered = api.nvim_eval_statusline(content, {
+		use_tabline = true,
+	}).width
+	local missing = width - rendered
+
+	if missing <= 0 then
+		return content
+	end
+
+	local tabufline_utils = utils()
+	local hl = "BufO" .. (active and "n" or "ff")
+	local padding = tabufline_utils.btn(string.rep(" ", missing), nil, "GoToBuf", buf)
+
+	return content .. tabufline_utils.txt(padding, hl)
+end
+
 function M.buffers()
 	local opts = config()
 	local tabufline_utils = utils()
@@ -89,13 +117,14 @@ function M.buffers()
 		return ""
 	end
 
+	local anchor, current = anchor_buffer(bufs)
 	local available = available_width()
 
 	local capacity = math.max(1, math.floor(available / opts.bufwidth))
 
 	capacity = math.min(capacity, #bufs)
 
-	local first, last = visible_window(bufs, capacity)
+	local first, last = visible_window(bufs, capacity, current)
 	local count = last - first + 1
 
 	local width = math.floor(available / count)
@@ -109,7 +138,12 @@ function M.buffers()
 		result[#result + 1] = tabufline_utils.style_buf(bufs[i], i, width + extra)
 	end
 
-	return table.concat(result) .. tabufline_utils.txt("%=", "Fill")
+	local content = table.concat(result)
+	local last_buf = bufs[last]
+
+	content = pad_to_width(content, available, last_buf, anchor == last_buf)
+
+	return content .. tabufline_utils.txt("%=", "Fill")
 end
 
 return M
