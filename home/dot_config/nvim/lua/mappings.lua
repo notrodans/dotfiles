@@ -41,7 +41,12 @@ map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 -- nvimtree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+map("n", "<C-n>", function()
+	require("nvim-tree.api").tree.toggle({
+		find_file = true,
+		focus = false,
+	})
+end, { desc = "nvimtree toggle window" })
 
 map("n", "<leader>th", function()
 	require("nvchad.themes").open()
