@@ -7,8 +7,6 @@ local namespace = api.nvim_create_namespace("AdaptiveScrolloff")
 local keyboard_scrolloff = 100
 local mouse_scrolloff = 0
 
-local mouse_input = false
-
 local function is_mouse_input(key)
 	local name = vim.fn.keytrans(key)
 
@@ -39,31 +37,20 @@ local function mouse()
 		return
 	end
 
-	mouse_input = true
-
-	-- Important: `scrolloff` changes before
-	-- Neovim processes the click itself.
+	-- Change scrolloff before Neovim processes the mouse input itself.
 	api.nvim_set_option_value("scrolloff", mouse_scrolloff, {
 		win = winid,
 	})
 end
 
 local function keyboard()
-	local winid = api.nvim_get_current_win()
-
-	mouse_input = false
-
 	api.nvim_set_option_value("scrolloff", keyboard_scrolloff, {
-		win = winid,
+		win = api.nvim_get_current_win(),
 	})
 end
 
 function M.setup()
-	local group = api.nvim_create_augroup("AdaptiveScrolloff", {
-		clear = true,
-	})
-
-	-- protection against re-registration after :source.
+	-- Protect against re-registration after :source.
 	vim.on_key(nil, namespace)
 
 	vim.on_key(function(key, typed)
@@ -74,23 +61,11 @@ function M.setup()
 			return
 		end
 
-		-- Set to “empty” for programmatically generated events.
-		-- We are only interested in actual keyboard input.
+		-- Ignore programmatically generated input.
 		if typed ~= "" then
 			keyboard()
 		end
 	end, namespace)
-
-	api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-		group = group,
-		callback = function()
-			if mouse_input then
-				return
-			end
-
-			vim.cmd("normal! zz")
-		end,
-	})
 end
 
 return M
