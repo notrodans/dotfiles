@@ -32,17 +32,11 @@ return {
 			interval = 60,
 			notify = false,
 		},
+		extensions = {
+			nvimtree = {},
+			tabufline = {
+				enable_in_tab = true,
+			},
+		},
 	},
-	config = function(_, opts)
-		local resession = require("resession")
-
-		resession.setup(opts)
-
-		vim.api.nvim_create_autocmd("VimLeavePre", {
-			group = vim.api.nvim_create_augroup("ResessionWorkspace", { clear = true }),
-			callback = function()
-				resession.save_all({ notify = false })
-			end,
-		})
-	end,
 }
