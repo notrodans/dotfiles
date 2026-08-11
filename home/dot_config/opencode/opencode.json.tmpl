@@ -1,41 +1,20 @@
 {
 	"$schema": "https://opencode.ai/config.json",
 	"plugin": [
-		"opencode-gemini-auth@latest",
+		"opencode-gemini-auth",
 		"oh-my-opencode-slim",
-		"oc-codex-multi-auth"
+		"oc-codex-multi-auth",
+		"@slkiser/opencode-quota"
 	],
 	"compaction": {
-		"auto": false,
-		"prune": false,
-		"reserved": 10000
+		"auto": true,
+		"prune": true,
+		"reserved": 32000
 	},
 	"permission": {
 		"bash": {
-			"*": "allow",
-			"sudo *": "ask",
-			"rm *": "ask",
-			"/bin/rm *": "ask",
-			"/usr/bin/rm *": "ask",
-			"mv *": "ask",
-			"chmod *": "ask",
-			"chown *": "ask",
-			"shred *": "ask",
-			"truncate *": "ask",
-			"chezmoi apply*": "ask",
-			"chezmoi update*": "ask",
-			"chezmoi forget*": "ask",
-			"git commit*": "ask",
 			"git push*": "ask",
 			"git remote*": "ask",
-			"git reset*": "ask",
-			"git restore*": "ask",
-			"git clean*": "ask",
-			"git checkout -f*": "ask",
-			"git checkout --*": "ask",
-			"git branch -D*": "ask",
-			"git stash clear*": "ask",
-			"git stash drop*": "ask",
 			"gh *": "ask"
 		},
 		"github_push_files": "ask",
@@ -57,15 +36,23 @@
 		}
 	},
 	"mcp": {
+		"codegraph": {
+			"type": "local",
+			"command": ["codegraph", "serve", "--mcp"],
+			"enabled": true
+		},
 		"chrome-devtools": {
 			"type": "local",
-			"command": ["npx", "chrome-devtools-mcp@latest"],
-			"timeout": 30000
+			"command": [
+				"npx",
+				"-y",
+				"chrome-devtools-mcp@latest",
+				"--autoConnect"
+			]
 		}{{- if .secrets }},
 		"DeepWiki": {
 			"type": "remote",
-			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key={{ (bitwarden "item" "fastmcp-key").login.password }}",
-			"timeout": 30000
+			"url": "https://mcp.fastmcp.me/9a199fde-af87-4253-bacd-022a69eb0193/69/mcp?fastmcp_gateway_key={{ (bitwarden "item" "fastmcp-key").login.password }}"
 		},
 		"dockerhub": {
 			"type": "local",
@@ -82,13 +69,11 @@
 				"mcp/dockerhub",
 				"--transport=stdio",
 				"--username={{ .user }}"
-			],
-			"timeout": 30000
+			]
 		},
 		"github": {
 			"type": "remote",
 			"url": "https://api.githubcopilot.com/mcp/",
-			"timeout": 30000,
 			"headers": {
 				"Authorization": "Bearer {{ (bitwarden "item" "github-token").login.password }}"
 			}

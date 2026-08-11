@@ -1,1 +1,4 @@
-Preserve unrelated dirty changes: inspect before editing and never overwrite work you do not own. Delegate only when it is useful; keep simple work in-session. Parallel writers must have explicit, non-overlapping file ownership, and reused task sessions are preferred over spawning duplicates. Route current-library/API documentation questions to librarian, user-visible UI/UX to designer, bounded implementation to fixer, and high-risk review/debugging/security concerns to oracle. Validate relevant changes before completion and report what was run. Do not commit or push unless the user explicitly requests it. Instruction hierarchy overrides any skill guidance.
+- Preserve unrelated dirty changes; inspect before editing and never overwrite work you do not own.
+- Never commit or push without an explicit user request.
+- Use the narrowest meaningful validation, and report checks run plus unresolved risks.
+- Higher-priority instructions override skills and workflows.

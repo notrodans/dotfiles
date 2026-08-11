@@ -25,32 +25,39 @@
 			"oracle": {
 				"model": "openai/gpt-5.6-sol",
 				"variant": "high",
-				"skills": ["simplify"],
-				"mcps": []
+				"skills": ["simplify", "caveman"],
+				"mcps": ["codegraph"]
 			},
 			"librarian": {
 				"model": "openai/gpt-5.6-luna",
 				"variant": "low",
-				"skills": [],
-				"mcps": ["websearch", "context7", "gh_grep"]
+				"skills": ["caveman"],
+				"mcps": ["websearch", "context7", "gh_grep", "codegraph"]
 			},
 			"explorer": {
 				"model": "openai/gpt-5.6-luna",
 				"variant": "low",
-				"skills": [],
-				"mcps": []
+				"skills": ["caveman"],
+				"mcps": ["codegraph"]
 			},
 			"designer": {
 				"model": "openai/gpt-5.6-luna",
 				"variant": "medium",
-				"skills": [],
-				"mcps": []
+				"skills": ["caveman"],
+				"mcps": ["codegraph"]
 			},
 			"fixer": {
 				"model": "openai/gpt-5.6-luna",
 				"variant": "xhigh",
-				"skills": [],
-				"mcps": []
+				"skills": ["caveman"],
+				"mcps": ["codegraph"]
+			},
+			"commiter": {
+				"model": "openai/gpt-5.6-luna",
+				"variant": "medium",
+				"skills": ["atomic-commits", "caveman"],
+				"mcps": ["codegraph"],
+				"orchestratorPrompt": "Delegate only when the user explicitly requests planning or creating a Git commit; never delegate for implementation completion, diff review, staging alone, or commit-message drafting."
 			}
 		},
 		"opencode-go": {
