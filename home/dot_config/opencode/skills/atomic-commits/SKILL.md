@@ -22,8 +22,17 @@ block stating the missing scope; do not start a long interview.
 ## Commit rules
 
 - Run narrow, relevant checks when practical and report the checks and results.
-- Use concise imperative commit messages. Do not require Conventional Commits,
-  a 72-character subject, a body, existing tests, comments, or repeated questions.
+- Every commit MUST follow Conventional Commits 1.0.0:
+  `<type>[optional scope][optional !]: <description>`.
+  Use lowercase types; `feat` for a new feature and `fix` for a bug fix. Other
+  valid types include `build`, `chore`, `ci`, `docs`, `perf`, `refactor`,
+  `style`, and `test`. Keep the description concise and imperative.
+- Every commit MUST include a body, even though Conventional Commits makes it
+  optional. Separate it from the header with one blank line and write:
+  `What: <what changed>` and `Why: <why it changed>`.
+- Mark breaking changes with `!` immediately before `:` or a separate
+  `BREAKING CHANGE: <description>` footer. Separate footers from the body with
+  one blank line; `BREAKING CHANGE` must be uppercase.
 - Do not edit code merely to make a commit.
 - Do not push.
 - Create a commit only after explicit authorization. Report its hash, **What**
