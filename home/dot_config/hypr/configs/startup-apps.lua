@@ -1,51 +1,11 @@
----@module 'hl'
-
---Commands & Apps to be executed at launch
+-- -@module 'hl'
 
 local home = os.getenv("HOME")
 local coreScripts = home .. "/.config/hypr/core/scripts"
 
-local UserScripts = home .. "/.config/hypr/scripts"
-
-local wallDIR = home .. "/Pictures/wallpapers"
-
--- plugin manager
-
--- wallpaper stuff / More wallpaper options below
-
--- Startup
-
--- Polkit (Polkit Gnome / KDE)
-
--- starup apps
-
--- exec-once = waybar &
-
---exec-once = blueman-applet &
-
---exec-once = rog-control-center &
-
---clipboard manager
-
--- sway-idle with lock only
-
--- exec-once = swayidle -w timeout 900 '$lock'
-
--- sway-idle with lock and sleep
-
---exec-once = swayidle -w timeout 900 '$lock' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep '$lock'
-
--- sway idle without lock
-
---exec-once = swayidle -w  timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
-
--- xdg-desktop-portal-hyprland (should be auto starting. However, you can force to start)
-
--- exec-once = $coreScripts/PortalHyprland.sh
-
 -- Autostart
 hl.on("hyprland.start", function()
-	hl.exec_cmd("hyprctl setcursor Pixel-Linux-Cursor-master 24")
+	hl.exec_cmd("hyprctl setcursor Adwaita 24")
 	hl.exec_cmd("hyprpm reload -n")
 	hl.exec_cmd("awww-daemon &")
 	hl.exec_cmd("awww query && awww restore")

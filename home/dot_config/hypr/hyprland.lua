@@ -14,6 +14,7 @@ dofile(configs .. "/monitors.lua")
 dofile(configs .. "/user-settings.lua")
 dofile(configs .. "/user-keybinds.lua")
 dofile(configs .. "/startup-apps.lua")
+dofile(configs .. "/startup-apps.lua")
 dofile(plugins .. "/hy3.lua")
 
 -- Autostart

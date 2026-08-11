@@ -12,7 +12,7 @@ hl.config({
 		resize_on_border = 1,
 		extend_border_grab_area = 1,
 		allow_tearing = 1,
-		layout = "hy3",
+		layout = "master",
 		col = {
 			active_border = "rgba(60606040)",
 			inactive_border = "rgb(000000)",

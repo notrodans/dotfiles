@@ -32,7 +32,7 @@ hl.config({
 
 				colors = {
 					active = "rgba(00000040)",
-					active_border = "rgba(333333ee)",
+					active_border = "rgba(606060aa)",
 					active_text = "rgba(ffffffff)",
 
 					active_alt_monitor = "rgba(60606040)",
@@ -44,7 +44,7 @@ hl.config({
 					focused_text = "rgba(ffffffff)",
 
 					inactive = "rgba(30303020)",
-					inactive_border = "rgba(606060aa)",
+					inactive_border = "rgba(333333ee)",
 					inactive_text = "rgba(ffffffff)",
 
 					urgent = "rgba(ff223340)",

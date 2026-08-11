@@ -1,7 +1,7 @@
 ---@module 'hl'
 
 -- fonts
-hl.env("FREETYPE_PROPERTIES", "cff:no-stem-darkening=0 autofitter:no-stem-darkening=0")
+-- hl.env("FREETYPE_PROPERTIES", "cff:no-stem-darkening=0 autofitter:no-stem-darkening=0")
 
 -- Toolkit Backend Variables
 hl.env("GDK_BACKEND", "wayland")

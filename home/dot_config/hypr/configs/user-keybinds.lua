@@ -1,17 +1,11 @@
 ---@module 'hl'
 
 local mainMod = "SUPER"
-
 local files = "pcmanfm"
-
 local term = "kitty"
-
 local home = os.getenv("HOME")
 local coreScripts = home .. "/.config/hypr/core/scripts"
-
-local UserScripts = home .. "/.config/hypr/scripts"
-
-local UserConfigs = home .. "/.config/hypr/configs"
+local userScripts = home .. "/.config/hypr/scripts"
 
 -- rofi App launcher
 
@@ -23,11 +17,11 @@ hl.bind(
 
 hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"))
 
-hl.bind(mainMod .. " + " .. "Return", hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + " .. "Return", hl.dsp.exec_cmd(term))
 
 -- Launch terminal
 
-hl.bind(mainMod .. " + " .. "T", hl.dsp.exec_cmd("pcmanfm"))
+hl.bind(mainMod .. " + " .. "T", hl.dsp.exec_cmd(files))
 
 -- hl.bind("CTRL + ALT" .. " + " .. "Delete", hl.dispatch(exit))
 
@@ -49,7 +43,7 @@ hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "R", hl.dsp.exec_cmd(coreScripts .
 
 -- FEATURES / EXTRAS (UserScripts)
 
-hl.bind(mainMod .. " + " .. "W", hl.dsp.exec_cmd(UserScripts .. "/WallpaperSelect.sh"))
+hl.bind(mainMod .. " + " .. "W", hl.dsp.exec_cmd(userScripts .. "/WallpaperSelect.sh"))
 
 -- Select wallpaper to apply
 
