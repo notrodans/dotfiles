@@ -7,15 +7,15 @@ local home = os.getenv("HOME")
 local coreScripts = home .. "/.config/hypr/core/scripts"
 local userScripts = home .. "/.config/hypr/scripts"
 
--- rofi App launcher
+-- Fuzzel app launcher
 
 hl.bind(
 	mainMod .. " + " .. mainMod .. "_L",
-	hl.dsp.exec_cmd("pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"),
+	hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"),
 	{ repeating = true }
 )
 
-hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"))
+hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"))
 
 hl.bind(mainMod .. " + " .. "Return", hl.dsp.exec_cmd(term))
 
@@ -37,9 +37,9 @@ hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "Space", hl.dsp.window.float())
 
 -- FEATURES / EXTRAS
 
-hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "R", hl.dsp.exec_cmd(coreScripts .. "/Refresh.sh"))
+hl.bind(mainMod .. " + " .. "ALT" .. " + "R", hl.dsp.exec_cmd(coreScripts .. "/Refresh.sh"))
 
--- Refresh waybar, rofi
+-- Refresh desktop components
 
 -- FEATURES / EXTRAS (UserScripts)
 
@@ -55,7 +55,7 @@ hl.bind(mainMod .. " + " .. "B", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"))
 
 -- Master Layout
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "D", hl.dsp.layout("removemaster"))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "D", hl.dsp.layout("removemaster"))
 
 hl.bind(mainMod .. " + " .. "I", hl.dsp.layout("addmaster"))
 
@@ -69,7 +69,7 @@ hl.bind(mainMod .. " + " .. "P", hl.dsp.window.pseudo())
 
 -- dwindle
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "Return", hl.dsp.layout("swapwithmaster"))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "Return", hl.dsp.layout("swapwithmaster"))
 
 -- Special Keys / Hot Keys
 
@@ -105,7 +105,7 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s +10%"))
 
 hl.bind(mainMod .. " + " .. "Print", hl.dsp.exec_cmd(coreScripts .. "/ScreenShot.sh --now"))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "Print", hl.dsp.exec_cmd(coreScripts .. "/ScreenShot.sh --area"))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "Print", hl.dsp.exec_cmd(coreScripts .. "/ScreenShot.sh --area"))
 
 hl.bind("ALT" .. " + " .. "Print", hl.dsp.exec_cmd(coreScripts .. "/ScreenShot.sh --active"))
 
@@ -113,23 +113,23 @@ hl.bind("ALT" .. " + " .. "Print", hl.dsp.exec_cmd(coreScripts .. "/ScreenShot.s
 
 -- screenshot with swappy (another screenshot tool)
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "S", hl.dsp.exec_cmd(coreScripts .. "/ScreenShot.sh --swappy"))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "S", hl.dsp.exec_cmd(coreScripts .. "/ScreenShot.sh --swappy"))
 
 -- Move windows
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "left", hl.dsp.window.move({ direction = "l" }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "left", hl.dsp.window.move({ direction = "l" }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "right", hl.dsp.window.move({ direction = "r" }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "right", hl.dsp.window.move({ direction = "r" }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "up", hl.dsp.window.move({ direction = "u" }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "up", hl.dsp.window.move({ direction = "u" }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "down", hl.dsp.window.move({ direction = "d" }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "down", hl.dsp.window.move({ direction = "d" }))
 
 -- Workspaces related
 
 hl.bind(mainMod .. " + " .. "tab", hl.dsp.focus({ workspace = "m+1" }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "tab", hl.dsp.focus({ workspace = "m-1" }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "tab", hl.dsp.focus({ workspace = "m-1" }))
 
 -- The following mappings use the key codes to better support various keyboard layouts
 
@@ -159,63 +159,63 @@ hl.bind(mainMod .. " + " .. "code:19", hl.dsp.focus({ workspace = 10 }))
 
 -- Move active window and follow to workspace mainMod + SHIFT [0-9]
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:10", hl.dsp.window.move({ workspace = 1 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:10", hl.dsp.window.move({ workspace = 1 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:11", hl.dsp.window.move({ workspace = 2 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:11", hl.dsp.window.move({ workspace = 2 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:12", hl.dsp.window.move({ workspace = 3 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:12", hl.dsp.window.move({ workspace = 3 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:13", hl.dsp.window.move({ workspace = 4 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:13", hl.dsp.window.move({ workspace = 4 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:14", hl.dsp.window.move({ workspace = 5 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:14", hl.dsp.window.move({ workspace = 5 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:15", hl.dsp.window.move({ workspace = 6 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:15", hl.dsp.window.move({ workspace = 6 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:16", hl.dsp.window.move({ workspace = 7 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:16", hl.dsp.window.move({ workspace = 7 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:17", hl.dsp.window.move({ workspace = 8 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:17", hl.dsp.window.move({ workspace = 8 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:18", hl.dsp.window.move({ workspace = 9 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:18", hl.dsp.window.move({ workspace = 9 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "code:19", hl.dsp.window.move({ workspace = 10 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "code:19", hl.dsp.window.move({ workspace = 10 }))
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "bracketleft", hl.dsp.window.move({ workspace = "-1" }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "bracketleft", hl.dsp.window.move({ workspace = "-1" }))
 
 -- brackets [ or ]
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "bracketright", hl.dsp.window.move({ workspace = "+1" }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + "bracketright", hl.dsp.window.move({ workspace = "+1" }))
 
 -- Move active window to a workspace silently mainMod + CTRL [0-9]
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:10", hl.dsp.window.move({ workspace = 1 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:10", hl.dsp.window.move({ workspace = 1 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:11", hl.dsp.window.move({ workspace = 2 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:11", hl.dsp.window.move({ workspace = 2 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:12", hl.dsp.window.move({ workspace = 3 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:12", hl.dsp.window.move({ workspace = 3 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:13", hl.dsp.window.move({ workspace = 4 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:13", hl.dsp.window.move({ workspace = 4 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:14", hl.dsp.window.move({ workspace = 5 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:14", hl.dsp.window.move({ workspace = 5 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:15", hl.dsp.window.move({ workspace = 6 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:15", hl.dsp.window.move({ workspace = 6 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:16", hl.dsp.window.move({ workspace = 7 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:16", hl.dsp.window.move({ workspace = 7 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:17", hl.dsp.window.move({ workspace = 8 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:17", hl.dsp.window.move({ workspace = 8 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:18", hl.dsp.window.move({ workspace = 9 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:18", hl.dsp.window.move({ workspace = 9 }, { follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "code:19", hl.dsp.window.move({ workspace = 10 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + "code:19", hl.dsp.window.move({ workspace = 10 }, { follow = false }))
 
 hl.bind(
-	mainMod .. " + " .. "CTRL" .. " + " .. "bracketleft",
+	mainMod .. " + " .. "CTRL" .. " + "bracketleft",
 	hl.dsp.window.move({ workspace = "-1" }, { follow = false })
 )
 
 -- brackets [ or ]
 
 hl.bind(
-	mainMod .. " + " .. "CTRL" .. " + " .. "bracketright",
+	mainMod .. " + " .. "CTRL" .. " + "bracketright",
 	hl.dsp.window.move({ workspace = "+1" }, { follow = false })
 )
 
