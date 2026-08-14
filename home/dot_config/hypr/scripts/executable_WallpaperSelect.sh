@@ -23,8 +23,8 @@ PICS=($(ls "${wallDIR}" | grep -E ".jpg$|.jpeg$|.png$|.gif$"))
 RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
 RANDOM_PIC_NAME="${#PICS[@]}. random"
 
-# Rofi command
-rofi_command="rofi -show -dmenu -config ~/.config/rofi/config-wallpaper.rasi"
+# Fuzzel command
+fuzzel_command=(fuzzel --dmenu --prompt="Wallpaper › " --cache=/dev/null --minimal-lines)
 
 menu() {
   for i in "${!PICS[@]}"; do
@@ -42,7 +42,7 @@ menu() {
 awww query || awww init
 
 main() {
-  choice=$(menu | ${rofi_command})
+  choice=$(menu | "${fuzzel_command[@]}")
 
   # No choice case
   if [[ -z $choice ]]; then
@@ -73,9 +73,9 @@ main() {
   fi
 }
 
-# Check if rofi is already running
-if pidof rofi > /dev/null; then
-  pkill rofi
+# Check if fuzzel is already running
+if pidof fuzzel > /dev/null; then
+  pkill -x fuzzel
   exit 0
 fi
 
