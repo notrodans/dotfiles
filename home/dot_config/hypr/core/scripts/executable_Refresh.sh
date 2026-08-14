@@ -1,6 +1,6 @@
 #!/bin/bash
 # Kill already running processes
-_ps=(waybar rofi)
+_ps=(waybar)
 for _prs in "${_ps[@]}"; do
     if pidof "${_prs}" >/dev/null; then
         pkill "${_prs}"
