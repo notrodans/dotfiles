@@ -78,7 +78,7 @@ packages:
     - hyprpicker
     - xdg-desktop-portal-hyprland
     - xdg-desktop-portal-gtk
-    - rofi-wayland
+    - fuzzel
     - waybar
     - cliphist
     - grim
