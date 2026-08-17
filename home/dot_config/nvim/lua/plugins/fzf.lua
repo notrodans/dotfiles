@@ -6,6 +6,10 @@ return {
 		local fzf = require("fzf-lua")
 		local actions = fzf.actions
 
+		local function workspace_cwd()
+			return vim.fn.getcwd(-1, -1)
+		end
+
 		fzf.register_ui_select()
 
 		vim.keymap.set("n", "<leader>fq", function()
@@ -17,7 +21,7 @@ return {
 		end, { desc = "Fzf resume previous picker" })
 
 		vim.keymap.set("n", "<leader>fg", function()
-			fzf.live_grep()
+			fzf.live_grep({ cwd = workspace_cwd() })
 		end, { desc = "Fzf live grep" })
 
 		vim.keymap.set("n", "<leader>fb", function()
@@ -33,7 +37,7 @@ return {
 		end, { desc = "Fzf find marks" })
 
 		vim.keymap.set("n", "<leader>ff", function()
-			fzf.files()
+			fzf.files({ cwd = workspace_cwd() })
 		end, { desc = "Fzf find files" })
 
 		vim.keymap.set("n", "<leader>fo", function()
@@ -49,11 +53,11 @@ return {
 		end, { desc = "Fzf find keymaps" })
 
 		vim.keymap.set({ "n", "v" }, "<leader>fw", function()
-			fzf.grep_cword()
+			fzf.grep_cword({ cwd = workspace_cwd() })
 		end, { desc = "Fzf find current word" })
 
 		vim.keymap.set({ "n", "v" }, "<leader>fW", function()
-			fzf.grep_cWORD()
+			fzf.grep_cWORD({ cwd = workspace_cwd() })
 		end, { desc = "Fzf find current WORD" })
 
 		vim.keymap.set({ "n", "v" }, "<leader>fi", function()
@@ -77,7 +81,7 @@ return {
 
 		-- git
 		vim.keymap.set("n", "<leader>gbb", function()
-			fzf.git_branches()
+			fzf.git_branches({ cwd = workspace_cwd() })
 		end, { desc = "Fzf git branches" })
 
 		vim.keymap.set("n", "<leader>gbc", function()
@@ -85,11 +89,11 @@ return {
 		end, { desc = "Fzf git branch commits" })
 
 		vim.keymap.set("n", "<leader>gc", function()
-			fzf.git_commits()
+			fzf.git_commits({ cwd = workspace_cwd() })
 		end, { desc = "Fzf git commits" })
 
 		vim.keymap.set("n", "<leader>gs", function()
-			fzf.git_status()
+			fzf.git_status({ cwd = workspace_cwd() })
 		end, { desc = "Fzf git status" })
 
 		-- lsp
