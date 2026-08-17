@@ -72,7 +72,12 @@ return {
 	filters = { dotfiles = true },
 	disable_netrw = false,
 	hijack_cursor = true,
-	sync_root_with_cwd = true,
+	sync_root_with_cwd = false,
+	actions = {
+		change_dir = {
+			enable = false,
+		},
+	},
 	update_focused_file = {
 		enable = false,
 		update_root = false,
