@@ -20,7 +20,16 @@ local function root()
 		return vim.fs.dirname(first.absolute_path)
 	end
 
-	return vim.fn.getcwd()
+	return vim.fn.getcwd(-1, -1)
+end
+
+local function normalize_local_cwd(winid)
+	api.nvim_win_call(winid, function()
+		if vim.fn.haslocaldir() == 1 then
+			local cwd = vim.fn.getcwd(-1, -1)
+			vim.cmd("lcd " .. vim.fn.fnameescape(cwd))
+		end
+	end)
 end
 
 local function collect_open(nodes, result)
@@ -142,6 +151,7 @@ M.load_win = function(winid, state)
 	}) or api.nvim_get_current_win()
 
 	api.nvim_set_current_win(tree_win)
+	normalize_local_cwd(tree_win)
 	restore_open(state.expanded)
 
 	vim.schedule(function()
