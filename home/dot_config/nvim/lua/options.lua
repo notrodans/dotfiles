@@ -68,7 +68,8 @@ o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
 -- opt.guicursor = "n-v-c:block,i-ci-ve:ver25"
-opt.guicursor = "a:block-blinkon250"
+-- opt.guicursor = "a:block-blinkon250"
+opt.guicursor = "n-v-c:block,i-ci-ve:hor20,r-cr-o:hor20"
 o.swapfile = false
 
 -- local nvim config
