@@ -79,23 +79,6 @@ return {
 			fzf.diagnostics_workspace()
 		end, { desc = "LSP diagnostics workspace" })
 
-		-- git
-		vim.keymap.set("n", "<leader>gbb", function()
-			fzf.git_branches({ cwd = workspace_cwd() })
-		end, { desc = "Fzf git branches" })
-
-		vim.keymap.set("n", "<leader>gbc", function()
-			fzf.git_bcommits()
-		end, { desc = "Fzf git branch commits" })
-
-		vim.keymap.set("n", "<leader>gc", function()
-			fzf.git_commits({ cwd = workspace_cwd() })
-		end, { desc = "Fzf git commits" })
-
-		vim.keymap.set("n", "<leader>gs", function()
-			fzf.git_status({ cwd = workspace_cwd() })
-		end, { desc = "Fzf git status" })
-
 		-- lsp
 		vim.keymap.set({ "n", "x" }, "gra", function()
 			fzf.lsp_code_actions({ silent = true })
