@@ -97,7 +97,7 @@ return {
 		--
 		root_folder_label = false,
 		add_trailing = false,
-		highlight_git = true,
+		highlight_git = false,
 		indent_width = 1,
 		indent_markers = { enable = false },
 		icons = {
@@ -109,12 +109,11 @@ return {
 					open = "",
 					symlink = "",
 				},
-				git = { unmerged = "" },
 			},
 		},
 	},
 	git = {
-		show_on_dirs = false,
+		enable = false,
 	},
 	diagnostics = {
 		enable = true,
