@@ -1,5 +1,14 @@
 local autocmd = vim.api.nvim_create_autocmd
 
+vim.filetype.add({
+	pattern = {
+		["docker%-compose.*%.yml"] = "yaml.docker-compose",
+		["docker%-compose.*%.yaml"] = "yaml.docker-compose",
+		["compose%.yml"] = "yaml.docker-compose",
+		["compose%.yaml"] = "yaml.docker-compose",
+	},
+})
+
 autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
@@ -26,29 +35,6 @@ autocmd({ "BufEnter", "WinEnter" }, {
 				})
 			end
 		end)
-	end,
-})
-
-autocmd({ "BufRead", "BufNewFile" }, {
-	group = vim.api.nvim_create_augroup("DockerComposeFiletype", { clear = true }),
-	pattern = {
-		"docker-compose*.yml",
-		"docker-compose*.yaml",
-		"compose.yml",
-		"compose.yaml",
-	},
-	callback = function()
-		vim.bo.filetype = "yaml.docker-compose"
-	end,
-})
-
-autocmd("BufReadPost", {
-	pattern = "*",
-	callback = function()
-		local last_pos = vim.fn.line("'\"")
-		if last_pos > 0 and last_pos <= vim.fn.line("$") then
-			vim.cmd('normal! g`"')
-		end
 	end,
 })
 
