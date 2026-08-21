@@ -38,7 +38,6 @@ local servers = {
 	"emmet_language_server",
 	"docker_compose_language_service",
 	"jinja_lsp",
-	"graphql",
 	"svelte",
 }
 
