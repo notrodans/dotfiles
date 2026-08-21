@@ -67,6 +67,15 @@ local function restore_open(paths)
 	end
 end
 
+local function resize_width(winid, width)
+	if api.nvim_win_resize then
+		pcall(api.nvim_win_resize, winid, width, -1, { anchor = "right" })
+		return
+	end
+
+	pcall(api.nvim_win_set_width, winid, width)
+end
+
 local function restore_view(winid, state)
 	if not api.nvim_win_is_valid(winid) then
 		return
@@ -104,7 +113,7 @@ local function restore_view(winid, state)
 	end)
 
 	if state.width then
-		pcall(api.nvim_win_set_width, winid, state.width)
+		resize_width(winid, state.width)
 	end
 end
 
