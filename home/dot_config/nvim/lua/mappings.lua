@@ -17,6 +17,11 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "general save file" })
 map("n", "yY", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 
+map({ "n", "v" }, "<leader>u", function()
+	vim.cmd("packadd nvim.undotree")
+	vim.cmd("Undotree")
+end, { desc = "undotree toggle window" })
+
 -- tabs
 map("n", "<leader>tc", "<cmd>tabnew<CR>", { desc = "New tab" })
 map("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" })
