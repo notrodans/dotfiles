@@ -2,11 +2,13 @@ local autocmd = vim.api.nvim_create_autocmd
 local ucommand = vim.api.nvim_create_user_command
 
 vim.filetype.add({
+	filename = {
+		["compose.yml"] = "yaml.docker-compose",
+		["compose.yaml"] = "yaml.docker-compose",
+	},
 	pattern = {
-		["docker%-compose.*%.yml"] = "yaml.docker-compose",
-		["docker%-compose.*%.yaml"] = "yaml.docker-compose",
-		["compose%.yml"] = "yaml.docker-compose",
-		["compose%.yaml"] = "yaml.docker-compose",
+		["docker%-compose.*%.yml$"] = "yaml.docker-compose",
+		["docker%-compose.*%.yaml$"] = "yaml.docker-compose",
 	},
 })
 
