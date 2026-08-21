@@ -98,8 +98,8 @@ map("n", "<leader>dt", function()
 end, { desc = "Toggle Virtual Text" })
 
 -- scrolling
-map("n", "<C-d>", vim.o.scroll .. "j", { desc = "scroll down" })
-map("n", "<C-u>", vim.o.scroll .. "k", { desc = "scroll up" })
+map({ "n", "x" }, "<C-d>", vim.o.scroll .. "j", { desc = "scroll down" })
+map({ "n", "x" }, "<C-u>", vim.o.scroll .. "k", { desc = "scroll up" })
 
 -- macroses
 -- vim.keymap.set("n", "q", "<nop>", { silent = true }) -- fucking piece of shit
