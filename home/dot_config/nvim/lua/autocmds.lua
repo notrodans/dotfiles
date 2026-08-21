@@ -1,4 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
+local ucommand = vim.api.nvim_create_user_command
 
 vim.filetype.add({
 	pattern = {
@@ -45,13 +46,13 @@ autocmd({ "BufEnter", "WinEnter" }, {
 -- 	end,
 -- })
 
-vim.api.nvim_create_autocmd("RecordingEnter", {
+autocmd("RecordingEnter", {
 	callback = function()
 		vim.notify("MACRO RECORDING @" .. vim.fn.reg_recording(), vim.log.levels.WARN)
 	end,
 })
 
-vim.api.nvim_create_autocmd("RecordingLeave", {
+autocmd("RecordingLeave", {
 	callback = function()
 		vim.notify("MACRO RECORDING STOPPED")
 	end,
@@ -68,4 +69,44 @@ autocmd("FileType", {
 			end
 		end
 	end,
+})
+
+ucommand("Shell", function(opts)
+	local function unique_buf_name(command)
+		local base = ("*Shell: %s*"):format(command)
+		local name = base
+		local i = 2
+
+		while vim.fn.bufexists(name) == 1 do
+			name = ("%s <%d>"):format(base, i)
+			i = i + 1
+		end
+
+		return name
+	end
+
+	local output = vim.fn.systemlist(opts.args)
+
+	if #output <= 1 then
+		vim.notify(output[1] or "")
+		return
+	end
+
+	vim.cmd("botright new")
+
+	local buf = vim.api.nvim_get_current_buf()
+
+	vim.bo[buf].buftype = "nofile"
+	vim.bo[buf].bufhidden = "wipe"
+	vim.bo[buf].swapfile = false
+
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
+
+	vim.bo[buf].modifiable = false
+	vim.bo[buf].filetype = "shelloutput"
+
+	vim.api.nvim_buf_set_name(buf, unique_buf_name(opts.args))
+end, {
+	nargs = "+",
+	complete = "shellcmd",
 })
