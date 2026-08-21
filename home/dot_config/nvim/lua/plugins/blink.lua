@@ -74,21 +74,10 @@ return {
 			},
 
 			["<Tab>"] = {
-				function(cmp)
-					if cmp.snippet_active() then
-						return cmp.accept()
-					end
-
-					return cmp.select_next()
-				end,
-
-				"snippet_forward",
 				"fallback",
 			},
 
 			["<S-Tab>"] = {
-				"snippet_backward",
-				"select_prev",
 				"fallback",
 			},
 		},
