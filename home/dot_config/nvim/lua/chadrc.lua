@@ -9,7 +9,7 @@ return {
 		},
 	},
 	lsp = {
-		signature = true,
+		signature = false,
 	},
 	ui = {
 		tabufline = {
@@ -28,7 +28,7 @@ return {
 			},
 		},
 		statusline = {
-			enabled = true,
+			enabled = false,
 			theme = "vscode",
 			separator_style = "default",
 		},

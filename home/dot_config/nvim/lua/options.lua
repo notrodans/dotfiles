@@ -26,7 +26,7 @@ o.mousemoveevent = false
 o.winborder = "rounded"
 
 o.cmdheight = 0
-o.laststatus = 3
+o.laststatus = 0
 o.showmode = false
 o.virtualedit = "all"
 
@@ -45,7 +45,8 @@ o.tabstop = 4
 o.shiftwidth = 4
 o.softtabstop = 4
 o.list = true
-o.listchars = "tab:  ,eol:¬"
+-- o.listchars = "tab:  ,eol:¬"
+o.listchars = "tab:  ,"
 
 opt.fillchars = { eob = " " }
 o.ignorecase = true

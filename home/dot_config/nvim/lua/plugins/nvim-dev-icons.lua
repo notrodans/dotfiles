@@ -1,4 +1,5 @@
 return {
+	-- enabled = false,
 	"nvim-tree/nvim-web-devicons",
 	opts = function()
 		dofile(vim.g.base46_cache .. "devicons")
