@@ -87,7 +87,19 @@ ucommand("Shell", function(opts)
 		return name
 	end
 
-	local output = vim.fn.systemlist(opts.args)
+	local result = vim.system({ vim.o.shell, vim.o.shellcmdflag, opts.args }, { text = true }):wait()
+	local output = vim.split(result.stdout or "", "\n", { plain = true, trimempty = true })
+
+	if result.code ~= 0 then
+		local message = vim.trim(result.stderr or "")
+
+		if message == "" then
+			message = ("Shell command exited with code %d"):format(result.code)
+		end
+
+		vim.notify(message, vim.log.levels.ERROR)
+		return
+	end
 
 	if #output <= 1 then
 		vim.notify(output[1] or "")
