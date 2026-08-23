@@ -1,8 +1,6 @@
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46/"
 vim.g.mapleader = " "
 
-vim.cmd.packadd("nvim.difftool")
-
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -35,6 +33,8 @@ require("lazy").setup({
 
 	{ import = "plugins" },
 }, lazy_config)
+
+vim.cmd.packadd("nvim.difftool")
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
