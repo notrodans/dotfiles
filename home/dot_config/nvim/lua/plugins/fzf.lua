@@ -81,7 +81,7 @@ return {
 
 		-- lsp
 		vim.keymap.set({ "n", "x" }, "gra", function()
-			fzf.lsp_code_actions({ silent = true })
+			vim.lsp.buf.code_action()
 		end, { desc = "LSP code actions", noremap = true, silent = true })
 
 		vim.keymap.set("n", "<leader>flr", function()
