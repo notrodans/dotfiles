@@ -105,10 +105,21 @@ install_opencode() {
   fi
 }
 
+install_gh_stack() {
+  if ! command -v gh >/dev/null 2>&1; then
+    warn "GitHub CLI not found, skipping gh-stack"
+    return
+  fi
+
+  info "Installing gh-stack v0.1.0..."
+  gh extension install github/gh-stack --pin v0.1.0 --force
+}
+
 install_oh_my_zsh
 install_sdkman
 install_tpm
 install_nvm
 install_opencode
+install_gh_stack
 
 {{ end -}}
