@@ -1,10 +1,11 @@
 {
+
 	"$schema": "https://opencode.ai/config.json",
 	"plugin": [
-		"opencode-gemini-auth",
 		"oh-my-opencode-slim",
 		"oc-codex-multi-auth",
-		"@slkiser/opencode-quota"
+		"@slkiser/opencode-quota",
+		"opentmux"
 	],
 	"compaction": {
 		"auto": true,
@@ -15,7 +16,12 @@
 		"bash": {
 			"git push*": "ask",
 			"git remote*": "ask",
-			"gh *": "ask"
+			"gh *": "ask",
+			"gh stack view*": "allow",
+			"gh stack --version*": "allow",
+			"gh extension list*": "allow",
+			"gh pr checks*": "allow",
+			"gh run watch*": "allow"
 		},
 		"github_push_files": "ask",
 		"github_create_or_update_file": "ask",
@@ -359,6 +365,8 @@
 		}
 	},
 	"provider": {
+		"openrouter": {},
+		"google-gemini-cli": {},
 		"openai": {
 		  "options": {
 			"reasoningEffort": "medium",
