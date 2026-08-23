@@ -1,5 +1,4 @@
 local nvlsp = require("nvchad.configs.lspconfig")
-local lspconfig = require("lspconfig")
 
 local function get_install_path_for(package)
 	return vim.fn.expand("$MASON/packages/" .. package)
@@ -42,7 +41,6 @@ local servers = {
 }
 
 vim.lsp.config("intelephense", {
-	root_dir = lspconfig.util.root_pattern("composer.json", "*.php"),
 	filetypes = { "php" },
 	settings = {
 		intelephense = {
@@ -89,8 +87,6 @@ vim.lsp.config("jdtls", {
 		"--data",
 		"--jvm-arg=-javaagent:" .. get_install_path_for("jdtls") .. "/lombok.jar",
 	},
-
-	root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
 
 	settings = {
 		redhat = {
