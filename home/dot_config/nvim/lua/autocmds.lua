@@ -41,6 +41,19 @@ autocmd({ "BufEnter", "WinEnter" }, {
 	end,
 })
 
+autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+		if client and client:supports_method("textDocument/linkedEditingRange") then
+			vim.lsp.linked_editing_range.enable(true, {
+				bufnr = args.buf,
+				client_id = client.id,
+			})
+		end
+	end,
+})
+
 -- autocmd("FileType", {
 -- 	pattern = { "markdown", "text", "gitcommit" },
 -- 	callback = function()
