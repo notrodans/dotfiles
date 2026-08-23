@@ -4,21 +4,21 @@ return {
 		{
 			"<leader>ws",
 			function()
-				require("resession").save()
+				require("modules.workspace").save()
 			end,
 			desc = "Workspace save",
 		},
 		{
 			"<leader>wl",
 			function()
-				require("resession").load()
+				require("modules.workspace").load()
 			end,
 			desc = "Workspace load",
 		},
 		{
 			"<leader>wd",
 			function()
-				require("resession").delete()
+				require("modules.workspace").delete()
 			end,
 			desc = "Workspace delete",
 		},
