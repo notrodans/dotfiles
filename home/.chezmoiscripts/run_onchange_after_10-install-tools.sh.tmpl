@@ -87,10 +87,10 @@ install_nvm() {
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
   if command -v nvm >/dev/null; then
-    info "Installing Node.js v22.21.0 via NVM..."
-    nvm install v22.21.0
-    nvm use v22.21.0
-    nvm alias default v22.21.0
+    info "Installing Node.js v22.23.2 via NVM..."
+    nvm install v22.23.2
+    nvm use v22.23.2
+    nvm alias default v22.23.2
   else
     warn "NVM installed but 'nvm' command not found in current shell"
   fi
