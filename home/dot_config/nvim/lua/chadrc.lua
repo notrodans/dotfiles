@@ -13,17 +13,10 @@ return {
 	},
 	ui = {
 		tabufline = {
+			order = { "buffers", "tabs" },
 			modules = {
-				treeOffset = function()
-					return ""
-				end,
-
 				buffers = function()
 					return require("modules.tabufline").buffers()
-				end,
-
-				btns = function()
-					return ""
 				end,
 			},
 		},
