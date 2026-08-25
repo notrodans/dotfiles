@@ -6,7 +6,11 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.uv.fs_stat(lazypath) then
 	local repo = "https://github.com/folke/lazy.nvim.git"
-	local result = vim.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }, { text = true }):wait()
+	local result = vim.system(
+		{ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath },
+		{ text = true }
+	)
+		:wait()
 
 	if result.code ~= 0 then
 		error(vim.trim(result.stderr or "Failed to clone lazy.nvim"))
@@ -38,7 +42,7 @@ vim.cmd.packadd("nvim.difftool")
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
+-- dofile(vim.g.base46_cache .. "statusline")
 
 require("commands")
 require("options")

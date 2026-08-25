@@ -5,6 +5,14 @@ local wo = vim.wo
 
 -------------------------------------- options ------------------------------------------
 
+-- statusline
+o.cmdheight = 1
+o.laststatus = 0
+o.ruler = true
+o.showmode = true
+o.showcmd = true
+o.showcmdloc = "last"
+
 -- folds
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
@@ -25,13 +33,10 @@ o.mousemoveevent = false
 -- windows
 o.winborder = "rounded"
 
-o.cmdheight = 0
-o.laststatus = 0
-o.showmode = false
-o.virtualedit = "all"
+-- o.virtualedit = "all"
 
 o.clipboard = "unnamedplus"
-o.cursorline = true
+o.cursorline = false
 o.cursorlineopt = "number,line"
 o.scroll = 4
 opt.scrolloff = 100
@@ -53,19 +58,16 @@ o.ignorecase = true
 o.smartcase = true
 
 -- Numbers
-o.number = true
-o.numberwidth = 1
-o.relativenumber = true
-o.ruler = false
+o.number = false
+o.relativenumber = false
 
-o.signcolumn = "yes"
-o.splitbelow = true
+o.splitbelow = false
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
 -- opt.guicursor = "n-v-c:block,i-ci-ve:ver25"
--- opt.guicursor = "a:block-blinkon250"
-opt.guicursor = "n-v-c:block,i-ci-ve:hor20,r-cr-o:hor20"
+opt.guicursor = "a:block-blinkon250"
+-- opt.guicursor = "n-v-c:block,i-ci-ve:hor20,r-cr-o:hor20"
 o.swapfile = false
 
 -- local nvim config

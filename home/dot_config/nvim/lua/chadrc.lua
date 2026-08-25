@@ -3,10 +3,7 @@ return {
 	base46 = {
 		---@diagnostic disable-next-line: assign-type-mismatch <my theme>
 		theme = "monochrome",
-		transparency = false,
-		hl_override = {
-			CursorLine = { bg = "line" },
-		},
+		transparency = true,
 	},
 	lsp = {
 		signature = false,

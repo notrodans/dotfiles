@@ -27,19 +27,20 @@ autocmd("BufReadPost", {
 	end,
 })
 
-autocmd({ "BufEnter", "WinEnter" }, {
-	callback = function()
-		local win = vim.api.nvim_get_current_win()
-
-		vim.schedule(function()
-			if vim.api.nvim_win_is_valid(win) then
-				vim.api.nvim_set_option_value("cursorline", true, {
-					win = win,
-				})
-			end
-		end)
-	end,
-})
+-- Override cursorline option for all buffers
+-- autocmd({ "BufEnter", "WinEnter" }, {
+-- 	callback = function()
+-- 		local win = vim.api.nvim_get_current_win()
+--
+-- 		vim.schedule(function()
+-- 			if vim.api.nvim_win_is_valid(win) then
+-- 				vim.api.nvim_set_option_value("cursorline", true, {
+-- 					win = win,
+-- 				})
+-- 			end
+-- 		end)
+-- 	end,
+-- })
 
 autocmd("LspAttach", {
 	callback = function(args)
@@ -136,4 +137,18 @@ ucommand("Shell", function(opts)
 end, {
 	nargs = "+",
 	complete = "shellcmd",
+})
+
+autocmd("WinEnter", {
+	callback = function()
+		local win = vim.api.nvim_get_current_win()
+		local config = vim.api.nvim_win_get_config(win)
+
+		if config.relative == "" or vim.bo.filetype ~= "markdown" then
+			return
+		end
+
+		vim.wo[win].conceallevel = 2
+		vim.wo[win].concealcursor = "nv"
+	end,
 })
