@@ -44,6 +44,89 @@ local function available_width()
 	return math.max(1, vim.o.columns - tabs_width())
 end
 
+local function filename(path)
+	return path:match("([^/\\]+)[/\\]*$")
+end
+
+local function buffer_name(bufs, buf, index)
+	local path = api.nvim_buf_get_name(buf)
+	local name = filename(path)
+
+	if not name then
+		return "No Name"
+	end
+
+	for i, other in ipairs(bufs) do
+		if i ~= index and filename(api.nvim_buf_get_name(other)) == name then
+			local parent = fn.fnamemodify(path, ":h:t")
+
+			return parent ~= "" and parent .. "/" .. name or name
+		end
+	end
+
+	return name
+end
+
+local function icon_segment(name, hl)
+	local tabufline_utils = utils()
+	local icon, icon_hl = require("nvim-web-devicons").get_icon(name)
+
+	if not icon then
+		return tabufline_utils.txt(" 󰈚 ", hl)
+	end
+
+	local icon_color = api.nvim_get_hl(0, { name = icon_hl }).fg
+	local buffer_color = api.nvim_get_hl(0, { name = "Tb" .. hl }).bg
+	local combined = icon_hl .. hl
+
+	api.nvim_set_hl(0, combined, {
+		fg = icon_color,
+		bg = buffer_color,
+	})
+
+	return "%#" .. combined .. "# " .. icon .. " "
+end
+
+local function rendered_width(content)
+	return api.nvim_eval_statusline(content, {
+		use_tabline = true,
+	}).width
+end
+
+local function style_buffer(bufs, buf, index, width)
+	local tabufline_utils = utils()
+	local active = api.nvim_get_current_buf() == buf
+	local hl = "BufO" .. (active and "n" or "ff")
+	local modified = api.nvim_get_option_value("modified", { buf = buf })
+	local modified_hl = active and "BufOnModified" or "BufOffModified"
+	local original = buffer_name(bufs, buf, index)
+	local name = original
+	local truncated = false
+
+	local function content()
+		local label = truncated and name .. "…" or name
+		local marker = modified and tabufline_utils.txt("  ", modified_hl) or ""
+
+		return icon_segment(original, hl) .. tabufline_utils.txt(label, hl) .. marker
+	end
+
+	local body = content()
+
+	while rendered_width(body) > width and fn.strchars(name) > 1 do
+		name = fn.strcharpart(name, 0, fn.strchars(name) - 1)
+		truncated = true
+		body = content()
+	end
+
+	local missing = math.max(0, width - rendered_width(body))
+	local left = math.floor(missing / 2)
+	local right = missing - left
+	local padding_left = tabufline_utils.txt(string.rep(" ", left), hl)
+	local padding_right = tabufline_utils.txt(string.rep(" ", right), hl)
+
+	return tabufline_utils.btn(padding_left .. body .. padding_right, nil, "GoToBuf", buf)
+end
+
 local function anchor_buffer(bufs)
 	local current = api.nvim_get_current_buf()
 
@@ -89,9 +172,7 @@ local function visible_window(bufs, capacity, current)
 end
 
 local function pad_to_width(content, width, buf, active)
-	local rendered = api.nvim_eval_statusline(content, {
-		use_tabline = true,
-	}).width
+	local rendered = rendered_width(content)
 	local missing = width - rendered
 
 	if missing <= 0 then
@@ -135,7 +216,7 @@ function M.buffers()
 	for i = first, last do
 		local extra = i - first < remainder and 1 or 0
 
-		result[#result + 1] = tabufline_utils.style_buf(bufs[i], i, width + extra)
+		result[#result + 1] = style_buffer(bufs, bufs[i], i, width + extra)
 	end
 
 	local content = table.concat(result)
