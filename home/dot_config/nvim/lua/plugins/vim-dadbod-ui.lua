@@ -22,6 +22,16 @@ return {
 			},
 		},
 		config = function()
+			local group = vim.api.nvim_create_augroup("DadbodUISignColumn", { clear = true })
+
+			vim.api.nvim_create_autocmd("FileType", {
+				group = group,
+				pattern = "dbui",
+				callback = function()
+					vim.opt_local.signcolumn = "yes"
+				end,
+			})
+
 			vim.g.db_ui_disable_info_notifications = 1
 			vim.g.db_ui_save_location = vim.fn.getcwd() .. "/sql/"
 			vim.g.db_ui_table_helpers = {
