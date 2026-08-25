@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 local map = vim.keymap.set
 
 map("i", "jj", "<ESC>", { silent = true })
@@ -24,7 +26,6 @@ end, { desc = "undotree toggle window" })
 
 -- tabs
 map("n", "<leader>tc", "<cmd>tabnew<CR>", { desc = "New tab" })
-map("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" })
 map("n", "tn", "<cmd>tabnext<CR>", { desc = "Go to next tab" })
 map("n", "tb", "<cmd>tabprevious<CR>", { desc = "Go to previous tab" })
 
@@ -108,3 +109,28 @@ map({ "n", "x" }, "<C-u>", vim.o.scroll .. "k", { desc = "scroll up" })
 
 -- macroses
 -- vim.keymap.set("n", "q", "<nop>", { silent = true }) -- fucking piece of shit
+
+-- Grep within text selection
+map("x", "/", function()
+	local pattern = utils.visual_pattern()
+
+	vim.cmd.normal({
+		vim.keycode("<Esc>"),
+		bang = true,
+	})
+
+	vim.fn.setreg("/", pattern)
+end, { desc = "search visual selection" })
+
+map("x", "<leader>q", function()
+	local pattern = utils.visual_pattern()
+
+	vim.cmd.normal({
+		vim.keycode("<Esc>"),
+		bang = true,
+	})
+
+	local escaped = pattern:gsub("/", "\\/")
+	vim.cmd("silent vimgrep /" .. escaped .. "/gj %")
+	vim.cmd.copen()
+end, { desc = "quickfix visual matches" })
