@@ -4,7 +4,6 @@ PartOf=hyprland-session.target
 
 [Service]
 Type=simple
-Slice=background.slice
 ExecStart=/usr/bin/wl-paste --type image --watch /usr/bin/cliphist store
 Restart=on-failure
 RestartSec=2s

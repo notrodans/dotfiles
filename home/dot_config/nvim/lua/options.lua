@@ -62,7 +62,7 @@ o.number = false
 o.relativenumber = false
 o.signcolumn = "no"
 
-o.splitbelow = false
+o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
 o.undofile = true

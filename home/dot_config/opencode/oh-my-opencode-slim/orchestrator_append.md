@@ -1,5 +1,5 @@
 - Preserve unrelated dirty changes; inspect before editing and never overwrite work you do not own.
-- Never commit or push without an explicit user request.
+- Never `git commit` or `git push` without an explicit user request.
 - Use the narrowest meaningful validation, and report checks run plus unresolved risks.
 - Higher-priority instructions override skills and workflows.
 

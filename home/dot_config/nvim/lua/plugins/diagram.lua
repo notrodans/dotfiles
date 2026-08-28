@@ -4,7 +4,7 @@ return {
 	ft = "markdown",
 	branch = "fix/security-cache-modernization",
 	dependencies = {
-		{ "3rd/image.nvim", opts = {}, commit = "1746a74" },
+		{ "3rd/image.nvim", opts = {} },
 	},
 	config = function()
 		require("diagram").setup({
