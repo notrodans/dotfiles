@@ -4,6 +4,7 @@ PartOf=hyprland-session.target
 
 [Service]
 Type=simple
+Slice=background.slice
 ExecStart=/usr/bin/awww-daemon
 ExecStartPost=-/usr/bin/awww restore
 Restart=on-failure
