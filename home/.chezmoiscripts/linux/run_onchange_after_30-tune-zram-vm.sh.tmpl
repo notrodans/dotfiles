@@ -1,0 +1,41 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+info() { echo -e "\033[34m[INFO]\033[0m $*"; }
+warn() { echo -e "\033[33m[WARN]\033[0m $*"; }
+
+if [[ ! -f /etc/arch-release ]]; then
+    info "Not an Arch Linux system. Skipping zram VM tuning."
+    exit 0
+fi
+
+if ! command -v sudo >/dev/null 2>&1; then
+    warn "sudo is unavailable. Skipping zram VM tuning."
+    exit 0
+fi
+
+config=$(mktemp)
+trap 'rm -f "$config"' EXIT
+
+cat > "$config" <<'EOF'
+# Prefer fast compressed RAM swap over evicting useful filesystem cache.
+vm.swappiness = 180
+# zram has random-access latency, so swap readahead adds unnecessary work.
+vm.page-cluster = 0
+EOF
+
+if [[ -f /etc/sysctl.d/99-dotfiles-zram.conf ]] && cmp -s "$config" /etc/sysctl.d/99-dotfiles-zram.conf; then
+    info "zram VM tuning is already configured"
+else
+    info "Installing zram VM tuning..."
+    sudo install -Dm644 "$config" /etc/sysctl.d/99-dotfiles-zram.conf
+fi
+
+if command -v sysctl >/dev/null 2>&1; then
+    if ! sudo sysctl --load /etc/sysctl.d/99-dotfiles-zram.conf; then
+        warn "Failed to apply zram VM tuning immediately; it will be loaded on boot"
+    fi
+fi
+
+{{ end -}}
