@@ -1,0 +1,9 @@
+{
+	"$schema": "https://opencode.ai/tui.json",
+	"theme": "system",
+	"plugin": [
+		"oc-codex-multi-auth",
+		"@slkiser/opencode-quota",
+		"oh-my-opencode-slim"
+	]
+}
