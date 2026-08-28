@@ -1,0 +1,69 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+info() { echo -e "\033[34m[INFO]\033[0m $*"; }
+warn() { echo -e "\033[33m[WARN]\033[0m $*"; }
+
+if [[ ! -f /etc/arch-release ]]; then
+    info "Not an Arch Linux system. Skipping Btrfs compression tuning."
+    exit 0
+fi
+
+if ! command -v sudo >/dev/null 2>&1; then
+    warn "sudo is unavailable. Skipping Btrfs compression tuning."
+    exit 0
+fi
+
+if ! command -v findmnt >/dev/null 2>&1 || [[ "$(findmnt -n -o FSTYPE / 2>/dev/null || true)" != "btrfs" ]]; then
+    info "Root filesystem is not Btrfs. Skipping compression tuning."
+    exit 0
+fi
+
+if [[ ! -f /etc/fstab ]]; then
+    warn "/etc/fstab is missing. Skipping Btrfs compression tuning."
+    exit 0
+fi
+
+if ! awk '$0 !~ /^[[:space:]]*#/ && $2 == "/" && $3 == "btrfs" { found = 1 } END { exit found ? 0 : 1 }' /etc/fstab; then
+    warn "No Btrfs root entry found in /etc/fstab. Skipping compression tuning."
+    exit 0
+fi
+
+fstab=$(mktemp)
+trap 'rm -f "$fstab"' EXIT
+
+awk '
+BEGIN { OFS = "\t" }
+function tuned(options, count, parts, i, result) {
+    count = split(options, parts, ",")
+    result = ""
+    for (i = 1; i <= count; i++) {
+        if (parts[i] ~ /^compress(-force)?(=|$)/) {
+            continue
+        }
+        result = result (result == "" ? "" : ",") parts[i]
+    }
+    return result (result == "" ? "" : ",") "compress=zstd:1"
+}
+$0 ~ /^[[:space:]]*#/ || NF == 0 { print; next }
+$2 == "/" && $3 == "btrfs" { $4 = tuned($4) }
+{ print }
+' /etc/fstab > "$fstab"
+
+if cmp -s "$fstab" /etc/fstab; then
+    info "Btrfs zstd:1 compression is already configured in /etc/fstab"
+else
+    info "Enabling Btrfs zstd:1 compression in /etc/fstab..."
+    sudo cp "$fstab" /etc/fstab
+fi
+
+options=$(findmnt -n -o OPTIONS /)
+if [[ ",${options}," != *",compress=zstd:1,"* ]]; then
+    info "Enabling Btrfs zstd:1 compression on the mounted filesystem..."
+    if ! sudo mount -o remount,compress=zstd:1 /; then
+        warn "Failed to enable compression immediately; the fstab setting will apply on the next boot"
+    fi
+fi
+
+{{ end -}}
