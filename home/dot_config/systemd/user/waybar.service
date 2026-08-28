@@ -1,0 +1,9 @@
+[Unit]
+Description=Waybar status bar
+PartOf=hyprland-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/waybar
+Restart=on-failure
+RestartSec=2s
