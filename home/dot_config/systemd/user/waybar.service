@@ -1,0 +1,14 @@
+[Unit]
+Description=Waybar status bar
+PartOf=hyprland-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/waybar
+Restart=on-failure
+RestartSec=2s
+MemoryAccounting=yes
+MemoryHigh=2%
+MemoryMax=4%
+MemorySwapMax=2%
+OOMPolicy=kill

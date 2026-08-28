@@ -1,0 +1,15 @@
+[Unit]
+Description=Awww wallpaper daemon
+PartOf=hyprland-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/awww-daemon
+ExecStartPost=-/usr/bin/awww restore
+Restart=on-failure
+RestartSec=2s
+MemoryAccounting=yes
+MemoryHigh=3%
+MemoryMax=5%
+MemorySwapMax=2%
+OOMPolicy=kill

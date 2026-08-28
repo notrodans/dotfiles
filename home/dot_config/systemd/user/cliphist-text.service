@@ -1,0 +1,14 @@
+[Unit]
+Description=Cliphist text watcher
+PartOf=hyprland-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wl-paste --type text --watch /usr/bin/cliphist store
+Restart=on-failure
+RestartSec=2s
+MemoryAccounting=yes
+MemoryHigh=1%
+MemoryMax=2%
+MemorySwapMax=1%
+OOMPolicy=kill

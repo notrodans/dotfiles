@@ -1,15 +1,8 @@
-#!/bin/bash
-# Kill already running processes
-_ps=(waybar)
-for _prs in "${_ps[@]}"; do
-    if pidof "${_prs}" >/dev/null; then
-        pkill "${_prs}"
-    fi
-done
+#!/usr/bin/env bash
+set -euo pipefail
 
-sleep 0.3
-waybar &
+if [[ -d /run/systemd/system ]]; then
+    systemctl --user restart waybar.service
+fi
 
 hyprctl reload
-
-exit 0
