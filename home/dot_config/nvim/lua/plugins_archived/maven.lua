@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	"oclay1st/maven.nvim",
 	cmd = { "Maven", "MavenInit", "MavenExec", "MavenFavorites" },
 	dependencies = {

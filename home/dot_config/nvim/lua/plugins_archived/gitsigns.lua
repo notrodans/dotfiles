@@ -1,6 +1,6 @@
 return {
-	"lewis6991/gitsigns.nvim",
 	enabled = false,
+	"lewis6991/gitsigns.nvim",
 	event = "User FilePost",
 	opts = function(opts)
 		dofile(vim.g.base46_cache .. "git")

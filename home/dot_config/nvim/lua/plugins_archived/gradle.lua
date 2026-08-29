@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	"oclay1st/gradle.nvim",
 	cmd = { "Gradle", "GradleExec", "GradleInit", "GradleFavorites" },
 	dependencies = {

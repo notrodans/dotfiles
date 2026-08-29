@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	"obsidian-nvim/obsidian.nvim",
 	version = "*",
 	ft = "markdown",

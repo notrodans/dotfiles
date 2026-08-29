@@ -1,10 +1,12 @@
 return {
+	enabled = false,
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
 	config = function()
-		require("snacks").setup(
-			---@type snacks.Config
+		local snacks = require("snacks")
+		snacks.setup(
+		---@type snacks.Config
 			{
 				image = {
 					enabled = true,

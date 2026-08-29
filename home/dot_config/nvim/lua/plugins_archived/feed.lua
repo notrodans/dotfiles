@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	"neo451/feed.nvim",
 	cmd = "Feed",
 	opts = {
