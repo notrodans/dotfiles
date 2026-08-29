@@ -26,12 +26,5 @@ return {
 				sql = { "pg_format" },
 			},
 		})
-
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*",
-			callback = function(args)
-				conf.format({ bufnr = args.buf, lsp_fallback = true })
-			end,
-		})
 	end,
 }

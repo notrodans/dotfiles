@@ -134,3 +134,11 @@ map("x", "<leader>q", function()
 	vim.cmd("silent vimgrep /" .. escaped .. "/gj %")
 	vim.cmd.copen()
 end, { desc = "quickfix visual matches" })
+
+-- formatting
+map("n", "<leader>fm", function()
+	require("conform").format({
+		async = true,
+		lsp_fallback = true,
+	})
+end, { desc = "format buffer" })
