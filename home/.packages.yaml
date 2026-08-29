@@ -130,7 +130,7 @@ packages:
     - gedit
     - kitty
     - kvantum
-    - neovim
+    - neovim-nightly
     - tree-sitter-cli
     - lazygit
     - bitwarden
