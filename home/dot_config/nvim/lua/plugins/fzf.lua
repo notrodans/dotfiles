@@ -10,6 +10,31 @@ return {
 			return vim.fn.getcwd(-1, -1)
 		end
 
+		local todo_tags = {
+			"PERFORMANCE",
+			"OPTIMIZE",
+			"TESTING",
+			"WARNING",
+			"FAILED",
+			"PASSED",
+			"FIXME",
+			"FIXIT",
+			"ISSUE",
+			"OPTIM",
+			"PERF",
+			"TEST",
+			"TODO",
+			"WARN",
+			"INFO",
+			"HACK",
+			"NOTE",
+			"BUG",
+			"FIX",
+			"XXX",
+		}
+
+		local todo_pattern = ([[\b(%s):]]):format(table.concat(todo_tags, "|"))
+
 		fzf.register_ui_select()
 
 		vim.keymap.set("n", "<leader>fq", function()
@@ -68,7 +93,25 @@ return {
 			fzf.lsp_definitions()
 		end, { desc = "Fzf find lsp definitions" })
 
-		vim.keymap.set("n", "<leader>ft", "<cmd>TodoFzfLua<CR>", { desc = "Fzf find todo comments" })
+		-- TODO
+		vim.keymap.set("n", "<leader>ft", function()
+			fzf.live_grep({
+				cwd = workspace_cwd(),
+				search = todo_pattern,
+				comments_only = true,
+				multiline = true,
+				multiline_pattern = "^.",
+				no_esc = true,
+				after = "fg",
+				rg_opts = table.concat({
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+				}, " "),
+			})
+		end, { desc = "Fzf find todo comments" })
 
 		-- diagnostics
 		vim.keymap.set("n", "<leader>dd", function()

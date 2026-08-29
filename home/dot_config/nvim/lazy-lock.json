@@ -37,7 +37,6 @@
   "resession.nvim": { "branch": "master", "commit": "0983fbdd3fe938c80fb7dd33817f08f428426ac8" },
   "schemastore.nvim": { "branch": "main", "commit": "b4a92475bb6928810b66a0dd2fd86bea44089aba" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
-  "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "ts-error-translator.nvim": { "branch": "main", "commit": "558abff11b9e8f4cefc0de09df780c56841c7a4b" },
   "ui": { "branch": "v3.0", "commit": "fe781d1c12860d6a25d45e588fe4fdd27eb34a1a" },
   "vim-dadbod": { "branch": "master", "commit": "6d1d41da4873a445c5605f2005ad2c68c99d8770" },
