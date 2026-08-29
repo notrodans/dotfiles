@@ -4,6 +4,24 @@ return {
 		---@diagnostic disable-next-line: assign-type-mismatch <my theme>
 		theme = "monochrome",
 		transparency = true,
+		hl_override = {
+			["@comment"] = { italic = true },
+
+			["@keyword"] = { italic = true },
+
+			["@function"] = { bold = true },
+			["@function.method"] = { bold = true },
+
+			["@type"] = { bold = true },
+
+			["@variable.parameter"] = { italic = true },
+
+			["@lsp.type.parameter"] = { italic = true },
+			["@lsp.type.typeParameter"] = {
+				bold = true,
+				italic = true,
+			},
+		},
 	},
 	lsp = {
 		signature = false,
