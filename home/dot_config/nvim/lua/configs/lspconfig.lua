@@ -4,8 +4,17 @@ local function get_install_path_for(package)
 	return vim.fn.expand("$MASON/packages/" .. package)
 end
 
-local function string_split(target, separator)
-	return vim.split(target, separator, { plain = true, trimempty = true })
+local function java_bundles()
+	local bundles = vim.fn.glob(
+		get_install_path_for("java-debug-adapter") .. "/extension/server/com.microsoft.java.debug.plugin-*.jar",
+		false,
+		true
+	)
+
+	return vim.list_extend(
+		bundles,
+		vim.fn.glob(get_install_path_for("java-test") .. "/extension/server/*.jar", false, true)
+	)
 end
 
 local lombok_arg = "-javaagent:" .. get_install_path_for("jdtls") .. "/lombok.jar"
@@ -88,9 +97,13 @@ vim.lsp.config("intelephense", {
 	},
 })
 vim.lsp.config("jsonls", {
+	before_init = function(_, config)
+		config.settings = config.settings or {}
+		config.settings.json = config.settings.json or {}
+		config.settings.json.schemas = require("schemastore").json.schemas()
+	end,
 	settings = {
 		json = {
-			schemas = require("schemastore").json.schemas(),
 			validate = {
 				enable = true,
 			},
@@ -116,6 +129,10 @@ vim.lsp.config("biome", {
 	},
 })
 vim.lsp.config("jdtls", {
+	before_init = function(_, config)
+		config.init_options = config.init_options or {}
+		config.init_options.bundles = java_bundles()
+	end,
 	settings = {
 		redhat = {
 			telemetry = { enabled = false },
@@ -212,23 +229,6 @@ vim.lsp.config("jdtls", {
 				},
 			},
 		},
-	},
-
-	init_options = {
-		bundles = vim.iter({
-			string_split(
-				vim.fn.glob(
-					get_install_path_for("java-debug-adapter")
-						.. "/extension/server/"
-						.. "com.microsoft.java.debug.plugin-*.jar",
-					1
-				),
-				"\n"
-			),
-			string_split(vim.fn.glob(get_install_path_for("java-test") .. "/extension/server/" .. "*.jar", 1), "\n"),
-		})
-			:flatten()
-			:totable(),
 	},
 })
 vim.lsp.config("vtsls", {
