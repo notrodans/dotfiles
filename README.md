@@ -50,7 +50,7 @@ chezmoi init --apply
 
 *   `home/` - The source state of your home directory.
 *   `home/.packages.yaml` - Declarative list of packages to install.
-*   `home/.chezmoidata/tool-versions.yaml` - Managed NVM, Node.js, Java, and gh-stack versions.
+*   `home/.chezmoidata/tool-versions.yaml` - Managed Oh My Zsh, TPM, NVM, Node.js, Java, and gh-stack versions/revisions.
 *   `home/.chezmoiscripts/` - Installation hooks (run automatically during `chezmoi apply`).
     *   `linux/run_onchange_after_00-install-packages.sh.tmpl` - Reconciles system packages from YAML.
     *   `run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
