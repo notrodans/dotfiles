@@ -9,8 +9,6 @@ return {
 	},
 
 	dependencies = {
-		"rafamadriz/friendly-snippets",
-
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = {
@@ -31,7 +29,6 @@ return {
 			opts = {
 				fast_wrap = {},
 				disable_filetype = {
-					"TelescopePrompt",
 					"vim",
 				},
 			},
