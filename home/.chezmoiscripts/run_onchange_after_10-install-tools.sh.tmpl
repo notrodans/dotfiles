@@ -2,7 +2,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Ensure USER is set
 USER=${USER:-$(id -un)}
 
 info() { echo -e "\033[34m[INFO]\033[0m $*"; }
@@ -15,13 +14,13 @@ install_oh_my_zsh() {
     info "Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   fi
-  
+
   if [[ "$SHELL" != */zsh ]]; then
     info "Changing shell to zsh..."
-    if command -v zsh >/dev/null; then
-        sudo chsh -s "$(which zsh)" "$USER"
+    if command -v zsh >/dev/null 2>&1; then
+      sudo chsh -s "$(command -v zsh)" "$USER"
     else
-        warn "zsh not found, skipping chsh"
+      warn "zsh not found, skipping chsh"
     fi
   fi
 }
@@ -32,7 +31,7 @@ install_sdkman() {
     info "SDKMAN already installed at $HOME/.sdkman"
   else
     info "Installing SDKMAN..."
-    curl -s "https://get.sdkman.io?rcupdate=false" | bash
+    curl -fsSL "https://get.sdkman.io?rcupdate=false" | bash
   fi
 
   export SDKMAN_DIR="$HOME/.sdkman"
@@ -42,14 +41,13 @@ install_sdkman() {
   if command -v sdk >/dev/null 2>&1; then
     info "Installing Java versions via SDKMAN..."
     if ! command -v zip >/dev/null 2>&1 || ! command -v unzip >/dev/null 2>&1; then
-       warn "zip/unzip not found. SDKMAN might fail to install packages."
+      warn "zip/unzip not found. SDKMAN might fail to install packages."
     fi
 
     sdk install java 25.0.2-tem || true
     sdk install java 21.0.10-tem || true
     sdk install java 17.0.18-tem || true
     sdk default java 21.0.10-tem
-    
     sdk version
   else
     warn "SDKMAN was installed but 'sdk' command is not available in current shell."
@@ -59,34 +57,34 @@ install_sdkman() {
 
 install_tpm() {
   local tpm_dir="$HOME/.tmux/plugins/tpm"
+
   if [[ -d "$tpm_dir" ]]; then
     info "TPM already installed at $tpm_dir"
   else
     info "Installing TPM..."
-    git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+    git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm_dir"
   fi
 }
 
 install_nvm() {
   local nvm_dir="$HOME/.nvm"
-  if [[ -d "$nvm_dir" ]]; then
-    info "NVM already installed at $nvm_dir"
+  local nvm_version="v0.40.6"
+
+  if [[ -d "$nvm_dir/.git" ]]; then
+    info "Updating NVM checkout to $nvm_version..."
+    git -C "$nvm_dir" fetch --depth 1 --force origin "refs/tags/$nvm_version:refs/tags/$nvm_version"
   else
-    info "Installing NVM..."
-    git clone https://github.com/nvm-sh/nvm.git "$nvm_dir"
-    (
-      cd "$nvm_dir"
-      # checkout latest release
-      git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
-    )
+    info "Installing NVM $nvm_version..."
+    git clone --depth 1 --branch "$nvm_version" https://github.com/nvm-sh/nvm.git "$nvm_dir"
   fi
 
-  # Load NVM and install Node.js
-  export NVM_DIR="$HOME/.nvm"
-  # shellcheck disable=SC1091
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  git -C "$nvm_dir" checkout --detach "$nvm_version"
 
-  if command -v nvm >/dev/null; then
+  export NVM_DIR="$nvm_dir"
+  # shellcheck disable=SC1091
+  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+
+  if command -v nvm >/dev/null 2>&1; then
     info "Installing Node.js v22.23.2 via NVM..."
     nvm install v22.23.2
     nvm use v22.23.2
