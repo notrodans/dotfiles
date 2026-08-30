@@ -22,6 +22,8 @@ validate_templates() {
 }
 
 validate_installation() {
+  local runtime_dir
+
   printf 'INFO: Validating generated configuration...\n'
 
   zsh -n "$HOME/.zshrc"
@@ -39,7 +41,9 @@ validate_installation() {
       \( -name '*.service' -o -name '*.target' \) -print0
   )
   if ((${#units[@]} > 0)); then
-    systemd-analyze --user verify "${units[@]}"
+    runtime_dir=$(mktemp -d)
+    XDG_RUNTIME_DIR="$runtime_dir" systemd-analyze --user verify "${units[@]}"
+    rm -rf "$runtime_dir"
   fi
 
   tmux -L dotfiles-test -f "$HOME/.tmux.conf" new-session -d -s config-check
