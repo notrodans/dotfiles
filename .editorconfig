@@ -1,12 +1,33 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
 [*.json{,5,c}]
 indent_style = space
 indent_size = 2
 
-[*.lua{,.tmpl}]
+[*.{yml,yaml}]
 indent_style = space
 indent_size = 2
-quote_type = single
+
+[*.lua]
+indent_style = tab
+indent_size = 4
+tab_width = 4
+
+[*.lua.tmpl]
+indent_style = tab
+indent_size = 4
+tab_width = 4
 
 [*.sh]
+indent_style = space
+indent_size = 2
+
+[*.sh.tmpl]
 indent_style = space
 indent_size = 2
