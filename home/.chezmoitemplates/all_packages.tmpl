@@ -2,10 +2,22 @@
 {{- $all := (list) -}}
 {{- range $category, $list := $pkgs -}}
   {{- $shouldInstall := true -}}
-  
+
   {{- if hasPrefix "gpu_" $category -}}
     {{- $vendor := trimPrefix "gpu_" $category -}}
-    {{- if ne $.gpu_vendor $vendor -}}
+    {{- if eq $vendor "intel" -}}
+      {{- if not $.gpu_intel -}}
+        {{- $shouldInstall = false -}}
+      {{- end -}}
+    {{- else if eq $vendor "amd" -}}
+      {{- if not $.gpu_amd -}}
+        {{- $shouldInstall = false -}}
+      {{- end -}}
+    {{- else if eq $vendor "nvidia" -}}
+      {{- if not $.gpu_nvidia -}}
+        {{- $shouldInstall = false -}}
+      {{- end -}}
+    {{- else -}}
       {{- $shouldInstall = false -}}
     {{- end -}}
   {{- end -}}

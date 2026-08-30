@@ -2,7 +2,6 @@
 {{- $ephemeral := env "CHEZMOI_EPHEMERAL" | not | not -}}
 {{- $headless := env "CHEZMOI_HEADLESS" | not | not -}}
 {{- $upgrade := eq (env "CHEZMOI_UPGRADE") "true" -}}
-{{- $osID := .chezmoi.osRelease.id | default "" -}}
 
 {{- $cpuVendor := "unknown" -}}
 {{- if eq .chezmoi.os "linux" -}}
@@ -14,30 +13,33 @@
 {{-   end -}}
 {{- end -}}
 
-{{- $gpuVendor := "unknown" -}}
+{{- $gpuVendorIDs := "" -}}
 {{- if eq .chezmoi.os "linux" -}}
-{{-   $lspci := output "bash" "-c" "lspci | grep -i vga || true" -}}
-{{-   if contains "Intel" $lspci -}}
-{{-     $gpuVendor = "intel" -}}
-{{-   else if contains "NVIDIA" $lspci -}}
-{{-     $gpuVendor = "nvidia" -}}
-{{-   else if or (contains "AMD" $lspci) (contains "ATI" $lspci) -}}
-{{-     $gpuVendor = "amd" -}}
-{{-   end -}}
+{{-   $gpuVendorIDs = output "bash" "-c" "for device in /sys/bus/pci/devices/*; do [ -r \"$device/class\" ] && [ -r \"$device/vendor\" ] || continue; case \"$(cat \"$device/class\")\" in 0x03*) cat \"$device/vendor\" ;; esac; done" -}}
+{{- end -}}
+{{- $gpuIntel := contains "0x8086" $gpuVendorIDs -}}
+{{- $gpuAmd := contains "0x1002" $gpuVendorIDs -}}
+{{- $gpuNvidia := contains "0x10de" $gpuVendorIDs -}}
+
+{{- $gpuVendor := "unknown" -}}
+{{- if $gpuIntel -}}
+{{-   $gpuVendor = "intel" -}}
+{{- else if $gpuNvidia -}}
+{{-   $gpuVendor = "nvidia" -}}
+{{- else if $gpuAmd -}}
+{{-   $gpuVendor = "amd" -}}
 {{- end -}}
 
 {{- $isLaptop := false -}}
 {{- if eq .chezmoi.os "linux" -}}
-{{-   $isLaptop = (stat "/sys/class/power_supply/BAT0" | not | not) -}}
+{{-   $battery := output "bash" "-c" "for battery in /sys/class/power_supply/BAT*; do if [ -d \"$battery\" ]; then printf present; break; fi; done" -}}
+{{-   $isLaptop = eq $battery "present" -}}
 {{- end -}}
 
 {{- $homeDir := .chezmoi.homeDir | default (env "HOME") -}}
-{{- $binDir := joinPath $homeDir ".local" "bin" -}}
-
 {{- $ci := eq (env "CI") "true" -}}
 {{- $codespaces := env "CODESPACES" | not | not -}}
 {{- $devContainer := env "REMOTE_CONTAINERS" | not | not -}}
-
 {{- $interactive := stdinIsATTY -}}
 
 {{- if or $ci $codespaces $devContainer -}}
@@ -93,12 +95,15 @@ data:
   ci: {{ $ci }}
   devContainer: {{ $devContainer }}
   secrets: {{ $secrets }}
-  
+
   # Upgrade packages
   upgrade: {{ $upgrade }}
 
   cpu_vendor: {{ $cpuVendor | quote }}
   gpu_vendor: {{ $gpuVendor | quote }}
+  gpu_intel: {{ $gpuIntel }}
+  gpu_amd: {{ $gpuAmd }}
+  gpu_nvidia: {{ $gpuNvidia }}
   is_laptop: {{ $isLaptop }}
 
 diff:
