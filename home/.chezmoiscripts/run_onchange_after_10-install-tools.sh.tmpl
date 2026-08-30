@@ -96,15 +96,6 @@ install_nvm() {
   fi
 }
 
-install_opencode() {
-  if [[ -f "$HOME/.opencode/bin/opencode" ]]; then
-    info "OpenCode already installed"
-  else
-    info "Installing OpenCode..."
-    curl -fsSL https://opencode.ai/install | bash
-  fi
-}
-
 install_gh_stack() {
   local version={{ .tool_versions.gh_stack | quote }}
 
@@ -121,7 +112,6 @@ install_oh_my_zsh
 install_sdkman
 install_tpm
 install_nvm
-install_opencode
 install_gh_stack
 
 {{ end -}}

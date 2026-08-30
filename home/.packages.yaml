@@ -118,6 +118,7 @@ packages:
 
   programs:
     - antigravity
+    - opencode
     - curl
     - wget
     - pcmanfm

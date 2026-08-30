@@ -23,7 +23,6 @@ export SUDO_EDITOR=nvim
 typeset -U path PATH
 path=(
 	"$HOME/.local/bin"
-	"$HOME/.opencode/bin"
 	"$SDKMAN_DIR/candidates/java/current/bin"
 	$path
 )
