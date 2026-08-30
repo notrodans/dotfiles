@@ -89,7 +89,7 @@ All sensitive data (tokens, API keys) must be retrieved from **Bitwarden**.
 
 ## OpenCode Harness Source Map
 
-- `home/dot_config/opencode/opencode.json.tmpl` - Main generated config, plugin registration, permissions, LSPs, and secret-backed MCP entries.
+- `home/dot_config/opencode/private_opencode.json.tmpl` - Main generated private config, plugin registration, permissions, LSPs, and secret-backed MCP entries.
 - `home/dot_config/opencode/tui.json` - TUI settings.
 - `home/dot_config/opencode/oh-my-opencode-slim.json` - Active agent presets and orchestration settings.
 - `home/dot_config/opencode/oh-my-opencode-slim/` - Prompt extensions for built-in agents.
@@ -97,7 +97,7 @@ All sensitive data (tokens, API keys) must be retrieved from **Bitwarden**.
 - `home/dot_config/opencode/skills/` - Skills; keep them reusable, focused, and documented in-file.
 
 Harness notes:
-- Active presets are `openai` and `opencode-go`; do not add cross-provider fallback behavior.
+- The active preset is `openai-lean`; configured alternatives are `openai` and `opencode-go`. Do not add cross-provider fallback behavior.
 - Preserve tmux specialist-pane conventions when editing commands or skills.
 - Restart OpenCode after config, command, skill, or MCP changes.
 
@@ -107,8 +107,9 @@ Harness notes:
 
 1.  **Analyze**: Locate the target file in `home/`. Check for a `.tmpl` version.
 2.  **Verify Context**: Run `chezmoi data` to understand environment variables.
-3.  **Implement**: Apply changes to the source files in `home/`.
-4.  **Validate Templates**: Use `chezmoi execute-template < path/to/file.tmpl` for changed templates.
-5.  **Harness Validation**: For OpenCode changes, run `OPENCODE_CONFIG="$HOME/.config/opencode/opencode.json" bunx oh-my-opencode-slim@latest doctor`, then `bunx oh-my-opencode-slim@2.1.1 doctor`.
-6.  **Dry-Run**: Execute `chezmoi apply --dry-run -v`.
-7.  **Test**: If changes affect installation or packages, run the Docker testing suite.
+3.  **Unlock Secrets**: Before rendering, status checks, or dry-runs with `.secrets` enabled, require a valid `BW_SESSION`. If Bitwarden is unavailable, report the validation as blocked instead of prompting or weakening the template.
+4.  **Implement**: Apply changes to the source files in `home/`.
+5.  **Validate Templates**: Use `chezmoi execute-template < path/to/file.tmpl` for changed templates.
+6.  **Harness Validation**: For OpenCode changes, run `OPENCODE_CONFIG="$HOME/.config/opencode/opencode.json" bunx oh-my-opencode-slim@latest doctor`.
+7.  **Dry-Run**: Execute `chezmoi apply --dry-run -v`.
+8.  **Test**: If changes affect installation or packages, run the Docker testing suite.
