@@ -1,87 +1,72 @@
-#!/bin/bash
-# This script for selecting wallpapers (SUPER W)
+#!/usr/bin/env bash
+set -euo pipefail
 
-SCRIPTSDIR="$HOME/core/.config/hypr/core/scripts"
+wall_dir="$HOME/Pictures/wallpapers"
+transition=(
+  --transition-fps 60
+  --transition-type wipe
+  --transition-duration 1
+)
+fuzzel_command=(
+  fuzzel
+  --dmenu
+  --prompt="Wallpaper › "
+  --cache=/dev/null
+  --minimal-lines
+)
 
-# WALLPAPERS PATH
-wallDIR="$HOME/Pictures/wallpapers"
-
-# Transition config
-FPS=60
-TYPE="wipe"
-DURATION=1
-BEZIER=".43,1.19,1,.4"
-SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
-
-# Check if swaybg is running
-if pidof swaybg > /dev/null; then
-  pkill swaybg
-fi
-
-# Retrieve image files
-PICS=($(ls "${wallDIR}" | grep -E ".jpg$|.jpeg$|.png$|.gif$"))
-RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
-RANDOM_PIC_NAME="${#PICS[@]}. random"
-
-# Fuzzel command
-fuzzel_command=(fuzzel --dmenu --prompt="Wallpaper › " --cache=/dev/null --minimal-lines)
-
-menu() {
-  for i in "${!PICS[@]}"; do
-    # Displaying .gif to indicate animated images
-    if [[ -z $(echo "${PICS[$i]}" | grep .gif$) ]]; then
-      printf "$(echo "${PICS[$i]}" | cut -d. -f1)\x00icon\x1f${wallDIR}/${PICS[$i]}\n"
-    else
-      printf "${PICS[$i]}\n"
-    fi
-  done
-
-  printf "$RANDOM_PIC_NAME\n"
-}
-
-awww query || awww init
-
-main() {
-  choice=$(menu | "${fuzzel_command[@]}")
-
-  # No choice case
-  if [[ -z $choice ]]; then
-    exit 0
-  fi
-
-  # Random choice case
-  if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
-    awww img "${wallDIR}/${RANDOM_PIC}" $SWWW_PARAMS
-    exit 0
-  fi
-
-  # Find the index of the selected file
-  pic_index=-1
-  for i in "${!PICS[@]}"; do
-    filename=$(basename "${PICS[$i]}")
-    if [[ "$filename" == "$choice"* ]]; then
-      pic_index=$i
-      break
-    fi
-  done
-
-  if [[ $pic_index -ne -1 ]]; then
-    awww img "${wallDIR}/${PICS[$pic_index]}" $SWWW_PARAMS
-  else
-    echo "Image not found."
-    exit 1
-  fi
-}
-
-# Check if fuzzel is already running
-if pidof fuzzel > /dev/null; then
+if pgrep -x fuzzel >/dev/null 2>&1; then
   pkill -x fuzzel
   exit 0
 fi
 
-main
+if ! awww query >/dev/null 2>&1; then
+  printf 'awww daemon is not available\n' >&2
+  exit 1
+fi
 
-sleep 0.5
-${SCRIPTSDIR}/PywalSwww.sh
-sleep 0.2
-${SCRIPTSDIR}/Refresh.sh
+if [[ ! -d "$wall_dir" ]]; then
+  printf 'Wallpaper directory does not exist: %s\n' "$wall_dir" >&2
+  exit 1
+fi
+
+mapfile -d '' -t pictures < <(
+  find "$wall_dir" -maxdepth 1 -type f \
+    \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' \) \
+    -print0 | sort -z
+)
+
+if ((${#pictures[@]} == 0)); then
+  printf 'No wallpapers found in %s\n' "$wall_dir" >&2
+  exit 1
+fi
+
+random_label="${#pictures[@]}. random"
+
+menu() {
+  local path
+  local name
+
+  for path in "${pictures[@]}"; do
+    name=$(basename "$path")
+    printf '%s\x00icon\x1f%s\n' "$name" "$path"
+  done
+
+  printf '%s\n' "$random_label"
+}
+
+choice=$(menu | "${fuzzel_command[@]}") || exit 0
+[[ -n "$choice" ]] || exit 0
+
+if [[ "$choice" == "$random_label" ]]; then
+  selected="${pictures[RANDOM % ${#pictures[@]}]}"
+else
+  selected="$wall_dir/$choice"
+fi
+
+if [[ ! -f "$selected" ]]; then
+  printf 'Wallpaper not found: %s\n' "$selected" >&2
+  exit 1
+fi
+
+exec awww img "$selected" "${transition[@]}"
