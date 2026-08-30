@@ -7,14 +7,6 @@ return {
 
 	keys = {
 		{
-			"<F5>",
-			function()
-				require("dap").continue()
-			end,
-			ft = "go",
-			desc = "Continue Go debugging",
-		},
-		{
 			"<leader>Dt",
 			function()
 				require("dap-go").debug_test()
