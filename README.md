@@ -9,7 +9,7 @@ Managed with [chezmoi](https://www.chezmoi.io/).
 Requires `git` and `curl` (and `sudo` for package installation).
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $USER
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://github.com/notrodans/dotfiles.git
 ```
 
 ### Manual Install
@@ -17,7 +17,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $USER
 If you already have `chezmoi` installed:
 
 ```bash
-chezmoi init --apply $USER
+chezmoi init --apply https://github.com/notrodans/dotfiles.git
 ```
 
 Or clone manually:
