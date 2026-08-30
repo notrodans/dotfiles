@@ -34,12 +34,10 @@ o.mousemoveevent = false
 o.winborder = "rounded"
 
 -- o.virtualedit = "all"
-
 o.clipboard = "unnamedplus"
 o.cursorline = false
 o.cursorlineopt = "number,line"
 o.scroll = 4
-opt.scrolloff = 100
 opt.scrolloffpad = 1
 wo.wrap = false
 wo.linebreak = false

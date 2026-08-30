@@ -3,11 +3,17 @@ local M = {}
 local api = vim.api
 
 local namespace = api.nvim_create_namespace("AdaptiveScrolloff")
-
 local keyboard_scrolloff = 100
 local mouse_scrolloff = 0
+local mouse_windows = {}
 
 local function is_mouse_input(key)
+	local byte = key:byte()
+
+	if #key == 1 and byte and byte < 128 then
+		return false
+	end
+
 	local name = vim.fn.keytrans(key)
 
 	return name:find("Mouse", 1, true) ~= nil
@@ -19,11 +25,7 @@ end
 local function window_under_mouse()
 	local position = vim.fn.getmousepos()
 
-	if position.winid == 0 then
-		return nil
-	end
-
-	if not api.nvim_win_is_valid(position.winid) then
+	if position.winid == 0 or not api.nvim_win_is_valid(position.winid) then
 		return nil
 	end
 
@@ -33,25 +35,42 @@ end
 local function mouse()
 	local winid = window_under_mouse()
 
-	if not winid then
+	if not winid or mouse_windows[winid] then
 		return
 	end
 
-	-- Change scrolloff before Neovim processes the mouse input itself.
 	api.nvim_set_option_value("scrolloff", mouse_scrolloff, {
 		win = winid,
 	})
+	mouse_windows[winid] = true
 end
 
 local function keyboard()
+	local winid = api.nvim_get_current_win()
+
+	if not mouse_windows[winid] then
+		return
+	end
+
 	api.nvim_set_option_value("scrolloff", keyboard_scrolloff, {
-		win = api.nvim_get_current_win(),
+		win = winid,
 	})
+	mouse_windows[winid] = nil
 end
 
 function M.setup()
+	vim.o.scrolloff = keyboard_scrolloff
+
 	-- Protect against re-registration after :source.
 	vim.on_key(nil, namespace)
+
+	local group = api.nvim_create_augroup("AdaptiveScrolloff", { clear = true })
+	api.nvim_create_autocmd("WinClosed", {
+		group = group,
+		callback = function(args)
+			mouse_windows[tonumber(args.match)] = nil
+		end,
+	})
 
 	vim.on_key(function(key, typed)
 		local input = typed ~= "" and typed or key
