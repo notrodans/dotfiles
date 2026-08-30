@@ -70,7 +70,6 @@
         "format": "{icon}",
         "show-special": false,
         "on-click": "activate",
-        "all-outputs": true,
         "sort-by-number": true,
         "persistent-workspaces": {
             "1": [],
@@ -140,13 +139,13 @@
         "format-alt-click": "click",
         "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛 ",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-        "on-click-right": "gnome-system-monitor",
+        "on-click-right": "kitty --title btop sh -c 'btop'",
     },
         
     "hyprland/language": {
         "format": "Lang: {}",
         "format-en": "American",
-        "format-uk": "Ukranian",
+        "format-uk": "Ukrainian",
         "format-ru": "Russian",
     },
         
@@ -257,9 +256,9 @@
             "phone": "",
             "portable": "",
             "car": "",
-        "default": ["", "", "󰕾", ""], 
-        "ignored-sinks": ["Easy Effects Sink"],
+            "default": ["", "", "󰕾", ""], 
         },
+        "ignored-sinks": ["Easy Effects Sink"],
         "scroll-step": 5.0,
         "on-click": "~/.config/hypr/scripts/Volume.sh --toggle",
         "on-click-right": "pavucontrol -t 3",
