@@ -141,7 +141,7 @@ packages:
     - bitwarden
     - ripgrep
     - bitwarden-cli
-    - sioyek
+    - sioyek-git
     - docker
     - docker-compose
     - docker-buildx
