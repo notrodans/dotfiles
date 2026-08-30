@@ -44,10 +44,11 @@ install_sdkman() {
       warn "zip/unzip not found. SDKMAN might fail to install packages."
     fi
 
-    sdk install java 25.0.2-tem || true
-    sdk install java 21.0.10-tem || true
-    sdk install java 17.0.18-tem || true
-    sdk default java 21.0.10-tem
+    local version
+    for version in{{ range .tool_versions.java.install }} {{ . | quote }}{{ end }}; do
+      sdk install java "$version" || true
+    done
+    sdk default java {{ .tool_versions.java.default | quote }}
     sdk version
   else
     warn "SDKMAN was installed but 'sdk' command is not available in current shell."
@@ -68,7 +69,8 @@ install_tpm() {
 
 install_nvm() {
   local nvm_dir="$HOME/.nvm"
-  local nvm_version="v0.40.6"
+  local nvm_version={{ .tool_versions.nvm | quote }}
+  local node_version={{ .tool_versions.node | quote }}
 
   if [[ -d "$nvm_dir/.git" ]]; then
     info "Updating NVM checkout to $nvm_version..."
@@ -85,10 +87,10 @@ install_nvm() {
   [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
 
   if command -v nvm >/dev/null 2>&1; then
-    info "Installing Node.js v22.23.2 via NVM..."
-    nvm install v22.23.2
-    nvm use v22.23.2
-    nvm alias default v22.23.2
+    info "Installing Node.js $node_version via NVM..."
+    nvm install "$node_version"
+    nvm use "$node_version"
+    nvm alias default "$node_version"
   else
     warn "NVM installed but 'nvm' command not found in current shell"
   fi
@@ -104,13 +106,15 @@ install_opencode() {
 }
 
 install_gh_stack() {
+  local version={{ .tool_versions.gh_stack | quote }}
+
   if ! command -v gh >/dev/null 2>&1; then
     warn "GitHub CLI not found, skipping gh-stack"
     return
   fi
 
-  info "Installing gh-stack v0.1.0..."
-  gh extension install github/gh-stack --pin v0.1.0 --force
+  info "Installing gh-stack $version..."
+  gh extension install github/gh-stack --pin "$version" --force
 }
 
 install_oh_my_zsh
