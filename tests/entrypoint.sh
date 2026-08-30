@@ -14,7 +14,7 @@ validate_templates() {
   while IFS= read -r -d '' template; do
     rendered=$(mktemp)
     chezmoi execute-template < "$template" > "$rendered"
-    if [[ -s "$rendered" ]]; then
+    if grep -q '[^[:space:]]' "$rendered"; then
       shellcheck --severity=error "$rendered"
     fi
     rm -f "$rendered"
