@@ -1,6 +1,8 @@
 [Unit]
 Description=Waybar status bar
-PartOf=hyprland-session.target
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
 
 [Service]
 Type=exec
