@@ -34,7 +34,7 @@ sync_arch_system() {
   sudo pacman -Syu --needed --noconfirm archlinux-keyring
 
   if has_systemd; then
-    sudo systemctl enable --now archlinux-keyring-wkd-sync.timer || true
+    sudo systemctl start archlinux-keyring-wkd-sync.timer || true
   fi
 }
 
