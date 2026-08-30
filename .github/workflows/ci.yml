@@ -2,12 +2,36 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Lint shell scripts
+        shell: bash
+        run: |
+          mapfile -d '' scripts < <(
+            find home tests -type f \
+              \( -name '*.sh' -o -name 'executable_*.sh' \) \
+              ! -name '*.tmpl' \
+              -print0
+          )
+
+          if ((${#scripts[@]} > 0)); then
+            shellcheck "${scripts[@]}"
+          fi
+
   test:
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -17,9 +41,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3.7.0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.12.0
