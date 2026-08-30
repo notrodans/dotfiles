@@ -6,7 +6,6 @@ PartOf=hyprland-session.target
 Type=simple
 Slice=background.slice
 ExecStart=/usr/bin/awww-daemon
-ExecStartPost=-/usr/bin/awww restore
 Restart=on-failure
 RestartSec=2s
 MemoryAccounting=yes
