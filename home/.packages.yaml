@@ -14,6 +14,7 @@ packages:
     - ttf-kopub
     - ttf-lato
     - ttf-linux-libertine
+    - otf-monaspace
     - ttf-nerd-fonts-symbols
     - ttf-nerd-fonts-symbols-common
     - ttf-nerd-fonts-symbols-mono
