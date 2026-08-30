@@ -8,9 +8,22 @@ local function string_split(target, separator)
 	return vim.split(target, separator, { plain = true, trimempty = true })
 end
 
-nvlsp.defaults()
+local capabilities = vim.tbl_deep_extend(
+	"force",
+	{},
+	nvlsp.capabilities,
+	require("lsp-file-operations").default_capabilities()
+)
+
+dofile(vim.g.base46_cache .. "lsp")
+require("nvchad.lsp").diagnostic_config()
+
+vim.lsp.config("*", {
+	capabilities = capabilities,
+})
 
 local servers = {
+	"lua_ls",
 	"vue_ls",
 	"jdtls",
 	"gradle_ls",
@@ -39,6 +52,21 @@ local servers = {
 	"svelte",
 }
 
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			runtime = { version = "LuaJIT" },
+			workspace = {
+				library = {
+					vim.fn.expand("$VIMRUNTIME/lua"),
+					vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types",
+					vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
+					"${3rd}/luv/library",
+				},
+			},
+		},
+	},
+})
 vim.lsp.config("intelephense", {
 	filetypes = { "php" },
 	settings = {

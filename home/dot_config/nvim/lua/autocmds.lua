@@ -45,6 +45,17 @@ autocmd("BufReadPost", {
 autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		local function map(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, {
+				buffer = args.buf,
+				desc = "LSP " .. desc,
+			})
+		end
+
+		map("gD", vim.lsp.buf.declaration, "Go to declaration")
+		map("gd", vim.lsp.buf.definition, "Go to definition")
+		map("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
+		map("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
 
 		if client and client:supports_method("textDocument/linkedEditingRange") then
 			vim.lsp.linked_editing_range.enable(true, {
