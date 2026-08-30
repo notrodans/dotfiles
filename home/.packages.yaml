@@ -95,6 +95,8 @@ packages:
     - pamixer
     - pavucontrol
     - pipewire-alsa
+    - pipewire-pulse
+    - wireplumber
     - playerctl
     - pyprland
     - qt5ct
