@@ -42,6 +42,20 @@ autocmd("BufReadPost", {
 -- 	end,
 -- })
 
+autocmd("FileType", {
+	pattern = "*",
+	callback = function(args)
+		local ok = pcall(vim.treesitter.get_parser, args.buf)
+
+		if not ok then
+			return
+		end
+
+		vim.opt_local.foldmethod = "expr"
+		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+	end,
+})
+
 autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)

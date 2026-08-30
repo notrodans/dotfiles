@@ -16,8 +16,6 @@ o.showcmdloc = "last"
 -- folds
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.opt_local.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 --latex
 opt.conceallevel = 2
