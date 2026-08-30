@@ -14,7 +14,9 @@ validate_templates() {
   while IFS= read -r -d '' template; do
     rendered=$(mktemp)
     chezmoi execute-template < "$template" > "$rendered"
-    shellcheck --severity=error "$rendered"
+    if [[ -s "$rendered" ]]; then
+      shellcheck --severity=error "$rendered"
+    fi
     rm -f "$rendered"
   done < <(find "$template_root" -type f -name '*.sh.tmpl' -print0)
 }
