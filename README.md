@@ -30,18 +30,18 @@ chezmoi init --apply
 ## 🛠 Features
 
 *   **OS**: Arch Linux (primary), basic support for others.
-*   **Hardware Detection**: Automatically detects CPU (Intel/AMD), GPU (Intel/AMD/NVIDIA), and Form Factor (Laptop/Desktop) to apply specific drivers and configurations.
-*   **Window Manager**: Hyprland (with Waybar, Rofi, Wlogout).
-*   **Shell**: Zsh + Oh My Zsh + Powerlevel10k (if configured).
+*   **Hardware Detection**: Automatically detects CPU (Intel/AMD), all present GPU vendors (Intel/AMD/NVIDIA), and form factor (Laptop/Desktop) to apply specific drivers and configurations.
+*   **Window Manager**: Hyprland (with Waybar, Fuzzel, Wlogout).
+*   **Shell**: Zsh + Oh My Zsh.
 *   **Terminal**: Kitty.
-*   **Editor**: Neovim.
+*   **Editor**: Neovim Nightly.
 *   **Dev Tools**:
     *   **SDKMAN**: Java version management.
     *   **NVM**: Node.js version management.
     *   **TPM**: Tmux Plugin Manager.
 *   **Package Management**:
     *   Declarative package management via `home/.packages.yaml`.
-    *   Hardware-aware: Installs only relevant drivers/microcode for your CPU/GPU.
+    *   Hardware-aware: Installs every relevant driver/microcode group for the detected CPU/GPU hardware.
     *   Automatically installs Arch Linux packages via `paru` (AUR helper).
 *   **Secrets Management**:
     *   Integrated with **Bitwarden** for secure token and password handling (e.g., MCP tokens).
