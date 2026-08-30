@@ -1,6 +1,6 @@
 return {
 	"ibhagwan/fzf-lua",
-	lazy = false,
+	event = "VeryLazy",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = function()
 		local fzf = require("fzf-lua")
@@ -123,10 +123,6 @@ return {
 		end, { desc = "LSP diagnostics workspace" })
 
 		-- lsp
-		vim.keymap.set({ "n", "x" }, "gra", function()
-			vim.lsp.buf.code_action()
-		end, { desc = "LSP code actions", noremap = true, silent = true })
-
 		vim.keymap.set("n", "<leader>flr", function()
 			fzf.lsp_references()
 		end, { desc = "Fzf lsp references" })

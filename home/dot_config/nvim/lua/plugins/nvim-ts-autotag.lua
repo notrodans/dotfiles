@@ -1,6 +1,14 @@
 return {
 	"windwp/nvim-ts-autotag",
-	event = "VeryLazy",
+	ft = {
+		"html",
+		"javascriptreact",
+		"typescriptreact",
+		"vue",
+		"svelte",
+		"xml",
+		"php",
+	},
 	opts = {
 		opts = {
 			enable_close = true,

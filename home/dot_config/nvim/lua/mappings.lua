@@ -97,6 +97,8 @@ map("n", "<A-k>", "<Up><CR><C-w>p", { remap = false, desc = "Navigate up quickfi
 map("n", "<A-j>", "<Down><CR><C-w>p", { remap = false, desc = "Navigate down quickfix" })
 
 -- lsp
+map({ "n", "x" }, "gra", vim.lsp.buf.code_action, { desc = "LSP code actions" })
+
 map("n", "<leader>dt", function()
 	local config = vim.diagnostic.config
 	local vt = config().virtual_text
