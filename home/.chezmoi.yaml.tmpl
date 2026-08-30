@@ -21,22 +21,12 @@
 {{- $gpuAmd := contains "0x1002" $gpuVendorIDs -}}
 {{- $gpuNvidia := contains "0x10de" $gpuVendorIDs -}}
 
-{{- $gpuVendor := "unknown" -}}
-{{- if $gpuIntel -}}
-{{-   $gpuVendor = "intel" -}}
-{{- else if $gpuNvidia -}}
-{{-   $gpuVendor = "nvidia" -}}
-{{- else if $gpuAmd -}}
-{{-   $gpuVendor = "amd" -}}
-{{- end -}}
-
 {{- $isLaptop := false -}}
 {{- if eq .chezmoi.os "linux" -}}
 {{-   $battery := output "bash" "-c" "for battery in /sys/class/power_supply/BAT*; do if [ -d \"$battery\" ]; then printf present; break; fi; done" -}}
 {{-   $isLaptop = eq $battery "present" -}}
 {{- end -}}
 
-{{- $homeDir := .chezmoi.homeDir | default (env "HOME") -}}
 {{- $ci := eq (env "CI") "true" -}}
 {{- $codespaces := env "CODESPACES" | not | not -}}
 {{- $devContainer := env "REMOTE_CONTAINERS" | not | not -}}
@@ -100,7 +90,6 @@ data:
   upgrade: {{ $upgrade }}
 
   cpu_vendor: {{ $cpuVendor | quote }}
-  gpu_vendor: {{ $gpuVendor | quote }}
   gpu_intel: {{ $gpuIntel }}
   gpu_amd: {{ $gpuAmd }}
   gpu_nvidia: {{ $gpuNvidia }}
