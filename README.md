@@ -53,8 +53,9 @@ chezmoi init --apply
 *   `home/.chezmoidata/tool-versions.yaml` - Managed Oh My Zsh, TPM, NVM, Node.js, Java, and gh-stack versions/revisions.
 *   `home/.chezmoiscripts/` - Installation hooks (run automatically during `chezmoi apply`).
     *   `linux/run_onchange_after_00-install-packages.sh.tmpl` - Reconciles system packages from YAML.
-    *   `run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
-    *   `run_onchange_after_11-install-tmux-plugins.sh.tmpl` - Installs newly declared TPM plugins when `.tmux.conf` changes.
+    *   `linux/run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
+    *   `linux/run_onchange_after_11-install-tmux-plugins.sh.tmpl` - Installs newly declared TPM plugins when `.tmux.conf` changes.
+    *   `linux/run_onchange_after_20-install-hyprpm-plugins.sh.tmpl` - Reconciles configured Hyprland plugins after Hyprland is installed.
 *   `tests/` - Docker testing suite.
 
 ## OpenCode Agent Harness
