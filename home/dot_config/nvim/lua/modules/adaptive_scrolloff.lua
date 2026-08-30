@@ -68,7 +68,11 @@ function M.setup()
 	api.nvim_create_autocmd("WinClosed", {
 		group = group,
 		callback = function(args)
-			mouse_windows[tonumber(args.match)] = nil
+			local winid = tonumber(args.match)
+
+			if winid then
+				mouse_windows[winid] = nil
+			end
 		end,
 	})
 
