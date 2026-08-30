@@ -50,9 +50,11 @@ chezmoi init --apply
 
 *   `home/` - The source state of your home directory.
 *   `home/.packages.yaml` - Declarative list of packages to install.
+*   `home/.chezmoidata/tool-versions.yaml` - Managed NVM, Node.js, Java, and gh-stack versions.
 *   `home/.chezmoiscripts/` - Installation hooks (run automatically during `chezmoi apply`).
-    *   `linux/run_once_after_00-install-packages.sh.tmpl` - Installs system packages from YAML.
+    *   `linux/run_onchange_after_00-install-packages.sh.tmpl` - Reconciles system packages from YAML.
     *   `run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
+    *   `run_onchange_after_11-install-tmux-plugins.sh.tmpl` - Installs newly declared TPM plugins when `.tmux.conf` changes.
 *   `tests/` - Docker testing suite.
 
 ## OpenCode Agent Harness
