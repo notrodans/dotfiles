@@ -8,12 +8,18 @@ info() { echo -e "\033[34m[INFO]\033[0m $*"; }
 warn() { echo -e "\033[33m[WARN]\033[0m $*"; }
 
 install_oh_my_zsh() {
-  if [[ -d "$HOME/.oh-my-zsh" ]]; then
-    info "Oh My Zsh already installed"
+  local zsh_dir="$HOME/.oh-my-zsh"
+  local version={{ .tool_versions.oh_my_zsh | quote }}
+
+  if [[ -d "$zsh_dir/.git" ]]; then
+    info "Updating Oh My Zsh checkout to $version..."
   else
-    info "Installing Oh My Zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    info "Installing Oh My Zsh $version..."
+    git clone --filter=blob:none --no-checkout https://github.com/ohmyzsh/ohmyzsh.git "$zsh_dir"
   fi
+
+  git -C "$zsh_dir" fetch --depth 1 --force origin "$version"
+  git -C "$zsh_dir" checkout --detach FETCH_HEAD
 
   if [[ "$SHELL" != */zsh ]]; then
     info "Changing shell to zsh..."
@@ -58,13 +64,17 @@ install_sdkman() {
 
 install_tpm() {
   local tpm_dir="$HOME/.tmux/plugins/tpm"
+  local version={{ .tool_versions.tpm | quote }}
 
-  if [[ -d "$tpm_dir" ]]; then
-    info "TPM already installed at $tpm_dir"
+  if [[ -d "$tpm_dir/.git" ]]; then
+    info "Updating TPM checkout to $version..."
   else
-    info "Installing TPM..."
-    git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm_dir"
+    info "Installing TPM $version..."
+    git clone --filter=blob:none --no-checkout https://github.com/tmux-plugins/tpm.git "$tpm_dir"
   fi
+
+  git -C "$tpm_dir" fetch --depth 1 --force origin "$version"
+  git -C "$tpm_dir" checkout --detach FETCH_HEAD
 }
 
 install_nvm() {

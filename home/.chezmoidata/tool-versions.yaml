@@ -1,4 +1,6 @@
 tool_versions:
+  oh_my_zsh: 4b657407c98bbc8830ae66c2ac7ff3d737c55a83
+  tpm: e261deb1b47614eed3400089ce7197dc68acc4eb
   nvm: v0.40.6
   node: v22.23.2
   java:
