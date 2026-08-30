@@ -1,70 +1,84 @@
-#!/bin/bash
-# Screenshots scripts
+#!/usr/bin/env bash
+set -euo pipefail
 
-time=$(date "+%d-%b_%H-%M-%S")
-dir="$(xdg-user-dir)/Pictures/Screenshots"
-file="Screenshot_${time}_${RANDOM}.png"
+pictures_dir=$(xdg-user-dir PICTURES)
+screenshot_dir="$pictures_dir/Screenshots"
+shader="$HOME/.config/hypr/shaders/vibrance.glsl.mustache"
+timestamp=$(date '+%d-%b_%H-%M-%S')
+filename="Screenshot_${timestamp}_${RANDOM}.png"
+path="$screenshot_dir/$filename"
 
-active_window_class=$(hyprctl -j activewindow | jq -r '(.class)')
-active_window_file="Screenshot_${time}_${active_window_class}.png"
-active_window_path="${dir}/${active_window_file}"
+mkdir -p "$screenshot_dir"
 
-shotnow() {
-	hyprshade off
-	cd ${dir} && grim - | tee "$file" | wl-copy
-	hyprshade on "$HOME/.config/hypr/shaders/vibrance.glsl.mustache"
-	sleep 2
+shader_disabled=false
+
+restore_shader() {
+  if [[ "$shader_disabled" == true ]]; then
+    hyprshade on "$shader" >/dev/null 2>&1 || true
+  fi
 }
 
-shotarea() {
-	hyprshade off
-	tmpfile=$(mktemp)
-	grim -g "$(slurp)" - >"$tmpfile"
-	if [[ -s "$tmpfile" ]]; then
-		wl-copy <"$tmpfile"
-		mv "$tmpfile" "$dir/$file"
-	fi
-	rm "$tmpfile"
-	hyprshade on "$HOME/.config/hypr/shaders/vibrance.glsl.mustache"
+disable_shader() {
+  hyprshade off
+  shader_disabled=true
+  trap restore_shader EXIT
 }
 
-shotactive() {
-    active_window_class=$(hyprctl -j activewindow | jq -r '(.class)')
-    active_window_file="Screenshot_${time}_${active_window_class}.png"
-    active_window_path="${dir}/${active_window_file}"
-
-    hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | grim -g - "${active_window_path}"
-	sleep 1
+shot_now() {
+  disable_shader
+  grim - | tee "$path" | wl-copy
 }
 
-shotswappy() {
-	tmpfile=$(mktemp)
-	grim -g "$(slurp)" - >"$tmpfile" && "${sDIR}/Sounds.sh" --screenshot
-	swappy -f - <"$tmpfile"
-	rm "$tmpfile"
+shot_area() {
+  local geometry
+
+  if ! geometry=$(slurp); then
+    exit 0
+  fi
+
+  disable_shader
+  grim -g "$geometry" - | tee "$path" | wl-copy
 }
 
+shot_active() {
+  local window
+  local class
+  local geometry
+  local active_path
 
-if [[ ! -d "$dir" ]]; then
-	mkdir -p "$dir"
-fi
+  window=$(hyprctl -j activewindow)
+  class=$(jq -r '.class // "window"' <<<"$window" | tr '/[:space:]' '__')
+  geometry=$(jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' <<<"$window")
+  active_path="$screenshot_dir/Screenshot_${timestamp}_${class}.png"
 
-if [[ "$1" == "--now" ]]; then
-	shotnow
-elif [[ "$1" == "--in5" ]]; then
-	shot5
-elif [[ "$1" == "--in10" ]]; then
-	shot10
-elif [[ "$1" == "--win" ]]; then
-	shotwin
-elif [[ "$1" == "--area" ]]; then
-	shotarea
-elif [[ "$1" == "--active" ]]; then
-	shotactive
-elif [[ "$1" == "--swappy" ]]; then
-	shotswappy
-else
-	echo -e "Available Options : --now --in5 --in10 --win --area --active --swappy"
-fi
+  grim -g "$geometry" "$active_path"
+}
 
-exit 0
+shot_swappy() {
+  local geometry
+
+  if ! geometry=$(slurp); then
+    exit 0
+  fi
+
+  grim -g "$geometry" - | swappy -f -
+}
+
+case ${1:-} in
+  --now)
+    shot_now
+    ;;
+  --area)
+    shot_area
+    ;;
+  --active)
+    shot_active
+    ;;
+  --swappy)
+    shot_swappy
+    ;;
+  *)
+    printf 'Usage: %s {--now|--area|--active|--swappy}\n' "$0" >&2
+    exit 2
+    ;;
+esac
