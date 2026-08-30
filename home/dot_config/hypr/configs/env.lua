@@ -25,6 +25,5 @@ hl.env("QT_QUICK_CONTROLS_STYLE", "org.hyprland.style")
 -- env = GDK_SCALE,1
 -- env = QT_SCALE_FACTOR,1
 
-hl.env("LIBVA_DRIVER_NAME", "radeonsi")
 -- firefox
 hl.env("MOZ_ENABLE_WAYLAND", 1)
