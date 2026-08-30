@@ -1,4 +1,4 @@
 [Unit]
 Description=Hyprland session services
-Wants=awww.service waybar.service nm-applet.service
+Wants=awww.service waybar.service nm-applet.service hyprpolkitagent.service
 Wants=cliphist-text.service cliphist-image.service
