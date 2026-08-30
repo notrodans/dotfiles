@@ -71,7 +71,7 @@ o.swapfile = false
 o.secure = true
 o.exrc = true
 
--- interval for writing swap file to disk, also used by gitsigns
+-- CursorHold delay
 o.updatetime = 250
 
 -- disable some default providers
