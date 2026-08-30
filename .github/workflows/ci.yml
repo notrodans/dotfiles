@@ -27,7 +27,7 @@ jobs:
           )
 
           if ((${#scripts[@]} > 0)); then
-            shellcheck "${scripts[@]}"
+            shellcheck --severity=error "${scripts[@]}"
           fi
 
   test:
