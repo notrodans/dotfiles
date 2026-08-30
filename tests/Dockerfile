@@ -10,6 +10,7 @@ RUN sed -i 's/^#DisableSandbox/DisableSandbox/' /etc/pacman.conf && \
       sudo \
       chezmoi \
       lua \
+      shellcheck \
       zsh \
       rust \
       zip \

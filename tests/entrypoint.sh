@@ -5,6 +5,20 @@ export USER=${USER:-$(id -un)}
 export CI=true
 COMMAND=${1:-/bin/zsh}
 
+validate_templates() {
+  local template_root="$HOME/.local/share/chezmoi/home/.chezmoiscripts"
+  local rendered
+
+  printf 'INFO: Validating rendered shell templates...\n'
+
+  while IFS= read -r -d '' template; do
+    rendered=$(mktemp)
+    chezmoi execute-template < "$template" > "$rendered"
+    shellcheck --severity=error "$rendered"
+    rm -f "$rendered"
+  done < <(find "$template_root" -type f -name '*.sh.tmpl' -print0)
+}
+
 validate_installation() {
   printf 'INFO: Validating generated configuration...\n'
 
@@ -33,6 +47,7 @@ validate_installation() {
 if [[ "$COMMAND" == "test" ]]; then
   printf 'INFO: Starting automated installation test...\n'
   chezmoi init --apply --verbose --force
+  validate_templates
   validate_installation
   printf 'INFO: Installation and validation successful!\n'
   exit 0
