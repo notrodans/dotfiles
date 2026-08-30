@@ -13,3 +13,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("systemctl --user start hyprland-session.target")
 	hl.exec_cmd(coreScripts .. "/Polkit.sh")
 end)
+
+hl.on("hyprland.shutdown", function()
+	hl.exec_cmd("systemctl --user stop hyprland-session.target")
+end)
