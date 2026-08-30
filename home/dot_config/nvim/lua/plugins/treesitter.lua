@@ -2,10 +2,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
-		config = function()
-			vim.treesitter.language.register("javascript", "tsx")
-			vim.treesitter.language.register("typescript.tsc", "tsx")
-		end,
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter-textobjects",
