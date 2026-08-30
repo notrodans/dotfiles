@@ -3,7 +3,7 @@ Description=Awww wallpaper daemon
 PartOf=hyprland-session.target
 
 [Service]
-Type=simple
+Type=exec
 Slice=background.slice
 ExecStart=/usr/bin/awww-daemon
 Restart=on-failure

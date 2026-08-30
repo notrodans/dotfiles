@@ -3,7 +3,7 @@ Description=Cliphist image watcher
 PartOf=hyprland-session.target
 
 [Service]
-Type=simple
+Type=exec
 Slice=background.slice
 ExecStart=/usr/bin/wl-paste --type image --watch /usr/bin/cliphist store
 Restart=on-failure

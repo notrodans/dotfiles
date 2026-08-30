@@ -3,7 +3,7 @@ Description=NetworkManager applet
 PartOf=hyprland-session.target
 
 [Service]
-Type=simple
+Type=exec
 ExecStart=/usr/bin/nm-applet --indicator
 Restart=on-failure
 RestartSec=2s

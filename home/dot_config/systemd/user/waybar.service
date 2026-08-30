@@ -3,7 +3,7 @@ Description=Waybar status bar
 PartOf=hyprland-session.target
 
 [Service]
-Type=simple
+Type=exec
 ExecStart=/usr/bin/waybar
 Restart=on-failure
 RestartSec=2s
