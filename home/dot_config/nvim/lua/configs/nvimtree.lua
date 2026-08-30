@@ -1,70 +1,77 @@
 dofile(vim.g.base46_cache .. "nvimtree")
 
-local sorter = function(nodes)
-	local fsd_order = {
-		app = 1,
-		pages = 2,
-		screens = 2,
-		widgets = 3,
-		features = 4,
-		entities = 5,
-		shared = 6,
-	}
+local fsd_order = {
+	app = 1,
+	pages = 2,
+	screens = 2,
+	widgets = 3,
+	features = 4,
+	entities = 5,
+	shared = 6,
+}
 
-	local function get_num(name)
-		return tonumber(name:match("^%d+"))
+local function sort_key(node)
+	local directory = node.type == "directory"
+	local mtime
+
+	if node.fs_stat and node.fs_stat.mtime then
+		mtime = node.fs_stat.mtime.sec or node.fs_stat.mtime
+	end
+
+	return {
+		directory = directory,
+		priority = directory and fsd_order[node.name] or nil,
+		number = tonumber(node.name:match("^%d+")),
+		mtime = mtime,
+		length = #node.name,
+		name = node.name:lower(),
+	}
+end
+
+local sorter = function(nodes)
+	local keys = {}
+
+	for _, node in ipairs(nodes) do
+		keys[node] = sort_key(node)
 	end
 
 	table.sort(nodes, function(a, b)
-		if a.type == "directory" and b.type ~= "directory" then
-			return true
-		end
-		if a.type ~= "directory" and b.type == "directory" then
-			return false
+		local a_key = keys[a]
+		local b_key = keys[b]
+
+		if a_key.directory ~= b_key.directory then
+			return a_key.directory
 		end
 
-		if a.type == "directory" and b.type == "directory" then
-			local a_prio = fsd_order[a.name]
-			local b_prio = fsd_order[b.name]
-
-			if a_prio and b_prio then
-				if a_prio ~= b_prio then
-					return a_prio < b_prio
+		if a_key.directory then
+			if a_key.priority and b_key.priority then
+				if a_key.priority ~= b_key.priority then
+					return a_key.priority < b_key.priority
 				end
-			elseif a_prio or b_prio then
-				return a_prio ~= nil
+			elseif a_key.priority or b_key.priority then
+				return a_key.priority ~= nil
 			end
 		end
 
-		local a_num = get_num(a.name)
-		local b_num = get_num(b.name)
-
-		if a_num and b_num then
-			if a_num ~= b_num then
-				return a_num < b_num
+		if a_key.number and b_key.number then
+			if a_key.number ~= b_key.number then
+				return a_key.number < b_key.number
 			end
-		elseif a_num then
+		elseif a_key.number then
 			return true
-		elseif b_num then
+		elseif b_key.number then
 			return false
 		end
 
-		if a.fs_stat and b.fs_stat and a.fs_stat.mtime and b.fs_stat.mtime then
-			local a_time = a.fs_stat.mtime.sec or a.fs_stat.mtime
-			local b_time = b.fs_stat.mtime.sec or b.fs_stat.mtime
-
-			if a_time ~= b_time then
-				return a_time > b_time
-			end
+		if a_key.mtime and b_key.mtime and a_key.mtime ~= b_key.mtime then
+			return a_key.mtime > b_key.mtime
 		end
 
-		if a.type == "directory" and b.type == "directory" then
-			if #a.name ~= #b.name then
-				return #a.name < #b.name
-			end
+		if a_key.directory and a_key.length ~= b_key.length then
+			return a_key.length < b_key.length
 		end
 
-		return a.name:lower() < b.name:lower()
+		return a_key.name < b_key.name
 	end)
 end
 
