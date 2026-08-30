@@ -25,6 +25,9 @@ packages:
     - zsh
     - tmux
     - fzf
+    - git
+    - github-cli
+    - kubectl
     - xclip
     - bat
     - libnotify
@@ -39,6 +42,7 @@ packages:
     - lrzip
     - unrar
     - unzip
+    - zip
     - unace
     - p7zip
     - squashfs-tools
