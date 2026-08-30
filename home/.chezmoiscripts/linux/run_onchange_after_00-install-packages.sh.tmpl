@@ -51,14 +51,15 @@ install_paru() {
   info "Installing paru..."
   sudo pacman -S --needed --noconfirm base-devel git
 
-  local temp_dir
-  temp_dir=$(mktemp -d)
-  trap 'rm -rf "$temp_dir"' RETURN
+  (
+    local temp_dir
+    temp_dir=$(mktemp -d)
+    trap 'rm -rf "$temp_dir"' EXIT
 
-  git clone https://aur.archlinux.org/paru.git "$temp_dir"
-  pushd "$temp_dir" >/dev/null
-  makepkg -si --noconfirm
-  popd >/dev/null
+    git clone https://aur.archlinux.org/paru.git "$temp_dir"
+    cd "$temp_dir"
+    makepkg -si --noconfirm
+  )
 }
 
 install_arch_packages() {
