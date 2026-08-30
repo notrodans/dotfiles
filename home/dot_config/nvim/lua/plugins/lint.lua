@@ -41,15 +41,27 @@ return {
 			sql = { "sqlfluff" },
 		}
 
+		local function run(buf)
+			if not vim.api.nvim_buf_is_valid(buf) then
+				return
+			end
+
+			local markers = roots[vim.bo[buf].filetype]
+			local cwd = markers and vim.fs.root(buf, markers) or nil
+
+			lint.try_lint(nil, cwd and { cwd = cwd } or nil)
+		end
+
 		local group = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
 			group = group,
 			callback = function(args)
-				local markers = roots[vim.bo[args.buf].filetype]
-				local cwd = markers and vim.fs.root(args.buf, markers) or nil
-
-				lint.try_lint(nil, cwd and { cwd = cwd } or nil)
+				run(args.buf)
 			end,
 		})
+
+		vim.schedule(function()
+			run(vim.api.nvim_get_current_buf())
+		end)
 	end,
 }
