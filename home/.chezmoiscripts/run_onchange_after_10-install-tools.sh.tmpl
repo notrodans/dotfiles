@@ -58,6 +58,7 @@ install_sdkman() {
 
 install_tpm() {
   local tpm_dir="$HOME/.tmux/plugins/tpm"
+  local installer="$tpm_dir/bin/install_plugins"
 
   if [[ -d "$tpm_dir" ]]; then
     info "TPM already installed at $tpm_dir"
@@ -65,6 +66,14 @@ install_tpm() {
     info "Installing TPM..."
     git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm_dir"
   fi
+
+  if [[ ! -x "$installer" ]]; then
+    warn "TPM plugin installer is unavailable at $installer"
+    return 1
+  fi
+
+  info "Installing configured tmux plugins..."
+  "$installer"
 }
 
 install_nvm() {
