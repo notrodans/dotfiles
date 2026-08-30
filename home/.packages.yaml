@@ -44,7 +44,6 @@ packages:
     - unzip
     - zip
     - unace
-    - p7zip
     - squashfs-tools
     - tar
     - 7zip
