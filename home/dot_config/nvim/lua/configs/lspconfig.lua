@@ -8,6 +8,13 @@ local function string_split(target, separator)
 	return vim.split(target, separator, { plain = true, trimempty = true })
 end
 
+local lombok_arg = "-javaagent:" .. get_install_path_for("jdtls") .. "/lombok.jar"
+local jdtls_jvm_args = vim.env.JDTLS_JVM_ARGS or ""
+
+if not jdtls_jvm_args:find(lombok_arg, 1, true) then
+	vim.env.JDTLS_JVM_ARGS = vim.trim(jdtls_jvm_args .. " " .. lombok_arg)
+end
+
 local capabilities = vim.tbl_deep_extend(
 	"force",
 	{},
@@ -109,12 +116,6 @@ vim.lsp.config("biome", {
 	},
 })
 vim.lsp.config("jdtls", {
-	cmd = {
-		"jdtls",
-		"--data",
-		"--jvm-arg=-javaagent:" .. get_install_path_for("jdtls") .. "/lombok.jar",
-	},
-
 	settings = {
 		redhat = {
 			telemetry = { enabled = false },
