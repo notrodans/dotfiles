@@ -59,16 +59,16 @@ chezmoi init --apply
 
 OpenCode is managed from chezmoi source files under `home/`:
 
-*   `home/dot_config/opencode/opencode.json.tmpl` - Main generated OpenCode config, including plugin registration, permissions, LSPs, and MCP wiring.
+*   `home/dot_config/opencode/private_opencode.json.tmpl` - Main generated private OpenCode config, including plugin registration, permissions, LSPs, and secret-backed MCP wiring.
 *   `home/dot_config/opencode/tui.json` - TUI configuration.
 *   `home/dot_config/opencode/oh-my-opencode-slim.json` - Agent presets and orchestration behavior.
 *   `home/dot_config/opencode/oh-my-opencode-slim/` - Narrow prompt extensions.
 *   `home/dot_config/opencode/commands/` - Slash commands.
 *   `home/dot_config/opencode/skills/` - Agent skills.
 
-Active presets are `openai` and `opencode-go`. There is no cross-provider fallback: if one provider is unavailable, switch presets explicitly instead of relying on another provider automatically.
+The active preset is `openai-lean`; configured alternatives are `openai` and `opencode-go`. There is no cross-provider fallback: if one provider is unavailable, switch presets explicitly instead of relying on another provider automatically.
 
-The harness includes tmux specialist panes for focused agent work and four slash commands: `/dotfiles-check`, `/repo-review`, `/research`, and `/commit-plan`. Commands stay small and deterministic; skills remain reusable and scoped.
+The harness includes tmux specialist panes for focused agent work and five slash commands: `/dotfiles-check`, `/repo-review`, `/research`, `/commit-plan`, and `/atomic-commit`. Commands stay small and deterministic; skills remain reusable and scoped.
 
 MCP servers backed by secrets are omitted from generated config when secrets are disabled. When secrets are enabled, a missing or locked Bitwarden item stops template rendering instead of generating broken credentials. Required items are:
 
@@ -81,9 +81,12 @@ FastMCP currently requires the token as a query parameter; keep that caveat in m
 Validate harness changes in this order:
 
 ```bash
+export BW_SESSION=$(bw unlock --raw)
 OPENCODE_CONFIG="$HOME/.config/opencode/opencode.json" bunx oh-my-opencode-slim@latest doctor
 chezmoi apply --dry-run -v
 ```
+
+When `.secrets` is enabled, stop and report a blocked validation if Bitwarden cannot be unlocked. Do not replace secret references with placeholders or validate against stale rendered credentials.
 
 Restart OpenCode after config, command, skill, or MCP changes so the runtime reloads generated files.
 
@@ -163,4 +166,3 @@ These dotfiles are tested and working stably on the following hardware:
 | `chezmoi re-add` | Re-import file from home dir (updates source state) |
 | `chezmoi forget $FILE` | Stop managing a file (does not delete it from disk) |
 | `chezmoi managed` | List all files currently managed by chezmoi |
-
