@@ -1,7 +1,6 @@
 ---
 {{- $ephemeral := env "CHEZMOI_EPHEMERAL" | not | not -}}
 {{- $headless := env "CHEZMOI_HEADLESS" | not | not -}}
-{{- $upgrade := eq (env "CHEZMOI_UPGRADE") "true" -}}
 
 {{- $cpuVendor := "unknown" -}}
 {{- if eq .chezmoi.os "linux" -}}
@@ -85,9 +84,6 @@ data:
   ci: {{ $ci }}
   devContainer: {{ $devContainer }}
   secrets: {{ $secrets }}
-
-  # Upgrade packages
-  upgrade: {{ $upgrade }}
 
   cpu_vendor: {{ $cpuVendor | quote }}
   gpu_intel: {{ $gpuIntel }}
