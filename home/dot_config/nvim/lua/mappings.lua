@@ -46,31 +46,10 @@ end, { desc = "buffer close" })
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
--- nvimtree
+-- oil
 map("n", "<C-n>", function()
-	local api = vim.api
-	local tree = require("nvim-tree.api").tree
-	local winid = api.nvim_get_current_win()
-	local filetype = vim.bo.filetype
-	local view = filetype ~= "NvimTree" and vim.fn.winsaveview() or nil
-
-	tree.toggle({
-		find_file = true,
-		focus = true,
-	})
-
-	if view then
-		vim.schedule(function()
-			if not api.nvim_win_is_valid(winid) then
-				return
-			end
-
-			api.nvim_win_call(winid, function()
-				vim.fn.winrestview(view)
-			end)
-		end)
-	end
-end, { desc = "nvimtree toggle window" })
+	require("modules.oil").toggle()
+end, { desc = "oil toggle window" })
 
 map("n", "<leader>th", function()
 	require("nvchad.themes").open()

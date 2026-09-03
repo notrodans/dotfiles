@@ -24,7 +24,7 @@ function M.close(bufnr)
 
 	local alternate = vim.fn.bufnr("#")
 
-	-- The alternate buffer may occasionally be NvimTree or another
+	-- The alternate buffer may occasionally be Oil or another
 	-- unlisted plugin buffer. Fall back to NvChad in that case.
 	if not is_normal_buffer(alternate) or alternate == bufnr then
 		return original_close(bufnr)

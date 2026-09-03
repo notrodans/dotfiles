@@ -33,7 +33,7 @@ return {
 			notify = false,
 		},
 		extensions = {
-			nvimtree = {},
+			oil = {},
 			tabufline = {
 				enable_in_tab = true,
 			},
