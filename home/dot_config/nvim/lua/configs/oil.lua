@@ -11,6 +11,9 @@ return {
 		["<C-s>"] = false,
 		["<C-h>"] = false,
 		["<C-l>"] = false,
+		["<C-c>"] = function()
+			require("modules.oil").close()
+		end,
 		["<CR>"] = function()
 			require("modules.oil").select()
 		end,

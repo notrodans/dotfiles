@@ -6,6 +6,16 @@ local function is_oil(bufnr)
 	return api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].filetype == "oil"
 end
 
+local function is_blank(bufnr)
+	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].modified or api.nvim_buf_get_name(bufnr) ~= "" then
+		return false
+	end
+
+	local lines = api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+	return #lines == 1 and lines[1] == ""
+end
+
 local function target()
 	local bufnr = api.nvim_get_current_buf()
 
@@ -51,16 +61,29 @@ local function select_name(name)
 end
 
 function M.open()
+	local bufnr = api.nvim_get_current_buf()
 	local directory, selected = target()
+
+	vim.w.oil_return_blank = is_blank(bufnr) or nil
 
 	require("oil").open(directory, {}, function()
 		select_name(selected)
 	end)
 end
 
+function M.close()
+	if vim.w.oil_return_blank then
+		vim.w.oil_return_blank = nil
+		vim.cmd.enew()
+		return
+	end
+
+	require("oil.actions").close.callback()
+end
+
 function M.toggle()
 	if is_oil(api.nvim_get_current_buf()) then
-		require("oil.actions").close.callback()
+		M.close()
 		return
 	end
 
