@@ -1,11 +1,29 @@
+local function attach()
+	require("dap").run({
+		type = "go",
+		name = "Attach to Go process",
+		request = "attach",
+		mode = "local",
+		processId = require("dap.utils").pick_process,
+	})
+end
+
 return {
 	"leoluz/nvim-dap-go",
+
+	ft = "go",
 
 	dependencies = {
 		"mfussenegger/nvim-dap",
 	},
 
 	keys = {
+		{
+			"<leader>Da",
+			attach,
+			ft = "go",
+			desc = "Attach to Go process",
+		},
 		{
 			"<leader>Dt",
 			function()
@@ -25,42 +43,13 @@ return {
 	},
 
 	config = function()
+		local dlv = vim.fn.exepath("dlv")
+		assert(dlv ~= "", "Delve executable 'dlv' not found in PATH")
+
 		require("dap-go").setup({
 			delve = {
-				path = "dlv",
-				initialize_timeout_sec = 20,
-				port = "${port}",
-				args = {},
-				build_flags = "",
-				detached = vim.fn.has("win32") == 0,
+				path = dlv,
 			},
 		})
-
-		local dap = require("dap")
-
-		-- Override dap-go's adapter to run the project-managed Delve.
-		dap.adapters.go = function(callback)
-			callback({
-				type = "server",
-				host = "127.0.0.1",
-				port = "${port}",
-
-				executable = {
-					command = "go",
-					args = {
-						"tool",
-						"dlv",
-						"dap",
-						"-l",
-						"127.0.0.1:${port}",
-					},
-					cwd = vim.fn.getcwd(),
-				},
-
-				options = {
-					initialize_timeout_sec = 20,
-				},
-			})
-		end
 	end,
 }
