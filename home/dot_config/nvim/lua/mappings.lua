@@ -58,17 +58,25 @@ end, { desc = "nvchad themes" })
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
+local function toggle_term(opts)
+	require("nvchad.term").toggle(opts)
+
+	if vim.bo.buftype == "terminal" then
+		vim.cmd.startinsert()
+	end
+end
+
 -- toggleable
 map({ "n", "t" }, "<A-v>", function()
-	require("nvchad.term").toggle({ pos = "vsp", id = "vtoggleTerm" })
+	toggle_term({ pos = "vsp", id = "vtoggleTerm" })
 end, { desc = "terminal toggleable vertical term" })
 
 map({ "n", "t" }, "<A-h>", function()
-	require("nvchad.term").toggle({ pos = "sp", id = "htoggleTerm" })
+	toggle_term({ pos = "sp", id = "htoggleTerm" })
 end, { desc = "terminal toggleable horizontal term" })
 
 map({ "n", "t" }, "<A-i>", function()
-	require("nvchad.term").toggle({ pos = "float", id = "floatTerm" })
+	toggle_term({ pos = "float", id = "floatTerm" })
 end, { desc = "terminal toggle floating term" })
 
 -- quickfix list

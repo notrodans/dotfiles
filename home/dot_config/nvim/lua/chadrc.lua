@@ -26,6 +26,9 @@ return {
 	lsp = {
 		signature = false,
 	},
+	term = {
+		startinsert = false,
+	},
 	ui = {
 		tabufline = {
 			order = { "buffers", "tabs" },
