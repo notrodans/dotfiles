@@ -24,12 +24,18 @@ if not jdtls_jvm_args:find(lombok_arg, 1, true) then
 	vim.env.JDTLS_JVM_ARGS = vim.trim(jdtls_jvm_args .. " " .. lombok_arg)
 end
 
-local capabilities = vim.tbl_deep_extend(
-	"force",
-	{},
-	nvlsp.capabilities,
-	require("lsp-file-operations").default_capabilities()
-)
+local capabilities = vim.tbl_deep_extend("force", {}, nvlsp.capabilities, {
+	workspace = {
+		fileOperations = {
+			didCreate = true,
+			didDelete = true,
+			didRename = true,
+			willCreate = true,
+			willDelete = true,
+			willRename = true,
+		},
+	},
+})
 
 dofile(vim.g.base46_cache .. "lsp")
 require("nvchad.lsp").diagnostic_config()

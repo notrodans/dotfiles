@@ -6,15 +6,6 @@ local function oil()
 	return require("oil")
 end
 
-local function resize_width(winid, width)
-	if api.nvim_win_resize then
-		pcall(api.nvim_win_resize, winid, width, -1, { anchor = "right" })
-		return
-	end
-
-	pcall(api.nvim_win_set_width, winid, width)
-end
-
 local function restore_selection(winid, name)
 	if not name or not api.nvim_win_is_valid(winid) then
 		return
@@ -60,10 +51,6 @@ local function restore_view(winid, state)
 			vim.fn.winrestview(view)
 		end
 	end)
-
-	if state.width then
-		resize_width(winid, state.width)
-	end
 end
 
 M.is_win_supported = function(_, bufnr)
@@ -85,9 +72,7 @@ M.save_win = function(winid)
 	return {
 		directory = oil().get_current_dir(bufnr),
 		selected = selected,
-		sidebar = vim.w[winid].oil_sidebar == true,
 		view = view,
-		width = api.nvim_win_get_width(winid),
 	}
 end
 
@@ -95,10 +80,6 @@ M.load_win = function(winid, state)
 	api.nvim_set_current_win(winid)
 
 	local directory = state.directory or vim.fn.getcwd(-1, -1)
-
-	if state.sidebar then
-		vim.w[winid].oil_sidebar = true
-	end
 
 	oil().open(directory, {}, function()
 		restore_view(winid, state)
