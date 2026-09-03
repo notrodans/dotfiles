@@ -138,6 +138,7 @@ packages:
     - kitty
     - kvantum
     - neovim-nightly
+    - delve
     - tree-sitter-cli
     - lazygit
     - bitwarden
