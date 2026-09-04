@@ -1,6 +1,6 @@
 return {
 	default_file_explorer = true,
-	columns = { "icon" },
+	columns = { "icon", "permissions", "size", "mtime" },
 	watch_for_changes = true,
 	lsp_file_methods = {
 		enabled = true,
