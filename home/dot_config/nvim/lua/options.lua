@@ -60,7 +60,7 @@ o.signcolumn = "no"
 
 o.splitbelow = true
 o.splitright = true
-o.timeoutlen = 400
+o.timeoutlen = 100
 o.undofile = true
 -- opt.guicursor = "n-v-c:block,i-ci-ve:ver25"
 opt.guicursor = "a:block-blinkon250"
