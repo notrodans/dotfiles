@@ -23,13 +23,6 @@ local lazy_config = require("configs.lazy")
 
 -- load plugins
 require("lazy").setup({
-	{
-		"notrodans/NvChad",
-		lazy = false,
-		branch = "v2.5",
-		import = "nvchad.plugins",
-	},
-
 	change_detection = {
 		enabled = false,
 		notify = false, -- get a notification when changes are found
@@ -41,13 +34,16 @@ require("lazy").setup({
 vim.cmd.packadd("nvim.difftool")
 
 -- load theme
-dofile(vim.g.base46_cache .. "defaults")
--- dofile(vim.g.base46_cache .. "statusline")
+local defaults_cache = vim.g.base46_cache .. "defaults"
+if not vim.uv.fs_stat(defaults_cache) then
+	require("base46").load_all_highlights()
+end
+dofile(defaults_cache)
 
 require("commands")
 require("options")
 require("autocmds")
-require("nvchad.autocmds")
+require("modules.tabufline").setup()
 require("modules.buffer_close").setup()
 require("modules.adaptive_scrolloff").setup()
 

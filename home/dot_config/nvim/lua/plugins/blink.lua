@@ -20,7 +20,7 @@ return {
 			},
 			config = function(_, opts)
 				require("luasnip").config.set_config(opts)
-				require("nvchad.configs.luasnip")
+				require("configs.luasnip")
 			end,
 		},
 
@@ -112,9 +112,7 @@ return {
 	},
 
 	config = function(_, opts)
-		-- Load NvChad/Base46 Blink highlight groups before Blink initializes.
 		dofile(vim.g.base46_cache .. "blink")
-
 		require("blink.cmp").setup(opts)
 	end,
 }
