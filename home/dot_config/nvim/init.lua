@@ -23,11 +23,6 @@ local lazy_config = require("configs.lazy")
 
 -- load plugins
 require("lazy").setup({
-	change_detection = {
-		enabled = false,
-		notify = false, -- get a notification when changes are found
-	},
-
 	{ import = "plugins" },
 }, lazy_config)
 
