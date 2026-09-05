@@ -17,6 +17,9 @@ return {
 		},
 		integrations_dir = nil,
 		integrations = {},
+		excluded = {
+			"nvcheatsheet",
+		},
 		changed_themes = {},
 		transparency = true,
 		theme_toggle = { "onedark", "one_light" },
