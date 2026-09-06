@@ -35,7 +35,6 @@ o.winborder = "rounded"
 o.clipboard = "unnamedplus"
 o.cursorline = false
 o.cursorlineopt = "number,line"
-o.scroll = 4
 o.scrolloff = 100
 opt.scrolloffpad = 1
 wo.wrap = false
