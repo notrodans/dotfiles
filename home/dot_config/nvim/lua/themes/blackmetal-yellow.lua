@@ -83,6 +83,6 @@ M.polish_hl = {
 
 M.add_hl = {}
 
-M = require("base46").override_theme(M, "blackmetal")
+M = require("base46").override_theme(M, "blackmetal-yellow")
 
 return M
