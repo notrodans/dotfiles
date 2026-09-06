@@ -70,6 +70,7 @@ autocmd("BufReadPost", {
 autocmd({ "WinNew", "WinEnter" }, {
 	callback = function()
 		vim.wo.scroll = 4
+		vim.wo.scrolloff = 100
 	end,
 })
 
