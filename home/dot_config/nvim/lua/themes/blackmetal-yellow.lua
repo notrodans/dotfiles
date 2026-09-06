@@ -60,6 +60,10 @@ M.base_30 = {
 }
 
 M.polish_hl = {
+	defaults = {
+		Visual = { bg = "#3a3218" },
+	},
+
 	syntax = {
 		Comment = { fg = M.base_16.base03, italic = true },
 		String = { fg = M.base_16.base0B },
@@ -83,6 +87,6 @@ M.polish_hl = {
 
 M.add_hl = {}
 
-M = require("base46").override_theme(M, "blackmetal")
+M = require("base46").override_theme(M, "blackmetal-yellow")
 
 return M

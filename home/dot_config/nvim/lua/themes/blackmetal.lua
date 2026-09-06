@@ -60,6 +60,10 @@ M.base_30 = {
 }
 
 M.polish_hl = {
+	defaults = {
+		Visual = { bg = "#3b2d2d" },
+	},
+
 	syntax = {
 		Comment = { fg = M.base_16.base03, italic = true },
 		String = { fg = M.base_16.base0B },

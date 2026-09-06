@@ -12,6 +12,31 @@ vim.filetype.add({
 	},
 })
 
+autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
+	group = vim.api.nvim_create_augroup("FilePost", { clear = true }),
+	callback = function(args)
+		local file = vim.api.nvim_buf_get_name(args.buf)
+		local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
+
+		if not vim.g.ui_entered and args.event == "UIEnter" then
+			vim.g.ui_entered = true
+		end
+
+		if file ~= "" and buftype ~= "nofile" and vim.g.ui_entered then
+			vim.api.nvim_exec_autocmds("User", { pattern = "FilePost", modeline = false })
+			vim.api.nvim_del_augroup_by_name("FilePost")
+
+			vim.schedule(function()
+				vim.api.nvim_exec_autocmds("FileType", {})
+
+				if vim.g.editorconfig then
+					require("editorconfig").config(args.buf)
+				end
+			end)
+		end
+	end,
+})
+
 autocmd("BufReadPost", {
 	pattern = "*",
 	callback = function()
@@ -45,6 +70,8 @@ autocmd("BufReadPost", {
 autocmd("FileType", {
 	pattern = "*",
 	callback = function(args)
+		pcall(vim.treesitter.start, args.buf)
+
 		local ok = pcall(vim.treesitter.get_parser, args.buf)
 
 		if not ok then
@@ -111,6 +138,10 @@ autocmd("FileType", {
 		end
 	end,
 })
+
+ucommand("TSInstallAll", function()
+	require("nvim-treesitter").install(require("configs.treesitter").ensure_installed)
+end, {})
 
 ucommand("Shell", function(opts)
 	local function unique_buf_name(command)

@@ -31,15 +31,15 @@ map("n", "tb", "<cmd>tabprevious<CR>", { desc = "Go to previous tab" })
 
 -- tabufline
 map("n", "]b", function()
-	require("nvchad.tabufline").next()
+	require("modules.tabufline").next()
 end, { desc = "buffer goto next", remap = true })
 
 map("n", "[b", function()
-	require("nvchad.tabufline").prev()
+	require("modules.tabufline").prev()
 end, { desc = "buffer goto prev", remap = true })
 
 map("n", "db", function()
-	require("nvchad.tabufline").close_buffer()
+	require("modules.tabufline").close_buffer()
 end, { desc = "buffer close" })
 
 -- Comment
@@ -52,14 +52,14 @@ map("n", "<C-n>", function()
 end, { desc = "oil toggle window" })
 
 map("n", "<leader>th", function()
-	require("nvchad.themes").open()
-end, { desc = "nvchad themes" })
+	require("modules.theme_picker").open()
+end, { desc = "base46 themes" })
 
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
 local function toggle_term(opts)
-	require("nvchad.term").toggle(opts)
+	require("modules.terminal").toggle(opts)
 
 	if vim.bo.buftype == "terminal" then
 		vim.cmd.startinsert()

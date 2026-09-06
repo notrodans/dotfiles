@@ -3,16 +3,6 @@ local M = {}
 
 M.type = "dark"
 
--- Ayaka theme
--- background: #000000
--- foreground: #cedaeb
--- color1 (Blue): #71ADE9 -> Using as Blue
--- color2 (Purple): #AB8CAE -> Using as Keyword/Purple
--- color3 (Pink): #E59DB1 -> Using as Red/Warning
--- color4 (Periwinkle): #9EA0D3 -> Using as Green/String
--- color5 (Light Blue): #8BB8E9 -> Using as Cyan
--- color6 (Light Pink): #E1B4CE -> Using as Orange
-
 ---@class Base16Table
 M.base_16 = {
 	base00 = "#000000",
@@ -23,14 +13,14 @@ M.base_16 = {
 	base05 = "#cedaeb",
 	base06 = "#e1eaff",
 	base07 = "#ffffff",
-	base08 = "#E59DB1",
-	base09 = "#E1B4CE",
-	base0A = "#AB8CAE",
-	base0B = "#9EA0D3",
-	base0C = "#8BB8E9",
-	base0D = "#71ADE9",
-	base0E = "#AB8CAE",
-	base0F = "#E59DB1",
+	base08 = "#e59db1",
+	base09 = "#e1b4ce",
+	base0A = "#ab8cae",
+	base0B = "#9ea0d3",
+	base0C = "#8bb8e9",
+	base0D = "#71ade9",
+	base0E = "#ab8cae",
+	base0F = "#e59db1",
 }
 
 ---@class Base30Table
@@ -38,43 +28,38 @@ M.base_30 = {
 	white = "#cedaeb",
 	black = "#000000",
 	darker_black = "#000000",
-	black2 = "#151018", -- UI Elements
-	one_bg = "#151018", -- Pmenu bg
-	one_bg2 = "#1f1824", -- Lighter UI
-	one_bg3 = "#2a2030", -- Borders
+	black2 = "#151018",
+	one_bg = "#151018",
+	one_bg2 = "#1f1824",
+	one_bg3 = "#2a2030",
 	grey = "#9098a4",
 	grey_fg = "#9098a4",
-	grey_fg2 = "#aab2bd",
 	light_grey = "#cedaeb",
-	line = "#2a2030", -- Split lines
+	line = "#2a2030",
 	statusline_bg = "#151018",
 	lightbg = "#1f1824",
 	pmenu_bg = "#151018",
-	folder_bg = "#8BB8E9", -- Blue for folders
+	folder_bg = "#8bb8e9",
 
-	red = "#E59DB1", -- Pink
-	pink = "#E59DB1", -- Pink
-	baby_pink = "#E1B4CE", -- Light Pink
-	orange = "#E1B4CE", -- Light Pink as Orange
-	yellow = "#AB8CAE", -- Purple as Yellow (Theme aesthetic)
-	green = "#9EA0D3", -- Periwinkle as Green
-	vibrant_green = "#9EA0D3",
-	blue = "#71ADE9", -- Sky Blue
-	nord_blue = "#8BB8E9",
-	teal = "#8BB8E9", -- Light Blue
-	cyan = "#8BB8E9",
-	purple = "#AB8CAE", -- Purple
+	red = "#e59db1",
+	green = "#9ea0d3",
+	blue = "#71ade9",
+	yellow = "#ab8cae",
+	purple = "#ab8cae",
+	orange = "#e1b4ce",
+	cyan = "#8bb8e9",
+	pink = "#e59db1",
+
+	grey_fg2 = "#aab2bd",
+	baby_pink = "#e1b4ce",
+	vibrant_green = "#9ea0d3",
+	nord_blue = "#8bb8e9",
+	sun = "#e1b4ce",
 	dark_purple = "#60486d",
-	sun = "#E1B4CE",
+	teal = "#8bb8e9",
 }
 
 M.polish_hl = {
-	-- defaults = {
-	-- 	Normal = { bg = M.base_16.base00 },
-	-- 	Cursor = { bg = "#cedaeb", fg = "#000000" },
-	-- 	Visual = { bg = M.base_16.base02 },
-	-- },
-
 	syntax = {
 		Comment = { fg = M.base_16.base03, italic = true },
 		String = { fg = M.base_16.base0B },
@@ -85,6 +70,7 @@ M.polish_hl = {
 		MatchParen = { fg = M.base_30.blue, underline = true },
 		Pmenu = { bg = M.base_30.one_bg },
 		PmenuSel = { bg = M.base_30.blue, fg = M.base_30.black, bold = true },
+		St_Mode = { bg = M.base_30.one_bg, fg = M.base_16.base02, bold = true },
 	},
 
 	treesitter = {
@@ -94,6 +80,8 @@ M.polish_hl = {
 		["@tag.attribute"] = { fg = M.base_16.base08, italic = false },
 	},
 }
+
+M.add_hl = {}
 
 M = require("base46").override_theme(M, "ayaka")
 

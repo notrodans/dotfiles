@@ -1,5 +1,3 @@
-local nvlsp = require("nvchad.configs.lspconfig")
-
 local function get_install_path_for(package)
 	return vim.fn.expand("$MASON/packages/" .. package)
 end
@@ -24,7 +22,27 @@ if not jdtls_jvm_args:find(lombok_arg, 1, true) then
 	vim.env.JDTLS_JVM_ARGS = vim.trim(jdtls_jvm_args .. " " .. lombok_arg)
 end
 
-local capabilities = vim.tbl_deep_extend("force", {}, nvlsp.capabilities, {
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities.textDocument.completion.completionItem = {
+	documentationFormat = { "markdown", "plaintext" },
+	snippetSupport = true,
+	preselectSupport = true,
+	insertReplaceSupport = true,
+	labelDetailsSupport = true,
+	deprecatedSupport = true,
+	commitCharactersSupport = true,
+	tagSupport = { valueSet = { 1 } },
+	resolveSupport = {
+		properties = {
+			"documentation",
+			"detail",
+			"additionalTextEdits",
+		},
+	},
+}
+
+capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
 	workspace = {
 		fileOperations = {
 			didCreate = true,
@@ -38,7 +56,21 @@ local capabilities = vim.tbl_deep_extend("force", {}, nvlsp.capabilities, {
 })
 
 dofile(vim.g.base46_cache .. "lsp")
-require("nvchad.lsp").diagnostic_config()
+
+local severity = vim.diagnostic.severity
+vim.diagnostic.config({
+	virtual_text = { prefix = "" },
+	signs = {
+		text = {
+			[severity.ERROR] = "󰅙",
+			[severity.WARN] = "",
+			[severity.INFO] = "󰋼",
+			[severity.HINT] = "󰌵",
+		},
+	},
+	underline = true,
+	float = { border = "single" },
+})
 
 vim.lsp.config("*", {
 	capabilities = capabilities,
@@ -81,7 +113,6 @@ vim.lsp.config("lua_ls", {
 			workspace = {
 				library = {
 					vim.fn.expand("$VIMRUNTIME/lua"),
-					vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types",
 					vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
 					"${3rd}/luv/library",
 				},
