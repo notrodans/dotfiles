@@ -51,11 +51,7 @@ local function render_tabs()
 		return ""
 	end
 
-	if vim.g.TbTabsToggled == 1 then
-		return btn(" 󰅁 ", "TabTitle", "ToggleTabs")
-	end
-
-	local result = btn(" 󰐕 ", "TabNewBtn", "NewTab") .. btn(" TABS ", "TabTitle", "ToggleTabs")
+	local result = ""
 
 	for nr = 1, count do
 		local hl = "TabO" .. (nr == fn.tabpagenr() and "n" or "ff")
@@ -418,17 +414,8 @@ local function define_click_handlers()
 			call luaeval('require("modules.tabufline").close_buffer(_A)', a:bufnr)
 		endfunction
 
-		function! TbNewTab(a,b,c,d)
-			tabnew
-		endfunction
-
 		function! TbGotoTab(tabnr,b,c,d)
 			execute a:tabnr .. 'tabnext'
-		endfunction
-
-		function! TbToggleTabs(a,b,c,d)
-			let g:TbTabsToggled = !g:TbTabsToggled
-			redrawtabline
 		endfunction
 	]])
 end
@@ -439,7 +426,6 @@ function M.setup()
 	end
 
 	setup_done = true
-	vim.g.TbTabsToggled = vim.g.TbTabsToggled or 0
 	vim.t.bufs = buffers()
 
 	define_click_handlers()
