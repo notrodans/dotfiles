@@ -435,6 +435,14 @@ function M.setup()
 	api.nvim_create_autocmd({ "BufAdd", "BufEnter", "TabNew" }, {
 		group = group,
 		callback = function(args)
+			if args.event == "TabNew" then
+				local current = api.nvim_get_current_buf()
+				vim.t.bufs = valid_listed_buffer(current) and { current } or {}
+				vim.t.tabufline_anchor = current
+				vim.cmd.redrawtabline()
+				return
+			end
+
 			local bufs = buffers()
 
 			if valid_listed_buffer(args.buf) and not vim.tbl_contains(bufs, args.buf) then
