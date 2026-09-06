@@ -28,12 +28,9 @@ require("lazy").setup({
 
 vim.cmd.packadd("nvim.difftool")
 
--- load theme
-local defaults_cache = vim.g.base46_cache .. "defaults"
-if not vim.uv.fs_stat(defaults_cache) then
-	require("base46").load_all_highlights()
-end
-dofile(defaults_cache)
+-- Recompile Base46 on startup so local nvconfig changes such as
+-- transparency and highlight overrides are reflected in the cache.
+require("base46").load_all_highlights()
 
 require("commands")
 require("options")
