@@ -36,6 +36,7 @@ require("modules.tabufline").setup()
 require("options")
 require("autocmds")
 require("modules.buffer_close").setup()
+require("modules.adaptive_scrolloff").setup()
 
 vim.schedule(function()
 	require("mappings")
