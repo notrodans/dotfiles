@@ -1,7 +1,6 @@
 local M = {}
 
 local cache_version = "1"
-local config_path = vim.fn.stdpath("config") .. "/lua/nvconfig.lua"
 local lock_path = vim.fn.stdpath("config") .. "/lazy-lock.json"
 local stamp_path = vim.g.base46_cache .. ".fingerprint"
 
@@ -15,6 +14,42 @@ local function read(path)
 	file:close()
 
 	return content
+end
+
+local function serialize(value)
+	local kind = type(value)
+
+	if kind == "nil" then
+		return "nil"
+	end
+
+	if kind == "boolean" or kind == "number" then
+		return tostring(value)
+	end
+
+	if kind == "string" then
+		return string.format("%q", value)
+	end
+
+	if kind ~= "table" then
+		error("unsupported Base46 cache fingerprint value: " .. kind)
+	end
+
+	local keys = {}
+	for key in pairs(value) do
+		keys[#keys + 1] = key
+	end
+
+	table.sort(keys, function(left, right)
+		return type(left) .. tostring(left) < type(right) .. tostring(right)
+	end)
+
+	local parts = {}
+	for _, key in ipairs(keys) do
+		parts[#parts + 1] = serialize(key) .. "=" .. serialize(value[key])
+	end
+
+	return "{" .. table.concat(parts, ",") .. "}"
 end
 
 local function base46_revision()
@@ -31,14 +66,14 @@ local function base46_revision()
 	return decoded.base46.commit or ""
 end
 
-local function local_theme_source()
-	local theme = require("nvconfig").base46.theme
-	local path = vim.fn.stdpath("config") .. "/lua/themes/" .. theme .. ".lua"
+local function local_theme_source(config)
+	local path = vim.fn.stdpath("config") .. "/lua/themes/" .. config.theme .. ".lua"
 
 	return read(path)
 end
 
 local function fingerprint()
+	local config = require("nvconfig").base46
 	local version = vim.version()
 	local runtime = table.concat({
 		tostring(version.major),
@@ -51,8 +86,8 @@ local function fingerprint()
 		cache_version,
 		runtime,
 		base46_revision(),
-		read(config_path),
-		local_theme_source(),
+		serialize(config),
+		local_theme_source(config),
 	}, "\0"))
 end
 
