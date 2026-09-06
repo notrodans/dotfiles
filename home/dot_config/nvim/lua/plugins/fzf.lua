@@ -6,33 +6,6 @@ return {
 		local fzf = require("fzf-lua")
 		local actions = fzf.actions
 
-		local function sync_tabufline()
-			local buf = vim.api.nvim_get_current_buf()
-
-			if not vim.api.nvim_buf_is_valid(buf) or not vim.bo[buf].buflisted then
-				return
-			end
-
-			local bufs = vim.t.bufs
-			if type(bufs) ~= "table" then
-				bufs = {}
-			end
-
-			bufs = vim.tbl_filter(function(item)
-				return vim.api.nvim_buf_is_valid(item) and vim.bo[item].buflisted
-			end, bufs)
-
-			if not vim.tbl_contains(bufs, buf) then
-				bufs[#bufs + 1] = buf
-			end
-
-			vim.t.bufs = bufs
-			vim.o.showtabline = 2
-			vim.o.tabline = "%!v:lua.require('modules.tabufline').render()"
-			dofile(vim.g.base46_cache .. "tbline")
-			vim.cmd.redrawtabline()
-		end
-
 		local function workspace_cwd()
 			return vim.fn.getcwd(-1, -1)
 		end
@@ -164,9 +137,6 @@ return {
 			},
 			winopts = {
 				fullscreen = true,
-				on_close = function()
-					vim.schedule(sync_tabufline)
-				end,
 			},
 			fzf_colors = true,
 			keymap = {
