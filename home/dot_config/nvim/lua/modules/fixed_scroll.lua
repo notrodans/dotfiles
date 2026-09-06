@@ -8,13 +8,21 @@ local function apply(winid)
 		return
 	end
 
+	if api.nvim_win_get_height(winid) < scroll then
+		return
+	end
+
 	if api.nvim_get_option_value("scroll", { win = winid }) == scroll then
 		return
 	end
 
-	api.nvim_win_call(winid, function()
+	local ok, err = pcall(api.nvim_win_call, winid, function()
 		vim.cmd(("noautocmd setlocal scroll=%d"):format(scroll))
 	end)
+
+	if not ok and not tostring(err):find("E49:", 1, true) then
+		error(err)
+	end
 end
 
 local function sync()
