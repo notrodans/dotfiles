@@ -477,6 +477,7 @@ function M.setup()
 							table.remove(bufs, index)
 							vim.t[tab].bufs = bufs
 							break
+						end
 					end
 				end
 			end
