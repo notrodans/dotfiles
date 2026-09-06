@@ -50,7 +50,7 @@ return {
 
 		tabufline = {
 			enabled = true,
-			lazyload = true,
+			lazyload = false,
 			treeOffsetFt = "NvimTree",
 			order = { "buffers", "tabs" },
 			bufwidth = 21,
