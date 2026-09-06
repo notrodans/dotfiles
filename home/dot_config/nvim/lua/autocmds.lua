@@ -67,6 +67,12 @@ autocmd("BufReadPost", {
 -- 	end,
 -- })
 
+autocmd({ "WinNew", "WinEnter" }, {
+	callback = function()
+		vim.wo.scroll = 4
+	end,
+})
+
 autocmd("FileType", {
 	pattern = "*",
 	callback = function(args)
