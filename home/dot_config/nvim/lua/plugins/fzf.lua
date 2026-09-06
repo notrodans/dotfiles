@@ -6,30 +6,29 @@ return {
 		local fzf = require("fzf-lua")
 		local actions = fzf.actions
 
-		local function with_tabufline(action)
-			return function(selected, opts)
-				action(selected, opts)
+		local function sync_tabufline()
+			local buf = vim.api.nvim_get_current_buf()
 
-				vim.schedule(function()
-					local buf = vim.api.nvim_get_current_buf()
-
-					if not vim.api.nvim_buf_is_valid(buf) or not vim.bo[buf].buflisted then
-						return
-					end
-
-					local bufs = vim.t.bufs
-					if type(bufs) ~= "table" then
-						bufs = {}
-					end
-
-					if not vim.tbl_contains(bufs, buf) then
-						bufs[#bufs + 1] = buf
-						vim.t.bufs = bufs
-					end
-
-					vim.cmd.redrawtabline()
-				end)
+			if not vim.api.nvim_buf_is_valid(buf) or not vim.bo[buf].buflisted then
+				return
 			end
+
+			local bufs = vim.t.bufs
+			if type(bufs) ~= "table" then
+				bufs = {}
+			end
+
+			bufs = vim.tbl_filter(function(item)
+				return vim.api.nvim_buf_is_valid(item) and vim.bo[item].buflisted
+			end, bufs)
+
+			if not vim.tbl_contains(bufs, buf) then
+				bufs[#bufs + 1] = buf
+			end
+
+			vim.t.bufs = bufs
+			vim.o.showtabline = 2
+			vim.cmd.redrawtabline()
 		end
 
 		local function workspace_cwd()
@@ -163,6 +162,9 @@ return {
 			},
 			winopts = {
 				fullscreen = true,
+				on_close = function()
+					vim.schedule(sync_tabufline)
+				end,
 			},
 			fzf_colors = true,
 			keymap = {
@@ -180,10 +182,10 @@ return {
 			},
 			actions = {
 				files = {
-					["enter"] = with_tabufline(actions.file_edit_or_qf),
-					["ctrl-x"] = with_tabufline(actions.file_split),
-					["ctrl-v"] = with_tabufline(actions.file_vsplit),
-					["ctrl-t"] = with_tabufline(actions.file_tabedit),
+					["enter"] = actions.file_edit_or_qf,
+					["ctrl-x"] = actions.file_split,
+					["ctrl-v"] = actions.file_vsplit,
+					["ctrl-t"] = actions.file_tabedit,
 					["alt-q"] = actions.file_sel_to_qf,
 				},
 			},
