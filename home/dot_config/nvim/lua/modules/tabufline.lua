@@ -436,9 +436,8 @@ function M.setup()
 		group = group,
 		callback = function(args)
 			if args.event == "TabNew" then
-				local current = api.nvim_get_current_buf()
-				vim.t.bufs = valid_listed_buffer(current) and { current } or {}
-				vim.t.tabufline_anchor = current
+				vim.t.bufs = {}
+				vim.t.tabufline_anchor = nil
 				vim.cmd.redrawtabline()
 				return
 			end
@@ -478,7 +477,6 @@ function M.setup()
 							table.remove(bufs, index)
 							vim.t[tab].bufs = bufs
 							break
-						end
 					end
 				end
 			end
