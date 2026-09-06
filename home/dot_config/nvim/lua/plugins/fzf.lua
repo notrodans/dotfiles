@@ -28,6 +28,8 @@ return {
 
 			vim.t.bufs = bufs
 			vim.o.showtabline = 2
+			vim.o.tabline = "%!v:lua.require('modules.tabufline').render()"
+			dofile(vim.g.base46_cache .. "tbline")
 			vim.cmd.redrawtabline()
 		end
 
