@@ -32,9 +32,9 @@ vim.cmd.packadd("nvim.difftool")
 require("modules.base46_cache").sync()
 
 require("commands")
+require("modules.tabufline").setup()
 require("options")
 require("autocmds")
-require("modules.tabufline").setup()
 require("modules.buffer_close").setup()
 require("modules.adaptive_scrolloff").setup()
 
