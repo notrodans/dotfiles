@@ -77,7 +77,7 @@ function M.open()
 		end
 
 		config.theme = theme
-		require("base46").load_all_highlights()
+		require("modules.base46_cache").rebuild()
 		vim.cmd.redraw()
 	end)
 end
