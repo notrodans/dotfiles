@@ -28,9 +28,8 @@ require("lazy").setup({
 
 vim.cmd.packadd("nvim.difftool")
 
--- Recompile Base46 on startup so local nvconfig changes such as
--- transparency and highlight overrides are reflected in the cache.
-require("base46").load_all_highlights()
+-- Compile Base46 only when the effective theme configuration changed.
+require("modules.base46_cache").sync()
 
 require("commands")
 require("options")
