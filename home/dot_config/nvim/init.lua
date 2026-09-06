@@ -35,6 +35,7 @@ require("commands")
 require("modules.tabufline").setup()
 require("options")
 require("autocmds")
+require("modules.fixed_scroll").setup()
 require("modules.buffer_close").setup()
 require("modules.adaptive_scrolloff").setup()
 
