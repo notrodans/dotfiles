@@ -41,6 +41,8 @@ hl.bind(mainMod .. " + " .. "ALT" .. "+" .. "R", hl.dsp.exec_cmd(coreScripts .. 
 
 hl.bind(mainMod .. " + " .. "W", hl.dsp.exec_cmd(userScripts .. "/WallpaperSelect.sh"))
 
+hl.bind(mainMod .. " + " .. "SHIFT" .. "+" .. "T", hl.dsp.exec_cmd(userScripts .. "/Translator.sh"))
+
 -- Select wallpaper to apply
 
 -- Waybar / Bar related

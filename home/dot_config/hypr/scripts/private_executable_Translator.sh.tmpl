@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{- if .secrets }}
+deepl_api_key={{ (bitwarden "item" "deepl-api-key").login.password | quote }}
+{{- else }}
+notify-send --urgency=critical "DeepL Translator" "Bitwarden secrets are disabled"
+exit 1
+{{- end }}
+
+fuzzel_command=(
+  fuzzel
+  --dmenu
+  --cache=/dev/null
+  --no-icons
+  --override=dmenu.exit-immediately-if-empty=no
+)
+
+if pgrep -x fuzzel >/dev/null 2>&1; then
+  pkill -x fuzzel
+  exit 0
+fi
+
+text=$(
+  "${fuzzel_command[@]}" \
+    --prompt-only="Translate › " \
+    --placeholder="English ↔ Russian"
+) || exit 0
+
+[[ -n "${text//[[:space:]]/}" ]] || exit 0
+
+if [[ "$text" =~ [А-Яа-яЁёІіЇїЄєҐґ] ]]; then
+  target="EN-US"
+  target_label="EN"
+else
+  target="RU"
+  target_label="RU"
+fi
+
+if [[ "$deepl_api_key" == *":fx" ]]; then
+  endpoint="https://api-free.deepl.com/v2/translate"
+else
+  endpoint="https://api.deepl.com/v2/translate"
+fi
+
+payload=$(
+  jq -n \
+    --arg text "$text" \
+    --arg target "$target" \
+    '{text: [$text], target_lang: $target}'
+)
+
+if ! response=$(
+  curl \
+    --silent \
+    --show-error \
+    --fail-with-body \
+    --max-time 15 \
+    --request POST \
+    "$endpoint" \
+    --header "Authorization: DeepL-Auth-Key $deepl_api_key" \
+    --header "Content-Type: application/json" \
+    --data "$payload"
+); then
+  message=$(jq -r '.message // empty' <<<"${response:-}" 2>/dev/null || true)
+  [[ -n "$message" ]] || message="DeepL request failed"
+  notify-send --urgency=critical "DeepL Translator" "$message"
+  exit 1
+fi
+
+if ! translation=$(jq -er '.translations[0].text' <<<"$response"); then
+  notify-send --urgency=critical "DeepL Translator" "DeepL returned no translation"
+  exit 1
+fi
+
+source_lang=$(jq -r '.translations[0].detected_source_language // "AUTO"' <<<"$response")
+display=${translation//$'\n'/ }
+
+if printf '%s\n' "$display" | "${fuzzel_command[@]}" \
+  --prompt="$source_lang → $target_label › " \
+  --lines=1 \
+  --minimal-lines >/dev/null; then
+  printf '%s' "$translation" | wl-copy
+fi
