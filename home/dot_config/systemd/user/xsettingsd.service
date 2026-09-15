@@ -1,0 +1,11 @@
+[Unit]
+Description=XSettings daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=DISPLAY
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/xsettingsd
+Restart=on-failure
+RestartSec=2s
