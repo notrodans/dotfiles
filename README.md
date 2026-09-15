@@ -36,7 +36,7 @@ chezmoi init --apply
 *   **Terminal**: Kitty.
 *   **Editor**: Neovim Nightly.
 *   **Dev Tools**:
-    *   **SDKMAN**: Java version management.
+    *   **Java**: Arch OpenJDK 17/21/25 with Java 21 as the default. See [docs/java.md](docs/java.md).
     *   **NVM**: Node.js version management.
     *   **TPM**: Tmux Plugin Manager.
 *   **Package Management**:
@@ -50,12 +50,13 @@ chezmoi init --apply
 
 *   `home/` - The source state of your home directory.
 *   `home/.packages.yaml` - Declarative list of packages to install.
-*   `home/.chezmoidata/tool-versions.yaml` - Managed Oh My Zsh, TPM, NVM, Node.js, Java, and gh-stack versions/revisions.
+*   `home/.chezmoidata/tool-versions.yaml` - Managed Oh My Zsh, TPM, NVM, Node.js, and gh-stack versions/revisions.
 *   `home/.chezmoiscripts/` - Installation hooks (run automatically during `chezmoi apply`).
     *   `linux/run_onchange_after_00-install-packages.sh.tmpl` - Reconciles system packages from YAML.
-    *   `linux/run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (SDKMAN, NVM, etc.).
+    *   `linux/run_onchange_after_10-install-tools.sh.tmpl` - Installs userspace tools (NVM, TPM, etc.).
     *   `linux/run_onchange_after_11-install-tmux-plugins.sh.tmpl` - Installs newly declared TPM plugins when `.tmux.conf` changes.
     *   `linux/run_onchange_after_20-install-hyprpm-plugins.sh.tmpl` - Reconciles configured Hyprland plugins after Hyprland is installed.
+*   `docs/java.md` - Java runtime, editor, LSP, formatter, and migration notes.
 *   `tests/` - Docker testing suite.
 
 ## OpenCode Agent Harness
