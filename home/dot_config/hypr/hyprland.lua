@@ -7,7 +7,6 @@ local home = os.getenv("HOME")
 local configs = home .. "/.config/hypr/configs"
 local plugins = home .. "/.config/hypr/plugins"
 
-dofile(configs .. "/env.lua")
 dofile(configs .. "/window_rules.lua")
 dofile(configs .. "/monitors.lua")
 dofile(configs .. "/settings.lua")

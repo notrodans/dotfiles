@@ -1,1 +1,19 @@
+# Font rendering
 export FREETYPE_PROPERTIES="cff:no-stem-darkening=1 autofitter:no-stem-darkening=1"
+
+# Toolkit
+export CLUTTER_BACKEND="wayland"
+
+# Qt
+# export QT_AUTO_SCREEN_SCALE_FACTOR="1"
+export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+export QT_QPA_PLATFORMTHEME="qt6ct"
+export QT_QUICK_CONTROLS_STYLE="org.hyprland.style"
+
+# XWayland scaling
+# Keep these aligned with the monitor scale when needed.
+# export GDK_SCALE="1"
+# export QT_SCALE_FACTOR="1"
+
+# Firefox
+export MOZ_ENABLE_WAYLAND="1"
