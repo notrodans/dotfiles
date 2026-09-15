@@ -3,10 +3,4 @@ tool_versions:
   tpm: e261deb1b47614eed3400089ce7197dc68acc4eb
   nvm: v0.40.6
   node: v22.23.2
-  java:
-    install:
-      - 25.0.2-tem
-      - 21.0.10-tem
-      - 17.0.18-tem
-    default: 21.0.10-tem
   gh_stack: v0.1.0

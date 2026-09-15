@@ -185,7 +185,7 @@ vim.lsp.config("jdtls", {
 					},
 				},
 			},
-			home = vim.fn.expand("$HOME") .. "/.sdkman/candidates/21.0.10-tem",
+			home = "/usr/lib/jvm/java-21-openjdk",
 			sources = {
 				organizeImports = {
 					starThreshold = 9999,
@@ -253,15 +253,15 @@ vim.lsp.config("jdtls", {
 				runtimes = {
 					{
 						name = "JavaSE-25",
-						path = vim.fn.expand("$HOME") .. "/.sdkman/candidates/25.0.2-tem",
+						path = "/usr/lib/jvm/java-25-openjdk",
 					},
 					{
 						name = "JavaSE-21",
-						path = vim.fn.expand("$HOME") .. "/.sdkman/candidates/21.0.10-tem",
+						path = "/usr/lib/jvm/java-21-openjdk",
 					},
 					{
 						name = "JavaSE-17",
-						path = vim.fn.expand("$HOME") .. "/.sdkman/candidates/17.0.10-tem",
+						path = "/usr/lib/jvm/java-17-openjdk",
 					},
 				},
 			},

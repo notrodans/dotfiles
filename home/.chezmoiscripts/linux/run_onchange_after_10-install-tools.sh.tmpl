@@ -31,37 +31,6 @@ install_oh_my_zsh() {
   fi
 }
 
-install_sdkman() {
-  set +u
-  if [[ -d "$HOME/.sdkman" ]]; then
-    info "SDKMAN already installed at $HOME/.sdkman"
-  else
-    info "Installing SDKMAN..."
-    curl -fsSL "https://get.sdkman.io?rcupdate=false" | bash
-  fi
-
-  export SDKMAN_DIR="$HOME/.sdkman"
-  # shellcheck disable=SC1091
-  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
-  if command -v sdk >/dev/null 2>&1; then
-    info "Installing Java versions via SDKMAN..."
-    if ! command -v zip >/dev/null 2>&1 || ! command -v unzip >/dev/null 2>&1; then
-      warn "zip/unzip not found. SDKMAN might fail to install packages."
-    fi
-
-    local version
-    for version in{{ range .tool_versions.java.install }} {{ . | quote }}{{ end }}; do
-      sdk install java "$version" || true
-    done
-    sdk default java {{ .tool_versions.java.default | quote }}
-    sdk version
-  else
-    warn "SDKMAN was installed but 'sdk' command is not available in current shell."
-  fi
-  set -u
-}
-
 install_tpm() {
   local tpm_dir="$HOME/.tmux/plugins/tpm"
   local version={{ .tool_versions.tpm | quote }}
@@ -119,7 +88,6 @@ install_gh_stack() {
 }
 
 install_oh_my_zsh
-install_sdkman
 install_tpm
 install_nvm
 install_gh_stack

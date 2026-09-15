@@ -48,6 +48,11 @@ packages:
     - tar
     - 7zip
 
+  java:
+    - jdk17-openjdk
+    - jdk21-openjdk
+    - jdk25-openjdk
+
   graphics_common:
     - mesa
     - mesa-utils

@@ -94,6 +94,26 @@ install_arch_packages() {
 {{ end }}
 }
 
+configure_java() {
+  local target="java-21-openjdk"
+
+  if ! command -v archlinux-java >/dev/null 2>&1; then
+    warn "archlinux-java is unavailable; skipping default Java selection"
+    return
+  fi
+
+  local current
+  current=$(archlinux-java get 2>/dev/null || true)
+
+  if [[ "$current" == "$target" ]]; then
+    info "Java default is already $target"
+    return
+  fi
+
+  info "Setting default Java environment to $target..."
+  sudo archlinux-java set "$target"
+}
+
 setup_pacman_cleaner() {
   if ! has_systemd; then
     return 0
@@ -161,6 +181,7 @@ check_pacman_lock
 sync_arch_system
 install_paru
 install_arch_packages
+configure_java
 setup_arch_services
 
 {{ end -}}
