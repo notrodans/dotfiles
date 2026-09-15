@@ -1,7 +1,5 @@
 ---@module 'hl'
 
--- fonts
-hl.env("FREETYPE_PROPERTIES", "cff:no-stem-darkening=1 autofitter:no-stem-darkening=1")
 hl.env("CLUTTER_BACKEND", "wayland")
 
 -- xdg Specifications
