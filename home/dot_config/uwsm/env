@@ -12,8 +12,8 @@ export QT_QUICK_CONTROLS_STYLE="org.hyprland.style"
 
 # XWayland scaling
 # Keep these aligned with the monitor scale when needed.
-# export GDK_SCALE="1"
-# export QT_SCALE_FACTOR="1"
+export GDK_SCALE="1"
+export QT_SCALE_FACTOR="1"
 
 # Firefox
 export MOZ_ENABLE_WAYLAND="1"
