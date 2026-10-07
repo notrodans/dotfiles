@@ -13,7 +13,7 @@ function M.save()
 end
 
 function M.load()
-	backend().load()
+	require("resession").load()
 end
 
 function M.delete()
