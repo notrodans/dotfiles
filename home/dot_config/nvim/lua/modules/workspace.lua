@@ -5,7 +5,11 @@ local function backend()
 end
 
 function M.save()
-	backend().save()
+	vim.ui.input({ prompt = "Session name> " }, function(name)
+		if name then
+			require("resession").save(name)
+		end
+	end)
 end
 
 function M.load()
