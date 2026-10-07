@@ -1,14 +1,10 @@
 packages:
   fonts:
     - ttf-comfortaa
-    - ttf-courier-code
-    - ttf-fira-sans
     - ttf-firacode-nerd
-    - ttf-hack-nerd
     - ttf-hannom
     - ttf-ibm-plex
     - ttf-indic-otf
-    - ttf-intel-one-mono
     - ttf-iosevka-nerd
     - ttf-jetbrains-mono-nerd
     - ttf-kopub
