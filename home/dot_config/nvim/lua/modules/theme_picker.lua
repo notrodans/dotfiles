@@ -57,7 +57,7 @@ function M.open()
 	local config = require("nvconfig").base46
 
 	vim.ui.select(theme_names(), {
-		prompt = "Base46 theme",
+		prompt = "Choose theme> ",
 		format_item = function(theme)
 			if theme == config.theme then
 				return theme .. " (current)"
