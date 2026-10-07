@@ -26,6 +26,7 @@ path=(
 )
 export PATH
 
+alias clipfzf="cliphist list | fzf | cliphist decode | wl-copy"
 alias pacall="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias ls="ls --sort=time -r"
 
