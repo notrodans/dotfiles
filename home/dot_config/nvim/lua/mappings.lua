@@ -99,6 +99,10 @@ map({ "n", "x" }, "<C-u>", function()
 	return vim.wo.scroll .. "k"
 end, { desc = "scroll up", expr = true })
 
+-- moving
+vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 -- macroses
 -- vim.keymap.set("n", "q", "<nop>", { silent = true }) -- fucking piece of shit
 
