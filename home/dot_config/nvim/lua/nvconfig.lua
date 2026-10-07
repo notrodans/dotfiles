@@ -1,6 +1,6 @@
 return {
 	base46 = {
-		theme = "monochrome",
+		theme = "blackmetal",
 		hl_add = {},
 		hl_override = {
 			["@comment"] = { italic = true },
