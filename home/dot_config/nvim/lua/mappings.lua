@@ -38,7 +38,7 @@ map("n", "[b", function()
 	require("modules.tabufline").prev()
 end, { desc = "buffer goto prev", remap = true })
 
-map("n", "db", function()
+map("n", "qb", function()
 	require("modules.tabufline").close_buffer()
 end, { desc = "buffer close" })
 
