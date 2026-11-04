@@ -78,7 +78,7 @@ vim.lsp.config("*", {
 
 local servers = {
 	"lua_ls",
-	"vue_ls",
+	-- "vue_ls",
 	"jdtls",
 	"gradle_ls",
 	-- "prismals",
@@ -99,7 +99,7 @@ local servers = {
 	-- "lemminx",
 	-- "texlab",
 	"graphql",
-	"pyrefly",
+	-- "pyrefly",
 	"emmet_language_server",
 	"docker_compose_language_service",
 	-- "jinja_lsp",
@@ -282,15 +282,16 @@ vim.lsp.config("vtsls", {
 				},
 			},
 			tsserver = {
-				globalPlugins = {
-					{
-						name = "@vue/typescript-plugin",
-						location = get_install_path_for("vue-language-server") .. "/node_modules/@vue/language-server",
-						languages = { "vue" },
-						configNamespace = "typescript",
-						enableForWorkspaceTypeScriptVersions = true,
-					},
-				},
+				-- Temporarly disabled because i don't give a fuck about Vue
+				-- globalPlugins = {
+				-- 	{
+				-- 		name = "@vue/typescript-plugin",
+				-- 		location = get_install_path_for("vue-language-server") .. "/node_modules/@vue/language-server",
+				-- 		languages = { "vue" },
+				-- 		configNamespace = "typescript",
+				-- 		enableForWorkspaceTypeScriptVersions = true,
+				-- 	},
+				-- },
 			},
 		},
 		typescript = {
