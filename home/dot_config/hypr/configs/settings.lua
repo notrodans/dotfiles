@@ -37,7 +37,7 @@ hl.config({
 	},
 	input = {
 		kb_layout = "us,ru",
-		kb_options = "grp:alt_shift_toggle,compose:rctrl,ctrl:swapcaps",
+		kb_options = "grp:alt_shift_toggle,compose:rctrl",
 		follow_mouse = 1,
 		float_switch_override_focus = 0,
 		repeat_rate = 25,
@@ -59,6 +59,7 @@ hl.config({
 		disable_hyprland_logo = true,
 		disable_splash_rendering = true,
 		mouse_move_enables_dpms = true,
+
 		enable_swallow = true,
 		focus_on_activate = true,
 		swallow_regex = "^(kitty)$",
