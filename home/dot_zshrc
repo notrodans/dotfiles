@@ -63,6 +63,70 @@ npx() {
 	npx "$@"
 }
 
+fman() {
+    local selected name section
+
+    selected="$(
+        {
+            # Explicit MANPATH entries, if configured
+            if [[ -n "$MANPATH" ]]; then
+                printf '%s\n' "${(@s/:/)MANPATH}"
+            fi
+
+            # Standard locations
+            printf '%s\n' \
+                /usr/share/man \
+                /usr/local/share/man \
+                /usr/local/man \
+                "$HOME/.local/share/man"
+        } |
+        awk 'NF && !seen[$0]++' |
+        while IFS= read -r root; do
+            [[ -d "$root" ]] || continue
+
+            find "$root" -type f \
+                \( -path '*/man[0-9]*/*' -o -path '*/mann/*' -o -path '*/manl/*' \) \
+                2>/dev/null
+        done |
+        sed -E '
+            s#^.*/##
+            s#\.(gz|bz2|xz|zst|lzma)$##
+        ' |
+        awk '
+            {
+                section = $0
+                sub(/^.*\./, "", section)
+
+                name = $0
+                sub(/\.[^.]+$/, "", name)
+
+                printf "%s\t%s\n", name, section
+            }
+        ' |
+        sort -u |
+		fzf \
+			--delimiter=$'\t' \
+			--with-nth=1,2 \
+			--prompt='man> ' \
+			--border=rounded \
+			--info=inline-right \
+			--preview='man {2} {1} 2>/dev/null | col -bx' \
+			--preview-window='right:65%,wrap-word,border-left' \
+			--preview-wrap-sign='' \
+			--no-scrollbar \
+			--bind='enter:execute(man {2} {1})' \
+			--bind='ctrl-u:preview-half-page-up' \
+			--bind='ctrl-d:preview-half-page-down'
+    )" || return
+
+    [[ -z "$selected" ]] && return
+
+    name="${selected%%$'\t'*}"
+    section="${selected##*$'\t'}"
+
+    man "$section" "$name"
+}
+
 # >>> oh-my-opencode-slim background subagents >>>
 export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
 # <<< oh-my-opencode-slim background subagents <<<
