@@ -155,7 +155,7 @@ setup_arch_services() {
 
   sudo tee /etc/systemd/zram-generator.conf >/dev/null <<'EOF'
 [zram0]
-zram-size = ram
+zram-size = 2*ram
 compression-algorithm = zstd
 swap-priority = 100
 fs-type = swap
