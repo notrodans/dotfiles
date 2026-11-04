@@ -185,36 +185,36 @@ hl.bind(mainMod .. " + " .. "SHIFT" .. "+" .. "bracketright", hl.dsp.window.move
 
 -- Move active window to a workspace silently mainMod + CTRL [0-9]
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:10", hl.dsp.window.move({ workspace = 1 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:10", hl.dsp.window.move({ workspace = 1, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:11", hl.dsp.window.move({ workspace = 2 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:11", hl.dsp.window.move({ workspace = 2, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:12", hl.dsp.window.move({ workspace = 3 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:12", hl.dsp.window.move({ workspace = 3, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:13", hl.dsp.window.move({ workspace = 4 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:13", hl.dsp.window.move({ workspace = 4, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:14", hl.dsp.window.move({ workspace = 5 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:14", hl.dsp.window.move({ workspace = 5, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:15", hl.dsp.window.move({ workspace = 6 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:15", hl.dsp.window.move({ workspace = 6, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:16", hl.dsp.window.move({ workspace = 7 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:16", hl.dsp.window.move({ workspace = 7, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:17", hl.dsp.window.move({ workspace = 8 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:17", hl.dsp.window.move({ workspace = 8, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:18", hl.dsp.window.move({ workspace = 9 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:18", hl.dsp.window.move({ workspace = 9, follow = false }))
 
-hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:19", hl.dsp.window.move({ workspace = 10 }, { follow = false }))
+hl.bind(mainMod .. " + " .. "CTRL" .. "+" .. "code:19", hl.dsp.window.move({ workspace = 10, follow = false }))
 
 hl.bind(
 	mainMod .. " + " .. "CTRL" .. "+" .. "bracketleft",
-	hl.dsp.window.move({ workspace = "-1" }, { follow = false })
+	hl.dsp.window.move({ workspace = "-1", follow = false })
 )
 
 -- brackets [ or ]
 
 hl.bind(
 	mainMod .. " + " .. "CTRL" .. "+" .. "bracketright",
-	hl.dsp.window.move({ workspace = "+1" }, { follow = false })
+	hl.dsp.window.move({ workspace = "+1", follow = false })
 )
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
