@@ -3,7 +3,7 @@
 	"theme": "system",
 	"plugin": [
 		"oc-codex-multi-auth",
-		"@slkiser/opencode-quota",
-		"oh-my-opencode-slim"
+		"@slkiser/opencode-quota@4",
+		"oh-my-opencode-slim@3.0.5"
 	]
 }
