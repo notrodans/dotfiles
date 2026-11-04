@@ -1,7 +1,6 @@
 # Java Toolchain
 
-Java is managed through Arch Linux packages. SDKMAN is not part of the managed
-toolchain.
+Java is managed through Arch Linux packages.
 
 ## JDKs
 
@@ -83,17 +82,3 @@ They are archived and disabled; they are not part of the active Java workflow.
 
 `home/dot_config/mimeapps.list` maps `application/java-archive` files to
 `xarchiver.desktop`.
-
-## SDKMAN migration
-
-SDKMAN installation, shell initialization, Java candidate paths, and Java
-version metadata have been removed from the managed dotfiles.
-
-An existing `~/.sdkman` directory is intentionally left untouched because it
-is unmanaged user data and may contain SDKs unrelated to Java. If it contains
-nothing you want to keep, remove it manually after verifying the Arch JDKs:
-
-```bash
-archlinux-java status
-rm -rf ~/.sdkman
-```
