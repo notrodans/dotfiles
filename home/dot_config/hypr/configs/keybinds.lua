@@ -9,7 +9,7 @@ local userScripts = home .. "/.config/hypr/scripts"
 
 -- Fuzzel app launcher
 
-hl.bind(mainMod .. " + " .. mainMod .. "_L", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"), { repeating = true })
+hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"), { repeating = true })
 
 hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"))
 
